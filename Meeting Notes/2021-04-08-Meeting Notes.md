@@ -2,20 +2,30 @@
 ![01_main_page](https://user-images.githubusercontent.com/50352883/114008201-f3f26000-989c-11eb-857a-40c2404ca29f.png)
 하단에 고정 배너 광고
 
+
+
 ![02_search_page](https://user-images.githubusercontent.com/50352883/114008268-079dc680-989d-11eb-8bde-2b2fb9e9655c.png)
 지도이용한 검색 (보류)
+
+
 
 ![03_hospital_page](https://user-images.githubusercontent.com/50352883/114008278-0b314d80-989d-11eb-9ba8-a04090d7c71e.png)
 구매할 수 있는 제품 목록 보여주기
 두 블럭으로 나눠서 오른쪽 - 병원정보, 왼쪽 - 제품 리스트
 
+
+
 ![04_reservation_page](https://user-images.githubusercontent.com/50352883/114008524-4af83500-989d-11eb-84c3-cab83b6273ea.png)
 후기 버튼 대신 취소 버튼
+
+
 
 ![05_write_post](https://user-images.githubusercontent.com/50352883/114008575-577c8d80-989d-11eb-8b95-7a380acc0911.png)
 첨부파일 기능(사진, 동영상 등)
 별점 평가 첨부
 평가할 키워드 제시(ex. 친절해요 예약시간 잘지켜요 빨라요 대기시간 없어요)
+
+
 
 ![06_goods_ad](https://user-images.githubusercontent.com/50352883/114008681-7549f280-989d-11eb-861a-c01a3c5863e8.png)
 
