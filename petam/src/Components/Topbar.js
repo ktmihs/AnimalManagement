@@ -7,9 +7,9 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 export default class TopBar extends Component {
   render = () => (
-      <div>
-          {/* nav태그의 mb-3은 content와 간격 띄우기 */}
-      <nav class="mb-3 navbar navbar-expand navbar-light bg-primary topbar  static-top shadow">
+    <div>
+      {/* nav태그의 mb-3은 content와 간격 띄우기 */}
+      <nav class="mb-3 shadow-sm navbar navbar-expand navbar-light bg-primary topbar  static-top shadow">
         <div className="col-9">
           <Link to="/main">
             <h4 className="bg-primary m-auto text-2140C text-center p-3 ">
@@ -28,7 +28,7 @@ export default class TopBar extends Component {
         </div>
 
         {/* <!-- Topbar Navbar --> */}
-      </nav> 
+      </nav>
     </div>
   );
 }

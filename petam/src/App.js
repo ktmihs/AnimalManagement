@@ -9,7 +9,7 @@ export default class App extends Component {
   // function App() {
   render() {
     return (
-      <div>
+      <div id = "light-bg" >
         <Router>
           <Route path="*" component={TopBar} />
           <Route path="/postlist" component={PostList} />
