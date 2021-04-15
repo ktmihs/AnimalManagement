@@ -17,6 +17,13 @@ react project 이름 petam 통일
 
 ![Untitled](https://user-images.githubusercontent.com/50352883/114846138-59070200-9e17-11eb-9e03-ecc5a4ea6c64.png)
 
+- Topbar랑 background 색깔 다르게
+- component 들은 배경 흰색
+- leftbar 생성 - 고정
+- Topbar, Leftbar, Background 색 모두 다르게
+- content, footer, background - 현서
+- topbar, leftbar - 주희
+- 
 ---
 
 ## 프로젝트 구조
