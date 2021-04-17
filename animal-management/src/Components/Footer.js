@@ -5,7 +5,8 @@ function Footer(){
         textAlign:'center',
         fontSize: '13px',
         color:'gray',
-        margin:'15px'
+        marginTop:'15px',
+        backgroundColor: '#D4E0F3'
     }
     return (
         <div style={style}>
