@@ -1,4 +1,6 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
+import Components from '../Components/Components'
 import '../Components/Content.css'
 
 function SearchPage(){
@@ -28,7 +30,7 @@ function SearchPage(){
         verticalAlign:'top'
     }
     return (
-        <>
+        <Components>
             <h2 className='name'>'신촌세브란스' 검색 결과</h2>
             <div className='headerContainer'>
                 <img style={logo} src="/logo2.jpg" alt="petAm"/>
@@ -36,11 +38,13 @@ function SearchPage(){
                     {/*search 창*/}
             </div>
             <div className='bodyContainer'>
-                <div style={bodyHospital}>
-                    <img style={imgStyle} src='/logo.jpg'/>
-                    병원1<br/>
-                    tel: 02-123-1004
-                </div>
+                <Link to='/HospitalPage'>
+                    <div style={bodyHospital}>
+                        <img style={imgStyle} src='/logo.jpg'/>
+                        병원1<br/>
+                        tel: 02-123-1004
+                    </div>
+                </Link>
                 <div style={bodyHospital}>
                     <img style={imgStyle} src='/logo.jpg'/>
                     병원2<br/>
@@ -57,7 +61,7 @@ function SearchPage(){
                     tel: 02-123-1004
                 </div>
             </div>
-        </>
+        </Components>
       )
 }
 
