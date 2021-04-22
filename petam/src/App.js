@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 // import './App.css';
-import TopBar from "./Components/Topbar.js";
+import Topbar from "./Components/Topbar.js";
+import Leftbar from "./Components/Leftbar.js";
 import PostList from "./Components/PostList.js";
 import Test from "./Components/test";
 export default class App extends Component {
@@ -9,9 +10,10 @@ export default class App extends Component {
   // function App() {
   render() {
     return (
-      <div id = "light-bg" >
+      <div id="light-bg">
         <Router>
-          <Route path="*" component={TopBar} />
+          <Route path="*" component={Topbar} />
+          <Route path="*" component={Leftbar} />
           <Route path="/postlist" component={PostList} />
           <Route path="/main" component={Test} />
           {/* <Route path="*" component={LeftSideBar} />
@@ -19,9 +21,7 @@ export default class App extends Component {
         <Route path="/NewCustomer" component={NewCustomer} />
         <Route path="/CustomerList" component={CustomerList} />
         <Route path="/NewReservation" component={NewReservation} /> */}
-          
         </Router>
-   
       </div>
 
       //   <div className="App">

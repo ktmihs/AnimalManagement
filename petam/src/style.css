@@ -10,6 +10,16 @@
   width: 10%;
   height: 95vh;
 }
+.text-pet{
+  color:#f1d976ff;
+}
+
+.text-m{
+color: #84a9c4ff;
+}
+.sidebar-color{
+  background-color: #bebebe;
+}
 #light-bg {
   background-color: rgb(209, 225, 245);
   height: 100vh;
@@ -10911,7 +10921,8 @@ a:focus {
 }
 
 .sidebar hr.sidebar-divider {
-  margin: 0 1rem 1rem;
+  /* margin: 0 1rem 1rem; */
+  margin:0 1rem 0rem;
 }
 
 .sidebar .sidebar-heading {
