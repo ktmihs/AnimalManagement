@@ -5,6 +5,17 @@ import Topbar from "./Components/Topbar.js";
 import Leftbar from "./Components/Leftbar.js";
 import PostList from "./Components/PostList.js";
 import Test from "./Components/test";
+
+import SearchPage from './Pages/SearchPage'
+import Background from './Components/Background'
+import Content from './Components/Content'
+import Footer from './Components/Footer'
+import Main from './Pages/Main'
+import MyReservationPage from './Pages/MyReservationPage'
+import CheckReservationPage from './Pages/CheckReservationPage'
+import ReservationPage from './Pages/ReservationPage'
+import HospitalPage from './Pages/HospitalPage'
+import ErrorPage from './Pages/ErrorPage'
 export default class App extends Component {
   
   // function App() {
@@ -16,6 +27,15 @@ export default class App extends Component {
           <Route path="*" component={Leftbar} />
           <Route path="/postlist" component={PostList} />
           <Route path="/main" component={Test} />
+            
+          <Route path='/' exact component={Main}/>
+          <Route path='/petAm' component={Main}/>
+          <Route path='/HospitalPage' component={HospitalPage}/>
+          <Route path='/ReservationPage' component={ReservationPage}/>
+          <Route path='/CheckReservationPage' component={CheckReservationPage}/>
+          <Route path='/MyReservationPage' component={MyReservationPage}/>
+          <Route path='/SearchPage' component={SearchPage}/>
+          <Route render={()=><ErrorPage/>}/>
           {/* <Route path="*" component={LeftSideBar} />
         <Route path="/Reservation" component={Reservation} />
         <Route path="/NewCustomer" component={NewCustomer} />
@@ -44,4 +64,5 @@ export default class App extends Component {
   }
 }
 
-// export default App;
+ export default App;
+
