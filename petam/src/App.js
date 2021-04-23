@@ -6,7 +6,6 @@ import Leftbar from "./Components/Leftbar.js";
 import PostList from "./Components/PostList.js";
 import Test from "./Components/test";
 import SearchPage from './Pages/SearchPage'
-import Background from './Components/Background'
 import Content from './Components/Content'
 import Footer from './Components/Footer'
 import Main from './Pages/Main'
@@ -27,7 +26,7 @@ export default class App extends Component {
               <Route path="*" component={Leftbar} />
               <Switch>
                 <Route path='/' exact component={Main}/>
-                <Route path='/petAm' component={Main}/>
+                <Route path='/main' component={Main}/>
                 <Route path='/HospitalPage' component={HospitalPage}/>
                 <Route path='/ReservationPage' component={ReservationPage}/>
                 <Route path='/CheckReservationPage' component={CheckReservationPage}/>
@@ -35,11 +34,12 @@ export default class App extends Component {
                 <Route path='/SearchPage' component={SearchPage}/>
                 
                 <Route render={()=><ErrorPage/>}/>
-            {/* <Route path="*" component={LeftSideBar} />
-            <Route path="/Reservation" component={Reservation} />
-            <Route path="/NewCustomer" component={NewCustomer} />
-            <Route path="/CustomerList" component={CustomerList} />
-            <Route path="/NewReservation" component={NewReservation} /> */}
+                {/* 
+                <Route path="*" component={LeftSideBar} />
+                <Route path="/Reservation" component={Reservation} />
+                <Route path="/NewCustomer" component={NewCustomer} />
+                <Route path="/CustomerList" component={CustomerList} />
+                <Route path="/NewReservation" component={NewReservation} /> */}
               </Switch> 
               
             </div>

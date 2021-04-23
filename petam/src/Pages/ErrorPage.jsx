@@ -1,16 +1,13 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import Background from '../Components/Background'
+import Content from '../Components/Content'
 
 function ErrorPage(){
     const error={
-        background:'white',
-        borderRadius:'20px',
         textAlign:'center',
         color:'red',
-        fontSize:'30px',
-        margin:'20vh 20%',
-        padding:'15vh 5vw',
+        fontSize:'50px',
+        margin:'13vw 25%',
         width:'50%'
     }
     const home={
@@ -19,14 +16,15 @@ function ErrorPage(){
         color:'#395382'
     }
     return(
-        <Background>
+        <Content>
             <div style={error}>
                 <strong>PAGE ERROR!!</strong>
             </div>
             <Link to='/'>
                 <h3 style={home}>link to home</h3>
             </Link>
-        </Background>
+            
+        </Content>
     )
 }
 export default ErrorPage

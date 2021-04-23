@@ -8,12 +8,24 @@
     text-align:center;
 }
 .headerContainer{
-    margin-top:30px;
+    margin-top:15px;
     text-align:center;
 }
 .bodyContainer{
     text-align:center;
     margin:1vh 3vw;
+}
+.contentBox{
+    display:inline-block;
+    padding-top:20px;
+    margin:10px 3% 20px 3%;
+    /*height:25vw;*/
+    height:400px;
+    width:350px;
+    border:1px dotted #bbbcbc;
+    overflow:hidden;
+    word-wrap:break-word;
+    line-height:30px;
 }
 .button{
     color:white;
@@ -22,5 +34,5 @@
     width: 120px;
     border-radius: 10px;
     border:0;
-    margin:25px;
+    margin:5px 10px;
 }
