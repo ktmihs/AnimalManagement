@@ -7,7 +7,7 @@
 - 모든 페이지에 적용되는 component들은 절대적인 크기로 설정
 
 
-# CheckList
+## CheckList
 
 - [x]  현서
     - [x]  Content 수정
