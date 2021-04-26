@@ -1,21 +1,20 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import Components from '../Components/Components'
+import Content from '../Components/Content'
 import '../Components/Content.css'
 
 function SearchPage(){
-    const logo={
-        display:'inline-block',
-        marginRight:'20px',
-        height:'40px',
-        verticalAlign:'top'     //이미지 하단 여백 없애기
-    }
     const search={
         display:'inline-block',
         border:'1px solid #bbbcbc',
         borderRadius:'5px',
         width:'40%',
         height:'35px'
+    }
+    const searchButton={
+        backgroundColor:'#dddddd',
+        marginLeft:'10px',
+        width:'80px'
     }
     const bodyHospital={
         display:'inline-block',
@@ -30,12 +29,11 @@ function SearchPage(){
         verticalAlign:'top'
     }
     return (
-        <Components>
+        <Content>
             <h2 className='name'>'신촌세브란스' 검색 결과</h2>
             <div className='headerContainer'>
-                <img style={logo} src="/logo2.jpg" alt="petAm"/>
                 <input style={search}/>
-                    {/*search 창*/}
+                <button className="button" style={searchButton}>검색</button>
             </div>
             <div className='bodyContainer'>
                 <Link to='/HospitalPage'>
@@ -61,7 +59,7 @@ function SearchPage(){
                     tel: 02-123-1004
                 </div>
             </div>
-        </Components>
+        </Content>
       )
 }
 

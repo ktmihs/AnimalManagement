@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import Components from '../Components/Components'
+import Content from '../Components/Content'
 import '../Components/Content.css'
 
 function Main() {
@@ -9,12 +9,12 @@ function Main() {
     textAlign:'center',
     marginTop:'30px'
   }
-  const leftContent={
+  const contentBox={
     display:'inline-block',
     padding:'10px 0px',
     marginRight:'3%',
-    height:'400px',
-    width:'40%',
+    height:'25vw',
+    width:'300px',
     border:'1px dotted #bbbcbc',
     //borderRight:'3px solid #BBBCBC',
     overflow:'hidden',
@@ -48,20 +48,9 @@ function Main() {
     backgroundColor:'#dddddd',
     textAlign:'center',
     fontSize:'20px',
-    margin:'30px 0',
+    margin:'20px 0',
     height:'100%',
     width:'100%'
-  }
-  const rightContent={
-  display:'inline-block',
-  padding:'10px 0px',
-  marginLeft:'3%',
-  height:'400px',
-  width:'40%',
-  border:'1px dotted #bbbcbc',
-  overflow:'hidden',
-  wordWrap:'break-word',
-  lineHeight:'30px'
   }
   const mainAd={
     border:'1px dotted #bbbcbc',
@@ -72,13 +61,13 @@ function Main() {
   }
 
   return (
-    <Components>
+    <Content>
       <h2 className='name'>Main Page!!</h2>
       <div style={contents} className='bodyContainer'>
-        <div style={leftContent}>
+        <div style={contentBox}>
           <div style={TopContent}>
             <img style={logo} src="/logo.jpg" alt="petAm"/>
-            <Link to='/SearchPage'><div style={contentName}><strong>병원 검색 바로가기</strong></div></Link>            
+            <Link to='/SearchPage'><div style={contentName}><strong>병원 검색</strong></div></Link>            
           </div>
           <div style={BottomContent}>
             <div style={ad}>    {/*나중에 이미지로 대체*/}
@@ -91,10 +80,10 @@ function Main() {
             </div>
           </div>
         </div>
-        <div style={rightContent}>
+        <div style={contentBox}>
           <div style={TopContent}>
             <img style={logo} src="/logo.jpg" alt="petAm"/>
-            <Link to=''><div style={contentName}><strong>제품 검색 바로가기</strong></div></Link>
+            <Link to=''><div style={contentName}><strong>제품 검색</strong></div></Link>
           </div>
           <div style={BottomContent}>
             <div style={ad}>
@@ -111,7 +100,7 @@ function Main() {
       <div style={mainAd}>
         main page default ad
       </div>
-    </Components>
+    </Content>
   )
 }
 
