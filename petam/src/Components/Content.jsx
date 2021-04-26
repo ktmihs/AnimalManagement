@@ -1,9 +1,10 @@
 import React from 'react'
+import Footer from './Footer'
 
 function Content({children}){
     const bodyStyle={
         background:'white',
-        height:'80vh',
+        height:'77vh',
         width:'70%',
         padding:'5px',
         margin:'5vh 10%',

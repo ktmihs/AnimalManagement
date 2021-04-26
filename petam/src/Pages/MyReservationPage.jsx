@@ -39,7 +39,7 @@ function MyReservationPage({location, history}){
                             <Link to='/CheckReservationPage'><h4>▶</h4></Link>
                         </div>
                         <div style={reservation}>
-                        <h5>신촌세브란스</h5>
+                            <h5>신촌세브란스</h5>
                             4월 16일 14시<br/>
                             정기 검진<br/><br/>
                             <Link to='/CheckReservationPage'><h4>▶</h4></Link>
