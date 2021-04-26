@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Topbar from "./Components/Topbar.js";
 import Leftbar from "./Components/Leftbar.js";
 import PostList from "./Components/PostList.js";
-import Test from "./Components/test";
 import SearchPage from './Pages/SearchPage'
 import Content from './Components/Content'
 import Footer from './Components/Footer'
@@ -41,10 +40,7 @@ export default class App extends Component {
                 <Route path="/CustomerList" component={CustomerList} />
                 <Route path="/NewReservation" component={NewReservation} /> */}
               </Switch> 
-              
             </div>
-            
-            
         </Router>
       </div>
 
