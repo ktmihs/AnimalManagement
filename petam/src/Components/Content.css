@@ -1,7 +1,17 @@
-.body{
+.sidebar-body{
     display:flex;
     flex-direction:row;
 }
+.body{
+    /*display:flex; 없애니까 content크기 내용만큼으로 바뀜*/
+    flex-direction:row !important;
+    width: 100% !important;
+    height: 90.7vh;
+    overflow-y: scroll !important;
+    
+    background-color: rgb(209, 225, 245);
+}
+.body::-webkit-scrollbar{display: none;}
 .name{
     color: #395382;
     margin:20px 0;
@@ -20,7 +30,7 @@
     padding-top:20px;
     margin:10px 3% 20px 3%;
     /*height:25vw;*/
-    height:400px;
+    height:370px;
     width:350px;
     border:1px dotted #bbbcbc;
     overflow:hidden;

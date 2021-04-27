@@ -13,7 +13,7 @@ function Main() {
     display:'inline-block',
     padding:'10px 0px',
     marginRight:'3%',
-    height:'25vw',
+    //height:'25vw',
     width:'300px',
     border:'1px dotted #bbbcbc',
     //borderRight:'3px solid #BBBCBC',

@@ -3,6 +3,10 @@ import Content from '../Components/Content'
 import '../Components/Content.css'
 
 function HospitalPage({location,history}){
+    const content={
+        //display:'fixed',
+        //height:'80vh'
+    }
     const search={
         display:'inline-block',
         border:'1px solid #bbbcbc',
@@ -48,7 +52,7 @@ function HospitalPage({location,history}){
         margin:'10%'
     }
     return(
-        <Content>
+        <Content style={content}>
             <h2 className='name'>신촌세브란스</h2>
             <div className='headerContainer'>
                 <input style={search}/>

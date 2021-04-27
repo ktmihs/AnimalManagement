@@ -18,31 +18,34 @@ export default class App extends Component {
   // function App() {
   render() {
     return (
-      <div id="light-bg">
+      <>
         <Router>
             <Route path="*" component={Topbar} />
-            <div className="body">
+            <div className="sidebar-body">
               <Route path="*" component={Leftbar} />
-              <Switch>
-                <Route path='/' exact component={Main}/>
-                <Route path='/main' component={Main}/>
-                <Route path='/HospitalPage' component={HospitalPage}/>
-                <Route path='/ReservationPage' component={ReservationPage}/>
-                <Route path='/CheckReservationPage' component={CheckReservationPage}/>
-                <Route path='/MyReservationPage' component={MyReservationPage}/>
-                <Route path='/SearchPage' component={SearchPage}/>
+              <div className="body">
+                <Switch>
+                  <Route path='/' exact component={Main}/>
+                  <Route path='/main' component={Main}/>
+                  <Route path='/hospitalPage' component={HospitalPage}/>
+                  <Route path='/reservationPage' component={ReservationPage}/>
+                  <Route path='/checkReservationPage' component={CheckReservationPage}/>
+                  <Route path='/myReservationPage' component={MyReservationPage}/>
+                  <Route path='/searchPage' component={SearchPage}/>
+                  
+                  <Route render={()=><ErrorPage/>}/>
+                  {/* 
+                  <Route path="*" component={LeftSideBar} />
+                  <Route path="/Reservation" component={Reservation} />
+                  <Route path="/NewCustomer" component={NewCustomer} />
+                  <Route path="/CustomerList" component={CustomerList} />
+                  <Route path="/NewReservation" component={NewReservation} /> */}
+                </Switch> 
                 
-                <Route render={()=><ErrorPage/>}/>
-                {/* 
-                <Route path="*" component={LeftSideBar} />
-                <Route path="/Reservation" component={Reservation} />
-                <Route path="/NewCustomer" component={NewCustomer} />
-                <Route path="/CustomerList" component={CustomerList} />
-                <Route path="/NewReservation" component={NewReservation} /> */}
-              </Switch> 
+              </div>
             </div>
         </Router>
-      </div>
+      </>
 
       //   <div className="App">
       //     <header className="App-header">

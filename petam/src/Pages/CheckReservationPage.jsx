@@ -4,11 +4,11 @@ import '../Components/Content.css'
 
 function CheckReservationPage({location,history}){
     const marginBox={
-        height:'3vw'
+        height:'1vw',
     }
     const contentBox={
         border:'none',
-        height:'100%'
+        height:'auto'
     }
     const buttons={
         textAlign:'center'
@@ -24,7 +24,6 @@ function CheckReservationPage({location,history}){
     return(
         <Content>
             <h2 className='name'>예약 정보 확인</h2>
-            <div style={marginBox}/>
             <div className='bodyContainer'>
                 <div className='contentBox' style={contentBox}>
                     <div>
@@ -33,7 +32,7 @@ function CheckReservationPage({location,history}){
                         예약자 : 보리<br/>
                         예약 일정 : 2021년 04월 14일 16일<br/>
                         예약 목적 : 정기 검진<br/>
-                        기타 내용 : 없음<br/>
+                        기타 내용 : 없음
                     </div>
                 </div>
                 <div className='contentBox' style={contentBox}>
@@ -45,7 +44,6 @@ function CheckReservationPage({location,history}){
                     </div>
                 </div>
             </div>
-            <div style={marginBox}/><div style={marginBox}/>
             <div style={buttons}>
                 <button style={leftButton} className='button' onClick={()=>history.push('/HospitalPage')}>예약 취소</button>
                 <button style={rightButton} className='button' onClick={()=>history.push('/MyReservationPage')}>확인</button>  
