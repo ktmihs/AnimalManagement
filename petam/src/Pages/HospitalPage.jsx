@@ -1,23 +1,12 @@
 import React from 'react'
 import Content from '../Components/Content'
 import '../Components/Content.css'
+import Search from '../Components/Search'
 
 function HospitalPage({location,history}){
     const content={
         //display:'fixed',
         //height:'80vh'
-    }
-    const search={
-        display:'inline-block',
-        border:'1px solid #bbbcbc',
-        borderRadius:'5px',
-        width:'40%',
-        height:'35px'
-    }
-    const searchButton={
-        backgroundColor:'#dddddd',
-        marginLeft:'10px',
-        width:'80px'
     }
     const topContent={
         width:'100%',
@@ -54,10 +43,7 @@ function HospitalPage({location,history}){
     return(
         <Content style={content}>
             <h2 className='name'>신촌세브란스</h2>
-            <div className='headerContainer'>
-                <input style={search}/>
-                <button className="button" style={searchButton}>검색</button>
-            </div>
+            <Search/>
             <div className='bodyContainer'>
                 <div className="contentBox">
                     <div style={topContent}>

@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import './App.css';
 import Topbar from "./Components/Topbar.js";
 import Leftbar from "./Components/Leftbar.js";
-import PostList from "./Components/PostList.js";
 import SearchPage from './Pages/SearchPage'
-import Content from './Components/Content'
-import Footer from './Components/Footer'
 import Main from './Pages/Main'
 import MyReservationPage from './Pages/MyReservationPage'
 import CheckReservationPage from './Pages/CheckReservationPage'
+import ConfirmReservationPage from './Pages/ConfirmReservationPage'
 import ReservationPage from './Pages/ReservationPage'
 import HospitalPage from './Pages/HospitalPage'
 import ErrorPage from './Pages/ErrorPage'
@@ -30,6 +28,7 @@ export default class App extends Component {
                   <Route path='/hospitalPage' component={HospitalPage}/>
                   <Route path='/reservationPage' component={ReservationPage}/>
                   <Route path='/checkReservationPage' component={CheckReservationPage}/>
+                  <Route path='/confirmReservationPage' component={ConfirmReservationPage}/>
                   <Route path='/myReservationPage' component={MyReservationPage}/>
                   <Route path='/searchPage' component={SearchPage}/>
                   

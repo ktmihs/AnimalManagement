@@ -2,20 +2,9 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import Content from '../Components/Content'
 import '../Components/Content.css'
+import Search from '../Components/Search'
 
 function SearchPage(){
-    const search={
-        display:'inline-block',
-        border:'1px solid #bbbcbc',
-        borderRadius:'5px',
-        width:'40%',
-        height:'35px'
-    }
-    const searchButton={
-        backgroundColor:'#dddddd',
-        marginLeft:'10px',
-        width:'80px'
-    }
     const bodyHospital={
         display:'inline-block',
         border:'1px solid gray',
@@ -31,10 +20,7 @@ function SearchPage(){
     return (
         <Content>
             <h2 className='name'>'신촌세브란스' 검색 결과</h2>
-            <div className='headerContainer'>
-                <input style={search}/>
-                <button className="button" style={searchButton}>검색</button>
-            </div>
+            <Search/>
             <div className='bodyContainer'>
                 <Link to='/HospitalPage'>
                     <div style={bodyHospital}>

@@ -6,7 +6,8 @@
     /*display:flex; 없애니까 content크기 내용만큼으로 바뀜*/
     flex-direction:row !important;
     width: 100% !important;
-    height: 90.7vh;
+    max-height: 90.7vh;
+    height:auto;
     overflow-y: scroll !important;
     
     background-color: rgb(209, 225, 245);
