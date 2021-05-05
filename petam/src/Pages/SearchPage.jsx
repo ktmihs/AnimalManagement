@@ -5,6 +5,10 @@ import '../Components/Content.css'
 import Search from '../Components/Search'
 
 function SearchPage(){
+    const searchResult=(data)=>{
+        console.log(data)
+        //<div>{props.value}</div>
+    }
     const bodyHospital={
         display:'inline-block',
         border:'1px solid gray',
@@ -20,7 +24,9 @@ function SearchPage(){
     return (
         <Content>
             <h2 className='name'>'신촌세브란스' 검색 결과</h2>
-            <Search/>
+            <Search
+                onCreate={searchResult}
+            />
             <div className='bodyContainer'>
                 <Link to='/HospitalPage'>
                     <div style={bodyHospital}>

@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../Components/Content.css'
 
-function ReservationContent({location,history}){
+function ReservationContent({time}){
+    const [selectTime,setSeleteTime]=useState()
+    
     const selectBox={
         width:'40%',
         marginLeft:'5px'
@@ -13,22 +15,11 @@ function ReservationContent({location,history}){
     const warningText={
         fontSize:'11px'
     }
-    const buttons={
-        textAlign:'center'
-    }
-    const leftButton={
-        display:'inline-block',
-        backgroundColor:'#BBBCBC'
-    }
-    const rightButton={
-        display:'inline-block',
-        backgroundColor:'#5F8DDA'
-    }
     return(
         <>
             <div className='contentBox'>
                 <div>
-                    예약 일정 : 2021년 04월 14일 16시<br/>
+                    예약 일정 : {time.year}년 {time.month}월 {time.dates}일 {time.hour}시 {time.minute}분<br/>
                     예약 목적 : 
                     <select style={selectBox}>
                         <option>정기검진</option>
@@ -43,10 +34,6 @@ function ReservationContent({location,history}){
                         회색 칸은 이미 예약된 시간이거나, 불가능한 시간입니다.
                     </div>
                 </div>
-            </div>
-            <div style={buttons}>
-                <button style={leftButton} className='button' onClick={()=>history.push('/TimeTable')}>이전으로</button>
-                <button style={rightButton} className='button' onClick={()=>history.push('/CheckReservationPage')}>예약하기</button>  
             </div>
         </>
     )
