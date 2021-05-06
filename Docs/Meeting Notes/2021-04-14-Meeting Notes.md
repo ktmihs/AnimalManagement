@@ -1,4 +1,4 @@
-# CheckList
+# Homework
 
 - [x]  DB, UI 수정 및 구체화
 - [x]  UI 1개 리액트로 만들기
