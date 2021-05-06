@@ -14,8 +14,13 @@ import HospitalPage from './Pages/HospitalPage'
 import ErrorPage from './Pages/ErrorPage'
 import PostListPage from './Pages/PostListPage'
 export default class App extends Component {
-
   // function App() {
+
+  componentDidMount() {
+    fetch("/users")
+      .then((res) => res.json())
+      .then((users) => this.setState({ users }));
+  }
   render() {
     return (
       <div id="light-bg">
