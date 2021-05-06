@@ -5,10 +5,10 @@ function Content({children}){
     const bodyStyle={
         background:'white',
         height:'auto',
-        minHeight:'75vh',
-        width:'80%',
+        minHeight:'77vh',
+        width:'90%',
         padding:'10px 5px',
-        margin:'5vh 10%',
+        margin:'4% 5%',
         borderRadius:'20px'
     }
     return(
