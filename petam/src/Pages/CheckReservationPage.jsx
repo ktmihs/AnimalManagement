@@ -42,8 +42,8 @@ function CheckReservationPage({location,history}){
                 </div>
             </div>
             <div style={buttons}>
-                <button style={leftButton} className='button' onClick={()=>history.push('/HospitalPage')}>예약 취소</button>
-                <button style={rightButton} className='button' onClick={()=>history.push('/ConfirmReservationPage')}>예약확정</button>  
+                <button style={leftButton} className='button' onClick={()=>history.push('/ReservationPage')}>다시 선택</button>
+                <button style={rightButton} className='button' onClick={()=>history.push('/MyReservationPage')}>예약확정</button>  
             </div>
         </Content>
     )
