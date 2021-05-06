@@ -8,6 +8,9 @@
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "^4.1.1",
     "date-fns": "^2.21.1",
+    "koa": "^2.13.1",
+    "mongoose": "^5.12.5",
+
     "react": "^17.0.2",
     "react-datepicker": "^3.8.0",
     "react-dom": "^17.0.2",
@@ -39,5 +42,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^7.25.0",
+    "eslint-plugin-react": "^7.23.2"
   }
+    "scripts":{
+    "start": "node src",
+    "start:dev": "nodemon --watch src/ src/index.js"
+  }
+}
 }
