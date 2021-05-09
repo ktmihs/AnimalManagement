@@ -22,7 +22,7 @@ function TimeTable(props){
     }
     const selectTime=()=>{
       const currentDate = new Date()
-      {(startDate.getDate()==currentDate.getDate() && startDate.getHours()==currentDate.getHours())
+      {(startDate.getDate()===currentDate.getDate() && startDate.getHours()===currentDate.getHours())
         || (startDate.getHours()<9 || startDate.getHours()>20)?
         swal('','시간을 선택해주세요','warning')
         :

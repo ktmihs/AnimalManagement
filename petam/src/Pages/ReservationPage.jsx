@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router'
 import Content from '../Components/Content'
 import '../Components/Content.css'
 import ReservationContent from './ReservaionContent'
 import TimeTable from './TimeTable'
+import swal from 'sweetalert';
 
 function ReservationPage({location,history}){
     const [time,setTime]=useState({
@@ -12,8 +14,37 @@ function ReservationPage({location,history}){
         hour:'',
         minute:''
     })
+    
+    const [reserve,setReserve]=useState({
+        option:'',
+        text:''
+    })
+    const getReserve=(name,value)=>{
+        setReserve({
+            ...reserve,
+            [name]: value,
+        })
+    }
+
     const [nextPage,setNextPage]=useState(false)
 
+    const res=useHistory();
+    const toCheck=()=>{{
+        reserve.option==='' || reserve.option==='기타' && reserve.text===''?
+        (
+            reserve.option===''?
+            swal('','예약 목적을 선택해주세요!','warning')
+            :
+            swal('','예약 목적에 대한 메시지를 작성해주세요!','warning')
+        )
+        :
+        res.push({
+            pathname:'/CheckReservationPage',
+            option:reserve.option,
+            text:reserve.text,
+            dateDay:`${time.year}년 ${time.month}월 ${time.dates}일 ${time.hour}시 ${time.minute}분`
+        })
+    }}
     const getTime=(startDate)=>{
         setTime({
             year:startDate.getFullYear(),
@@ -45,10 +76,10 @@ function ReservationPage({location,history}){
                 <div style={inner}>
                     {nextPage?
                     <>
-                        <ReservationContent time={time}/>
-                        <div style={buttons}>
+                        <ReservationContent time={time} getReserve={getReserve}/>
+                        <div style={buttons}>                   {/* onClick으로 이름 넘기기 */} 
                             <button style={leftButton} className='button' onClick={()=>setNextPage(false)}>이전으로</button>
-                            <button style={rightButton} className='button' onClick={()=>history.push('/CheckReservationPage')}>예약하기</button>  
+                            <button style={rightButton} className='button' onClick={toCheck}>예약하기</button>  
                         </div>
                     </>
                     :

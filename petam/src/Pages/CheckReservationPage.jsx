@@ -1,8 +1,32 @@
 import React from 'react'
+import { useLocation } from 'react-router'
 import Content from '../Components/Content'
 import '../Components/Content.css'
+import swal from 'sweetalert';
 
 function CheckReservationPage({location,history}){
+    const reserve=useLocation({
+        option:location.option,
+        text:location.option,
+        dateDay:location.dateDay
+    })
+    const handleClick=()=>{
+        swal({
+            text:'예약이 확정되었습니다.',
+            icon:'success',
+            closeOnClickOutside:false,
+            confirm:{
+                text:'확인',
+                value:true
+            }
+        }).then((result)=>{
+            if(result){
+                history.push({
+                    pathname:'/MyReservationPage',
+                })
+            }
+        })
+    }
     const contentBox={
         border:'none',
         height:'auto'
@@ -27,9 +51,9 @@ function CheckReservationPage({location,history}){
                         예약 번호 : 1235468788<br/>
                         예약 병원 : 신촌 세브란스 병원<br/>
                         예약자 : 보리<br/>
-                        예약 일정 : 2021년 04월 14일 16일<br/>
-                        예약 목적 : 정기 검진<br/>
-                        기타 내용 : 없음
+                        예약 일정 : {reserve.dateDay}<br/>
+                        예약 목적 : {reserve.option}<br/>
+                        기타 내용 : {reserve.text}
                     </div>
                 </div>
                 <div className='contentBox' style={contentBox}>
@@ -43,7 +67,7 @@ function CheckReservationPage({location,history}){
             </div>
             <div style={buttons}>
                 <button style={leftButton} className='button' onClick={()=>history.push('/ReservationPage')}>다시 선택</button>
-                <button style={rightButton} className='button' onClick={()=>history.push('/MyReservationPage')}>예약확정</button>  
+                <button style={rightButton} className='button' onClick={handleClick}>예약확정</button>  
             </div>
         </Content>
     )
