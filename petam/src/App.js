@@ -12,6 +12,7 @@ import ReservationPage from './Pages/ReservationPage'
 import HospitalPage from './Pages/HospitalPage'
 import ErrorPage from './Pages/ErrorPage'
 import PostListPage from './Pages/PostListPage'
+import WritePostPage from "./Pages/WritePostPage"
 export default class App extends Component {
 
   componentDidMount() {
@@ -23,30 +24,35 @@ export default class App extends Component {
     return (
       <>
         <Router>
-            <Route path="*" component={Topbar} />
-            <div className="sidebar-body">
-              <Route path="*" component={Leftbar} />
-              <div className="body">
-                <Switch>
-                  <Route path='/' exact component={Main}/>
-                  <Route path='/main' component={Main}/>
-                  <Route path='/hospitalPage' component={HospitalPage}/>
-                  <Route path='/reservationPage' component={ReservationPage}/>
-                  <Route path='/checkReservationPage' component={CheckReservationPage}/>
-                  <Route path='/confirmReservationPage' component={ConfirmReservationPage}/>
-                  <Route path='/myReservationPage' component={MyReservationPage}/>
-                  <Route path='/searchPage' component={SearchPage}/>
-                  
-                  <Route render={()=><ErrorPage/>}/>
-                  {/* 
-                  <Route path="*" component={LeftSideBar} />
-                  <Route path="/Reservation" component={Reservation} />
-                  <Route path="/NewCustomer" component={NewCustomer} />
-                  <Route path="/CustomerList" component={CustomerList} />
-                  <Route path="/NewReservation" component={NewReservation} /> */}
-                </Switch> 
-              </div>
+          <Route path="*" component={Topbar} />
+          <div className="sidebar-body">
+            <Route path="*" component={Leftbar} />
+            <div className="body">
+              <Switch>
+                <Route path="/" exact component={Main} />
+                <Route path="/main" component={Main} />
+                <Route path="/hospitalPage" component={HospitalPage} />
+                <Route path="/reservationPage" component={ReservationPage} />
+                <Route
+                  path="/checkReservationPage"
+                  component={CheckReservationPage}
+                />
+                <Route
+                  path="/confirmReservationPage"
+                  component={ConfirmReservationPage}
+                />
+                <Route
+                  path="/myReservationPage"
+                  component={MyReservationPage}
+                />
+                <Route path="/searchPage" component={SearchPage} />
+                <Route path="/PostListPage" component={PostListPage} />
+                <Route path="/WritePostPage" component={WritePostPage} />
+
+                <Route render={() => <ErrorPage />} />
+              </Switch>
             </div>
+          </div>
         </Router>
       </>
     );
