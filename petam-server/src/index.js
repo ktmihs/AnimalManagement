@@ -1,33 +1,36 @@
-const Koa = require("koa");
-const Router = require("koa-router");
+require('dotenv').config();
+
+const Koa = require('koa');
+const Router = require('koa-router');
+const bodyParser = require('koa-bodyparser');
+const mongoose = require('mongoose');
+
+// 비 구조화 할당을 통해 process.env 내부 값에 대한 레퍼런스 만들기
+const { PORT, MONGO_URI } = process.env;
+
+mongoose.connect(MONGO_URI, { useNewUrlParser: true, useFindAndModify: false })
+    .then(() => {
+        console.log("Connected to MongoDB");
+    })
+    .catch(e => {
+        console.error(e);
+    });
+
+const api = require('./api');
 
 const app = new Koa();
 const router = new Router();
 
-router.get("/", (ctx, next) => {
-  ctx.body = "홈";
-});
+// 라우터 설정
+router.use('/api', api.routes()); // api 라우트 적용
 
-router.get("/about", (ctx, next) => {
-  ctx.body = "소개";
-});
+// // 라우터 적용 전에 bodyParser 적용
+// app.use(bodyParser());
 
-router.get("/about/:name", (ctx, next) => {
-  const { name } = ctx.params; // 라우트 경로에서 :파라미터명 으로 정의된 값이 ctx.params 안에 설정됩니다.
-  ctx.body = name + "의 소개";
-});
-
-router.get("/post", (ctx, next) => {
-  const { id } = ctx.request.query; // 주소 뒤에 ?id=10 이런식으로 작성된 쿼리는 ctx.request.query 에 파싱됩니다.
-  if (id) {
-    ctx.body = "포스트 #" + id;
-  } else {
-    ctx.body = "포스트 아이디가 없습니다.";
-  }
-});
-
+//app 인 스턴스에 라우터 적용
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(4000, () => {
-  console.log("heurm server is listening to port 4000");
+const port = PORT || 4000;
+app.listen(port, () => {
+  console.log('Listening to port %d', port);
 });
