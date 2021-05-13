@@ -39,6 +39,7 @@ yarn add --dev eslint
 yarn run eslint --init
 ```
 <br/>
+
 ### petam-server 디렉토리 내에 .prettierrc 파일 생성
 
 ```json
@@ -52,6 +53,7 @@ yarn run eslint --init
 }
 ```
 <br/>
+
 ### Prettier에서 관리하는 코드 스타일을 ESLint에서 관리하지 않도록 eslint-config-prettier 설치
 
 ```bash
@@ -59,7 +61,9 @@ yarn add eslint-config-prettier
 ```
 <br/>
 <br/>
+
 ---
+
 # nodemon 사용하기
 
 - 코드를 변경할 때마다 서버를 자동으로 재시작.
