@@ -10,6 +10,7 @@ function CheckReservationPage({location,history}){
         text:location.option,
         dateDay:location.dateDay
     })
+    const hspId=useLocation()
     const handleClick=()=>{
         swal({
             text:'예약이 확정되었습니다.',
@@ -49,7 +50,7 @@ function CheckReservationPage({location,history}){
                 <div className='contentBox' style={contentBox}>
                     <div>
                         예약 번호 : 1235468788<br/>
-                        예약 병원 : 신촌 세브란스 병원<br/>
+                        예약 병원 : {hspId.name}<br/>
                         예약자 : 보리<br/>
                         예약 일정 : {reserve.dateDay}<br/>
                         예약 목적 : {reserve.option}<br/>

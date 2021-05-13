@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router'
+import { useHistory, useLocation } from 'react-router'
 import Content from '../Components/Content'
 import '../Components/Content.css'
 import ReservationContent from './ReservaionContent'
@@ -14,11 +14,11 @@ function ReservationPage({location,history}){
         hour:'',
         minute:''
     })
-    
     const [reserve,setReserve]=useState({
         option:'',
         text:''
     })
+
     const getReserve=(name,value)=>{
         setReserve({
             ...reserve,
@@ -28,9 +28,11 @@ function ReservationPage({location,history}){
 
     const [nextPage,setNextPage]=useState(false)
 
-    const res=useHistory();
-    const toCheck=()=>{{
-        reserve.option==='' || reserve.option==='기타' && reserve.text===''?
+    const hspId=useLocation()
+    const hspName=hspId.name
+    const res=useHistory()
+    const toCheck=()=>{{    
+        reserve.option==='' || reserve.option==='기타' && reserve.text===''?    //미입력 사항 존재할 때
         (
             reserve.option===''?
             swal('','예약 목적을 선택해주세요!','warning')
@@ -38,8 +40,9 @@ function ReservationPage({location,history}){
             swal('','예약 목적에 대한 메시지를 작성해주세요!','warning')
         )
         :
-        res.push({
+        res.push({      //전부 작성되면 다음 페이지로 이동 & 정보 보내기
             pathname:'/CheckReservationPage',
+            name:hspName,
             option:reserve.option,
             text:reserve.text,
             dateDay:`${time.year}년 ${time.month}월 ${time.dates}일 ${time.hour}시 ${time.minute}분`
@@ -71,7 +74,7 @@ function ReservationPage({location,history}){
     }
     return(
         <Content>
-            <h2 className='name'>신촌 세브란스 병원</h2>
+            <h2 className='name'>{hspName}</h2>
             <div className='bodyContainer'>
                 <div style={inner}>
                     {nextPage?
