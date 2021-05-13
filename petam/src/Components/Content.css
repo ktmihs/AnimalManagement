@@ -32,8 +32,8 @@
     margin:10px 3% 20px 3%;
     /*height:25vw;*/
     height:370px;
-    width:350px;
-    border:1px dotted #bbbcbc;
+    width:400px;
+    /* border:1px dotted #bbbcbc; */
     overflow:hidden;
     word-wrap:break-word;
     line-height:30px;

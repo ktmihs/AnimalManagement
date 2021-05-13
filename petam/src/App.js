@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import './App.css';
+import './App.css';
 import Topbar from "./Components/Topbar.js";
 import Leftbar from "./Components/Leftbar.js";
 import SearchPage from './Pages/SearchPage'
@@ -11,14 +11,8 @@ import ConfirmReservationPage from './Pages/ConfirmReservationPage'
 import ReservationPage from './Pages/ReservationPage'
 import HospitalPage from './Pages/HospitalPage'
 import ErrorPage from './Pages/ErrorPage'
-import PostListPage from './Pages/PostListPage'
 export default class App extends Component {
 
-  componentDidMount() {
-    fetch("/users")
-      .then((res) => res.json())
-      .then((users) => this.setState({ users }));
-  }
   render() {
     return (
       <>
@@ -38,12 +32,6 @@ export default class App extends Component {
                   <Route path='/searchPage' component={SearchPage}/>
                   
                   <Route render={()=><ErrorPage/>}/>
-                  {/* 
-                  <Route path="*" component={LeftSideBar} />
-                  <Route path="/Reservation" component={Reservation} />
-                  <Route path="/NewCustomer" component={NewCustomer} />
-                  <Route path="/CustomerList" component={CustomerList} />
-                  <Route path="/NewReservation" component={NewReservation} /> */}
                 </Switch> 
               </div>
             </div>
