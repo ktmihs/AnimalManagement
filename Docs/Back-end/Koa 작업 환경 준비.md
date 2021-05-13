@@ -82,4 +82,4 @@ yarn start  // 재시작이 필요 없을 떄
 yarn start:dev  // 재시작이 필요할 때
 ```
 
-참고 : http://localhost:4000/node-js/koa-setting
+참고 : https://joo-ju.github.io/node-js/koa-setting
