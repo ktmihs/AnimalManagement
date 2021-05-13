@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import '../Components/Content.css'
 
-function Search(){
+function Search({getSearchWord}){
     const [searchWord,setSearchWord]=useState('')
 
     const handleChange=(e)=>{
@@ -9,8 +9,8 @@ function Search(){
 
     }
     const handleSubmit=()=>{
-        //onCreate(searchWord)
-        alert('hospital '+searchWord)
+        getSearchWord(searchWord)
+        //alert('hospital '+searchWord)
             // 디비 서치할 때 사용
     }
 
