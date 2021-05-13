@@ -69,6 +69,7 @@ yarn add eslint-config-prettier
 - 코드를 변경할 때마다 서버를 자동으로 재시작.
 
 <br/>
+
 ### nodemon 설치
 
 ```jsx
