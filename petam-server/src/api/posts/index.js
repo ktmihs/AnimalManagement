@@ -1,4 +1,6 @@
-const Router = require('koa-router');
+// const Router = require('koa-router');
+import Router from 'koa-router';
+// import posts from './posts';
 const posts = new Router();
 
 const printInfo = ctx => {
@@ -15,4 +17,5 @@ posts.get('/:id', printInfo);
 posts.delete('/:id', printInfo);
 posts.put('/:id', printInfo);
 posts.patch('/:id', printInfo);
-module.exports = posts;
+// module.exports = posts;
+export default posts;
