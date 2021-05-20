@@ -1,6 +1,5 @@
 import Post from '../../models/post';
 
-
 export const write = async (ctx, next) => {
     const { title, content, tags, view, score } = ctx.request.body;
     const post = new Post({
@@ -21,7 +20,6 @@ export const write = async (ctx, next) => {
     // }
 };
 
-// export const listen => ctx => { };
 // export const read => ctx => { };
 // export const remove => ctx => { };
 // export const update => ctx => { };
