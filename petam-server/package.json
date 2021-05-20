@@ -1,4 +1,5 @@
 {
+  
   "name": "petam-server",
   "version": "1.0.0",
   "main": "index.js",
@@ -6,19 +7,33 @@
   "dependencies": {
     "dotenv": "^9.0.2",
     "eslint-config-prettier": "^8.3.0",
+    "esm": "^3.2.25",
     "koa": "^2.13.1",
+    "koa-body": "^4.2.0",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.0.0",
-    "mongoose": "^5.12.8"
+    "mongoose": "^5.12.9"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.23.0",
     "@typescript-eslint/parser": "^4.23.0",
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "eslint": "^7.26.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-json": "^2.1.1",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.3",
     "nodemon": "^2.0.7"
   },
   "scripts": {
-    "start": "node src",
-    "start:dev": "nodemon --watch src/ src/index.js"
+    "start": "nodemon --exec babel-node src/index.js",
+    "start:dev": "nodemon —watch src/ src/index.js"
   }
+ 
 }

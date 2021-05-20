@@ -1,5 +1,6 @@
 {
     "env": {
+        "es6": true,
         "browser": true,
         "commonjs": true,
         "es2021": true
@@ -12,13 +13,16 @@
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
-    "parser": "@typescript-eslint/parser",
+    "parser": "babel-eslint",
     "parserOptions": {
-        "ecmaVersion": 12
+        "ecmaVersion": 12,
+        "sourceType": "module"
     },
     "plugins": [
         "@typescript-eslint"
     ],
     "rules": {
+        "no-unused-vars": "warn",
+        "no-console": "off"
     }
 }
