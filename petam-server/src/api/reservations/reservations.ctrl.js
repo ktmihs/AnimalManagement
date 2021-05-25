@@ -1,11 +1,17 @@
-import Reservation from "../../model/reservation"
+import Reservation from "../../models/reservation"
 
 export const write=async(ctx, next)=>{
     const {
-        id, type, memo, reservationTime
+        id,
+        type,
+        memo,
+        reservationTime
     }=ctx.request.body
     const reservation=new Reservation({
-        id, type, memo, reservationTime
+        id, 
+        type, 
+        memo, 
+        reservationTime
     })
     await reservation.save()
     ctx.body=reservation

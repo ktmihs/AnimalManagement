@@ -1,5 +1,4 @@
 {
-  
   "name": "petam-server",
   "version": "1.0.0",
   "main": "index.js",
@@ -23,17 +22,16 @@
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "eslint": "^7.26.0",
+    "eslint": "^7.27.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-json": "^2.1.1",
     "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react": "^7.23.2",
     "nodemon": "^2.0.7"
   },
   "scripts": {
     "start": "nodemon --exec babel-node src/index.js",
     "start:dev": "nodemon —watch src/ src/index.js"
   }
- 
 }
