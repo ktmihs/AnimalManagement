@@ -10,6 +10,7 @@ export const write=async(ctx, next)=>{
         score,
         businessNum
     }=ctx.request.body
+
     const hospital=new Hospital({
         id,
         pw,
@@ -47,5 +48,5 @@ export const remove=async(ctx,next)=>{
     const id=ctx.params
     
     await Hospital.deleteOne({_id:id})
-    await next
+    await next()
 }

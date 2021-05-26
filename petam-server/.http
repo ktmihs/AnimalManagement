@@ -1,6 +1,5 @@
 @BASEURL=http://localhost:4000/api
 
-
 GET {{BASEURL}}/reservation
 
 POST {{BASEURL}}/reservation

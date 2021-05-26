@@ -41,5 +41,5 @@ export const remove=async(ctx,next)=>{
     const id=ctx.params
     
     await Reservation.deleteOne({_id:id})
-    await next
+    await next()
 }
