@@ -10,10 +10,16 @@ const HospitalSchema=new Schema({
     name:{
         type: String
     },  //남길 메시지
-    phone: {
+    tel: {
         type: String
     },   //예약한 시간(방문일, 시간)
-    address: {
+    old_addr: {
+        type: String
+    },
+    new_addr: {
+        type: String
+    },
+    zip_code: {
         type: String
     },
     score: {

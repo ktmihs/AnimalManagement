@@ -5,8 +5,10 @@ export const write=async(ctx, next)=>{
         id,
         pw,
         name,
-        phone,
-        address,
+        tel,
+        old_addr,
+        new_addr,
+        zip_code,
         score,
         businessNum
     }=ctx.request.body
@@ -15,8 +17,10 @@ export const write=async(ctx, next)=>{
         id,
         pw,
         name,
-        phone,
-        address,
+        tel,
+        old_addr,
+        new_addr,
+        zip_code,
         score,
         businessNum
     })
