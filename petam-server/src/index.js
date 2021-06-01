@@ -7,12 +7,10 @@ import api from './api';
 const router = new Router();
 const app = new Koa();
 
-
-mongoose
-  .connect('mongodb://localhost:27017/petam', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+var connection = new mongoose.connect('mongodb://localhost:27017/petam', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
   .then(() => {
     console.log('Connected to MongoDB petam');
   })

@@ -3,13 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// import board_reducer from './App_reducer';
+
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+// import board_reducer from "./App_reducer";
+
+// let store = createStore(board_reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
 
 
 
 // import "bootstrap/dist/css/bootstrap.css";
 ReactDOM.render(
-  
+  // <Provider store={store}>
     <App />,
+    // </Provider>,
   document.getElementById('root')
 );
 
