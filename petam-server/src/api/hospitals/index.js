@@ -4,7 +4,7 @@ import {write, read, readOne, remove} from "./hospitals.ctrl"
 const hospitals=new Router()
 
 hospitals.post('/',write)
-hospitals.get('/list',read)
+hospitals.get('/read',read)
 // hospitals.get('/:id',readOne)
 // hospitals.delete('/:id',remove)
 
