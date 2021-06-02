@@ -4,6 +4,7 @@ import '../Components/Content.css'
 import Search from '../Components/Search'
 import SearchContent from './SearchContent'
 import axios from 'axios'
+import Pagination from './Pagination'
 
 function SearchPage(){
     const [searchWord,setSearchWord]=useState('병원')
@@ -11,12 +12,29 @@ function SearchPage(){
     //     hospitals:[],
     //     userInput:""
     // })
-    const [info,setInfo]=useState([])
+    const [info,setInfo]=useState([])   //병원 정보
+    const [loading,setLoading]=useState(false)    //로딩 중 표시
+    const [currentPage,setCurrentPage]=useState(1)  //현재 페이지
+    const [postsPerPage]=useState(4)                //한 페이지에서 보여줄 info 수
+
+    const indexOfLastPost=currentPage*postsPerPage  //해당 페이지에서 마지막 info의 index
+    const indexOfFirstPost=indexOfLastPost-postsPerPage //  ...      첫번째 ...
+    const currentPosts=info.slice(indexOfFirstPost, indexOfLastPost)    //각 페이지에서 보여질 info 배열
+    
+    const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
     useEffect(() => {
-        axios.get('api/hospitals/read') // 내 주소 못 불러오겠움... 다른 데이터로는 됨
-        //axios.get('https://jsonplaceholder.typicode.com/comments')
-        .then(res=>setInfo(res.data))
-        .catch(err=>console.log(err))
+        const fetchPosts=async()=>{
+            setLoading(true)
+            axios.get('api/hospitals/read')
+            //axios.get('https://jsonplaceholder.typicode.com/comments')
+            .then(
+                res=>setInfo(res.data),
+                setLoading(false)
+            )
+            .catch(err=>console.log(err))
+        }
+        fetchPosts()
     }, [])
 
     const getSearchWord=(word)=>{
@@ -24,10 +42,10 @@ function SearchPage(){
         console.log(word)
         console.log(searchWord)
     }
-    const searchResult=(data)=>{
-        console.log(data)
-        //<div>{props.value}</div>
-    }
+    // const searchResult=(data)=>{
+    //     console.log(data)
+    //     //<div>{props.value}</div>
+    // }
     return (
         <Content>
             <h2 className='name'>'{searchWord}' 검색 결과</h2>
@@ -36,7 +54,8 @@ function SearchPage(){
                 getSearchWord={getSearchWord}
             />
             <div className='bodyContainer'>
-                <SearchContent info={info} />
+                <SearchContent info={currentPosts} loading={loading}/>
+                <Pagination postsPerPage={postsPerPage} totalPosts={info.length} paginate={paginate}/>
             </div>
         </Content>
       )

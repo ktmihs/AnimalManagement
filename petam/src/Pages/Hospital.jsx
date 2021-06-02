@@ -20,8 +20,8 @@ function Hospital({item}){
 
     return(
             <div style={bodyHospital}>
+                <img style={imgStyle} src={'Sev.jpg'}/>
                 {item.name}<br/>
-                {item.old_addr}<br/>
                 tel: {item.tel}
             </div>
     )
