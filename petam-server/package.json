@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "dateformat": "^4.5.1",
     "dotenv": "^9.0.2",
     "eslint-config-prettier": "^8.3.0",
     "esm": "^3.2.25",
@@ -11,7 +12,9 @@
     "koa-body": "^4.2.0",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.0.0",
-    "mongoose": "^5.12.9"
+    "mongoose": "^5.12.9",
+    "mongoose-auto-increment": "^5.0.1",
+    "package.json": "^2.0.1"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.23.0",

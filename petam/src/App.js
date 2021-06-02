@@ -1,23 +1,32 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import './App.css';
+import "./App.css";
 import Topbar from "./Components/Topbar.js";
 import Leftbar from "./Components/Leftbar.js";
-import SearchPage from './Pages/SearchPage'
-import Main from './Pages/Main'
-import MyReservationPage from './Pages/MyReservationPage'
-import CheckReservationPage from './Pages/CheckReservationPage'
-import ConfirmReservationPage from './Pages/ConfirmReservationPage'
-import ReservationPage from './Pages/ReservationPage'
-import HospitalPage from './Pages/HospitalPage'
-import ErrorPage from './Pages/ErrorPage'
+import SearchPage from "./Pages/SearchPage";
+import Main from "./Pages/Main";
+import MyReservationPage from "./Pages/MyReservationPage";
+import CheckReservationPage from "./Pages/CheckReservationPage";
+import ConfirmReservationPage from "./Pages/ConfirmReservationPage";
+import ReservationPage from "./Pages/ReservationPage";
+import HospitalPage from "./Pages/HospitalPage";
+import ErrorPage from "./Pages/ErrorPage";
 
-import PostListPage from './Pages/PostListPage'
-import WritePostPage from "./Pages/WritePostPage"
+import PostListPage from "./Pages/PostListPage";
+import PostViewPage from "./Pages/PostViewPage";
+import WritePostPage from "./Pages/WritePostPage";
 
+import Axios from "axios";
 
 export default class App extends Component {
-
+  // const submitReview = () => {
+  //   Axios.post('https://localhost:4000/api/posts', {
+  //     title: '',
+  //     content: ''
+  //   }).then(() => {
+  //     alert('등록 완료!');
+  //   })
+  // }
   render() {
     return (
       <>
@@ -43,13 +52,14 @@ export default class App extends Component {
                   path="/myReservationPage"
                   component={MyReservationPage}
                 />
+
                 <Route path="/searchPage" component={SearchPage} />
                 <Route path="/PostListPage" component={PostListPage} />
                 <Route path="/WritePostPage" component={WritePostPage} />
+                <Route path="/PostViewPage" component={PostViewPage} />
 
                 <Route render={() => <ErrorPage />} />
               </Switch>
-
             </div>
           </div>
         </Router>
@@ -57,4 +67,3 @@ export default class App extends Component {
     );
   }
 }
-
