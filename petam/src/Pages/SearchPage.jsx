@@ -13,8 +13,8 @@ function SearchPage(){
     // })
     const [info,setInfo]=useState([])
     useEffect(() => {
-        //axios.get('https://localhost:4000/api/hospitals/list') // 내 주소 못 불러오겠움... 다른 데이터로는 됨
-        axios.get('https://jsonplaceholder.typicode.com/comments')
+        axios.get('api/hospitals/read') // 내 주소 못 불러오겠움... 다른 데이터로는 됨
+        //axios.get('https://jsonplaceholder.typicode.com/comments')
         .then(res=>setInfo(res.data))
         .catch(err=>console.log(err))
     }, [])
