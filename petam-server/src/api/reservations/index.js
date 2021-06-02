@@ -1,11 +1,11 @@
-import KoaRouter from "koa-router"
+import Router from "koa-router"
 import {write, read, readOne, remove} from "./reservations.ctrl"
 
-const router=new KoaRouter()
+const reservations=new Router()
 
-router.post('/',write)
-router.get('/',read)
-router.read('/:id',readOne)
-router.delete('/:id',remove)
+reservations.post('/',write)
+// reservations.get('/',read)
+// reservations.get('/:id',readOne)
+// reservations.delete('/:id',remove)
 
-export default router
+export default reservations

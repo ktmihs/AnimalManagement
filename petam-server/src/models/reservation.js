@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-const  Schema  = mongoose
+const {Schema} = mongoose
 const ReservationSchema=new Schema({
     id:{
         type: String
@@ -16,4 +16,4 @@ const ReservationSchema=new Schema({
 })
 
 const Reservation=mongoose.model("Reservation",ReservationSchema)
-export default reservation
+export default Reservation

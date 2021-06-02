@@ -24,6 +24,7 @@ router.use('/api', api.routes());
 app.use(KoaBody());
 
 app.use(router.routes()).use(router.allowedMethods());
+app.use((ctx) => (ctx.body = 'hello world!'));
 
 const port = 4000;
 app.listen(port, () => {
