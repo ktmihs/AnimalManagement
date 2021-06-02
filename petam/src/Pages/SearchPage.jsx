@@ -1,11 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import Content from '../Components/Content'
 import '../Components/Content.css'
 import Search from '../Components/Search'
 import SearchContent from './SearchContent'
+import axios from 'axios'
 
 function SearchPage(){
-    const [searchWord,setSearchWord]=useState('')
+    const [searchWord,setSearchWord]=useState('병원')
+    // const [searchWord,setSearchWord]=useState({
+    //     hospitals:[],
+    //     userInput:""
+    // })
+    const [info,setInfo]=useState([])
+    useEffect(() => {
+        //axios.get('https://localhost:4000/api/hospitals/list') // 내 주소 못 불러오겠움... 다른 데이터로는 됨
+        axios.get('https://jsonplaceholder.typicode.com/comments')
+        .then(res=>setInfo(res.data))
+        .catch(err=>console.log(err))
+    }, [])
+
     const getSearchWord=(word)=>{
         setSearchWord(word)
         console.log(word)
@@ -23,10 +36,7 @@ function SearchPage(){
                 getSearchWord={getSearchWord}
             />
             <div className='bodyContainer'>
-                <SearchContent/>
-                <SearchContent/>
-                <SearchContent/>
-                <SearchContent/>
+                <SearchContent info={info} />
             </div>
         </Content>
       )

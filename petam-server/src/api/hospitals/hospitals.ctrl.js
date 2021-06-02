@@ -30,12 +30,11 @@ export const write=async(ctx, next)=>{
     await next()
 }
 
-export const read=async(ctx, next)=>{
-    const data=await Hospital.find()
+export const read=async(ctx)=>{
+    const hospitals=await Hospital.find()
     ctx.status=200
-    ctx.body=data
+    ctx.body=hospitals
 
-    await next()
 }
 
 export const readOne=async(ctx, next)=>{
