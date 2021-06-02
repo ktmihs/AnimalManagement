@@ -29,11 +29,26 @@ export default class Leftbar extends Component {
 
         <hr class="sidebar-divider" />
 
-        <li class="  nav-item active">
-          <div class="nav-link">
-            <span>커뮤니티</span>
-          </div>
+        <li class=" nav-item active">
+          <Link to="/postlistpage">
+            <div class="nav-link">
+              <span>커뮤니티</span>
+            </div>
+          </Link>
+          <li>
+            <span>게시판</span>
+          </li>
         </li>
+        <hr class="sidebar-divider" />
+
+        {/* <li class="  b nav-item active">
+          <Link to="/postlistpage">
+            <div class="nav-link sidebar">
+              <span className="nav-item">커뮤니티</span>
+            </div>
+          </Link>
+        </li>
+        <hr class="sidebar-divider" /> */}
       </ul>
     </div>
   );
