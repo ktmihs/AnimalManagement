@@ -27,6 +27,7 @@ export default class App extends Component {
   //     alert('등록 완료!');
   //   })
   // }
+
   render() {
     return (
       <>

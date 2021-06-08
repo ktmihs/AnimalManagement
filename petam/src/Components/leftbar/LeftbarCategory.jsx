@@ -4,21 +4,6 @@ import React, { Component, useState } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import { Motion, spring } from "react-motion";
-// const LeftbarCategory = ({ children }) => {
-//   // const LeftbarCategory = ({ url, children }) => {
-//   return (
-//     <button className="leftbar-category b">
-//       {/* //{" "}
-//       <Link to={url} className="link"> */}
-//       {children}
-//       {/* <p className="leftbar-category b">{children}</p> */}
-//       {/* //{" "}
-//       </Link> */}
-//     </button>
-//   );
-// };
-
-// export default LeftbarCategory;
 
 const styles = {
   menu: {

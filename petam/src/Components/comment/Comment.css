@@ -1,0 +1,32 @@
+.comment-input {
+  /* border: 2px solid green; */
+  /* width: (100% - 40px); */
+
+  width: 80%;
+  min-width: 70%;
+  max-width: 90%;
+  float: left;
+}
+
+.comment {
+  min-height: 150px;
+}
+
+.comment-profile {
+  width: 40px;
+  /* border: 1px solid red; */
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  margin-bottom: 10px;
+}
+.comment-write-button {
+  float: right;
+  width: 80px;
+  margin-left: 20px;
+  /* background-color: gray; */
+}
+
+.comment-cancel-button {
+  float: right;
+}

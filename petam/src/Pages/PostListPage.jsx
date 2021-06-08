@@ -29,8 +29,8 @@ function PostListPage() {
   useEffect(async () => {
     try {
       // 데이터를 받아오는 동안 시간 소요 되므로 await로 대기
+      // const res = await axios.get("http://localhost:4000/api/posts/list");
       const res = await axios.get("/api/posts/list");
-
       const _postData = await res.data.map(
         (rowData) => (
           setLastIdx(lastIdx + 1),

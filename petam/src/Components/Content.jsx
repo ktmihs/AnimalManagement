@@ -5,7 +5,7 @@ function Content({ children }) {
   const bodyStyle = {
     background: "white",
     height: "auto",
-    minHeight: "77vh",
+    // minHeight: "77vh",
     width: "90%",
     padding: "10px 5px",
     margin: "4% 5%",
