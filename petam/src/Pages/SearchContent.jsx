@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {Link} from 'react-router-dom'
 import '../Components/Content.css'
 import Hospital from './Hospital'
 
-function SearchContent({info}){
- 
+function SearchContent({info, loading}){
+    if (loading){
+        return <h2>Loading...</h2>
+    }
     return(
-
-        <Link to='/HospitalPage'>
+        <>
             {
                 info.map(item=>{
                     return(
@@ -15,7 +16,7 @@ function SearchContent({info}){
                     )
                 })
         }
-        </Link>
+        </>
     )
 }
 export default SearchContent

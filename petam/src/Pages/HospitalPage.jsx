@@ -1,19 +1,40 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { useHistory } from 'react-router'
 import Content from '../Components/Content'
 import '../Components/Content.css'
 import Search from '../Components/Search'
+import axios from 'axios'
 
-function HospitalPage({location,history}){
+function HospitalPage(props){
     const [hospitalInfo,setHospitalInfo]=useState({     //나중에 ''로 초기화 후, db에서 받아 set에 넣어주기
-        id:'980505',
-        name:'신촌세브란스',
+        id:'',
+        name:'',
         img:'/sev.jpg',
-        addr:'서울 서대문구 연세로 50-1',
-        ph:'02-1599-1004',
+        addr:'',
+        tel:'',
         time:'09:00 - 18:00',
         avg:'5' //평점
     })
+
+    const hospital=props.match.params.name
+    
+    useEffect(() => {
+        const fetchPosts=async()=>{
+            axios.get('api/hospitals/read/name/'+hospital) //안됨
+            .then(
+                res=>setHospitalInfo(
+                    hospitalInfo.name=res.name,
+                    ...hospitalInfo
+                ),
+                console.log(hospitalInfo,hospital),
+            )
+            .catch(
+                console.log('fail'),
+                err=>console.log(err)
+                )
+        }
+        fetchPosts()
+    }, [])
     
     const hspId=useHistory()
     
@@ -21,7 +42,7 @@ function HospitalPage({location,history}){
         hspId.push({
             pathname: '/ReservationPage',
             id:hospitalInfo.id,
-            name:hospitalInfo.name
+            name:hospital
         })
     }
     const topContent={
@@ -56,7 +77,7 @@ function HospitalPage({location,history}){
     }
     return(
         <Content>
-            <h2 className='name' value={hospitalInfo.name}>{hospitalInfo.name}</h2>
+            <h2 className='name' value={hospital}>{hospital}</h2>
             <Search/>
             <div className='bodyContainer'>
                 <div className="contentBox">

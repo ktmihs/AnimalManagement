@@ -39,7 +39,7 @@ export default class App extends Component {
               <Switch>
                 <Route path="/" exact component={Main} />
                 <Route path="/main" component={Main} />
-                <Route path="/hospitalPage" component={HospitalPage} />
+                <Route path="/hospital/:name" component={HospitalPage} />
                 <Route path="/reservationPage" component={ReservationPage} />
                 <Route
                   path="/checkReservationPage"
@@ -54,7 +54,7 @@ export default class App extends Component {
                   component={MyReservationPage}
                 />
 
-                <Route path="/searchPage" component={SearchPage} />
+                <Route exact path="/hospital" component={SearchPage} />
                 <Route path="/PostListPage" component={PostListPage} />
                 <Route path="/WritePostPage" component={WritePostPage} />
                 <Route path="/PostViewPage" component={PostViewPage} />

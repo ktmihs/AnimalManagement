@@ -6,11 +6,13 @@ function Hospital({item}){
        
     const bodyHospital={
         display:'inline-block',
-        border:'5px solid #98B6E4',
+        border:'4px dotted #98B6E4',
         textAlign:'center',
         height:'190px',
-        width:'160px',
-        margin:'20px 20px 0 20px'
+        width:'170px',
+        margin:'20px 20px 0 20px',
+        padding:'5px 0',
+        fontSize:'14px'
     }
     const imgStyle={
         width:'150px',
@@ -18,12 +20,18 @@ function Hospital({item}){
         verticalAlign:'top'
     }
 
+    const name=item.name
+    const id=item._id
+    console.log(id)
+
     return(
+        <a href={`/hospital/${name}`}>
             <div style={bodyHospital}>
+                <img style={imgStyle} src={'Sev.jpg'}/>
                 {item.name}<br/>
-                {item.old_addr}<br/>
                 tel: {item.tel}
             </div>
+        </a>
     )
 }
 export default Hospital
