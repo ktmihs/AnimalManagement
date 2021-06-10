@@ -1,3 +1,4 @@
+import { render } from "@testing-library/react"
 import React from "react"
 import { useState } from "react"
 
@@ -11,22 +12,26 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
     pageNumber.push(i)
   }
   const pNum=(pageNumber)
-  let pArr=pageNumber.slice(pNum,5)
+  let pArr=pageNumber.slice(0,10)
 
   //함수 다시 만들기
   
   const firstPage=()=>{
     setBlockNum(0)
     setCurrPage(1)
+    pArr=pageNumber.slice(0,10)
+    paginate((blockNum*10)+currPage)
   }
   const lastPage=()=>{
-    setBlockNum(Math.ceil(pNum/5))
-    setCurrPage(pNum)
+    setBlockNum(Math.ceil(Number(pageNumber)/4))
+    setCurrPage(Number(pageNumber))
+    pArr=pageNumber.slice((blockNum)*10+1,currPage)
+    paginate(currPage)
   }
   const prevPage=()=>{
     if(currPage<=1)
         return
-    if((currPage-1)<=pageLimit*blockNum){
+    if((currPage-1)<=10*Number(blockNum)){
         setBlockNum(n=>n-1)
     }
     setCurrPage(n=>n-1)
@@ -34,7 +39,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const nextPage=()=>{
     if(currPage>=pNum)
         return
-    if(5*Number(blockNum+1)<Number(currPage+1)){
+    if(10*Number(blockNum+1)<Number(currPage+1)){
         setBlockNum(n=>n+1)        
     }
     setCurrPage(n=>n+1)
@@ -42,17 +47,20 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
 
   const pageBtn={
     height:'30px',
-    border:'1px solid #d5d5d5',
+    border:'1px solid #ffffff',
+    backgroundColor:'#b5cfff',
     borderRadius:'6px',
     padding:'0 12px',
     cursor:'pointer',
     boxSizing:'border-box',
-    position:'relative'
+    position:'relative',
   }
   const style={
     position:'relative',
     bottom:'-3vw',
-    paddingBottom:'20px'
+    padding:'auto',
+    margin:'auto',
+    paddingBottom:'20px',
 }
 
   return (

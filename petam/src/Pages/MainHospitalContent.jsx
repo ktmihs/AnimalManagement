@@ -51,7 +51,7 @@ function MainHospitalContent(){
         <div style={contentBox}>
           <div style={TopContent}>
             <img style={logo} src="/logo.jpg" alt="petAm"/>
-            <Link to='/SearchPage'><div style={contentName}><strong>병원 검색</strong></div></Link>            
+            <Link to='/hospital'><div style={contentName}><strong>병원 검색</strong></div></Link>            
           </div>
           <div style={BottomContent}>
             <div style={ad}>    {/*나중에 이미지로 대체*/}

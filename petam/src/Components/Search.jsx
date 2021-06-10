@@ -10,6 +10,9 @@ function Search({getSearchWord}){
     }
     const handleSubmit=()=>{
         getSearchWord(searchWord)
+        res.push({
+            pathname:`/hospital/${searchWord}`
+        })
         //alert('hospital '+searchWord)
             // 디비 서치할 때 사용
     }

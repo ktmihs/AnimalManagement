@@ -4,7 +4,7 @@ import '../Components/Content.css'
 import Search from '../Components/Search'
 import SearchContent from './SearchContent'
 import axios from 'axios'
-import Pagination from './Pagination'
+import Pagination from '../Components/Pagination'
 
 function SearchPage(){
     const [searchWord,setSearchWord]=useState('병원')
@@ -41,6 +41,7 @@ function SearchPage(){
         setSearchWord(word)
         console.log(word)
         console.log(searchWord)
+        
     }
     // const searchResult=(data)=>{
     //     console.log(data)

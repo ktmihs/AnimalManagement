@@ -8,7 +8,7 @@ function SearchContent({info, loading}){
         return <h2>Loading...</h2>
     }
     return(
-        <Link to='/HospitalPage'>
+        <>
             {
                 info.map(item=>{
                     return(
@@ -16,7 +16,7 @@ function SearchContent({info, loading}){
                     )
                 })
         }
-        </Link>
+        </>
     )
 }
 export default SearchContent
