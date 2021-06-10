@@ -74,9 +74,11 @@ function PostListPage() {
                       <PostTableRow>
                         <PostTableColumnNo>{rowData.no}</PostTableColumnNo>
                         <PostTableColumn></PostTableColumn>
-                        <PostTableColumnTitle>
-                          {rowData.title}
-                        </PostTableColumnTitle>
+                        <Link to={`/postView/${rowData._id}`}>
+                          <PostTableColumnTitle>
+                            {rowData.title}
+                          </PostTableColumnTitle>
+                        </Link>
                         <PostTableColumn>{rowData.enrollTime}</PostTableColumn>
                         <PostTableColumn> {rowData.writer}</PostTableColumn>
                         <PostTableColumn>6</PostTableColumn>
