@@ -23,16 +23,16 @@ export const write = async (ctx) => {
   ctx.body = post;
 };
 
-export const read = async (ctx) => {
-  const { id } = ctx.params;
+export const readOne = async (ctx) => {
+  const { _id } = ctx.params; // id로 하면 안됨.. _id로 해야 됨..
 
   try {
-    const post = await Post.findById(id).exec();
-    if (!post) {
+    const posts = await Post.findById(_id).exec();
+    if (!posts) {
       ctx.status = 404;
       return;
     }
-    ctx.body = post;
+    ctx.body = posts;
   } catch (e) {
     ctx.throw(500, e);
   }
