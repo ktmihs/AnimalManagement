@@ -9,7 +9,7 @@ posts.get('/list', postsCtrl.list);
 // posts.post('/', postsCtrl.write);
 
 // posts.get('/', postsCtrl.list);
-// post.get('/', postsCtrl.read);
+posts.get('/readone/:_id', postsCtrl.readOne);
 // post.delete('/', postsCtrl.remove);
 // post.patch('/', postsCtrl.update);
 

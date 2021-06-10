@@ -27,6 +27,7 @@ export default class App extends Component {
   //     alert('등록 완료!');
   //   })
   // }
+
   render() {
     return (
       <>
@@ -57,6 +58,8 @@ export default class App extends Component {
                 <Route path="/PostListPage" component={PostListPage} />
                 <Route path="/WritePostPage" component={WritePostPage} />
                 <Route path="/PostViewPage" component={PostViewPage} />
+
+                <Route path="/PostView/:id" component={PostViewPage} />
 
                 <Route render={() => <ErrorPage />} />
               </Switch>
