@@ -2,7 +2,7 @@
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
 import db from '../index';
-mongoose.set('useCreateIndex', true)
+mongoose.set('useCreateIndex', true);
 autoIncrement.initialize(mongoose.connection);
 
 const { Schema } = mongoose;

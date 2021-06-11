@@ -59,7 +59,7 @@ export default class App extends Component {
                 <Route path="/WritePostPage" component={WritePostPage} />
                 <Route path="/PostViewPage" component={PostViewPage} />
 
-                <Route path="/PostView/:id" component={PostViewPage} />
+                <Route path="/PostView/:_id" component={PostViewPage} />
 
                 <Route render={() => <ErrorPage />} />
               </Switch>
