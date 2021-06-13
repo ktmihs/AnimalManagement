@@ -1,0 +1,29 @@
+.item-box{
+    display:inline-block;
+    border:4px dotted #98B6E4;
+    text-align:center;
+    height:190px;
+    width:170px;
+    margin:20px 20px 0 20px;
+    padding:5px 0;
+    font-size:14px;
+}
+
+.img-style{
+    width:150px;
+    height:130px;
+    vertical-align:top;
+}
+
+.search{
+    display:inline-block;
+    border:1px solid #bbbcbc;
+    border-radius:5px;
+    width:40%;
+    height:35px;
+}
+.search-button{
+    background-color:#dddddd;
+    margin-left:10px;
+    width:80px;
+}

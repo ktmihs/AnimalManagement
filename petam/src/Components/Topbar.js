@@ -1,6 +1,7 @@
 import '../style.css';
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import SignButton from './sign/SignButton';
 // import React from 'react';
 // import ReactDOM from "react-dom";
 // import App from "../App.js";
@@ -29,12 +30,7 @@ export default class TopBar extends Component {
           </Link>
         </div>
         <div className="  col-3">
-          <button className=" btn-light btn col-5 m-auto text-2140C text-center p-2 m-1">
-            Sign In
-          </button>
-          <button className=" btn-secondary btn col-5 m-auto text-white text-center float-right p-2 m-1">
-            Sign Up
-          </button>
+          <SignButton/>
         </div>
 
         {/* <!-- Topbar Navbar --> */}

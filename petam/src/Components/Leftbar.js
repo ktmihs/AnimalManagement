@@ -37,12 +37,15 @@ export default class Leftbar extends Component {
       >
         <LeftbarCategory
           selections={[
-            "Selection 1",
-            "Selection 2",
-            "Selection 3",
-            "Selection 4",
-            "Selection 5",
-            "Selection 6",
+            {
+              title: "병원검색",
+              address: "/hospital",
+            },
+            {
+              title: "내 예약 내역",
+              address: "/myReservationPage",
+            },
+            "Selection 3"
           ]}
           h={233}
         >
@@ -59,7 +62,7 @@ export default class Leftbar extends Component {
           ]}
           h={233}
         >
-          진료예약
+          제품찾기
         </LeftbarCategory>
         <LeftbarCategory
           selections={[
