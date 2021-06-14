@@ -23,15 +23,16 @@ function RegisterFormContent(){
             ...authActions,
             [name]: value
         })
+        console.log(name,value)
     }
-    const handleClick=()=>{
+    const handleSubmit=()=>{
         axios.post("/api/auth",authActions)
         .then((response) => {
-            console.log(response);
+            console.log(response)
+            alert(authActions.username+authActions.email+authActions.password)
           })
           .catch((error) => {
-            alert(authActions.username+authActions.email+authActions.password)
-            console.log(error);
+            console.log(error)
           })
     }
     return(
@@ -57,7 +58,7 @@ function RegisterFormContent(){
                 <input name="passwordConfirm"  value={passwordConfirm} onChange={handleChange} class="form-control" placeholder="Repeat password" type="password"/>
             </div>                                     
             <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block" onClick={handleClick}> Create Account  </button>
+                <button type="submit" class="btn btn-primary btn-block" onSubmit={handleSubmit}> Create Account  </button>
             </div>  
             <RegisterFormFooter/>
         </form>

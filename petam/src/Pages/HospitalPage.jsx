@@ -1,8 +1,10 @@
+// 병원 세부 정보 & 예약 및 후기 링크
+
 import React, { useState,useEffect } from 'react'
 import { useHistory } from 'react-router'
 import Content from '../Components/Content'
 import '../Components/Content.css'
-import Search from '../Components/Search'
+import Search from '../Components/search/Search'
 import axios from 'axios'
 
 function HospitalPage(props){
@@ -16,16 +18,19 @@ function HospitalPage(props){
         avg:'5' //평점
     })
 
-    const hospital=props.match.params.name
+    const [hospital,setHospital]=useState(props.match.params.name)
     
     useEffect(() => {
         const fetchPosts=async()=>{
-            axios.get('api/hospitals/read/name/'+hospital) //안됨
+            //axios.get('api/hospitals/read?name='+hospital) //안됨
+            axios.get('https://jsonplaceholder.typicode.com/users/')
             .then(
-                res=>setHospitalInfo(
-                    hospitalInfo.name=res.name,
-                    ...hospitalInfo
-                ),
+                res=>setHospitalInfo({
+                    
+                    name:res.name,
+                    tel:'024567899',
+                    ...hospitalInfo,
+                }),
                 console.log(hospitalInfo,hospital),
             )
             .catch(
@@ -91,7 +96,7 @@ function HospitalPage(props){
                     <div style={bottomContent}>
                         병원명: {hospitalInfo.name}<br/>
                         병원주소: {hospitalInfo.addr}<br/>
-                        전화번호: {hospitalInfo.ph}<br/>
+                        전화번호: {hospitalInfo.tel}<br/>
                         운영시간: {hospitalInfo.time}<br/>
                         평점: {hospitalInfo.avg}
                     </div>

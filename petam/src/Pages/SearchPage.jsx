@@ -1,10 +1,12 @@
+//검색 페이지
+
 import React, { useState,useEffect } from 'react'
 import Content from '../Components/Content'
 import '../Components/Content.css'
-import Search from '../Components/Search'
-import SearchContent from './SearchContent'
+import Search from '../Components/search/Search'
+import SearchContent from '../Components/search/SearchContent'
 import axios from 'axios'
-import Pagination from '../Components/Pagination'
+import Pagination from '../Components/pagination/Pagination'
 
 function SearchPage(){
     const [searchWord,setSearchWord]=useState('병원')
@@ -37,6 +39,7 @@ function SearchPage(){
         fetchPosts()
     }, [])
 
+    //병원 검색 받으면 리렌딩 ()
     const getSearchWord=(word)=>{
         setSearchWord(word)
         console.log(word)
