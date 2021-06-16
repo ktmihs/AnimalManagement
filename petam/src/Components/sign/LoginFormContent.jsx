@@ -1,10 +1,10 @@
 import React,{useState} from 'react'
 import "./sign.css"
-//import { AuthContent, InputWithLabel, AuthButton, RightAlignedLink } from '../Pages/Auth';
+/* import { AuthContent, InputWithLabel, AuthButton, RightAlignedLink } from '../Pages/Auth';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as authActions from '../../redux/modules/auth';
-
+ import * as authActions from '../../redux/modules/auth';
+*/
 function LoginFormContent(){
     const [authActions,setAuthActions]=useState({
             email:'',
@@ -27,6 +27,7 @@ function LoginFormContent(){
         </form>
     )
 }
+/* 
 export default connect(
     (state) => ({
         form: state.auth.getIn(['login', 'form'])
@@ -35,5 +36,5 @@ export default connect(
         AuthActions: bindActionCreators(authActions, dispatch)
     })
 )(LoginFormContent);
-
-//export default LoginFormContent
+ */
+export default LoginFormContent

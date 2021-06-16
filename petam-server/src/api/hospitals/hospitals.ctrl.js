@@ -86,7 +86,7 @@ export const readOne=async(ctx)=>{
     }
     ctx.body=data
 }
-/*
+
 export const readName=async(ctx)=>{
     const name=ctx.params
     let data
@@ -102,7 +102,7 @@ export const readName=async(ctx)=>{
     }
     ctx.body=data
 }
-*/
+
 
 export const remove=async(ctx,next)=>{
     const id=ctx.params

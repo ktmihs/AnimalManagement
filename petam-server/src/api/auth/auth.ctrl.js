@@ -1,5 +1,5 @@
-import Joi from 'Joi'
-import Account from '../../models/account'
+//import Joi from 'Joi'
+//import Account from '../../models/account'
 import Auth from '../../models/auth'
 
 // 로컬 회원가입
@@ -18,11 +18,11 @@ export const write=async(ctx)=>{
     try{
         await auth.save()
     } catch(e){
-        return ctx.throw(200,e)
+        return ctx.throw(500,e)
     }
     ctx.body=auth
 }
-
+/* 
 export const localRegister = async (ctx) => {
     const schema = Joi.object().keys({
         username: Joi.string().alphanum().min(4).max(15).required(),
@@ -37,7 +37,7 @@ export const localRegister = async (ctx) => {
         ctx.status = 400;
         return;
     }
-    /* TODO: 아이디 / 이메일 중복처리 구현 */
+    /* TODO: 아이디 / 이메일 중복처리 구현 
 
     // 아이디 / 이메일 중복 체크
     let existing = null;
@@ -153,4 +153,4 @@ export const check = (ctx) => {
     }
 
     ctx.body = user.profile;
-};
+}; */
