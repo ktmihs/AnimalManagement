@@ -1,8 +1,31 @@
 import React from 'react'
+import { useState,useEffect } from 'react'
 import Content from '../Components/Content'
 import '../Components/Content.css'
+import axios from 'axios'
 
-function CheckReservationPage({location,history}){
+function ConfirmReservationPage(props){
+    const [hospital,setHospital]=useState(props.match.hospitalName)
+    console.log(props.match.hospitalName)
+    useEffect(() => {
+        const fetchPosts=async()=>{
+            axios.get('api/reservations/host?hospitalName='+hospital) 
+            .then(
+                res=>setHospitalInfo({
+                    
+                    name:res.hospitalName,
+                    tel:'024567899',
+                    ...hospitalInfo,
+                }),
+                console.log(hospital),
+            )
+            .catch(
+                console.log('fail'),
+                err=>console.log(err)
+                )
+        }
+        fetchPosts()
+    }, [])
     const contentBox={
         border:'none',
         height:'auto'
@@ -25,7 +48,7 @@ function CheckReservationPage({location,history}){
                 <div className='contentBox' style={contentBox}>
                     <div>
                         예약 번호 : 1235468788<br/>
-                        예약 병원 : 신촌 세브란스 병원<br/>
+                        예약 병원 : {hospital}<br/>
                         예약자 : 보리<br/>
                         예약 일정 : 2021년 04월 14일 16일<br/>
                         예약 목적 : 정기 검진<br/>
@@ -42,11 +65,11 @@ function CheckReservationPage({location,history}){
                 </div>
             </div>
             <div style={buttons}>
-                <button style={leftButton} className='button' onClick={()=>history.push('/')}>예약 취소</button>
-                <button style={rightButton} className='button' onClick={()=>history.push('/MyReservationPage')}>확인</button>  
+                <button style={leftButton} className='button' onClick={()=>props.history.push('/')}>예약 취소</button>
+                <button style={rightButton} className='button' onClick={()=>props.history.push('/MyReservationPage')}>확인</button>  
             </div>
         </Content>
     )
 }
 
-export default CheckReservationPage
+export default ConfirmReservationPage

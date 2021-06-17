@@ -1,8 +1,9 @@
-import { render } from "@testing-library/react"
+//pagination 시 앞뒤 버튼
+
 import React from "react"
 import { useState } from "react"
 
-const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
+const PageButton = ({ postsPerPage, totalPosts, paginate,children }) => {
   const pageNumber = []
   const [blockNum,setBlockNum]=useState(0)
   const [currPage,setCurrPage]=useState(0)
@@ -52,36 +53,19 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
     borderRadius:'6px',
     padding:'0 12px',
     cursor:'pointer',
-    boxSizing:'border-box',
-    position:'relative',
+    //boxSizing:'border-box',
+    //position:'relative',
   }
-  const style={
-    position:'relative',
-    bottom:'-3vw',
-    padding:'auto',
-    margin:'auto',
-    paddingBottom:'20px',
-}
 
   return (
-    <ul className="pagination" style={style}>
+    <>
       <button style={pageBtn} onClick={firstPage}>&lt;&lt;</button>
       <button style={pageBtn} onClick={prevPage}>&lt;</button>
-      <>
-        {pArr.map((pageNum) => (
-            <li
-            key={pageNum}
-            className="pagination_item"
-            onClick={() => paginate(pageNum)}
-            >
-            {pageNum}&nbsp;&nbsp;
-            </li>
-        ))}
-      </>
+      {children}
       <button style={pageBtn} onClick={nextPage}>&gt;</button>
       <button style={pageBtn} onClick={lastPage}>&gt;&gt;</button>
-    </ul>
+    </>
   )
 }
 
-export default Pagination
+export default PageButton

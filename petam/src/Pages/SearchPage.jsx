@@ -1,10 +1,12 @@
+//검색 페이지
+
 import React, { useState,useEffect } from 'react'
 import Content from '../Components/Content'
 import '../Components/Content.css'
-import Search from '../Components/Search'
-import SearchContent from './SearchContent'
+import Search from '../Components/search/Search'
+import SearchContent from '../Components/search/SearchContent'
 import axios from 'axios'
-import Pagination from '../Components/Pagination'
+import Pagination from '../Components/pagination/Pagination'
 
 function SearchPage(){
     const [searchWord,setSearchWord]=useState('병원')
@@ -16,6 +18,8 @@ function SearchPage(){
     const [loading,setLoading]=useState(false)    //로딩 중 표시
     const [currentPage,setCurrentPage]=useState(1)  //현재 페이지
     const [postsPerPage]=useState(4)                //한 페이지에서 보여줄 info 수
+
+    const linkName='hospital'       // 링크이름
 
     const indexOfLastPost=currentPage*postsPerPage  //해당 페이지에서 마지막 info의 index
     const indexOfFirstPost=indexOfLastPost-postsPerPage //  ...      첫번째 ...
@@ -37,6 +41,7 @@ function SearchPage(){
         fetchPosts()
     }, [])
 
+    //병원 검색 받으면 리렌딩 ()
     const getSearchWord=(word)=>{
         setSearchWord(word)
         console.log(word)
@@ -55,7 +60,7 @@ function SearchPage(){
                 getSearchWord={getSearchWord}
             />
             <div className='bodyContainer'>
-                <SearchContent info={currentPosts} loading={loading}/>
+                <SearchContent linkName={linkName} info={currentPosts} loading={loading}/>
                 <Pagination postsPerPage={postsPerPage} totalPosts={info.length} paginate={paginate}/>
             </div>
         </Content>

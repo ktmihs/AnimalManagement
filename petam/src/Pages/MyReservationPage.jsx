@@ -1,9 +1,37 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import Content from '../Components/Content'
 import '../Components/Content.css'
+import SearchContent from '../Components/search/SearchContent'
+import axios from 'axios'
+import Pagination from '../Components/pagination/Pagination'
 
 function MyReservationPage({location, history}){
+    const [info,setInfo]=useState([])   //병원 정보
+    const [loading,setLoading]=useState(false)    //로딩 중 표시
+    const [currentPage,setCurrentPage]=useState(1)  //현재 페이지
+    const [postsPerPage]=useState(4)                //한 페이지에서 보여줄 info 수
+
+    const linkName='confirmReservationPage'         // 링크이름
+
+    const indexOfLastPost=currentPage*postsPerPage  //해당 페이지에서 마지막 info의 index
+    const indexOfFirstPost=indexOfLastPost-postsPerPage //  ...      첫번째 ...
+    const currentPosts=info.slice(indexOfFirstPost, indexOfLastPost)    //각 페이지에서 보여질 info 배열
+    const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
+    useEffect(() => {
+        const fetchPosts=async()=>{
+            setLoading(true)
+            axios.get('api/reservations/read')
+            .then(
+                res=>setInfo(res.data),
+                setLoading(false)
+            )
+            .catch(err=>console.log(err))
+        }
+        fetchPosts()
+    }, [])
+    
     const totalCount={
         textAlign:'right'
     }
@@ -11,16 +39,12 @@ function MyReservationPage({location, history}){
         height:'300px',
         textAlign:'center'
     }
-    const reservation={
-        height:'160px',
-        width:'140px',
-        padding:'20px 5px',
-        margin:'40px 20px',
-        border:'4px solid #98B6E4',
-        borderRadius:'30px',
-        display:'inline-block',
-        textAlign:'center',
-        fontSize:'14px'
+    const paginationlocate={
+        width:'100%',
+        textAlign:'center'
+    }
+    const buttonlocate={
+        textAlign:'right'
     }
     const button={
     backgroundColor:'#BBBCBC'
@@ -32,21 +56,11 @@ function MyReservationPage({location, history}){
                     <div style={totalCount}>총 5건</div>
                     <hr/>
                     <div style={reservationContainer}>
-                        <div style={reservation}>
-                            <h5>신촌세브란스</h5>
-                            4월 16일 14시<br/>
-                            정기 검진<br/><br/>
-                            <Link to='/ConfirmReservationPage'><h4>▶</h4></Link>
-                        </div>
-                        <div style={reservation}>
-                            <h5>신촌세브란스</h5>
-                            4월 16일 14시<br/>
-                            정기 검진<br/><br/>
-                            <Link to='/ConfirmReservationPage'><h4>▶</h4></Link>
-                        </div>
+                        <SearchContent linkName={linkName} info={currentPosts} loading={loading}/>
+                        <div style={paginationlocate}><Pagination postsPerPage={postsPerPage} totalPosts={info.length} paginate={paginate}/></div>
                     </div>
                 <hr/>
-                <button style={button} className='button' onClick={()=>history.push('/')}>뒤로가기</button>
+                <div style={buttonlocate}><button style={button} className='button' onClick={()=>history.push('/')}>뒤로가기</button></div>
             </div>
         </Content>
     )

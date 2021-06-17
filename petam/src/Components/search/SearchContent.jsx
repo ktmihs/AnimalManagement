@@ -1,9 +1,10 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import '../Components/Content.css'
-import Hospital from './Hospital'
+// 검색어에 맞는 병원 정보 보여주기(map으로)
 
-function SearchContent({info, loading}){
+import React from 'react'
+import '../Content.css'
+import Item from './Item'
+
+function SearchContent({linkName, info, loading}){
     if (loading){
         return <h2>Loading...</h2>
     }
@@ -12,7 +13,7 @@ function SearchContent({info, loading}){
             {
                 info.map(item=>{
                     return(
-                        <Hospital key={item.id} item={item}/>
+                        <Item linkName={linkName} key={item.id} item={item}/>
                     )
                 })
         }

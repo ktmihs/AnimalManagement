@@ -50,6 +50,27 @@ export const read=async(ctx)=>{
 }
 */
 
+
+/* export const readName=async(ctx)=>{
+    let options = []
+    if (ctx.request.query.option == 'name') {
+        options = [{ name: new RegExp(ctx.request.query.content) }]
+    } else if (ctx.request.query.option == 'old_adrr') {
+        options = [{ old_adrr: new RegExp(ctx.request.query.content) }]
+    } else if (ctx.request.query.option == 'name+old_adrr') {
+        options = [
+            { name: new RegExp(ctx.request.query.content) },
+            { old_adrr: new RegExp(ctx.request.query.content) },
+        ]
+    } else {
+        const err = new Error('검색 옵션이 없습니다.')
+        err.status = 400
+        throw err
+    }
+    const hospital = await Hospital.find({ $or: options })
+} */
+
+
 export const readOne=async(ctx)=>{
     const id=ctx.params
     let data
@@ -65,6 +86,7 @@ export const readOne=async(ctx)=>{
     }
     ctx.body=data
 }
+
 export const readName=async(ctx)=>{
     const name=ctx.params
     let data

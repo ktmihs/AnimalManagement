@@ -11,6 +11,8 @@ import ConfirmReservationPage from "./Pages/ConfirmReservationPage";
 import ReservationPage from "./Pages/ReservationPage";
 import HospitalPage from "./Pages/HospitalPage";
 import ErrorPage from "./Pages/ErrorPage";
+import Login from "./Components/sign/Login";
+import Register from "./Components/sign/Register";
 
 import PostListPage from "./Pages/PostListPage";
 import PostViewPage from "./Pages/PostViewPage";
@@ -39,20 +41,13 @@ export default class App extends Component {
               <Switch>
                 <Route path="/" exact component={Main} />
                 <Route path="/main" component={Main} />
+                <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
                 <Route path="/hospital/:name" component={HospitalPage} />
                 <Route path="/reservationPage" component={ReservationPage} />
-                <Route
-                  path="/checkReservationPage"
-                  component={CheckReservationPage}
-                />
-                <Route
-                  path="/confirmReservationPage"
-                  component={ConfirmReservationPage}
-                />
-                <Route
-                  path="/myReservationPage"
-                  component={MyReservationPage}
-                />
+                <Route path="/checkReservationPage" component={CheckReservationPage} />
+                <Route path="/confirmReservationPage/:hospitalName" component={ConfirmReservationPage} />
+                <Route path="/myReservationPage" component={MyReservationPage} />
 
                 <Route exact path="/hospital" component={SearchPage} />
                 <Route path="/PostListPage" component={PostListPage} />
