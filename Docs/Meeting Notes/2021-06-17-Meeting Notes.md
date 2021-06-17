@@ -13,5 +13,5 @@
   - [ ] 글 상세보기
   - [ ] 댓글 입력
 - 현서
-  - [ ] pagination 마무리
+  - [ ] 특정 id get 구현 찾아보기
   - [ ] reservation get one & delete
