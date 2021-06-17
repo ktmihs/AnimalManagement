@@ -4,7 +4,7 @@ import React from 'react'
 import '../Content.css'
 import Item from './Item'
 
-function SearchContent({info, loading}){
+function SearchContent({linkName, info, loading}){
     if (loading){
         return <h2>Loading...</h2>
     }
@@ -13,7 +13,7 @@ function SearchContent({info, loading}){
             {
                 info.map(item=>{
                     return(
-                        <Item key={item.id} item={item}/>
+                        <Item linkName={linkName} key={item.id} item={item}/>
                     )
                 })
         }

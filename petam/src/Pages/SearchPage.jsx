@@ -19,6 +19,8 @@ function SearchPage(){
     const [currentPage,setCurrentPage]=useState(1)  //현재 페이지
     const [postsPerPage]=useState(4)                //한 페이지에서 보여줄 info 수
 
+    const linkName='hospital'       // 링크이름
+
     const indexOfLastPost=currentPage*postsPerPage  //해당 페이지에서 마지막 info의 index
     const indexOfFirstPost=indexOfLastPost-postsPerPage //  ...      첫번째 ...
     const currentPosts=info.slice(indexOfFirstPost, indexOfLastPost)    //각 페이지에서 보여질 info 배열
@@ -58,7 +60,7 @@ function SearchPage(){
                 getSearchWord={getSearchWord}
             />
             <div className='bodyContainer'>
-                <SearchContent info={currentPosts} loading={loading}/>
+                <SearchContent linkName={linkName} info={currentPosts} loading={loading}/>
                 <Pagination postsPerPage={postsPerPage} totalPosts={info.length} paginate={paginate}/>
             </div>
         </Content>

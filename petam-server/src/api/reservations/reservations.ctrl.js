@@ -4,15 +4,19 @@ export const write=async(ctx, next)=>{
     const {
         id,
         hostId,
+        hospitalName,
         type,
         memo,
+        dateDay,
         reservationTime
     }=ctx.request.body
     const reservation=new Reservation({
         id, 
         hostId,
+        hospitalName,
         type, 
-        memo, 
+        memo,
+        dateDay, 
         reservationTime
     })
     try{
@@ -41,6 +45,21 @@ export const readOne=async(ctx)=>{
     let data
     try{
         data=await Reservation.findById(id).exec()
+    }catch(e){
+        return ctx.throw(200,e)
+    }
+    if(!data){
+        ctx.status=404
+        ctx.body={message:'data not found'}
+        return
+    }
+    ctx.body=data
+}
+export const hospital=async(ctx)=>{
+    const name=ctx.params
+    let data
+    try{
+        data=await Reservation.findOne(name).exec()
     }catch(e){
         return ctx.throw(200,e)
     }

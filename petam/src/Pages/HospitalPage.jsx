@@ -22,8 +22,8 @@ function HospitalPage(props){
     
     useEffect(() => {
         const fetchPosts=async()=>{
-            //axios.get('api/hospitals/read?name='+hospital) //안됨
-            axios.get('https://jsonplaceholder.typicode.com/users/')
+            axios.get('/api/hospitals/read/name/'+hospital) //안됨
+            //axios.get('https://jsonplaceholder.typicode.com/users/')
             .then(
                 res=>setHospitalInfo({
                     

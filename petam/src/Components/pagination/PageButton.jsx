@@ -3,7 +3,7 @@
 import React from "react"
 import { useState } from "react"
 
-const Pagination = ({ postsPerPage, totalPosts, paginate,children }) => {
+const PageButton = ({ postsPerPage, totalPosts, paginate,children }) => {
   const pageNumber = []
   const [blockNum,setBlockNum]=useState(0)
   const [currPage,setCurrPage]=useState(0)
@@ -53,8 +53,8 @@ const Pagination = ({ postsPerPage, totalPosts, paginate,children }) => {
     borderRadius:'6px',
     padding:'0 12px',
     cursor:'pointer',
-    boxSizing:'border-box',
-    position:'relative',
+    //boxSizing:'border-box',
+    //position:'relative',
   }
 
   return (
@@ -68,4 +68,4 @@ const Pagination = ({ postsPerPage, totalPosts, paginate,children }) => {
   )
 }
 
-export default Pagination
+export default PageButton

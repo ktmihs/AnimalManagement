@@ -3,15 +3,47 @@ import { useLocation } from 'react-router'
 import Content from '../Components/Content'
 import '../Components/Content.css'
 import swal from 'sweetalert';
+import axios from 'axios'
+import { useState,useEffect } from 'react';
 
 function CheckReservationPage({location,history}){
+    const [reservation,setReservation]=useState({
+        hospitalName:'',
+        hostId:'ktmihs',
+        type:'',
+        memo:'',
+        dateDay:'',
+    })
+    const hspId=useLocation()
     const reserve=useLocation({
         option:location.option,
         text:location.option,
         dateDay:location.dateDay
     })
-    const hspId=useLocation()
+    useEffect(() => {
+        const saveReservation=async()=>{
+            setReservation({
+                hospitalName:hspId.name,
+                type:reserve.option,
+                memo:reserve.text,
+                dateDay:reserve.dateDay
+            })
+            console.log(reservation)
+        }
+        saveReservation()
+    }, [])
+    
+    const handleSubmit=()=>{
+        axios.post("/api/reservations",reservation)
+        .then((response) => {
+            console.log(response)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }
     const handleClick=()=>{
+        
         swal({
             text:'예약이 확정되었습니다.',
             icon:'success',
@@ -21,6 +53,9 @@ function CheckReservationPage({location,history}){
                 value:true
             }
         }).then((result)=>{
+            
+            console.log(reservation.type+reservation.memo)
+            handleSubmit()
             if(result){
                 history.push({
                     pathname:'/MyReservationPage',

@@ -13,7 +13,6 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   let pArr=pageNumber.slice(0,10)
 
   const style={
-    position:'relative',
     bottom:'-3vw',
     padding:'auto',
     marginTop:'3vw',
@@ -22,7 +21,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
 
   return (
     <ul className="pagination" style={style}>
-      <PageButton>
+      <PageButton postsPerPage={postsPerPage} totalPosts={totalPosts} paginate={paginate}>
         {pArr.map((pageNum) => (
             <li
             key={pageNum}
