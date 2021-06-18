@@ -21,24 +21,21 @@ function HospitalPage(props){
     const [hospital,setHospital]=useState(props.match.params.name)
     
     useEffect(() => {
-        const fetchPosts=async()=>{
-            axios.get('/api/hospitals/read/name/'+hospital) //안됨
-            //axios.get('https://jsonplaceholder.typicode.com/users/')
+        axios.get('/api/hospitals/read/name/'+hospital) //안됨
             .then(
-                res=>setHospitalInfo({
-                    
-                    name:res.name,
-                    tel:'024567899',
-                    ...hospitalInfo,
-                }),
-                console.log(hospitalInfo,hospital),
+                ctx=>{
+                    console.log(ctx)
+                    setHospitalInfo({
+                        ...hospitalInfo,
+                        name:ctx.data.name,
+                        addr:ctx.data.new_addr,
+                        tel:ctx.data.tel
+                })},
+                console.log(hospitalInfo),
             )
             .catch(
-                console.log('fail'),
                 err=>console.log(err)
                 )
-        }
-        fetchPosts()
     }, [])
     
     const hspId=useHistory()
@@ -78,7 +75,9 @@ function HospitalPage(props){
     const bottomContent={
         fontSize:'14px',
         textAlign:'left',
-        margin:'3% 10%'
+        margin:'3% 10%',
+        overflow:'auto',
+        height:'150px'
     }
     return(
         <Content>

@@ -7,7 +7,7 @@ reservations.post('/',write)
 reservations.get('/read',read)
 reservations.get('/read/:_id',readOne)
 reservations.get('/read/host/:hostId',readName)
-reservations.get('/read/host/:hospitalName',hospital)
+reservations.get('/read/name/:hospitalName',hospital)
 // reservations.delete('/:id',remove)
 
 export default reservations

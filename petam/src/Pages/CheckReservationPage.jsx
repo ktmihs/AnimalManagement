@@ -58,7 +58,7 @@ function CheckReservationPage({location,history}){
             handleSubmit()
             if(result){
                 history.push({
-                    pathname:'/MyReservationPage',
+                    pathname:'/reservation',
                 })
             }
         })
@@ -84,7 +84,6 @@ function CheckReservationPage({location,history}){
             <div className='bodyContainer'>
                 <div className='contentBox' style={contentBox}>
                     <div>
-                        예약 번호 : 1235468788<br/>
                         예약 병원 : {hspId.name}<br/>
                         예약자 : 보리<br/>
                         예약 일정 : {reserve.dateDay}<br/>

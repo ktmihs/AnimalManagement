@@ -25,7 +25,7 @@ function Item({linkName,item}){
             <h5>{hospitalName}</h5>
             {item.dateDay}<br/>
             {item.type}<br/>
-            <a href={`/${link}/${hospitalName}`}><h4>▶</h4></a>
+            <a href={`/${link}/${id}`}><h4>▶</h4></a>
         </div>
     )
 }
