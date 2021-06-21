@@ -4,7 +4,7 @@ import Content from '../Components/Content'
 import '../Components/Content.css'
 import ReservationContent from './ReservaionContent'
 import TimeTable from './TimeTable'
-import swal from 'sweetalert';
+import swal from 'sweetalert'
 
 function ReservationPage({location,history}){
     const [time,setTime]=useState({

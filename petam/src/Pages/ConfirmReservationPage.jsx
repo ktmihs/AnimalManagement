@@ -3,10 +3,10 @@ import { useState,useEffect } from 'react'
 import Content from '../Components/Content'
 import '../Components/Content.css'
 import axios from 'axios'
+import swal from 'sweetalert'
 
 function ConfirmReservationPage(props){
     const [id,setId]=useState(props.match.params._id)
-    console.log(id)
     const [reservation,setReservation]=useState({
         no:0,
         name:'',
@@ -16,7 +16,7 @@ function ConfirmReservationPage(props){
     })
     const {no,name,type,memo,dateDay}=reservation
     useEffect(() => {
-        const fetchPosts=async()=>{
+        const findReserve=async()=>{
             axios.get('/api/reservations/read/'+id) 
             .then(
                 ctx=>setReservation({
@@ -32,8 +32,46 @@ function ConfirmReservationPage(props){
                 err=>console.log(err)
                 )
         }
-        fetchPosts()
+        findReserve()
     }, [])
+
+    const cancelReserve=async()=>{
+        axios.delete('/api/reservations/'+id) 
+        swal({
+            text:'예약이 취소되었습니다.',
+            icon:'success',
+            //closeOnClickOutside:false,
+            confirm:{
+                text:'확인',
+                value:true
+            }
+        }).then(
+            props.history.push({
+                pathname:'/reservation',
+            })
+        )
+    }
+
+    const handleClick=()=>{
+        console.log(reservation.name,reservation.type,reservation.dateDay)
+        swal({
+            title:'예약을 취소하시겠습니까?',
+            text:`예약병원: ${reservation.name}
+            종류: ${reservation.type}
+            예약날짜: ${reservation.dateDay}`,
+            icon: "warning",
+            buttons: ['cancel',true],
+            dangerMode: true,
+            closeOnClickOutside:false,
+            confirm:{
+                text:'확인',
+                value:true
+            }
+        }).then((willDelete) => {
+            if (willDelete) { cancelReserve() } 
+        })
+    }
+
     const contentBox={
         border:'none',
         height:'auto'
@@ -73,7 +111,7 @@ function ConfirmReservationPage(props){
                 </div>
             </div>
             <div style={buttons}>
-                <button style={leftButton} className='button' onClick={()=>props.history.push('/')}>예약 취소</button>
+                <button style={leftButton} className='button' onClick={handleClick}>예약 취소</button>
                 <button style={rightButton} className='button' onClick={()=>props.history.push('/reservation')}>확인</button>  
             </div>
         </Content>
