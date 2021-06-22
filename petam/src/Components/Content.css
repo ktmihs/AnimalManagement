@@ -1,49 +1,51 @@
-.sidebar-body{
-    display:flex;
-    flex-direction:row;
+.sidebar-body {
+  display: flex;
+  flex-direction: row;
 }
-.body{
-    /*display:flex; 없애니까 content크기 내용만큼으로 바뀜*/
-    flex-direction:row !important;
-    width: 100% !important;
-    max-height: 90.7vh;
-    height:auto;
-    overflow-y: scroll !important;
-    
-    background-color: rgb(209, 225, 245);
+.body {
+  /*display:flex; 없애니까 content크기 내용만큼으로 바뀜*/
+  flex-direction: row !important;
+  width: 100% !important;
+  max-height: 90.7vh;
+  height: auto;
+  overflow-y: scroll !important;
+  /* background-color: red; */
+  background-color: rgb(209, 225, 245);
 }
-.body::-webkit-scrollbar{display: none;}
-.name{
-    color: #395382;
-    margin:20px 0;
-    text-align:center;
+.body::-webkit-scrollbar {
+  display: none;
 }
-.headerContainer{
-    margin-top:15px;
-    text-align:center;
+.name {
+  color: #395382;
+  margin: 20px 0;
+  text-align: center;
 }
-.bodyContainer{
-    text-align:center;
-    margin:1vh 3vw;
+.headerContainer {
+  margin-top: 15px;
+  text-align: center;
 }
-.contentBox{
-    display:inline-block;
-    padding-top:20px;
-    margin:10px 3% 20px 3%;
-    /*height:25vw;*/
-    height:370px;
-    width:400px;
-    /* border:1px dotted #bbbcbc; */
-    overflow:hidden;
-    word-wrap:break-word;
-    line-height:30px;
+.bodyContainer {
+  text-align: center;
+  margin: 1vh 3vw;
 }
-.button{
-    color:white;
-    text-align: center;
-    height: 40px;
-    width: 120px;
-    border-radius: 10px;
-    border:0;
-    margin:5px 10px;
+.contentBox {
+  display: inline-block;
+  padding-top: 20px;
+  margin: 10px 3% 20px 3%;
+  /*height:25vw;*/
+  height: 370px;
+  width: 400px;
+  /* border:1px dotted #bbbcbc; */
+  overflow: hidden;
+  word-wrap: break-word;
+  line-height: 30px;
+}
+.button {
+  color: white;
+  text-align: center;
+  height: 40px;
+  width: 120px;
+  border-radius: 10px;
+  border: 0;
+  margin: 5px 10px;
 }

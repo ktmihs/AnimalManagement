@@ -1,13 +1,17 @@
 //joo-ju
 import mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
-import db from '../index';
-mongoose.set('useCreateIndex', true)
+// import db from '../index';
+mongoose.set('useCreateIndex', true);
 autoIncrement.initialize(mongoose.connection);
 
 const { Schema } = mongoose;
+// const {
+//   Types: { ObjectId },
+// } = Schema;
 
 const PostSchema = new Schema({
+  // _id: String,
   no: {
     type: Number,
   }, // auto increment

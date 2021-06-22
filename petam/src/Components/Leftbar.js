@@ -1,11 +1,11 @@
 import "../style.css";
 import "../Components/leftbar/Leftbar.css";
 import React, { Component } from "react";
-import { FaAngleDown } from "react-icons/fa";
-import { Motion, spring } from "react-motion";
+// import { FaAngleDown } from "react-icons/fa";
+// import { Motion, spring } from "react-motion";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import LeftbarCategory from "./leftbar/LeftbarCategory";
-import { Dropdown, Form } from "react-bootstrap";
+// import { Dropdown, Form } from "react-bootstrap";
 // import React from 'react';
 // import ReactDOM from "react-dom";
 // import App from "../App.js";
@@ -32,7 +32,8 @@ export default class Leftbar extends Component {
   render = () => (
     <div>
       <ul
-        class="navbar-nav sidebar-color sidebar sidebar-dark accordion"
+        // class="leftbar-scope"
+        class="leftbar-scope navbar-nav sidebar-color sidebar sidebar-dark accordion"
         id="accordionSidebar"
       >
         <LeftbarCategory

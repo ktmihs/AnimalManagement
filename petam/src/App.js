@@ -11,7 +11,8 @@ import ConfirmReservationPage from "./Pages/ConfirmReservationPage";
 import ReservationPage from "./Pages/ReservationPage";
 import HospitalPage from "./Pages/HospitalPage";
 import ErrorPage from "./Pages/ErrorPage";
-
+// import $ from "jquery";
+// import {} from "jquery.cookie";
 import PostListPage from "./Pages/PostListPage";
 import PostViewPage from "./Pages/PostViewPage";
 import WritePostPage from "./Pages/WritePostPage";
@@ -57,9 +58,9 @@ export default class App extends Component {
                 <Route exact path="/hospital" component={SearchPage} />
                 <Route path="/PostListPage" component={PostListPage} />
                 <Route path="/WritePostPage" component={WritePostPage} />
-                <Route path="/PostViewPage" component={PostViewPage} />
+                {/* <Route path="/PostViewPage" component={PostViewPage} /> */}
 
-                <Route path="/PostView/:id" component={PostViewPage} />
+                <Route path="/PostView/:_id" component={PostViewPage} />
 
                 <Route render={() => <ErrorPage />} />
               </Switch>

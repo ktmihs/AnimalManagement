@@ -36,5 +36,13 @@
   padding: 10px 5px;
   text-align: left;
   font-size: small;
+  text-decoration: none;
   /* border: 1px solid red; */
+}
+.link-title {
+  text-decoration: none;
+}
+
+.b {
+  border: 1px solid red;
 }

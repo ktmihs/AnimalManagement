@@ -28,3 +28,7 @@
 .b {
   border: 1px solid red;
 }
+
+.leftbar-scope {
+  min-width: 200px;
+}
