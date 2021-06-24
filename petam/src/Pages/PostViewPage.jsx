@@ -3,7 +3,6 @@
 import "../style.css";
 import React, { Component, useEffect, useState } from "react";
 import Content from "../Components/Content";
-
 import "../Components/button/Button.css";
 import { Button, Form } from "react-bootstrap";
 import "../Components/Content.css";
@@ -14,8 +13,13 @@ import PostViewWriterDate from "../Components/view/PostViewWriterDate";
 import PostViewContent from "../Components/view/PostViewContent";
 import PostViewTitle from "../Components/view/PostViewTitle";
 import axios from "axios";
+import CommentWrite from "../Components/comment/CommentWrite";
+
+axios.defaults.withCredentials = true;
+const headers = { withCredentials: true };
 
 function PostViewPage(props) {
+
   const _id = props.match.params._id;
   const [postData, setpostData] = useState([
     {
@@ -50,6 +54,65 @@ function PostViewPage(props) {
     }
   }, []);
 
+
+  // 댓글 작성 함수들
+
+  // const constructor(props) {
+  //   super(props);
+  //   this.state = {value: ' '}
+  // }
+  const handleSubmit = (e) => {
+    alert('An essay was submitted: ' + this.state.value);
+    e.preventDefault();
+  }
+  
+    const writer = "joo-ju"
+  // function submitHandler (async (e) => {
+  //   const writer = "joo-ju"
+  //   const comContent = this.comContent.value;
+  //   e.preventDefault();
+  //   console.log(writer);
+  //   console.log(comContent);
+  // };
+
+  // commentWrite (async () => {
+  const commentWrite = (e) => {
+e.preventDefault();
+  // function commentWrite( async () => {
+    // const comContent = this.comContent.value;
+    // const comContent = comContent.value;
+    const comContent = this.comContent.value;
+    // if (title === "" || title === undefined) {
+    //   alert("제목을 입력해주세요.");
+    //   this.postTitle.focus();
+    //   return;
+    // } else if (content === "" || content === undefined) {
+    //   alert("내용을 입력해주세요.");
+    //   this.postContent.focus();
+    //   return;
+    // }
+
+    const send_param = {
+      // post_id: this.postId.value,
+      post_id: _id,
+      // content: comContent,
+      content: this.comContent.value,
+      // writer: this.writer.value,
+      writer: writer,
+    };
+    console.log("send_param : ", send_param);
+    axios
+      .post("/api/comments", send_param)
+      .then((response) => {
+        console.log("response : ", response);
+        console.log("success");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    
+  };
+
   return (
     <div>
       <Content className="b">
@@ -69,41 +132,8 @@ function PostViewPage(props) {
       </Content>
 
       {/* Comment */}
-      <Content>
-        <div className="col-12 m-auto bg-white">
-          <div className="col-12 m-auto ,pt-3">
-            <Form
-              class="user"
-              id="WritePostPage"
-              // onSubmit={this.postWrite}
-              // onSubmit = {this.submitHandler}
-            >
-              <div class="form-group mt-3">
-                <div class="float-right">
-                  <div
-                    class="comment-write-button"
-                    variant="primary"
-                    // onClick={this.postWrite}
-                    // type='submit'
-                    block
-                  >
-                    저장
-                  </div>
-                </div>
-              </div>
-              <div class="form-group comment-scope ">
-                <div>
-                  <textarea
-                    type="textarea"
-                    class="form-control comment-input"
-                    placeholder="comments..."
-                  />
-                </div>
-              </div>
-            </Form>
-          </div>
-        </div>
-      </Content>
+
+      <CommentWrite pid ={postData._id} >{postData._id}</CommentWrite>
     </div>
   );
 }
