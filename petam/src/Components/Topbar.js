@@ -2,9 +2,7 @@ import "../style.css";
 import "../Components/button/Button.css";
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-// import React from 'react';
-// import ReactDOM from "react-dom";
-// import App from "../App.js";
+import SignButton from './sign/SignButton';
 
 export default class TopBar extends Component {
   render = () => (
@@ -30,6 +28,7 @@ export default class TopBar extends Component {
               {/* <img src={imgUser} className="w-25 h-25"></img> */}
             </h3>
           </Link>
+
           <div className="   sign-component c.ol-3">
             <button
               class="signin"
@@ -44,6 +43,11 @@ export default class TopBar extends Component {
               Sign Up
             </button>
           </div>
+
+        </div>
+        <div className="  col-3">
+          <SignButton/>
+
         </div>
 
         {/* <!-- Topbar Navbar --> */}
