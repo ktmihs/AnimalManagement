@@ -9,15 +9,15 @@ import { useState,useEffect } from 'react';
 function CheckReservationPage({location,history}){
     const [reservation,setReservation]=useState({
         hospitalName:'',
-        hostId:'ktmihs',
+        hostId:'ktmihs',        // 로그인 후, 유저 정보로 변경
         type:'',
         memo:'',
         dateDay:'',
     })
     const hspId=useLocation()
-    const reserve=useLocation({
+    const reserve=useLocation({     // 이전 페이지에서 location으로 받은 정보를 저장
         option:location.option,
-        text:location.option,
+        text:location.text,
         dateDay:location.dateDay
     })
     useEffect(() => {
@@ -34,7 +34,7 @@ function CheckReservationPage({location,history}){
     }, [])
     
     const handleSubmit=()=>{
-        axios.post("/api/reservations",reservation)
+        axios.post("/api/reservations",reservation)     // 작성된 예약 정보 DB에 POST
         .then((response) => {
             console.log(response)
         })
@@ -53,12 +53,10 @@ function CheckReservationPage({location,history}){
                 value:true
             }
         }).then((result)=>{
-            
-            console.log(reservation.type+reservation.memo)
             handleSubmit()
             if(result){
                 history.push({
-                    pathname:'/MyReservationPage',
+                    pathname:'/reservation',
                 })
             }
         })
@@ -84,7 +82,6 @@ function CheckReservationPage({location,history}){
             <div className='bodyContainer'>
                 <div className='contentBox' style={contentBox}>
                     <div>
-                        예약 번호 : 1235468788<br/>
                         예약 병원 : {hspId.name}<br/>
                         예약자 : 보리<br/>
                         예약 일정 : {reserve.dateDay}<br/>

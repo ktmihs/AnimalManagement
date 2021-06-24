@@ -1,9 +1,11 @@
 import mongoose from "mongoose"
+import autoIncrement from 'mongoose-auto-increment'
+autoIncrement.initialize(mongoose.connection);
+
 const {Schema} = mongoose
 const ReservationSchema=new Schema({
-    id:{
-        type: String,
-        default:String
+    no:{
+        type: Number
     },  //예약번호
     hostId:{
         type: String
@@ -25,6 +27,11 @@ const ReservationSchema=new Schema({
         default:Date.now
     }   //예약한 시간(방문일, 시간)
 })
-
+ReservationSchema.plugin(autoIncrement.plugin, {
+    model: 'Reservation',
+    field: 'no',
+    startAt: 21060000,
+    increment: 1,
+  });
 const Reservation=mongoose.model("Reservation",ReservationSchema)
 export default Reservation

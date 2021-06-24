@@ -1,8 +1,8 @@
-import Koa from 'koa';
-import mongoose from 'mongoose';
-import Router from 'koa-router';
-import KoaBody from 'koa-body';
-
+import Koa from 'koa'
+import mongoose from 'mongoose'
+import Router from 'koa-router'
+import KoaBody from 'koa-body'
+//import bodyParser from 'koa-bodyparser'
 import api from './api';
 const router = new Router();
 const app = new Koa();
@@ -20,7 +20,7 @@ var connection = new mongoose.connect('mongodb://localhost:27017/petam', {
 
 // url /api 이면 ./api/index.js가 실행됨.
 router.use('/api', api.routes());
-
+//app.use(bodyParser())
 app.use(KoaBody());
 
 app.use(router.routes()).use(router.allowedMethods());
