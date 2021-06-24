@@ -30,25 +30,29 @@ export default class TopBar extends Component {
           </Link>
 
           <div className="   sign-component c.ol-3">
+             <Link to='/login'>
             <button
               class="signin"
               // className=" btn-light btn col-5 m-auto text-2140C text-center p-2 m-1"
             >
               Sign In
-            </button>
+          </button>
+          </Link>
+            <Link to='/register'>
             <button
               class="signup"
               // className=" btn-secondary btn col-5 m-auto text-white text-center float-right p-2 m-1"
             >
               Sign Up
-            </button>
+              </button>
+              </Link>
           </div>
 
         </div>
-        <div className="  col-3">
+        {/* <div className="  col-3">
           <SignButton/>
 
-        </div>
+        </div> */}
 
         {/* <!-- Topbar Navbar --> */}
       </nav>
