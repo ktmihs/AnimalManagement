@@ -4,7 +4,7 @@ import Content from '../Components/Content'
 import '../Components/Content.css'
 import ReservationContent from './ReservaionContent'
 import TimeTable from './TimeTable'
-import swal from 'sweetalert';
+import swal from 'sweetalert'
 
 function ReservationPage({location,history}){
     const [time,setTime]=useState({
@@ -80,7 +80,8 @@ function ReservationPage({location,history}){
                     {nextPage?
                     <>
                         <ReservationContent time={time} getReserve={getReserve}/>
-                        <div style={buttons}>                   {/* onClick으로 이름 넘기기 */} 
+                        <div style={buttons}>                   
+                            {/* onClick으로 이름 넘기기 */} 
                             <button style={leftButton} className='button' onClick={()=>setNextPage(false)}>이전으로</button>
                             <button style={rightButton} className='button' onClick={toCheck}>예약하기</button>  
                         </div>

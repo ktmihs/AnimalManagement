@@ -6,13 +6,13 @@ import SearchContent from '../Components/search/SearchContent'
 import axios from 'axios'
 import Pagination from '../Components/pagination/Pagination'
 
-function MyReservationPage({location, history}){
+function MyReservationPage(){
     const [info,setInfo]=useState([])   //병원 정보
     const [loading,setLoading]=useState(false)    //로딩 중 표시
     const [currentPage,setCurrentPage]=useState(1)  //현재 페이지
-    const [postsPerPage]=useState(4)                //한 페이지에서 보여줄 info 수
+    const [postsPerPage]=useState(3)                //한 페이지에서 보여줄 info 수
 
-    const linkName='confirmReservationPage'         // 링크이름
+    const linkName='reservation'         // 링크이름
 
     const indexOfLastPost=currentPage*postsPerPage  //해당 페이지에서 마지막 info의 index
     const indexOfFirstPost=indexOfLastPost-postsPerPage //  ...      첫번째 ...
@@ -35,32 +35,18 @@ function MyReservationPage({location, history}){
     const totalCount={
         textAlign:'right'
     }
-    const reservationContainer={
-        height:'300px',
-        textAlign:'center'
-    }
-    const paginationlocate={
-        width:'100%',
-        textAlign:'center'
-    }
-    const buttonlocate={
-        textAlign:'right'
-    }
-    const button={
-    backgroundColor:'#BBBCBC'
-    }
     return(
         <Content>
             <h2 className='name'>내 예약 내역</h2>
             <div className='bodyContainer'>
-                    <div style={totalCount}>총 5건</div>
-                    <hr/>
-                    <div style={reservationContainer}>
-                        <SearchContent linkName={linkName} info={currentPosts} loading={loading}/>
-                        <div style={paginationlocate}><Pagination postsPerPage={postsPerPage} totalPosts={info.length} paginate={paginate}/></div>
-                    </div>
+                <div style={totalCount}>총 {info.length}건</div>
                 <hr/>
-                <div style={buttonlocate}><button style={button} className='button' onClick={()=>history.push('/')}>뒤로가기</button></div>
+                <div >
+                    <SearchContent linkName={linkName} info={currentPosts} loading={loading}/>
+                    <Pagination postsPerPage={postsPerPage} totalPosts={info.length} paginate={paginate}/>
+                </div>
+                <hr/>
+                {/*<div style={buttonlocate}><button style={button} className='button' onClick={()=>history.push('/')}>main</button></div>*/}
             </div>
         </Content>
     )

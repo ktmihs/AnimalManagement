@@ -2,7 +2,7 @@ import Reservation from "../../models/reservation"
 
 export const write=async(ctx, next)=>{
     const {
-        id,
+        no,
         hostId,
         hospitalName,
         type,
@@ -11,7 +11,7 @@ export const write=async(ctx, next)=>{
         reservationTime
     }=ctx.request.body
     const reservation=new Reservation({
-        id, 
+        no, 
         hostId,
         hospitalName,
         type, 

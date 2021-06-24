@@ -18,7 +18,7 @@ function TimeTable(props){
       const currentDate = new Date()
       const selectedDate = new Date(time)
       
-      return currentDate.getTime()+1800000 < selectedDate.getTime()   //지난 시간은 선택할 수 없도록 설정
+      return currentDate.getTime()+1800000 < selectedDate.getTime()   //지난 시간은 선택할 수 없도록 설정(+ 30분 전에는 불가능)
     }
     const selectTime=()=>{
       const currentDate = new Date()
