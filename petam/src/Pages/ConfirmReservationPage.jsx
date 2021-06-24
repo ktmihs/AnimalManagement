@@ -20,7 +20,7 @@ function ConfirmReservationPage(props){
             axios.get('/api/reservations/read/'+id) 
             .then(
                 ctx=>setReservation({
-                    no:ctx.data.no,
+                    no:ctx.data.no,                 //넘겨오는 정보 중 data 안에 들어있는 상세 예약 정보들을 하나씩 받아줌
                     name:ctx.data.hospitalName,
                     type:ctx.data.type,
                     memo:ctx.data.memo,

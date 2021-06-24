@@ -7,13 +7,12 @@ function Search({getSearchWord}){
 
     const handleChange=(e)=>{
         setSearchWord(e.target.value)
-
     }
     const handleSubmit=()=>{
         getSearchWord(searchWord)
-        res.push({
-            pathname:`/hospital/${searchWord}`
-        })
+        // res.push({
+        //     pathname:`/hospital/${searchWord}`
+        // })
         //alert('hospital '+searchWord)
             // 디비 서치할 때 사용
     }

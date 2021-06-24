@@ -6,7 +6,7 @@ import SearchContent from '../Components/search/SearchContent'
 import axios from 'axios'
 import Pagination from '../Components/pagination/Pagination'
 
-function MyReservationPage({location, history}){
+function MyReservationPage(){
     const [info,setInfo]=useState([])   //병원 정보
     const [loading,setLoading]=useState(false)    //로딩 중 표시
     const [currentPage,setCurrentPage]=useState(1)  //현재 페이지
@@ -34,16 +34,6 @@ function MyReservationPage({location, history}){
     
     const totalCount={
         textAlign:'right'
-    }
-    const reservationContainer={
-        height:'300px',
-        textAlign:'center'
-    }
-    const buttonlocate={
-        textAlign:'right'
-    }
-    const button={
-    backgroundColor:'#BBBCBC'
     }
     return(
         <Content>

@@ -21,7 +21,7 @@ function HospitalPage(props){
     const [hospital,setHospital]=useState(props.match.params.name)
     
     useEffect(() => {
-        axios.get('/api/hospitals/read/name/'+hospital) //안됨
+        axios.get('/api/hospitals/read/name/'+hospital) 
             .then(
                 ctx=>{
                     console.log(ctx)
@@ -35,7 +35,7 @@ function HospitalPage(props){
             )
             .catch(
                 err=>console.log(err)
-                )
+            )
     }, [])
     
     const hspId=useHistory()
