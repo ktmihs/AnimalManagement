@@ -10,10 +10,15 @@ import PostTableRow from "../Components/table/PostTableRow";
 import PostTableColumnNo from "../Components/table/PostTableColumnNo";
 import PostTableColumnTitle from "../Components/table/PostTableColumnTitle";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { useHistory, useLocation } from "react-router";
 import dateFormat from "dateformat";
 import axios from "axios";
 
-function PostListPage() {
+function PostListPage({ location, history }) {
+  // function getPostDetail(e) {
+  //   console.log("/PostView/" + this.postid.value);
+  //   window.location.href = "/PostView/" + this.postid.value;
+  // }
   const [postData, setpostData] = useState([
     {
       _id: "",
@@ -31,6 +36,7 @@ function PostListPage() {
       // 데이터를 받아오는 동안 시간 소요 되므로 await로 대기
       // const res = await axios.get("http://localhost:4000/api/posts/list");
       const res = await axios.get("/api/posts/list");
+      console.log(res);
       const _postData = await res.data.map(
         (rowData) => (
           setLastIdx(lastIdx + 1),
@@ -52,6 +58,11 @@ function PostListPage() {
     }
   }, []);
 
+  const toPostDetail = () => {
+    {
+      console.log("toPostDetail");
+    }
+  };
   return (
     <Content>
       <h2 className="name">Reviews</h2>
@@ -71,18 +82,45 @@ function PostListPage() {
                   (rowData) =>
                     // 최초 선언한 기본값은 나타내지 않음
                     rowData._id !== "" && (
-                      <PostTableRow>
-                        <PostTableColumnNo>{rowData.no}</PostTableColumnNo>
-                        <PostTableColumn></PostTableColumn>
-                        <Link to={`/postView/${rowData._id}`}>
-                          <PostTableColumnTitle>
-                            {rowData.title}
-                          </PostTableColumnTitle>
-                        </Link>
-                        <PostTableColumn>{rowData.enrollTime}</PostTableColumn>
-                        <PostTableColumn> {rowData.writer}</PostTableColumn>
-                        <PostTableColumn>6</PostTableColumn>
+                      // <a
+                      //   class="test"
+                      //   href="http://localhost:3000/PostView/${rowData._id}"
+                      // >
+                      <PostTableRow
+                      // onClick={toPostDetail}
+                      // value={rowData._id}
+                      // ref={(ref) => (this.postid = ref)}
+                      >
+                        <PostTableColumnNo his={history} _id={rowData._id}>
+                          {rowData.no}
+                        </PostTableColumnNo>
+                        <PostTableColumn his={history} _id={rowData._id}>
+                          {/* {rowData._id} */}
+                        </PostTableColumn>
+
+                        {/* <Link to={`/postView/${rowData._id}`}> */}
+                        <PostTableColumnTitle
+                          his={history}
+                          _id={rowData._id}
+                          // onClick={() =>
+                          //   history.push("/PostView/${rowData._id}")
+                          // }
+                        >
+                          {rowData.title}
+                        </PostTableColumnTitle>
+                        {/* </Link> */}
+                        <PostTableColumn his={history} _id={rowData._id}>
+                          {rowData.enrollTime}
+                        </PostTableColumn>
+                        <PostTableColumn his={history} _id={rowData._id}>
+                          {" "}
+                          {rowData.writer}
+                        </PostTableColumn>
+                        <PostTableColumn his={history} _id={rowData._id}>
+                          6
+                        </PostTableColumn>
                       </PostTableRow>
+                      // </a>
                     )
                 )
               ) : (

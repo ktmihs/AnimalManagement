@@ -65,33 +65,6 @@ export default class WritePostPage extends Component {
         console.log(error);
       });
 
-    // axios.post("http://localhost:4000/api/posts/", {
-    //   title: this.postTitle.value,
-    //   content: this.postContent.value
-    //   // title:  title,
-    //   // content: content
-    // })
-    //   .then(function (response) {
-    //   console.log("dsds")
-    // })
-    // .then(returnData => {
-    //   alert.log("sss")
-    //   // alert("ssss")
-    //   if (returnData.data.message) {
-    //     console.log("_id:" + returnData.data._id);
-    //     console.log("title:" + returnData.data.title);
-    //     console.log("content:" + returnData.data.content);
-    //     alert(returnData.data.message);
-    //     // window.location.href = "/";
-    //     window.location.reload();
-    //   } else {
-    //     // alert(returnData.data.message);
-    //     alert("글 저장 실패");
-    //   }
-    // })
-    // .catch(err => {
-    //   console.log(err);
-    // });
   };
 
   // render() {

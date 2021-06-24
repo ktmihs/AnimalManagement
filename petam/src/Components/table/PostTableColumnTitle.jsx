@@ -1,13 +1,22 @@
-import React from 'react';
- 
-const PostTableColumnTitle = ({ children }) => {
+import React from "react";
+
+const PostTableColumnTitle = ({ his, _id, children }) => {
+  const toPostDetail = () => {
+    {
+      // console.log(useHistory());
+      console.log("toPostDetail");
+      console.log(_id);
+      console.log(his);
+      his.push("/PostView/" + _id);
+      // window.location.href = "/PostView/" + { test };
+      // console.log("/PostView/" + { test });
+    }
+  };
   return (
-    <td className="post-table-column-title">
-      {
-        children
-      }
+    <td onClick={toPostDetail} className="post-table-column-title">
+      {children}
     </td>
-  )
-}
- 
+  );
+};
+
 export default PostTableColumnTitle;

@@ -1,15 +1,26 @@
 .comment-input {
   /* border: 2px solid green; */
   /* width: (100% - 40px); */
+  padding: 10px 15px;
+  border-radius: 10px;
+  border-color: lightgray;
+  /* width: 80%; */
+  width: calc(100% - 85px);
 
-  width: 80%;
-  min-width: 70%;
-  max-width: 90%;
+  /* max-width: 89%; */
+  /* max-width: 80%; */
+  min-height: 100px;
+  max-height: 100px;
+  overflow-y: scroll;
+
   float: left;
+  font-size: 20;
+  /* border: 1px solid red; */
 }
 
 .comment {
   min-height: 150px;
+  /* max-height: 150px; */
 }
 
 .comment-profile {
@@ -21,12 +32,32 @@
   margin-bottom: 10px;
 }
 .comment-write-button {
-  float: right;
-  width: 80px;
-  margin-left: 20px;
+  float: left;
+  width: 10%;
+  border: none;
+  min-width: 70px;
+  max-width: 70px;
+  min-height: 100px;
+  max-height: 100px;
+  border-radius: 10px;
+  color: white !important;
+  text-decoration: none !important;
+  text-decoration-style: none;
+  background-color: #98b6e4;
+  text-align: center;
+  text-align-last: center;
+  padding: 37px 0;
+  /* vertical-align: middle; */
+  /* margin-left: 10px; */
+  /* border: 1px solid red; */
   /* background-color: gray; */
 }
-
-.comment-cancel-button {
+å .comment-cancel-button {
   float: right;
+}
+.comment-scope {
+  width: 100%;
+  min-height: 103px;
+  /* min-height: 60px; */
+  /* border: 1px solid green; */
 }

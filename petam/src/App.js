@@ -11,6 +11,7 @@ import ConfirmReservationPage from "./Pages/ConfirmReservationPage";
 import ReservationPage from "./Pages/ReservationPage";
 import HospitalPage from "./Pages/HospitalPage";
 import ErrorPage from "./Pages/ErrorPage";
+
 import Login from "./Components/sign/Login";
 import Register from "./Components/sign/Register";
 
@@ -52,7 +53,7 @@ export default class App extends Component {
                 <Route exact path="/hospital" component={SearchPage} />
                 <Route path="/PostListPage" component={PostListPage} />
                 <Route path="/WritePostPage" component={WritePostPage} />
-                <Route path="/PostViewPage" component={PostViewPage} />
+                {/* <Route path="/PostViewPage" component={PostViewPage} /> */}
 
                 <Route path="/PostView/:_id" component={PostViewPage} />
 
