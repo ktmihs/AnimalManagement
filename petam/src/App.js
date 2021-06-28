@@ -18,6 +18,7 @@ import Register from "./Components/sign/Register";
 import PostListPage from "./Pages/PostListPage";
 import PostViewPage from "./Pages/PostViewPage";
 import WritePostPage from "./Pages/WritePostPage";
+import WriteProductPage from "./Pages/WriteProductPage";
 
 import Axios from "axios";
 
@@ -46,13 +47,24 @@ export default class App extends Component {
                 <Route path="/register" component={Register} />
                 <Route path="/hospital/:name" component={HospitalPage} />
                 <Route path="/reservationPage" component={ReservationPage} />
-                <Route path="/checkReservationPage" component={CheckReservationPage} />
-                <Route path="/reservation/:_id" component={ConfirmReservationPage} />
-                <Route exact path="/reservation" component={MyReservationPage} />
+                <Route
+                  path="/checkReservationPage"
+                  component={CheckReservationPage}
+                />
+                <Route
+                  path="/reservation/:_id"
+                  component={ConfirmReservationPage}
+                />
+                <Route
+                  exact
+                  path="/reservation"
+                  component={MyReservationPage}
+                />
 
                 <Route exact path="/hospital" component={SearchPage} />
                 <Route path="/PostListPage" component={PostListPage} />
                 <Route path="/WritePostPage" component={WritePostPage} />
+                <Route path="/writeproductpage" component={WriteProductPage} />
                 {/* <Route path="/PostViewPage" component={PostViewPage} /> */}
 
                 <Route path="/PostView/:_id" component={PostViewPage} />

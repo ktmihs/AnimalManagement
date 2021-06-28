@@ -10,18 +10,18 @@ posts.get('/list', postsCtrl.list);
 
 // posts.get('/', postsCtrl.list);
 
-posts.get('/readone/:_id', postsCtrl.readOne);
-posts.post('/detail/:_id', async (req, res) => {
-  try {
-    const _id = req.body._id;
-    const post = await Post.findById({ _id });
-    console.log(post);
-    res.json({ post });
-  } catch (err) {
-    console.log(err);
-    res.json({ message: false });
-  }
-});
+// posts.get('/readone/:_id', postsCtrl.readOne);
+// posts.post('/detail/:_id', async (req, res) => {
+//   try {
+//     const _id = req.body._id;
+//     const post = await Post.findById({ _id });
+//     console.log(post);
+//     res.json({ post });
+//   } catch (err) {
+//     console.log(err);
+//     res.json({ message: false });
+//   }
+// });
 // post.delete('/', postsCtrl.remove);
 // post.patch('/', postsCtrl.update);
 

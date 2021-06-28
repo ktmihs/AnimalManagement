@@ -61,3 +61,39 @@
   /* min-height: 60px; */
   /* border: 1px solid green; */
 }
+
+.comment-top {
+  margin: 20px 30px 0px 30px;
+  min-height: 30px;
+  /* border: 1px solid green; */
+  height: auto;
+  display: block;
+  /* style */
+
+  /* font-weight: bold; */
+}
+.comment-top-writer {
+  /* float: left; */
+  /* border: 1px solid blue; */
+  margin: auto;
+  visibility: inherit;
+  font-size: large;
+}
+.comment-detail {
+  margin: 0px 30px 0px 30px;
+  /* font-size: ; */
+}
+.comment-top-time {
+  margin-top: 8px;
+  visibility: inherit;
+  font-size: small;
+}
+.comment-buttons {
+  margin: 0px 30px 0px 20px;
+  min-height: 30px;
+}
+.comment-button {
+  float: right;
+  margin-left: 10px;
+  font-size: small;
+}

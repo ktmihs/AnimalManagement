@@ -5,9 +5,9 @@ export const write = async (ctx) => {
   const { writer, content, post_id, secret } = ctx.request.body;
 
   // 현재 로그인 기능이 구현되어 있지 않아 임의로 작성자 명시_210601
-//   const writer = 'jooju';
+  //   const writer = 'jooju';
   const comment = new Comment({
-      writer,
+    writer,
     content,
     post_id,
     secret,
@@ -36,10 +36,26 @@ export const readOne = async (ctx) => {
   }
 };
 
-export const list = async (ctx) => {
-    try {
-      // postid로 찾아야 함
+export const read = async (ctx) => {
+  try {
+    // postid로 찾아야 함
     const comments = await Comment.find().exec();
+    ctx.body = comments;
+  } catch (e) {
+    ctx.throw(500, e);
+  }
+};
+
+export const readPostId = async (ctx) => {
+  const { post_id } = ctx.params;
+
+  try {
+    const comments = await Comment.find({ post_id: post_id }).exec();
+
+    if (!comments) {
+      ctx.status = 404;
+      return;
+    }
     ctx.body = comments;
   } catch (e) {
     ctx.throw(500, e);
