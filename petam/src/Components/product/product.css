@@ -1,0 +1,22 @@
+.product-input {
+  padding: 10px 20px;
+  width: 100%;
+  border: 1px solid lightgray;
+  /* border-color: gray; */
+  /* border: 1px solid green; */
+  border-radius: 20px;
+  margin-bottom: 15px;
+}
+.product-input-50 {
+  padding: 10px 20px;
+  width: 45%;
+  /* float: right; */
+  border: 1px solid lightgray;
+  /* border-color: gray; */
+  /* border: 1px solid green; */
+  border-radius: 20px;
+  margin-bottom: 15px;
+}
+.product-input:focus {
+  border: 1px solid gray;
+}

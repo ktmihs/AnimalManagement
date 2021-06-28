@@ -10,28 +10,6 @@ import axios from "axios";
 axios.defaults.withCredentials = true;
 const headers = { withCredentials: true };
 export default class WritePostPage extends Component {
-  // constructor(props) {
-  //   super(props)
-
-  //   this.state = {
-  //     title: '',
-  //     content: '',
-  //   }
-  // }
-
-  changeHandler = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  };
-  submitHandler = (e) => {
-    const title = this.postTitle.value;
-    const content = this.postContent.value;
-    e.preventDefault();
-    console.log(title);
-    console.log(content);
-    // console.log(this.state)
-  };
   postWrite = () => {
     const title = this.postTitle.value;
     const content = this.postContent.value;
@@ -64,7 +42,6 @@ export default class WritePostPage extends Component {
       .catch((error) => {
         console.log(error);
       });
-
   };
 
   // render() {
@@ -74,9 +51,6 @@ export default class WritePostPage extends Component {
       <h2 className="name">글 쓰기</h2>
 
       <div className="col-12 m-auto bg-white">
-        {/* 글 목록 */}
-        {/* <hr className="col-10"></hr> */}
-        {/* vh-70은 나중에 페이징하면서 사용할 듯 */}
         <div className="col-12 m-auto pt-3">
           <Form
             class="user"
