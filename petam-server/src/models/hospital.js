@@ -25,9 +25,16 @@ const HospitalSchema=new Schema({
     score: {
         type: String
     },
-    businessNum: {
+    company_number: {
         type: String
-    }
+    },
+    image:{
+        type: ['images']
+    },
+    products: [{
+        productId:String,
+        price:Number
+    }]
 })
 
 const Hospital=mongoose.model("Hospital",HospitalSchema)

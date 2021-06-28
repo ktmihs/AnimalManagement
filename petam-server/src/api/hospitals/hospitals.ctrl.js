@@ -103,6 +103,32 @@ export const readName=async(ctx)=>{
     ctx.body=data
 }
 
+export const update=async(ctx)=>{
+    const id=ctx.params
+    let hospital
+    try{
+        hospital=await Hospital.updateOne(id,ctx.request.body,{
+            upsert: true,
+            new:true
+        }).exec()
+    } catch(e){
+        return ctx.throw(500,e)
+    }
+    ctx.body=hospital
+}
+export const update2=async(ctx)=>{
+    const name=ctx.params
+    let hospital
+    try{
+        hospital=await Hospital.updateOne(name,ctx.request.body,{
+            upsert: true,
+            new:true
+        }).exec()
+    } catch(e){
+        return ctx.throw(500,e)
+    }
+    ctx.body=hospital
+}
 
 export const remove=async(ctx,next)=>{
     const id=ctx.params
