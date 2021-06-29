@@ -29,7 +29,7 @@ const HospitalSchema=new Schema({
         type: String
     },
     image:{
-        type: ['images']
+        type: []
     },
     products: [{
         productId:String,

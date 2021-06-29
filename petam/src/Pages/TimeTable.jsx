@@ -1,12 +1,12 @@
 import React,{useState} from 'react'
 import '../Components/Content.css'
-import DatePicker from "react-datepicker";
-import { ko } from "date-fns/esm/locale";
-import setHours from "date-fns/setHours";
-import setMinutes from "date-fns/setMinutes";
-import "react-datepicker/dist/react-datepicker.css";
-import { addDays } from 'date-fns';
-import swal from 'sweetalert';
+import DatePicker from "react-datepicker"
+import { ko } from "date-fns/esm/locale"
+import setHours from "date-fns/setHours"
+import setMinutes from "date-fns/setMinutes"
+import "react-datepicker/dist/react-datepicker.css"
+import { addDays } from 'date-fns'
+import swal from 'sweetalert'
 
 function TimeTable(props){
     
