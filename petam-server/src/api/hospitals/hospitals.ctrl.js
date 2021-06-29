@@ -10,7 +10,7 @@ export const write=async(ctx)=>{
         new_addr,
         zip_code,
         score,
-        businessNum
+        company_number
     }=ctx.request.body
 
     const hospital=new Hospital({
@@ -22,7 +22,7 @@ export const write=async(ctx)=>{
         new_addr,
         zip_code,
         score,
-        businessNum
+        company_number
     })
     try{
         await hospital.save()
@@ -96,9 +96,10 @@ export const readName=async(ctx)=>{
         return ctx.throw(200,e)
     }
     if(!data){
-        ctx.status=404
-        ctx.body={message:'data not found'}
-        return
+        data='x'
+        // ctx.status=404
+        // ctx.body={message:'data not found'}
+        // return 
     }
     ctx.body=data
 }
