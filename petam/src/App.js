@@ -14,7 +14,7 @@ import ErrorPage from "./Pages/ErrorPage";
 
 import Login from "./Components/sign/Login";
 import Register from "./Components/sign/Register";
-
+import RegisterForm from "./Components/sign/RegisterForm"
 import PostListPage from "./Pages/PostListPage";
 import PostViewPage from "./Pages/PostViewPage";
 import WritePostPage from "./Pages/WritePostPage";
@@ -43,7 +43,9 @@ export default class App extends Component {
                 <Route path="/" exact component={Main} />
                 <Route path="/main" component={Main} />
                 <Route path="/login" component={Login} />
-                <Route path="/register" component={Register} />
+                <Route exact path="/register" component={Register} />
+                <Route path="/register/hospital" component={RegisterForm} />
+                <Route path="/register/common" component={RegisterForm} />
                 <Route path="/hospital/:name" component={HospitalPage} />
                 <Route path="/reservationPage" component={ReservationPage} />
                 <Route path="/checkReservationPage" component={CheckReservationPage} />

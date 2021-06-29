@@ -1,17 +1,19 @@
 .item-box{
     display:inline-block;
-    border:4px dotted #98B6E4;
+    border-radius: 10px;
     text-align:center;
-    height:190px;
-    width:170px;
+    height:180px;
+    width:158px;
     margin:20px 20px 0 20px;
     padding:5px 0;
     font-size:14px;
+    color:#333333;
+    box-shadow: 3px 3px 10px 0 rgba(0,0,0,0.3);
 }
 
 .img-style{
     width:150px;
-    height:130px;
+    height:125px;
     vertical-align:top;
 }
 
@@ -27,15 +29,19 @@
     margin-left:10px;
     width:80px;
 }
-
 .reservation{
-    height:160px;
+    height:180px;
     width:140px;
     padding:20px 5px;
-    margin:40px 20px;
-    border:4px solid #98B6E4;
+    margin:3vw 3vh;
     border-radius:30px;
     display:inline-block;
     text-align:center;
     font-size:14px;
+    box-shadow: 3px 3px 10px 0 rgba(0,0,0,0.3);
+}
+.sign{
+    color:#333333;
+    margin:6px 12px;
+    font-size: large;
 }

@@ -30,7 +30,7 @@ function SearchPage(){
     useEffect(() => {
         const fetchPosts=async()=>{
             setLoading(true)
-            axios.get('api/hospitals/read')
+            axios.get('api/hospitals/read'+searchWord)
             //axios.get('https://jsonplaceholder.typicode.com/comments')
             .then(
                 res=>setInfo(res.data),

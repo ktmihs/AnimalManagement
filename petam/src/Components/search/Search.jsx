@@ -8,7 +8,9 @@ function Search({getSearchWord}){
     const handleChange=(e)=>{
         setSearchWord(e.target.value)
     }
-    const handleSubmit=()=>{
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+        
         getSearchWord(searchWord)
         // res.push({
         //     pathname:`/hospital/${searchWord}`
