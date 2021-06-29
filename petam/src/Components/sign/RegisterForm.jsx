@@ -1,9 +1,12 @@
 import React from 'react'
+import { useHistory, useLocation } from 'react-router'
+
 import '../../style.css'
 import "./Register.css"
 import "./sign.css"
 import RegisterTitle from './RegisterTitle'
 import RegisterFormContent from './RegisterFormContent'
+import HospitalRegisterFormContent from './HospitalRegisterFormContent'
 
 function RegisterForm(){
     const articleStyle={
@@ -11,18 +14,29 @@ function RegisterForm(){
         padding:'20px 10%',
         margin:'10px'
     }
+    const margin={
+        marginTop:'55px'
+    }
+    const category=useLocation().category
+    
     return(
-        <>
+        <div style={margin}>
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"/>
             <div class="container container fadeInDown">
                 <div>
                     <article id="formContent" class="card-body mx-auto" style={articleStyle}>
-                        <RegisterTitle/>        {/* 소셜 로그인 */}
-                        <RegisterFormContent/>  {/* 일반 로그인 */}
+                        <RegisterTitle category={category}/>        {/* title + 소셜 회원가입 */}
+                        {
+                            category==="병원"?
+                            <HospitalRegisterFormContent category={category}/> 
+                            :
+                            <RegisterFormContent category={category}/>
+                        }
+                        
                     </article>
                 </div>
             </div> 
-        </>
+        </div>
     )
 }
 export default RegisterForm
