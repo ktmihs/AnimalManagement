@@ -19,6 +19,7 @@ import PostListPage from "./Pages/PostListPage";
 import PostViewPage from "./Pages/PostViewPage";
 import WritePostPage from "./Pages/WritePostPage";
 import WriteProductPage from "./Pages/WriteProductPage";
+import AllProductListPage from "./Pages/AllProductListPage";
 
 import Axios from "axios";
 
@@ -65,7 +66,10 @@ export default class App extends Component {
                 <Route path="/PostListPage" component={PostListPage} />
                 <Route path="/WritePostPage" component={WritePostPage} />
                 <Route path="/writeproductpage" component={WriteProductPage} />
-                {/* <Route path="/PostViewPage" component={PostViewPage} /> */}
+                <Route
+                  path="/AllProductListPage"
+                  component={AllProductListPage}
+                />
 
                 <Route path="/PostView/:_id" component={PostViewPage} />
 

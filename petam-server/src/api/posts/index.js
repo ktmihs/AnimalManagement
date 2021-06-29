@@ -10,7 +10,7 @@ posts.get('/list', postsCtrl.list);
 
 // posts.get('/', postsCtrl.list);
 
-// posts.get('/readone/:_id', postsCtrl.readOne);
+posts.get('/readone/:_id', postsCtrl.readOne);
 // posts.post('/detail/:_id', async (req, res) => {
 //   try {
 //     const _id = req.body._id;

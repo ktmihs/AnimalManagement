@@ -58,6 +58,10 @@ export default class Leftbar extends Component {
               title: "제품 등록",
               address: "/writeproductpage",
             },
+            {
+              title: "All Products",
+              address: "/allproductlistpage",
+            },
           ]}
           h={95}
         >
