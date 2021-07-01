@@ -31,12 +31,12 @@ const HospitalSchema = new Schema({
   image: {
     type: ['images'],
   },
-  // 병원에서 판매하는 제품의 ID와 판매가
+
   products: [
     {
       productId: String,
       price: Number,
-    },
+    }, // 병원에서 판매하는 제품의 ID와 판매가
   ],
 });
 

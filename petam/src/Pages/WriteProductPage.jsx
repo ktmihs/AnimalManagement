@@ -1,4 +1,5 @@
 // joo-ju
+// 제품을 등록할 수 있는 페이지
 
 import "../style.css";
 import "../Components/product/product.css";
@@ -19,7 +20,7 @@ const floatRight = {
   float: "right",
 };
 const he = {
-  height: "250px",
+  height: "320px",
 };
 
 export default class WriteProductPage extends Component {
@@ -29,6 +30,7 @@ export default class WriteProductPage extends Component {
     const sellingPrice = this.productSellingPrice.value;
     const price = this.productPrice.value;
     const company = this.productCompany.value;
+    const discription = this.productDiscription.value;
 
     // if (name === "" || name === undefined) {
     //   alert("제품 이름을 입력해주세요.");
@@ -49,6 +51,7 @@ export default class WriteProductPage extends Component {
       sellingPrice: this.productSellingPrice.value,
       price: this.productPrice.value,
       company: this.productCompany.value,
+      discription: this.productDiscription.value,
     };
 
     console.log("send_param : ", send_param);
@@ -103,7 +106,13 @@ export default class WriteProductPage extends Component {
                   value={this.productSellingPrice}
                   placeholder="판매가"
                 />
-
+                <textarea
+                  // lassName="form-control product-input w-100 form-control-lg"
+                  className="product-input"
+                  ref={(ref) => (this.productDiscription = ref)}
+                  value={this.productDiscription}
+                  placeholder="제품 설명"
+                />
                 {/* <div class="form-group mt-3"> */}
                 <div class="col-sm-3 float-left">
                   <Button

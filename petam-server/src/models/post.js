@@ -22,7 +22,8 @@ const PostSchema = new Schema({
     type: String,
   }, // 글 내용
   view: {
-    type: String,
+    type: Number,
+    default: 0,
   }, // 조회 수
   tags: {
     type: String,

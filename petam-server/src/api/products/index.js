@@ -5,5 +5,7 @@ const products = new Router();
 
 products.post('/', productsCtrl.write);
 products.get('/read', productsCtrl.read);
+products.get('/readone/:_id', productsCtrl.readOne);
+products.put('/:_id/:hospitalId', productsCtrl.updateHospital);
 
 export default products;

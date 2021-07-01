@@ -20,6 +20,7 @@ import PostViewPage from "./Pages/PostViewPage";
 import WritePostPage from "./Pages/WritePostPage";
 import WriteProductPage from "./Pages/WriteProductPage";
 import AllProductListPage from "./Pages/AllProductListPage";
+import ProductViewPage from "./Pages/ProductViewPage";
 
 import Axios from "axios";
 
@@ -61,7 +62,6 @@ export default class App extends Component {
                   path="/reservation"
                   component={MyReservationPage}
                 />
-
                 <Route exact path="/hospital" component={SearchPage} />
                 <Route path="/PostListPage" component={PostListPage} />
                 <Route path="/WritePostPage" component={WritePostPage} />
@@ -70,9 +70,11 @@ export default class App extends Component {
                   path="/AllProductListPage"
                   component={AllProductListPage}
                 />
-
+                <Route
+                  path="/product/detail/:_id"
+                  component={ProductViewPage}
+                />
                 <Route path="/PostView/:_id" component={PostViewPage} />
-
                 <Route render={() => <ErrorPage />} />
               </Switch>
             </div>

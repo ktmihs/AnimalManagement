@@ -46,3 +46,17 @@ export const list = async (ctx) => {
     ctx.throw(500, e);
   }
 };
+
+export const update = async (ctx) => {
+  const _id = ctx.params;
+  let post;
+  try {
+    post = await Post.updateOne(_id, ctx.request.body, {
+      upsert: true,
+      new: true,
+    }).exec();
+  } catch (e) {
+    return ctx.throw(500, e);
+  }
+  ctx.body = post;
+};

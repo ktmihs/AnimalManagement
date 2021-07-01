@@ -9,7 +9,7 @@ posts.get('/list', postsCtrl.list);
 // posts.post('/', postsCtrl.write);
 
 // posts.get('/', postsCtrl.list);
-
+posts.put('/:_id', postsCtrl.update);
 posts.get('/readone/:_id', postsCtrl.readOne);
 // posts.post('/detail/:_id', async (req, res) => {
 //   try {

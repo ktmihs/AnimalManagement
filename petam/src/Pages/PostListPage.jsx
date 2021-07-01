@@ -91,10 +91,18 @@ function PostListPage({ location, history }) {
                       // value={rowData._id}
                       // ref={(ref) => (this.postid = ref)}
                       >
-                        <PostTableColumnNo his={history} _id={rowData._id}>
+                        <PostTableColumnNo
+                          his={history}
+                          type="post"
+                          _id={rowData._id}
+                        >
                           {rowData.no}
                         </PostTableColumnNo>
-                        <PostTableColumn his={history} _id={rowData._id}>
+                        <PostTableColumn
+                          his={history}
+                          type="post"
+                          _id={rowData._id}
+                        >
                           {/* {rowData._id} */}
                         </PostTableColumn>
 
@@ -102,6 +110,7 @@ function PostListPage({ location, history }) {
                         <PostTableColumnTitle
                           his={history}
                           _id={rowData._id}
+                          type="post"
                           // onClick={() =>
                           //   history.push("/PostView/${rowData._id}")
                           // }
@@ -109,14 +118,26 @@ function PostListPage({ location, history }) {
                           {rowData.title}
                         </PostTableColumnTitle>
                         {/* </Link> */}
-                        <PostTableColumn his={history} _id={rowData._id}>
+                        <PostTableColumn
+                          his={history}
+                          type="post"
+                          _id={rowData._id}
+                        >
                           {rowData.enrollTime}
                         </PostTableColumn>
-                        <PostTableColumn his={history} _id={rowData._id}>
+                        <PostTableColumn
+                          his={history}
+                          type="post"
+                          _id={rowData._id}
+                        >
                           {" "}
                           {rowData.writer}
                         </PostTableColumn>
-                        <PostTableColumn his={history} _id={rowData._id}>
+                        <PostTableColumn
+                          his={history}
+                          type="post"
+                          _id={rowData._id}
+                        >
                           6
                         </PostTableColumn>
                       </PostTableRow>
