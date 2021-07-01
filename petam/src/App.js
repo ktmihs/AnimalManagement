@@ -49,19 +49,9 @@ export default class App extends Component {
                 <Route path="/register/common" component={RegisterForm} />
                 <Route path="/hospital/:name" component={HospitalPage} />
                 <Route path="/reservationPage" component={ReservationPage} />
-                <Route
-                  path="/checkReservationPage"
-                  component={CheckReservationPage}
-                />
-                <Route
-                  path="/reservation/:_id"
-                  component={ConfirmReservationPage}
-                />
-                <Route
-                  exact
-                  path="/reservation"
-                  component={MyReservationPage}
-                />
+                <Route path="/checkReservationPage" component={CheckReservationPage}/>
+                <Route path="/reservation/:_id" component={ConfirmReservationPage}/>
+                <Route exact path="/reservation" component={MyReservationPage} />
 
                 <Route exact path="/hospital" component={SearchPage} />
                 <Route path="/PostListPage" component={PostListPage} />

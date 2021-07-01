@@ -9,7 +9,6 @@ function Item({linkName,item}){
     const name=item.name
     const id=item._id
     const hospitalName=item.hospitalName
-    console.log(id,item.image)
 
     return(
         link==='hospital'?

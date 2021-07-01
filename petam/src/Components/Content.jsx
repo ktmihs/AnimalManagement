@@ -11,6 +11,11 @@ function Content({ children }) {
     margin: "4% 5%",
     borderRadius: "20px",
   };
-  return <div style={bodyStyle}>{children}</div>;
+  return( 
+  <>
+  <link href="http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css" rel="stylesheet"/>
+  <link href="http://fonts.googleapis.com/earlyaccess/jejugothic.css" rel="stylesheet"/>
+  <div className="jg" style={bodyStyle}>{children}</div>;
+    </>)
 }
 export default Content;

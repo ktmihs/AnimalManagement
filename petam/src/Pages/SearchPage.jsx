@@ -17,7 +17,7 @@ function SearchPage(){
     const [info,setInfo]=useState([])   //병원 정보
     const [loading,setLoading]=useState(false)    //로딩 중 표시
     const [currentPage,setCurrentPage]=useState(1)  //현재 페이지
-    const [postsPerPage]=useState(4)                //한 페이지에서 보여줄 info 수
+    const [postsPerPage,setPostsPerPage]=useState(100)                //한 페이지에서 보여줄 info 수
 
     const linkName='hospital'       // 링크이름
 
@@ -26,15 +26,20 @@ function SearchPage(){
     const currentPosts=info.slice(indexOfFirstPost, indexOfLastPost)    //각 페이지에서 보여질 info 배열
     
     const paginate = (pageNumber) => setCurrentPage(pageNumber)
-
     useEffect(() => {
         const fetchPosts=async()=>{
             setLoading(true)
-            axios.get('api/hospitals/read'+searchWord)
+            axios.get('api/hospitals/read')
             //axios.get('https://jsonplaceholder.typicode.com/comments')
             .then(
-                res=>setInfo(res.data),
-                setLoading(false)
+                res=>{
+                    setInfo(res.data),
+                    res.data.length>1000?
+                    setPostsPerPage(150)
+                    :
+                    console.log(res.data.length)
+                },
+                setLoading(false),
             )
             .catch(err=>console.log(err))
         }
@@ -48,13 +53,20 @@ function SearchPage(){
         console.log(searchWord)
         
     }
+    const button={
+        position:'relative',
+        left:'95%',
+        textAlign:'right'
+    }
     // const searchResult=(data)=>{
     //     console.log(data)
     //     //<div>{props.value}</div>
     // }
     return (
         <Content>
+            <a name='top'/>
             <h2 className='name'>'{searchWord}' 검색 결과</h2>
+            <a href='#bottom' style={button}>🔽</a>
             <Search
                 //onCreate={searchResult}
                 getSearchWord={getSearchWord}
@@ -63,6 +75,7 @@ function SearchPage(){
                 <SearchContent linkName={linkName} info={currentPosts} loading={loading}/>
                 <Pagination postsPerPage={postsPerPage} totalPosts={info.length} paginate={paginate}/>
             </div>
+            <a href='#top' name='bottom' style={button}>🔼</a>
         </Content>
       )
 }
