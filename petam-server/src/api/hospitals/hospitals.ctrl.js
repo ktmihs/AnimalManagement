@@ -42,13 +42,19 @@ export const read=async(ctx)=>{
     
     ctx.body=hospitals
 }
-/*
-export const read=async(ctx)=>{
-    const hospitals=await Hospital.find()
-    ctx.status=200
-    ctx.body=hospitals   
+
+export const filter=async(ctx)=>{
+    const filter=ctx.params
+    let total, hospitals
+    try{
+        total=await Hospital.find().exec()
+        hospitals=total.filter(item=>item.name.includes(Object.values(filter)))
+    }catch(e){
+        return ctx.throw(200,e)
+    }
+    ctx.body=hospitals
 }
-*/
+
 
 
 /* export const readName=async(ctx)=>{

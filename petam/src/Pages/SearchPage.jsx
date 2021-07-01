@@ -9,11 +9,7 @@ import axios from 'axios'
 import Pagination from '../Components/pagination/Pagination'
 
 function SearchPage(){
-    const [searchWord,setSearchWord]=useState('병원')
-    // const [searchWord,setSearchWord]=useState({
-    //     hospitals:[],
-    //     userInput:""
-    // })
+    const [searchWord,setSearchWord]=useState('')
     const [info,setInfo]=useState([])   //병원 정보
     const [loading,setLoading]=useState(false)    //로딩 중 표시
     const [currentPage,setCurrentPage]=useState(1)  //현재 페이지
@@ -29,8 +25,7 @@ function SearchPage(){
     useEffect(() => {
         const fetchPosts=async()=>{
             setLoading(true)
-            axios.get('api/hospitals/read')
-            //axios.get('https://jsonplaceholder.typicode.com/comments')
+            axios.get('api/hospitals/read/'+searchWord)
             .then(
                 res=>{
                     setInfo(res.data),
@@ -44,7 +39,7 @@ function SearchPage(){
             .catch(err=>console.log(err))
         }
         fetchPosts()
-    }, [])
+    }, [searchWord])
 
     //병원 검색 받으면 리렌딩 ()
     const getSearchWord=(word)=>{
@@ -58,19 +53,12 @@ function SearchPage(){
         left:'95%',
         textAlign:'right'
     }
-    // const searchResult=(data)=>{
-    //     console.log(data)
-    //     //<div>{props.value}</div>
-    // }
     return (
         <Content>
             <a name='top'/>
             <h2 className='name'>'{searchWord}' 검색 결과</h2>
             <a href='#bottom' style={button}>🔽</a>
-            <Search
-                //onCreate={searchResult}
-                getSearchWord={getSearchWord}
-            />
+            <Search getSearchWord={getSearchWord} />
             <div className='bodyContainer'>
                 <SearchContent linkName={linkName} info={currentPosts} loading={loading}/>
                 <Pagination postsPerPage={postsPerPage} totalPosts={info.length} paginate={paginate}/>
