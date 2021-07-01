@@ -22,15 +22,16 @@ function SearchPage(){
     const currentPosts=info.slice(indexOfFirstPost, indexOfLastPost)    //각 페이지에서 보여질 info 배열
     
     const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
     useEffect(() => {
         const fetchPosts=async()=>{
             setLoading(true)
-            axios.get('api/hospitals/read/'+searchWord)
+            axios.get('api/hospitals/read/'+searchWord) // 검색 단어로 정보 불러옴
             .then(
                 res=>{
                     setInfo(res.data),
-                    res.data.length>1000?
-                    setPostsPerPage(150)
+                    res.data.length>1000?   // 병원 데이터가 1000을 넘을 경우
+                    setPostsPerPage(150)    // 한 페이지 당 150으로 변경
                     :
                     console.log(res.data.length)
                 },
@@ -39,15 +40,10 @@ function SearchPage(){
             .catch(err=>console.log(err))
         }
         fetchPosts()
-    }, [searchWord])
+    }, [searchWord])  // searchWord 바뀔 때마다 렌더링 해줌
 
     //병원 검색 받으면 리렌딩 ()
-    const getSearchWord=(word)=>{
-        setSearchWord(word)
-        console.log(word)
-        console.log(searchWord)
-        
-    }
+    const getSearchWord=(word)=>{ setSearchWord(word) }
     const button={
         position:'relative',
         left:'95%',
