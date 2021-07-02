@@ -28,10 +28,7 @@ const HospitalSchema=new Schema({
     image:{
         type: []
     },  //병원 이미지
-    reservation: [{
-        reservationId:String,
-        reservationTime:String
-    }], //예약 정보
+    reservationTime: [], //예약 정보
     products: [{
         productId:String,
         price:Number

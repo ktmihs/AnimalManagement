@@ -42,7 +42,7 @@ function ReservationContent({time,getReserve}){
                     <option value="x" hidden>=== 선택 ===</option>
                 </select>
                 <br/><br/>
-                <textarea name='text' value={text} onChange={handleChange} style={textBox} placeholder="병원에 보낼 메시지를 적어주세요."/>
+                <textarea name='text' onChange={handleChange} style={textBox} placeholder="병원에 보낼 메시지를 적어주세요."/>
                 <div style={warningText}>
                     ※주의사항※<br/>
                     예약 1일 전까지 무료 취소 가능합니다.<br/>

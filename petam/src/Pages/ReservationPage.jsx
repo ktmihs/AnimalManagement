@@ -28,8 +28,13 @@ function ReservationPage({location,history}){
 
     const [nextPage,setNextPage]=useState(false)
 
-    const hspId=useLocation()
-    const hspName=hspId.name
+    const hspId=useLocation()       // 이전 페이지에서 받아서 사용
+    const [hsp,setHsp]=useState({
+        Id:hspId.id,
+        Name:hspId.name
+    })
+    console.log(hsp,hsp.Id)
+
     const res=useHistory()
     const toCheck=()=>{{    
         reserve.option==='' || reserve.option==='기타' && reserve.text===''?    //미입력 사항 존재할 때
@@ -42,7 +47,8 @@ function ReservationPage({location,history}){
         :
         res.push({      //전부 작성되면 다음 페이지로 이동 & 정보 보내기
             pathname:'/CheckReservationPage',
-            name:hspName,
+            id:hsp.Id,
+            name:hsp.Name,
             option:reserve.option,
             text:reserve.text,
             dateDay:`${time.year}년 ${time.month}월 ${time.dates}일 ${time.hour}시 ${time.minute}분`
@@ -74,7 +80,7 @@ function ReservationPage({location,history}){
     }
     return(
         <Content>
-            <h2 className='name'>{hspName}</h2>
+            <h2 className='name'>{hsp.Name}</h2>
             <div className='bodyContainer'>
                 <div style={inner}>
                     {nextPage?
@@ -91,7 +97,7 @@ function ReservationPage({location,history}){
                         <TimeTable getTime={getTime}/>
                         {time.minute!==''?
                             <div style={buttons}>
-                                <button style={leftButton} className='button' onClick={()=>history.push('/HospitalPage')}>취소</button>
+                                <button style={leftButton} className='button' onClick={()=>history.push('/Hospital/'+hsp.Name)}>취소</button>
                                 <button style={rightButton} className='button' onClick={()=>setNextPage(true)}>다음으로</button>  
                             </div>
                         :

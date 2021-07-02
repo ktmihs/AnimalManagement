@@ -27,6 +27,7 @@ function HospitalPage(props){
                     console.log(ctx)
                     setHospitalInfo({
                         ...hospitalInfo,
+                        id:ctx.data._id,
                         name:ctx.data.name,
                         addr:ctx.data.new_addr,
                         tel:ctx.data.tel
@@ -38,7 +39,7 @@ function HospitalPage(props){
             )
     }, [])
     
-    const hspId=useHistory()
+    const hspId=useHistory()        // history.push로 연결된 링크에 보내주기
     
     const handleClick=()=>{
         hspId.push({

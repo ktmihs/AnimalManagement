@@ -21,6 +21,7 @@ import WritePostPage from "./Pages/WritePostPage";
 import WriteProductPage from "./Pages/WriteProductPage";
 
 import Axios from "axios";
+import Information from "./Components/mypage/Information";
 
 export default class App extends Component {
   // const submitReview = () => {
@@ -52,6 +53,8 @@ export default class App extends Component {
                 <Route path="/checkReservationPage" component={CheckReservationPage}/>
                 <Route path="/reservation/:_id" component={ConfirmReservationPage}/>
                 <Route exact path="/reservation" component={MyReservationPage} />
+                <Route path="/information" component={Information} />
+{/*                <Route path="/information/:_id" component={Information} />*/}
 
                 <Route exact path="/hospital" component={SearchPage} />
                 <Route path="/PostListPage" component={PostListPage} />
