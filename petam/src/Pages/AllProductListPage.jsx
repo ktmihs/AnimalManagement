@@ -9,6 +9,7 @@ import PostTableColumn from "../Components/table/PostTableColumn";
 import PostTableRow from "../Components/table/PostTableRow";
 import PostTableColumnNo from "../Components/table/PostTableColumnNo";
 import PostTableColumnTitle from "../Components/table/PostTableColumnTitle";
+import ProductTableButton from "../Components/table/ProductTableButton";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { useHistory, useLocation } from "react-router";
 import dateFormat from "dateformat";
@@ -32,7 +33,7 @@ function AllProductListPage({ location, history }) {
   ]);
 
   const [lastIdx, setLastIdx] = useState(0);
-
+  const hospitalId = "60da89269392a9b8dd76732d";
   useEffect(async () => {
     try {
       // 데이터를 받아오는 동안 시간 소요 되므로 await로 대기
@@ -71,7 +72,7 @@ function AllProductListPage({ location, history }) {
         <div className="col-12 m-auto pt-3">
           <div className="table table-responsive">
             <PostTable
-              headersName={["no", "", "제조원", "제품명", "정가", "등록일"]}
+              headersName={["no", "", "제조원", "제품명", "정가", "등록일", ""]}
             >
               {lastIdx !== 0 ? (
                 // 포스트를 역순으로 출력하고 싶다면 .reverse()를 추가하면 된다
@@ -136,9 +137,25 @@ function AllProductListPage({ location, history }) {
                         >
                           {rowData.enrollTime}
                         </PostTableColumn>
+
+                        <ProductTableButton
+                          his={history}
+                          hospitalId={hospitalId}
+                          _id={rowData._id} //제품의 _id
+                        >
+                          {/* {rowData.enrollTime} */}
+                        </ProductTableButton>
                       </PostTableRow>
                       // </a>
                     )
+
+                  //  <PostTableColumn
+                  //         his={history}
+                  //         type="product"
+                  //         _id={rowData._id}
+                  //       >
+                  //         {rowData.enrollTime}
+                  //       </PostTableColumn>
                 )
               ) : (
                 <PostTableRow>

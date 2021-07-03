@@ -61,6 +61,8 @@ function PostViewPage(props) {
       });
 
       console.log("postData:", postData);
+
+      // 게시 글의 조회수를 1씩 증가
       const req = axios.put("/api/posts/" + _id, {
         ...res.data,
         view: parseInt(res.data.view) + 1,

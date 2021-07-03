@@ -46,7 +46,10 @@ export default class Leftbar extends Component {
               title: "내 예약 내역",
               address: "/reservation",
             },
-            "Selection 3",
+            // {
+            //   title: "내",
+            //   address: "/reservation",
+            // },
           ]}
           h={95}
         >

@@ -1,3 +1,5 @@
+// 제품 상세설명에서 해당 제품을 판매하는 병원을 표형식으로 출력함
+
 import React, { Component, useEffect, useState } from "react";
 import "./ProductHospitalTable.css";
 import axios from "axios";

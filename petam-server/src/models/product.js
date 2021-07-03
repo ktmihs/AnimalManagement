@@ -38,6 +38,9 @@ const ProductSchema = new Schema({
   },
   // deleteTime: Date,
   hospitals: [String],
+  image: {
+    type: ['images'],
+  },
   // hospitals: [
   //   {
   //     hospitalId: {

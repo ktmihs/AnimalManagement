@@ -43,6 +43,7 @@ function PostListPage({ location, history }) {
           {
             _id: rowData._id,
             no: rowData.no,
+            view: rowData.view,
             title: rowData.title,
             content: rowData.content,
             writer: rowData.writer,
@@ -138,7 +139,7 @@ function PostListPage({ location, history }) {
                           type="post"
                           _id={rowData._id}
                         >
-                          6
+                          {rowData.view}
                         </PostTableColumn>
                       </PostTableRow>
                       // </a>

@@ -19,20 +19,6 @@ export const write = async (ctx) => {
   ctx.body = product;
 };
 
-// export const readOne = async (ctx) => {
-//   const { _id } = ctx.params; // id로 하면 안됨.. _id로 해야 됨..
-
-//   try {
-//     const posts = await Post.findById(_id).exec();
-//     if (!posts) {
-//       ctx.status = 404;
-//       return;
-//     }
-//     ctx.body = posts;
-//   } catch (e) {
-//     ctx.throw(500, e);
-//   }
-// };
 export const readOne = async (ctx) => {
   const { _id } = ctx.params; // id로 하면 안됨.. _id로 해야 됨..
 
@@ -47,6 +33,25 @@ export const readOne = async (ctx) => {
     ctx.throw(500, e);
   }
 };
+export const readHospital = async (ctx) => {
+  const { _id, hospitalId } = ctx.params;
+  try {
+    const products = await Product.findById(_id).exec();
+
+    const product = await Product.find({
+      $and: [{ hospitals: hospitalId }, { _id: _id }],
+    });
+
+    if (product.length == 0) {
+      ctx.body = 0;
+    } else {
+      ctx.body = 1;
+    }
+    console.log('product:', ctx.body);
+  } catch (e) {
+    ctx.throw(500, e);
+  }
+};
 export const read = async (ctx) => {
   try {
     const products = await Product.find().exec();
@@ -57,35 +62,42 @@ export const read = async (ctx) => {
 };
 
 export const updateHospital = async (ctx) => {
-  // const { params } = ctx.request.body;
   const { _id, hospitalId } = ctx.params; // id로 하면 안됨.. _id로 해야 됨..
-  // const { hospitalId } = ctx.params;
   let product;
   try {
-    // console.log('ctx : ', ctx);
     console.log('_id: ', _id);
     console.log('hospitlaId : ', hospitalId);
-    // console.log('ctx.request: ', ctx.request.body);
-    // console.log('params.hospitalId : ', params.hospitalId);
-    // product = await Product.updateOne(
     product = await Product.findOneAndUpdate(
-      // _id,
       { _id: _id },
       {
-        // $set: {
         $addToSet: {
-          // $push: {
-          // hospitals: hospitalId,
           hospitals: hospitalId,
         },
-        // },
       },
-      // { returnNewDocument: true },
     ).exec();
-    // console.log(product);
   } catch (e) {
     ctx.throw(500, e);
   }
   ctx.body = product;
+  console.log('ctx.body:', ctx.body);
+};
+
+export const removeHospital = async (ctx) => {
+  const { _id, hospitalId } = ctx.params;
+  let product;
+  try {
+    product = await Product.findOneAndUpdate(
+      { _id: _id },
+      {
+        $pull: {
+          hospitals: hospitalId,
+        },
+      },
+    );
+  } catch (e) {
+    ctx.throw(500, e);
+  }
+  ctx.body = product;
+
   console.log('ctx.body:', ctx.body);
 };

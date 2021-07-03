@@ -29,11 +29,14 @@ const PostSchema = new Schema({
     type: String,
   }, // 공지, 알림 등 - 문자열로 이루어진 배열
   score: {
-    type: String,
+    type: Number,
   },
   writer: {
     type: String,
   },
+  hospitalId: {
+    type: String,
+  }, // 진료받은 병원의 _id 저장
   enrollTime: {
     type: Date,
     default: Date.now,

@@ -23,14 +23,20 @@ const HospitalSchema = new Schema({
     type: String,
   },
   score: {
-    type: String,
-  },
+    type: Number,
+    default: 0,
+  }, // 총 평점
+  count: {
+    type: Number,
+    default: 0,
+  }, // 리뷰 갯수
+
   company_number: {
     type: String,
   },
   image: {
     type: ['images'],
-  },
+  }, // 제품 사진 저장
 
   products: [
     {
