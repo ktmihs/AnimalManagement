@@ -14,7 +14,7 @@ import { useHistory, useLocation } from "react-router";
 import dateFormat from "dateformat";
 import axios from "axios";
 
-function PostListPage({ location, history }) {
+function MyPostListPage({ location, history }) {
   // function getPostDetail(e) {
   //   console.log("/PostView/" + this.postid.value);
   //   window.location.href = "/PostView/" + this.postid.value;
@@ -34,8 +34,7 @@ function PostListPage({ location, history }) {
   useEffect(async () => {
     try {
       // 데이터를 받아오는 동안 시간 소요 되므로 await로 대기
-      // const res = await axios.get("http://localhost:4000/api/posts/list");
-      const res = await axios.get("/api/posts/list");
+      const res = await axios.get("/api/posts/read/" + "jooju");
       console.log(res);
       const _postData = await res.data.map(
         (rowData) => (
@@ -66,7 +65,7 @@ function PostListPage({ location, history }) {
   };
   return (
     <Content>
-      <h2 className="name">Reviews</h2>
+      <h2 className="name">내가 쓴 글</h2>
 
       <div className="col-12 m-auto bg-white">
         {/* 글 목록 */}
@@ -164,4 +163,4 @@ function PostListPage({ location, history }) {
     </Content>
   );
 }
-export default PostListPage;
+export default MyPostListPage;

@@ -11,6 +11,7 @@ import ConfirmReservationPage from "./Pages/ConfirmReservationPage";
 import ReservationPage from "./Pages/ReservationPage";
 import HospitalPage from "./Pages/HospitalPage";
 import ErrorPage from "./Pages/ErrorPage";
+import MyPostListPage from "./Pages/MyPostListPage";
 
 import Login from "./Components/sign/Login";
 import Register from "./Components/sign/Register";
@@ -19,6 +20,8 @@ import PostListPage from "./Pages/PostListPage";
 import PostViewPage from "./Pages/PostViewPage";
 import WritePostPage from "./Pages/WritePostPage";
 import WriteProductPage from "./Pages/WriteProductPage";
+import AllProductListPage from "./Pages/AllProductListPage";
+import ProductViewPage from "./Pages/ProductViewPage";
 
 import Axios from "axios";
 
@@ -48,6 +51,7 @@ export default class App extends Component {
                 <Route path="/register/hospital" component={RegisterForm} />
                 <Route path="/register/common" component={RegisterForm} />
                 <Route path="/hospital/:name" component={HospitalPage} />
+                {/* <Route path="/hospital/:_id" component={HospitalPage} /> */}
                 <Route path="/reservationPage" component={ReservationPage} />
                 <Route
                   path="/checkReservationPage"
@@ -62,15 +66,20 @@ export default class App extends Component {
                   path="/reservation"
                   component={MyReservationPage}
                 />
-
                 <Route exact path="/hospital" component={SearchPage} />
                 <Route path="/PostListPage" component={PostListPage} />
+                <Route path="/MyPostListPage" component={MyPostListPage} />
                 <Route path="/WritePostPage" component={WritePostPage} />
                 <Route path="/writeproductpage" component={WriteProductPage} />
-                {/* <Route path="/PostViewPage" component={PostViewPage} /> */}
-
+                <Route
+                  path="/AllProductListPage"
+                  component={AllProductListPage}
+                />
+                <Route
+                  path="/product/detail/:_id"
+                  component={ProductViewPage}
+                />
                 <Route path="/PostView/:_id" component={PostViewPage} />
-
                 <Route render={() => <ErrorPage />} />
               </Switch>
             </div>

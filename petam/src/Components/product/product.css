@@ -7,6 +7,15 @@
   border-radius: 20px;
   margin-bottom: 15px;
 }
+ul {
+  list-style: none;
+  padding-left: 0px;
+  white-space: nowrap;
+}
+li {
+  list-style: none;
+  display: inline-block;
+}
 .product-input-50 {
   padding: 10px 20px;
   width: 45%;
@@ -17,6 +26,99 @@
   border-radius: 20px;
   margin-bottom: 15px;
 }
+.product-input-60 {
+  padding: 10px 20px;
+  min-width: calc(100% - 330px);
+  /* float: right; */
+  border: 1px solid lightgray;
+  /* border-color: gray; */
+  /* border: 1px solid green; */
+  border-radius: 20px;
+  margin-bottom: 26px;
+}
 .product-input:focus {
   border: 1px solid gray;
+}
+
+.product-x-scroll {
+  max-width: 95%;
+  margin: auto;
+}
+#XProduct {
+  overflow-x: auto;
+
+  /* float: left; */
+  /* max-height: 200px; */
+}
+.b {
+  border: 1px solid red;
+}
+.product-image {
+  min-width: 140px;
+  min-height: 140px;
+  background-color: #f6f6f6;
+}
+.product-item {
+  /* float: left; */
+  /* border: 1px solid green; */
+  margin: 4px;
+  width: 155px;
+
+  padding: 5px;
+}
+.product-name {
+  font-size: small;
+  margin: 6px 0px;
+  text-align: left;
+  width: auto;
+  padding-left: 5px;
+  /* min-width: 50px; */
+  max-width: 150px;
+}
+.product-price {
+  /* border: 1px solid blue; */
+  margin-top: 10px;
+  text-align: left;
+  width: auto;
+  font-size: large;
+  padding-left: 5px;
+  font-weight: bold;
+}
+
+._ul {
+  padding-top: 20px;
+  /* padding-bottom: 20px; */
+  /* border-top: 3px solid lightgray; */
+  /* max-width: 96%; */
+  /* margin: auto; */
+  /* padding-left: 10px; */
+}
+
+.bo {
+  border-top: 2px solid lightgray;
+  border-bottom: 2px solid lightgray;
+}
+.product-input-image {
+  /* margin-left: calc(50%-150px);
+  margin-right: 0; */
+  /* padding-left: 20%; */
+  /* padding-left: calc(20%); */
+  /* background-color: red; */
+  /* border: 1px solid green; */
+  /* min-width: 200px; */
+  width: 100%;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  max-width: 300px;
+}
+.product-image-preview {
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 300px;
+  max-height: 300px;
+  margin-left: 0;
+  background-color: rgb(244, 244, 244);
+  border-radius: 15px;
+  /* border: 1px solid red; */
 }
