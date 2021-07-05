@@ -109,24 +109,9 @@ function HospitalPage(props) {
                 </div>
                 <div className="contentBox"></div>
             </div>
-          </div>
-          <div style={bottomContent}>
-            병원명: {hospitalInfo.name}
-            <br />
-            병원주소: {hospitalInfo.addr}
-            <br />
-            전화번호: {hospitalInfo.tel}
-            <br />
-            운영시간: {hospitalInfo.time}
-            <br />
-            평점: {hospitalInfo.avg}
-          </div>
-        </div>
-        {/* <div className=""> */}
-        <ProductXscroll>{hospitalInfo.products}</ProductXscroll>
-        {/* </div> */}
-      </div>
-    </Content>
-  );
+            <ProductXscroll>{hospitalInfo.products}</ProductXscroll>
+        </Content>
+    )
 }
+ 
 export default HospitalPage;

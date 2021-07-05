@@ -41,3 +41,5 @@ const HospitalSchema=new Schema({
       }, // 병원에서 판매하는 제품의 ID와 판매가
     ],
 })
+const Hospital=mongoose.model("Hospital",HospitalSchema)
+export default Hospital
