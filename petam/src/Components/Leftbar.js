@@ -80,8 +80,12 @@ export default class Leftbar extends Component {
               title: "후기 작성",
               address: "/writepostpage",
             },
+            {
+              title: "내가 쓴 글",
+              address: "/mypostlistpage",
+            },
           ]}
-          h={95}
+          h={141}
         >
           커뮤니티
         </LeftbarCategory>

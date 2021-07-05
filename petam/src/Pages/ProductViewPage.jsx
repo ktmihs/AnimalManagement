@@ -36,6 +36,7 @@ function ProductViewPage(props) {
     try {
       console.log("product detail");
       console.log("_id : ", _id);
+      console.log("history: ", props.history);
       const res = await axios.get("/api/products/readone/" + _id);
 
       console.log("res : ", res.data);
@@ -100,6 +101,7 @@ function ProductViewPage(props) {
         <h2 className="name">판매중인 병원</h2>
         <ProductHospitalTable
           headersName={["병원명", "전화번호"]}
+          history={props.history}
           hospitalinfo={productData.hospitals}
         />
       </Content>

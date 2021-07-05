@@ -11,6 +11,7 @@ import ConfirmReservationPage from "./Pages/ConfirmReservationPage";
 import ReservationPage from "./Pages/ReservationPage";
 import HospitalPage from "./Pages/HospitalPage";
 import ErrorPage from "./Pages/ErrorPage";
+import MyPostListPage from "./Pages/MyPostListPage";
 
 import Login from "./Components/sign/Login";
 import Register from "./Components/sign/Register";
@@ -48,6 +49,7 @@ export default class App extends Component {
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
                 <Route path="/hospital/:name" component={HospitalPage} />
+                {/* <Route path="/hospital/:_id" component={HospitalPage} /> */}
                 <Route path="/reservationPage" component={ReservationPage} />
                 <Route
                   path="/checkReservationPage"
@@ -64,6 +66,7 @@ export default class App extends Component {
                 />
                 <Route exact path="/hospital" component={SearchPage} />
                 <Route path="/PostListPage" component={PostListPage} />
+                <Route path="/MyPostListPage" component={MyPostListPage} />
                 <Route path="/WritePostPage" component={WritePostPage} />
                 <Route path="/writeproductpage" component={WriteProductPage} />
                 <Route

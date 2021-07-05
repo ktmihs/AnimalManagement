@@ -17,16 +17,19 @@ function HospitalPage(props) {
     addr: "",
     tel: "",
     time: "09:00 - 18:00",
-    avg: "5", //평점
+    avg: "0", //평점
   });
 
   const [hospital, setHospital] = useState(props.match.params.name);
 
   useEffect(() => {
+    console.log("----", props.match.params.name);
     axios
       .get("/api/hospitals/read/name/" + hospital)
       .then((ctx) => {
         console.log(ctx);
+        const _avg = (ctx.data.score / ctx.data.count).toFixed(2);
+
         setHospitalInfo({
           ...hospitalInfo,
           name: ctx.data.name,
@@ -34,6 +37,8 @@ function HospitalPage(props) {
           tel: ctx.data.tel,
           _id: ctx.data._id,
           products: ctx.data.products,
+          // avg: (ctx.data.score / ctx.data.count).toFixed(2),
+          avg: _avg,
         });
         console.log("products : ", ctx.data.products);
       }, console.log(hospitalInfo))

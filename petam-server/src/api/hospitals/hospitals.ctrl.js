@@ -134,6 +134,7 @@ export const updateProduct = async (ctx) => {
   ctx.body = hospital;
   console.log('ctx.body:', ctx.body);
 };
+
 export const removeProduct = async (ctx) => {
   const { _id, productId } = ctx.params;
   let hospital;

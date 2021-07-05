@@ -6,7 +6,7 @@ import axios from "axios";
 import ProductHospitalTableColumnName from "./ProductHospitalTableColumnName";
 
 const ProductHospitalTable = (props) => {
-  const { headersName, hospitalinfo } = props;
+  const { headersName, hospitalinfo, history } = props;
 
   return (
     <table className="product-table">
@@ -58,12 +58,16 @@ const ProductHospitalTable = (props) => {
                 <ProductHospitalTableColumnName
                   // className="product-table-row"
                   key={index}
+                  _id={hospitalData._id}
+                  his={history}
                 >
                   {hospitalData.name}
                 </ProductHospitalTableColumnName>
                 <ProductHospitalTableColumnName
                   // className="product-table-row"
                   key={index}
+                  _id={hospitalData._id}
+                  his={history}
                 >
                   {hospitalData.tel}
                 </ProductHospitalTableColumnName>

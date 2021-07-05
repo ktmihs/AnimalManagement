@@ -10,39 +10,11 @@ const ProductXscroll = (props) => {
   const scope = {
     minWidth: "100%",
     maxWidth: "100%",
-    // border: "1px solid red",
-    // borderTop: "3px solid lightgray",
-    // borderBottom: "3px solid lightgray",
   };
   return (
     <div style={scope} className="bo">
       <div id="XProduct" className="product-x-scroll ">
         <ul className="_ul ">
-          {/* {children &&
-            children.map((item, index) => {
-              const [productData, setProductData] = useState([
-                {
-                  _id: '',
-                  name: '',
-                  company: '',
-                  image: []
-                },
-              ]);
-
-              console.log("item", item);
-              // useEffect(async () => {
-              //   const res = axios.get("api/products/readone/"+item.productId)
-              //   return () => {
-              //     cleanup
-              //   }
-              // }, [input])
-  return(
-          
-              );
-            }
-            
-          } */}
-
           {children &&
             children.map((item, index) => {
               const [productData, setProductData] = useState([
@@ -89,45 +61,9 @@ const ProductXscroll = (props) => {
                 </li>
               );
             })}
-
-          {/* <li class="product-item">
-            <ProductImage></ProductImage>
-            <ProductName></ProductName>
-            <ProductPrice></ProductPrice>
-          </li>
-          <li class="product-item">
-            <ProductImage></ProductImage>
-            <ProductName></ProductName>
-            <ProductPrice></ProductPrice>
-          </li>
-          <li class="product-item">
-            <ProductImage></ProductImage>
-            <ProductName></ProductName>
-            <ProductPrice></ProductPrice>
-          </li>
-          <li class="product-item">
-            <ProductImage></ProductImage>
-            <ProductName></ProductName>
-            <ProductPrice></ProductPrice>
-          </li>
-          <li class="product-item">
-            <ProductImage></ProductImage>
-            <ProductName></ProductName>
-            <ProductPrice></ProductPrice>
-          </li>
-          <li class="product-item">
-            <ProductImage></ProductImage>
-            <ProductName></ProductName>
-            <ProductPrice></ProductPrice>
-          </li> */}
         </ul>
       </div>
     </div>
-    // <Link class="b link-title" to={`/postView/${_id}`}>
-    // <div className="b">
-    // <tr className="">{children}</tr>
-    // </div>
-    // </Link>
   );
 };
 

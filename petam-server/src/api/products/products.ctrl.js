@@ -1,7 +1,8 @@
 import Product from '../../models/product';
 
 export const write = async (ctx) => {
-  const { name, sellingPrice, price, company, discription } = ctx.request.body;
+  const { name, sellingPrice, price, company, discription, image } =
+    ctx.request.body;
 
   const product = new Product({
     name,
@@ -9,6 +10,7 @@ export const write = async (ctx) => {
     price,
     company,
     discription,
+    image,
   });
   try {
     await product.save();
