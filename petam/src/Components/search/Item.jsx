@@ -9,23 +9,28 @@ function Item({linkName,item}){
     const name=item.name
     const id=item._id
     const hospitalName=item.hospitalName
-    console.log(id)
+    console.log(id,item.image)
 
     return(
         link==='hospital'?
         <a href={`/${link}/${name}`}>
             <div className="item-box">
-                <img className="img-style" src={'Sev.jpg'}/>
+                {
+                    item.image===[]?
+                    <img className="img-style" src={item.image}/>
+                    :
+                    <img className="img-style" src={'no_img.jpg'}/>
+                }
                 {item.name}<br/>
                 tel: {item.tel}
             </div>
         </a>
         :
         <div className="reservation">
-            <h5>{hospitalName}</h5>
+            <h5 className='sign'>{hospitalName}</h5>
             {item.dateDay}<br/>
             {item.type}<br/>
-            <a href={`/${link}/${id}`}><h4>▶</h4></a>
+            <a href={`/${link}/${id}`}><h5 className='sign'>▶</h5></a>
         </div>
     )
 }

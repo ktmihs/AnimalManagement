@@ -23,7 +23,16 @@
     left: 0;
     z-index: 1;
 }
-
+.regbtn {
+    box-shadow: 8px 8px 16px 3px rgba(0,0,0,0.3);
+    border:0;
+    height:150px;
+    width:300px;
+    display:inline-block;
+    margin:5vh 30px;
+    border-radius: 5px;
+    color:#fff;
+}
 .btn-facebook {
     background-color: #405D9D;
     color: #fff;

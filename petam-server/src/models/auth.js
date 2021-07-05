@@ -6,7 +6,7 @@ const AuthSchema=new Schema({
     },
     email: {
         type: String
-    },   //예약한 시간(방문일, 시간)
+    },   // 아이디로 쓰일 이메일
     password: {
         type: String
     }

@@ -13,10 +13,8 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   let pArr=pageNumber.slice(0,10)
 
   const style={
-    bottom:'-3vw',
-    padding:'auto',
-    marginTop:'3vw',
-    paddingBottom:'20px',
+    margin:'3vw 10% 3vw 10%',
+    padding:'5px 0',
 }
 
   return (

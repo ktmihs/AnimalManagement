@@ -10,7 +10,7 @@ function MyReservationPage(){
     const [info,setInfo]=useState([])   //병원 정보
     const [loading,setLoading]=useState(false)    //로딩 중 표시
     const [currentPage,setCurrentPage]=useState(1)  //현재 페이지
-    const [postsPerPage]=useState(3)                //한 페이지에서 보여줄 info 수
+    const [postsPerPage]=useState(4)                //한 페이지에서 보여줄 info 수
 
     const linkName='reservation'         // 링크이름
 

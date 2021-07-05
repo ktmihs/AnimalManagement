@@ -3,7 +3,7 @@
 import React from "react"
 import { useState } from "react"
 
-const PageButton = ({ postsPerPage, totalPosts, paginate,children }) => {
+const PageButton = ({ postsPerPage, totalPosts, paginate, children }) => {
   const pageNumber = []
   const [blockNum,setBlockNum]=useState(0)
   const [currPage,setCurrPage]=useState(0)
@@ -45,16 +45,16 @@ const PageButton = ({ postsPerPage, totalPosts, paginate,children }) => {
     }
     setCurrPage(n=>n+1)
   }
-
   const pageBtn={
+    display:'inline-block',
     height:'30px',
     border:'1px solid #ffffff',
-    backgroundColor:'#b5cfff',
+    backgroundColor:'#aaaaaa',
+    color:'#ddd',
     borderRadius:'6px',
     padding:'0 12px',
+    margin:'0px 2px',
     cursor:'pointer',
-    //boxSizing:'border-box',
-    //position:'relative',
   }
 
   return (

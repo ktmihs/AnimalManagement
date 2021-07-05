@@ -1,5 +1,6 @@
 import Hospital from '../../models/hospital';
 
+
 export const write = async (ctx) => {
   const {
     id,
@@ -33,6 +34,39 @@ export const write = async (ctx) => {
   }
   ctx.body = hospital;
 };
+
+// export const write=async(ctx)=>{
+//     const {
+//         id,
+//         pw,
+//         name,
+//         tel,
+//         old_addr,
+//         new_addr,
+//         zip_code,
+//         score,
+//         company_number
+//     }=ctx.request.body
+
+//     const hospital=new Hospital({
+//         id,
+//         pw,
+//         name,
+//         tel,
+//         old_addr,
+//         new_addr,
+//         zip_code,
+//         score,
+//         company_number
+//     })
+//     try{
+//         await hospital.save()
+//     } catch(e){
+//         return ctx.throw(200,e)
+//     }
+//     ctx.body=hospital
+// }
+
 
 export const read = async (ctx) => {
   let hospitals;
@@ -104,6 +138,7 @@ export const update2 = async (ctx) => {
   }
   ctx.body = hospital;
 };
+
 
 export const remove = async (ctx, next) => {
   const id = ctx.params;

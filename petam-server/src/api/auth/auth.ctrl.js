@@ -22,6 +22,34 @@ export const write=async(ctx)=>{
     }
     ctx.body=auth
 }
+
+export const read=async(ctx)=>{
+    let auth
+    try{
+        auth=await Auth.find().exec()
+    }catch(e){
+        return ctx.throw(200,e)
+    }
+    
+    ctx.body=auth
+}
+
+export const readEmail=async(ctx)=>{
+    const email=ctx.params
+    let data
+    try{
+        data=await Auth.findOne(email).exec()
+    }catch(e){
+        return ctx.throw(200,e)
+    }
+    if(!data){
+        data='x'
+        // ctx.status=404
+        // ctx.body={message:'data not found'}
+        // return 
+    }
+    ctx.body=data
+}
 /* 
 export const localRegister = async (ctx) => {
     const schema = Joi.object().keys({
