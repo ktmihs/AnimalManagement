@@ -10,6 +10,7 @@ export const write = async (ctx) => {
     new_addr,
     zip_code,
     score,
+    count,
     businessNum,
   } = ctx.request.body;
 
@@ -22,6 +23,7 @@ export const write = async (ctx) => {
     new_addr,
     zip_code,
     score,
+    count,
     businessNum,
   });
   try {
