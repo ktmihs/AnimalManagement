@@ -1,8 +1,7 @@
 import React from "react";
-import { useHistory, useLocation } from "react-router";
 
-const PostTableColumn = ({ his, type, _id, children }) => {
-  const toDetail = () => {
+const ProductHospitalColumnTel = ({ his, type, _id, children }) => {
+  const toPostDetail = () => {
     {
       // console.log(useHistory());
       console.log("toPostDetail");
@@ -18,17 +17,10 @@ const PostTableColumn = ({ his, type, _id, children }) => {
     }
   };
   return (
-    // <div className="d">
-
-    <td
-      className=" post-table-column"
-      onClick={toDetail}
-      // onClick={() => history.push("/PostView/" + { test })}
-    >
+    <td onClick={toPostDetail} className="product-table-column-title">
       {children}
     </td>
-    // </div>
   );
 };
 
-export default PostTableColumn;
+export default ProductHospitalColumnTel;

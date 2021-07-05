@@ -1,0 +1,29 @@
+.clickedstar {
+  color: rgb(212, 180, 0);
+}
+svg.rating {
+  color: #c7c7c7;
+  cursor: pointer;
+  /* border: 1px solid blue; */
+}
+
+div.rating {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px 20px;
+}
+
+/* div.rating:hover svg {
+  color: rgb(212, 180, 0);
+} */
+
+svg.rating:hover ~ svg {
+  color: #c7c7c7;
+}
+.star {
+  margin-right: 1px;
+  /* margin-top: 5px; */
+}
+.stars {
+  margin-top: 5px;
+}

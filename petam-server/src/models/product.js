@@ -1,5 +1,5 @@
 //joo-ju
-import mongoose from 'mongoose';
+import mongoose, { isValidObjectId } from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
 
 mongoose.set('useCreateIndex', true);
@@ -23,7 +23,9 @@ const ProductSchema = new Schema({
   company: {
     type: String,
   }, //제조원(제품 만드는 곳)
-
+  no: {
+    type: Number,
+  }, // auto increment
   enrollTime: {
     type: Date,
     default: Date.now,
@@ -31,7 +33,28 @@ const ProductSchema = new Schema({
   deleteTime: {
     type: Date,
   },
+  discription: {
+    type: String,
+  },
   // deleteTime: Date,
+  hospitals: [String],
+  image: {
+    type: ['images'],
+  },
+  // hospitals: [
+  //   {
+  //     hospitalId: {
+  //       // type: mongoose.Schema.Types.ObjectId,
+  //       type: String,
+  //     },
+  //   },
+  // ], // 제품별 판매하는 병원을 찾기 위해 배열형태로 저장
+});
+ProductSchema.plugin(autoIncrement.plugin, {
+  model: 'Product',
+  field: 'no',
+  startAt: 1,
+  increment: 1,
 });
 
 // 모델 생성

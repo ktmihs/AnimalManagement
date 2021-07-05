@@ -55,12 +55,19 @@ function PostViewPage(props) {
         title: res.data.title,
         content: res.data.content,
         writer: res.data.writer,
+        // view: parseInt(res.data.view) + 1,
         // dateformat을 이용하여 년-월-일 시:분:초 로 표현
         enrollTime: dateFormat(res.data.enrollTime, "yyyy-mm-dd hh:mm:ss"),
       });
 
       console.log("postData:", postData);
 
+      // 게시 글의 조회수를 1씩 증가
+      const req = axios.put("/api/posts/" + _id, {
+        ...res.data,
+        view: parseInt(res.data.view) + 1,
+      });
+      console.log("update post view : ", req);
       console.log("-----comment-----");
       //comments
       const commentRes = await axios.get("/api/comments/read/post/" + _id);

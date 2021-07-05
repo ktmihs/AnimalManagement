@@ -1,52 +1,58 @@
 // 병원 세부 정보 & 예약 및 후기 링크
 
-import React, { useState,useEffect } from 'react'
-import { useHistory } from 'react-router'
-import Content from '../Components/Content'
-import '../Components/Content.css'
-import Search from '../Components/search/Search'
-import axios from 'axios'
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
+import Content from "../Components/Content";
+import "../Components/Content.css";
+import Search from "../Components/search/Search";
+import ProductXscroll from "../Components/product/ProductXscroll";
+import axios from "axios";
 
-function HospitalPage(props){
-    const [hospitalInfo,setHospitalInfo]=useState({     //나중에 ''로 초기화 후, db에서 받아 set에 넣어주기
-        id:'',
-        name:'',
-        img:'/sev.jpg',
-        addr:'',
-        tel:'',
-        time:'09:00 - 18:00',
-        avg:'5' //평점
-    })
+function HospitalPage(props) {
+  const [hospitalInfo, setHospitalInfo] = useState({
+    //나중에 ''로 초기화 후, db에서 받아 set에 넣어주기
+    id: "",
+    name: "",
+    img: "/sev.jpg",
+    addr: "",
+    tel: "",
+    time: "09:00 - 18:00",
+    avg: "0", //평점
+  });
 
-    const [hospital,setHospital]=useState(props.match.params.name)
-    
-    useEffect(() => {
-        axios.get('/api/hospitals/read/name/'+hospital) 
-            .then(
-                ctx=>{
-                    console.log(ctx)
-                    setHospitalInfo({
-                        ...hospitalInfo,
-                        id:ctx.data._id,
-                        name:ctx.data.name,
-                        addr:ctx.data.new_addr,
-                        tel:ctx.data.tel
-                })},
-                console.log(hospitalInfo),
-            )
-            .catch(
-                err=>console.log(err)
-            )
-    }, [])
-    
-    const hspId=useHistory()        // history.push로 연결된 링크에 보내주기
-    
-    const handleClick=()=>{
-        hspId.push({
-            pathname: '/ReservationPage',
-            id:hospitalInfo.id,
-            name:hospital
-        })
+  const [hospital,setHospital]=useState(props.match.params.name)
+
+  useEffect(() => {
+      axios.get('/api/hospitals/read/name/'+hospital) 
+          .then(
+              ctx=>{
+                  console.log(ctx)
+                  const _avg = (ctx.data.score / ctx.data.count).toFixed(2);
+                  setHospitalInfo({
+                      ...hospitalInfo,
+                      id:ctx.data._id,
+                      name:ctx.data.name,
+                      addr:ctx.data.new_addr,
+                      tel:ctx.data.tel,
+                      _id: ctx.data._id,
+                      products: ctx.data.products,
+                      avg: _avg,
+              })},
+              console.log(hospitalInfo),
+          )
+          .catch(
+              err=>console.log(err)
+          )
+  }, [])
+
+  const hspId=useHistory()        // history.push로 연결된 링크에 보내주기
+
+  const handleClick=()=>{
+      hspId.push({
+          pathname: '/ReservationPage',
+          id:hospitalInfo.id,
+          name:hospital
+      })
     }
     const topContent={
         padding:'0 10%',
@@ -103,7 +109,24 @@ function HospitalPage(props){
                 </div>
                 <div className="contentBox"></div>
             </div>
-        </Content>
-    )
+          </div>
+          <div style={bottomContent}>
+            병원명: {hospitalInfo.name}
+            <br />
+            병원주소: {hospitalInfo.addr}
+            <br />
+            전화번호: {hospitalInfo.tel}
+            <br />
+            운영시간: {hospitalInfo.time}
+            <br />
+            평점: {hospitalInfo.avg}
+          </div>
+        </div>
+        {/* <div className=""> */}
+        <ProductXscroll>{hospitalInfo.products}</ProductXscroll>
+        {/* </div> */}
+      </div>
+    </Content>
+  );
 }
-export default HospitalPage
+export default HospitalPage;

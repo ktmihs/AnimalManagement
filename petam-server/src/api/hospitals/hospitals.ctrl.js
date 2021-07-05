@@ -11,6 +11,7 @@ export const write=async(ctx)=>{
         new_addr,
         zip_code,
         score,
+        count,
         company_number
     }=ctx.request.body
 
@@ -23,6 +24,7 @@ export const write=async(ctx)=>{
         new_addr,
         zip_code,
         score,
+        count,
         company_number
     })
     try{
@@ -115,3 +117,48 @@ export const remove=async(ctx,next)=>{
     await Hospital.deleteOne({_id:id})
     await next()
 }
+
+export const updateProduct = async (ctx) => {
+  const { _id, productId, price } = ctx.params; // id로 하면 안됨.. _id로 해야 됨..
+  let hospital;
+  try {
+    console.log('_id: ', _id);
+    console.log('productId : ', productId);
+    hospital = await Hospital.findOneAndUpdate(
+      // _id,
+      { _id: _id },
+      {
+        $addToSet: {
+          products: {
+            productId: productId,
+            price: price,
+          },
+        },
+      },
+    ).exec();
+  } catch (e) {
+    ctx.throw(500, e);
+  }
+  ctx.body = hospital;
+  console.log('ctx.body:', ctx.body);
+};
+
+export const removeProduct = async (ctx) => {
+  const { _id, productId } = ctx.params;
+  let hospital;
+  try {
+    hospital = await Hospital.findOneAndUpdate(
+      { _id: _id },
+      {
+        $pull: {
+          products: { productId: productId },
+        },
+      },
+    );
+  } catch (e) {
+    ctx.throw(500, e);
+  }
+  ctx.body = hospital;
+
+  console.log('ctx.body:', ctx.body);
+};

@@ -46,7 +46,10 @@ export default class Leftbar extends Component {
               title: "내 예약 내역",
               address: "/reservation",
             },
-            "Selection 3",
+            // {
+            //   title: "내",
+            //   address: "/reservation",
+            // },
           ]}
           h={95}
         >
@@ -57,6 +60,10 @@ export default class Leftbar extends Component {
             {
               title: "제품 등록",
               address: "/writeproductpage",
+            },
+            {
+              title: "All Products",
+              address: "/allproductlistpage",
             },
           ]}
           h={95}
@@ -73,8 +80,12 @@ export default class Leftbar extends Component {
               title: "후기 작성",
               address: "/writepostpage",
             },
+            {
+              title: "내가 쓴 글",
+              address: "/mypostlistpage",
+            },
           ]}
-          h={95}
+          h={141}
         >
           커뮤니티
         </LeftbarCategory>

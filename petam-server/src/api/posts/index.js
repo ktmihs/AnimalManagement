@@ -9,8 +9,9 @@ posts.get('/list', postsCtrl.list);
 // posts.post('/', postsCtrl.write);
 
 // posts.get('/', postsCtrl.list);
-
-// posts.get('/readone/:_id', postsCtrl.readOne);
+posts.put('/:_id', postsCtrl.update);
+posts.get('/readone/:_id', postsCtrl.readOne);
+posts.get('/read/:writer', postsCtrl.readWriter);
 // posts.post('/detail/:_id', async (req, res) => {
 //   try {
 //     const _id = req.body._id;
