@@ -25,21 +25,21 @@ const he = {
 };
 
 export default class WriteProductPage extends Component {
-  productWrite = (event) => {
+  productWrite = () => {
     console.log("productWrite");
     const name = this.productName.value;
-    const sellingPrice = this.productSellingPrice.value;
+    // const sellingPrice = this.productSellingPrice.value;
     const price = this.productPrice.value;
     const company = this.productCompany.value;
     const discription = this.productDiscription.value;
 
     //빈파일이 아닌 경우 함수 진행
-    if (event.target.files !== null) {
-      //FormData 생성
-      const fd = new FormData();
+    // if (event.target.files !== null) {
+    //   //FormData 생성
+    //   const fd = new FormData();
 
-      const image = event.target.file[0];
-    }
+    //   const image = event.target.file[0];
+    // }
 
     // if (name === "" || name === undefined) {
     //   alert("제품 이름을 입력해주세요.");
@@ -57,7 +57,7 @@ export default class WriteProductPage extends Component {
 
     const send_param = {
       name: this.productName.value,
-      sellingPrice: this.productSellingPrice.value,
+      // sellingPrice: this.productSellingPrice.value,
       price: this.productPrice.value,
       company: this.productCompany.value,
       discription: this.productDiscription.value,
@@ -73,30 +73,30 @@ export default class WriteProductPage extends Component {
         console.log(error);
       });
   };
-  isSelectedImg = (event) => {
-    //빈파일이 아닌 경우 함수 진행
-    if (event.target.files !== null) {
-      //FormData 생성
-      const fd = new FormData();
-      console.log(fd);
-      //FormData에 key, value 추가하기
-      fd.append("image", event.target.files[0]);
-      // axios 사용해서 백엔드에게 파일 보내기
-      axios
-        .post(`${URL}/user/profile-upload`, fd)
-        // .post("/api/products/")
-        .then((res) => {
-          //응답으로 받은 url 저장하기 (응답 내용의 표시나 방법은 백엔드와 결정해야한다.)
-          setImgUpload(res.data.image_url);
-          // 최종적으로 DB에 저장될 url을 보내는 과정이 부모 컴포넌트에 있기 때문에 부모 컴포넌트에 url을 보내는 과정
-          props.imgStore(res.data.image_url);
-        })
-        //에러가 날 경우 처리
-        .catch((error) => {
-          console.log(error.response);
-        });
-    }
-  };
+  // isSelectedImg = (event) => {
+  //   //빈파일이 아닌 경우 함수 진행
+  //   if (event.target.files !== null) {
+  //     //FormData 생성
+  //     const fd = new FormData();
+  //     console.log(fd);
+  //     //FormData에 key, value 추가하기
+  //     fd.append("image", event.target.files[0]);
+  //     // axios 사용해서 백엔드에게 파일 보내기
+  //     axios
+  //       .post(`${URL}/user/profile-upload`, fd)
+  //       // .post("/api/products/")
+  //       .then((res) => {
+  //         //응답으로 받은 url 저장하기 (응답 내용의 표시나 방법은 백엔드와 결정해야한다.)
+  //         setImgUpload(res.data.image_url);
+  //         // 최종적으로 DB에 저장될 url을 보내는 과정이 부모 컴포넌트에 있기 때문에 부모 컴포넌트에 url을 보내는 과정
+  //         props.imgStore(res.data.image_url);
+  //       })
+  //       //에러가 날 경우 처리
+  //       .catch((error) => {
+  //         console.log(error.response);
+  //       });
+  //   }
+  // };
 
   // render() {
   render = () => (
@@ -112,10 +112,10 @@ export default class WriteProductPage extends Component {
                 <div style={floatLeft}>
                   <div className=" product-image-preview"></div>
                   <input
-                    className="product-input-image"
-                    type="file"
-                    accept="image/jpg, image/jpeg, image/png"
-                    onChange={this.isSelectedImg}
+                  // className="product-input-image"
+                  // type="file"
+                  // accept="image/jpg, image/jpeg, image/png"
+                  // onChange={this.isSelectedImg}
                   ></input>
                 </div>
                 <input

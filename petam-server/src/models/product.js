@@ -14,9 +14,9 @@ const ProductSchema = new Schema({
   name: {
     type: String,
   }, // 제품 이름
-  sellingPrice: {
-    type: Number,
-  }, // 판매가
+  // sellingPrice: {
+  //   type: Number,
+  // }, // 판매가
   price: {
     type: Number,
   }, // 정가
