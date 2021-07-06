@@ -15,28 +15,30 @@ function ConfirmReservationPage(props){
         dateDay:''
     })
     const {no,name,type,memo,dateDay}=reservation
+    const [hsp,setHsp]=useState()
     useEffect(() => {
         const findReserve=async()=>{
             axios.get('/api/reservations/read/'+id) 
             .then(
-                ctx=>setReservation({
+                ctx=>{setReservation({
                     no:ctx.data.no,                 //넘겨오는 정보 중 data 안에 들어있는 상세 예약 정보들을 하나씩 받아줌
                     name:ctx.data.hospitalName,
                     type:ctx.data.type,
                     memo:ctx.data.memo,
                     dateDay:ctx.data.dateDay
-                }),
-                console.log(id),
-            )
-            .catch(
-                err=>console.log(err)
-                )
+                })
+                console.log(ctx.data.dateDay)
+                axios.get('/api/hospitals/read/name/'+ctx.data.hospitalName)
+                .then(ctx=>{setHsp(ctx.data._id)
+                }).catch(err=>console.log(err))
+            }).catch(err=>console.log(err))
         }
         findReserve()
     }, [])
 
     const cancelReserve=async()=>{
         axios.delete('/api/reservations/'+id) 
+        axios.delete('/api/hospitals/'+hsp+'/'+dateDay)
         swal({
             text:'예약이 취소되었습니다.',
             icon:'success',
@@ -53,6 +55,7 @@ function ConfirmReservationPage(props){
     }
 
     const handleClick=()=>{
+        console.log(hsp,dateDay,':dateid')
         console.log(reservation.name,reservation.type,reservation.dateDay)
         swal({
             title:'예약을 취소하시겠습니까?',

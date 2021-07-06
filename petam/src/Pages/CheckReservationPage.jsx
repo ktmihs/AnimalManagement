@@ -14,30 +14,14 @@ function CheckReservationPage({location,history}){
         memo:'',
         dateDay:'',
     })
-    const [reservationTime,setReservationTime]=useState()
     const hsp=useLocation()       // 이전 페이지에서 location으로 받은 정보를 저장
     const reserve=useLocation({     
         option:location.option,
         text:location.text,
         dateDay:location.dateDay
     })
-    const {dateDay}=reserve
+
     useEffect(() => {
-        axios.get('/api/hospitals/read/name/'+hsp.name) 
-            .then(
-                ctx=>{
-                    //console.log('aaa',ctx.data.reservationTime[1],ctx.data.reservationTime.length)
-                    //console.log('type',typeof(ctx.data.reservationTime[1]))
-                    if(!ctx.data.reservationTime){
-                        setReservationTime({reservationTime:[reserve.dateDay]})
-                    }
-                    else{
-                        setReservationTime({
-                            reservationTime:[...dateDay]
-                        })
-                    }   
-                }
-                ).catch(err=>console.log(err))
         const saveReservation=async()=>{
             setReservation({
                 ...reservation,
@@ -47,7 +31,6 @@ function CheckReservationPage({location,history}){
                 dateDay:reserve.dateDay
             })
         }
-        console.log(reservationTime)
         saveReservation()
     }, [])
     
@@ -60,13 +43,12 @@ function CheckReservationPage({location,history}){
             console.log(error)
         })
 
-        axios.put("/api/hospitals/"+hsp.id,reservationTime)        // 병원에 예약 정보 저장
+        axios.put("/api/hospitals/"+hsp.id+'/'+reserve.dateDay)        // 병원에 예약 시간 정보 저장
         .then((response) => {
             console.log('reservationTime:',response)
         })
         .catch((error) => {
-            console.log(error),
-            console.log('id:',hsp.id,reservationTime)
+            console.log(error)
         })
     }
     const handleClick=()=>{

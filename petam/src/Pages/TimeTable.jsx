@@ -4,16 +4,26 @@ import DatePicker from "react-datepicker"
 import { ko } from "date-fns/esm/locale"
 import setHours from "date-fns/setHours"
 import setMinutes from "date-fns/setMinutes"
+import setDate from "date-fns/setDate"
+import setMonth from "date-fns/setMonth"
 import "react-datepicker/dist/react-datepicker.css"
 import { addDays } from 'date-fns'
 import swal from 'sweetalert'
+import { useEffect } from 'react'
 
 function TimeTable(props){
     
     const [startDate, setStartDate] = useState(
       // setHours(setMinutes(new Date(), 30), 16)
       new Date()
-    );
+    )
+
+    const [reservationTime,setReservationTime]=useState()
+
+    const excludeTimes=()=>{[
+      setHours(setMinutes(new Date(), 30), 9)
+    ]}
+
     const filterPassedTime = time => {
       const currentDate = new Date()
       const selectedDate = new Date(time)
@@ -56,17 +66,18 @@ function TimeTable(props){
         <>
           <div style={contentBox} className='contentBox'>
             <DatePicker
+              inline
               style={picker}
               locale={ko}
               selected={startDate}
               onChange={date => setStartDate(date)}
               showTimeSelect
-              inline
               minDate={new Date()}
               maxDate={addDays(new Date(), 30)}
               minTime={setHours(setMinutes(new Date(),0),9)}
               maxTime={setHours(setMinutes(new Date(),0),20)}
               filterTime={filterPassedTime}
+              excludeTimes={[setMonth(setDate(setHours(setMinutes(new Date(),0),17),10),8)]}
             />
           </div>
           <div style={info}>※ 예약은 최소 30분 전까지 가능합니다<br/>회색 칸은 이미 예약된 시간이거나, 불가능한 시간입니다. ※</div>

@@ -1,45 +1,50 @@
-.item-box {
-  display: inline-block;
-  border: 4px dotted #98b6e4;
-  text-align: center;
-  height: 190px;
-  width: 170px;
-  margin: 20px 20px 0 20px;
-  padding: 5px 0;
-  font-size: 14px;
+.item-box{
+  display:inline-block;
+  border-radius: 10px;
+  text-align:center;
+  height:180px;
+  width:158px;
+  margin:20px 20px 0 20px;
+  padding:5px 0;
+  font-size:14px;
+  color:#333333;
+  box-shadow: 3px 3px 10px 0 rgba(0,0,0,0.3);
 }
 
 .img-style {
   width: 150px;
-  height: 130px;
+  height: 125px;
   vertical-align: top;
 }
 
 .search {
-  display: inline-block;
-  padding: 10px 20px;
-  border: 1px solid lightgray;
-  border-radius: 20px;
-  width: 40%;
-  height: 40px;
-}
-.search-button {
-  background-color: #98b6e4;
-  margin-left: 20px;
-  /* height: 35px; */
-  width: 80px;
+  display:inline-block;
+    border:1px solid #bbbcbc;
+    border-radius:5px;
+    width:40%;
+    height:35px;
 }
 
+.search-button {
+  background-color:#dddddd;
+    margin-left:10px;
+    width:80px;
+}
+.sign{
+  color:#333333;
+  margin:6px 12px;
+  font-size: large;
+} 
 .reservation {
-  height: 160px;
-  width: 140px;
-  padding: 20px 5px;
-  margin: 40px 20px;
-  border: 4px solid #98b6e4;
-  border-radius: 30px;
-  display: inline-block;
-  text-align: center;
-  font-size: 14px;
+  height:180px;
+    width:140px;
+    padding:20px 5px;
+    margin:3vw 3vh;
+    border-radius:30px;
+    display:inline-block;
+    text-align:center;
+    font-size:14px;
+    box-shadow: 3px 3px 10px 0 rgba(0,0,0,0.3);
 }
 .b {
   border: 1px solid red;

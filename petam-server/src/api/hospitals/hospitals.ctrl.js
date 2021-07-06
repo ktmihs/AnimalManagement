@@ -118,6 +118,47 @@ export const remove=async(ctx,next)=>{
     await next()
 }
 
+// 병원에서 예약된 시간 추가
+export const updateTime = async (ctx) => {
+    const { _id, reservationTime } = ctx.params
+    let hospital
+    try {
+      console.log('_id: ', _id)
+      console.log('reservationTime : ', reservationTime)
+      hospital = await Hospital.findOneAndUpdate(
+        { _id: _id },
+        {
+          $addToSet: {
+            reservationTime: reservationTime,
+          }
+        }
+      ).exec()
+    } catch (e) {
+      ctx.throw(500, e)
+    }
+    ctx.body = hospital
+  }
+
+  // 병원에서 예약된 시간 삭제
+  export const removeTime = async (ctx) => {
+    const { _id, reservationTime } = ctx.params
+    let hospital
+    try {
+        hospital = await Hospital.findOneAndUpdate(
+        { _id: _id },
+        {
+          $pull: {
+            reservationTime: reservationTime
+          }
+        }
+      )
+    } catch (e) {
+      ctx.throw(500, e)
+    }
+    ctx.body = hospital
+  }
+  
+
 export const updateProduct = async (ctx) => {
   const { _id, productId, price } = ctx.params; // id로 하면 안됨.. _id로 해야 됨..
   let hospital;
