@@ -24,6 +24,9 @@ function AddPet(){
         )
     }, [pets])
 
+    const handleClick=(e)=>{
+        console.log(e)
+    }
     const handleChange=(e)=>{
         const {name,value}=e.target
         setPet({
@@ -32,7 +35,6 @@ function AddPet(){
         })
         console.log(name,value)
     }
-
     const handleCheck=(e)=>{
         e.preventDefault();
         (name==='' || age==='' || gender==='')?    //미입력 사항 존재할 때
@@ -60,22 +62,7 @@ function AddPet(){
             console.log(error)
         })
     }
-    const petsDiv={
-        margin:'20px 50px',
-        textAlign:'center'
-    }
-    const petDiv={
-        backgroundColor:'',
-        border:'5px solid rgba(500,100,100,0.3)',
-        //boxShadow: '4px 4px 10px 2px rgba(0,0,0,0.3)',
-        borderRadius:'50px',
-        width:'100px',
-        height:'100px',
-        textAlign:'center',
-        display:'inline-block',
-        padding:'25px 0',
-        margin:'10px 10px'
-    }
+    
     const line={
         margin:'20px 50px'
     }
@@ -89,11 +76,11 @@ function AddPet(){
     return(
         <Content>
             <div className="title mt-4"><h3>등록된 반려 동물 리스트</h3></div>
-            <div style={petsDiv}>
+            <div className="petsDiv">
             {
                 pets.map(item=>{
                     return(
-                        <div style={petDiv}>
+                        <div className="petDiv" onClick={handleClick}>
                             <h6>{item.name}</h6>
                             <h6>{item.gender}/{item.age}살</h6>
                         </div>
