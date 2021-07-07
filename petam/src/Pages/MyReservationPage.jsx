@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 import Content from '../Components/Content'
 import '../Components/Content.css'
 import SearchContent from '../Components/search/SearchContent'
@@ -13,6 +13,9 @@ function MyReservationPage(){
     const [postsPerPage]=useState(4)                //한 페이지에서 보여줄 info 수
 
     const linkName='reservation'         // 링크이름
+    //const [hostId,setHostId]=useState('1410ahs@naver.com')
+    
+    //if (useLocation()) setHostId(useLocation().hostId)
 
     const indexOfLastPost=currentPage*postsPerPage  //해당 페이지에서 마지막 info의 index
     const indexOfFirstPost=indexOfLastPost-postsPerPage //  ...      첫번째 ...
@@ -22,7 +25,7 @@ function MyReservationPage(){
     useEffect(() => {
         const fetchPosts=async()=>{
             setLoading(true)
-            axios.get('api/reservations/read')
+            axios.get('api/reservations/filter/'+'1410ahs@naver.com')
             .then(
                 res=>setInfo(res.data),
                 setLoading(false)

@@ -95,6 +95,24 @@ export const readName=async(ctx)=>{
     ctx.body=data
 }
 
+// 사업자 등록번호로 하나만 검색
+export const readCompany=async(ctx)=>{
+    const company_number=ctx.params
+    let data
+    try{
+        data=await Hospital.findOne(company_number).exec()
+    }catch(e){
+        return ctx.throw(200,e)
+    }
+    if(!data){
+        data='x'
+        // ctx.status=404
+        // ctx.body={message:'data not found'}
+        // return 
+    }
+    ctx.body=data
+}
+
 // 병원 정보 업데이트 (수정할 내용만 변경)
 export const update=async(ctx)=>{
     const id=ctx.params
@@ -117,6 +135,47 @@ export const remove=async(ctx,next)=>{
     await Hospital.deleteOne({_id:id})
     await next()
 }
+
+// 병원에서 예약된 시간 추가
+export const updateTime = async (ctx) => {
+    const { _id, reservationTime } = ctx.params
+    let hospital
+    try {
+      console.log('_id: ', _id)
+      console.log('reservationTime : ', reservationTime)
+      hospital = await Hospital.findOneAndUpdate(
+        { _id: _id },
+        {
+          $addToSet: {
+            reservationTime: reservationTime,
+          }
+        }
+      ).exec()
+    } catch (e) {
+      ctx.throw(500, e)
+    }
+    ctx.body = hospital
+  }
+
+  // 병원에서 예약된 시간 삭제
+  export const removeTime = async (ctx) => {
+    const { _id, reservationTime } = ctx.params
+    let hospital
+    try {
+        hospital = await Hospital.findOneAndUpdate(
+        { _id: _id },
+        {
+          $pull: {
+            reservationTime: reservationTime
+          }
+        }
+      )
+    } catch (e) {
+      ctx.throw(500, e)
+    }
+    ctx.body = hospital
+  }
+  
 
 export const updateProduct = async (ctx) => {
   const { _id, productId, price } = ctx.params; // id로 하면 안됨.. _id로 해야 됨..

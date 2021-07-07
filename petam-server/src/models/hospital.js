@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 const {Schema} = mongoose
 const HospitalSchema=new Schema({
-    pw:{
+    password:{
         type: String
     },  //로그인 비밀번호
     name:{

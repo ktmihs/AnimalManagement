@@ -1,5 +1,6 @@
 import Reservation from "../../models/reservation"
 
+// 예약하기
 export const write=async(ctx, next)=>{
     const {
         no,
@@ -29,6 +30,7 @@ export const write=async(ctx, next)=>{
     await next()
 }
 
+// 모든 예약 읽기
 export const read=async(ctx)=>{
     let reservation
     try{
@@ -40,6 +42,7 @@ export const read=async(ctx)=>{
     ctx.body=reservation
 }
 
+// id로 특정 예약 하나 가져오기
 export const readOne=async(ctx)=>{
     const id=ctx.params
     let data
@@ -55,36 +58,51 @@ export const readOne=async(ctx)=>{
     }
     ctx.body=data
 }
-export const hospital=async(ctx)=>{
-    const name=ctx.params
-    let data
-    try{
-        data=await Reservation.findOne(name).exec()
-    }catch(e){
-        return ctx.throw(200,e)
-    }
-    if(!data){
-        ctx.status=404
-        ctx.body={message:'data not found'}
-        return
-    }
-    ctx.body=data
-}
 
-export const readName=async(ctx)=>{
-    const hostId=ctx.params
-    let data
+// 병원 이름으로 가져오기
+// export const hospital=async(ctx)=>{
+//     const name=ctx.params
+//     let data
+//     try{
+//         data=await Reservation.findOne(name).exec()
+//     }catch(e){
+//         return ctx.throw(200,e)
+//     }
+//     if(!data){
+//         ctx.status=404
+//         ctx.body={message:'data not found'}
+//         return
+//     }
+//     ctx.body=data
+// }
+
+// export const readName=async(ctx)=>{
+//     const hostId=ctx.params
+//     let data
+//     try{
+//         data=await Reservation.findOne(hostId).exec()
+//     }catch(e){
+//         return ctx.throw(200,e)
+//     }
+//     if(!data){
+//         ctx.status=404
+//         ctx.body={message:'data not found'}
+//         return
+//     }
+//     ctx.body=data
+// }
+
+// 내가 예약한 내역만 가져오기
+export const filter=async(ctx)=>{       
+    const filter=ctx.params             // 입력 받은 단어(params)
+    let total, reservation
     try{
-        data=await Reservation.findOne(hostId).exec()
+        total=await Reservation.find().exec()  // 모든 데이터 조회 후
+        reservation=total.filter(item=>item.hostId.includes(Object.values(filter))) //모든 병원 이름 중 입력받은 단어를 포함하는 것만 필터링
     }catch(e){
         return ctx.throw(200,e)
     }
-    if(!data){
-        ctx.status=404
-        ctx.body={message:'data not found'}
-        return
-    }
-    ctx.body=data
+    ctx.body=reservation
 }
 
 export const remove=async(ctx,next)=>{
