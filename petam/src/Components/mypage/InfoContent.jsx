@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import swal from 'sweetalert';
 import { useHistory, useLocation } from 'react-router'
+import "./mypage.css"
 
 function InfoContent({user}){
     const [information,setInformation]=useState({
@@ -20,7 +21,8 @@ function InfoContent({user}){
         .then(
             ctx=>{setInformation({
                 ...information,
-                email:ctx.data.email
+                email:ctx.data.email,
+                username:ctx.data.username
             })
             console.log(ctx)
             })
@@ -65,54 +67,22 @@ function InfoContent({user}){
         })
     }
 
-    const divstyle={
-        display:'inline-block',
-        textAlign:'center'
-    }
-    const input={
-        height:'50px',
-        width:'40vw',
-        maxWidth:'350px',
-        borderRadius:'25px',
-        border:'3px solid #55569960',
-        textAlign:'center',
-        backgroundColor:'#f7f7f7'
-    }
-    const inputDisabled={
-        height:'50px',
-        width:'40vw',
-        maxWidth:'350px',
-        borderRadius:'25px',
-        backgroundColor:'#88888840',
-        color:'gray'
-    }
-    const modifyBtn={
-        width:'150px',
-        height:'50px',
-        padding:'0',
-        color:'white',
-        textAlign:'center',
-        borderRadius:'25px',
-        backgroundColor:'#3547aadd',
-        boxShadow:'0px 0px 0px 0px'
-    }
-
     return(
         <form onSubmit={handleCheck}>
-            <div style={divstyle}>
-                <input style={inputDisabled} type="text" class='mt-2' name="email" placeholder="email" value={email} disabled/>
+            <div className='divstyle'>
+                <input className="inputDisabled mt-2" name="email" placeholder="email" value={email} disabled/>
             </div>
-            <div style={divstyle}>
-                <input style={input} class='mt-2' name="username" placeholder="username" value={username} onChange={handleChange}/>
+            <div className='divstyle'>
+                <input className="input mt-2" name="username" value={username} onChange={handleChange}/>
             </div>
-            <div style={divstyle}>
-                <input style={input} type="password" class='mt-2' name="password" placeholder="password" value={password} onChange={handleChange}/>
+            <div className='divstyle'>
+                <input className="input mt-2" type="password" name="password" placeholder="password" value={password} onChange={handleChange}/>
             </div>
-            <div style={divstyle}>
-                <input style={input} type="password" class='mt-2' name="passwordConfirm" placeholder="confirm password" value={passwordConfirm} onChange={handleChange}/>
+            <div className='divstyle'>
+                <input className="input mt-2" type="password" name="passwordConfirm" placeholder="confirm password" value={passwordConfirm} onChange={handleChange}/>
             </div>
             <div>
-                <button style={modifyBtn} type="submit" class="mt-4">수정하기</button>
+                <button className="modifyBtn mt-4" type="submit">수정하기</button>
             </div>
         </form>
     )

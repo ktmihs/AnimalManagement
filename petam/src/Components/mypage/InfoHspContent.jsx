@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import swal from 'sweetalert';
 import { useHistory, useLocation } from 'react-router'
+import "./mypage.css"
 
 function InfoHspContent({user}){
     const [hospital,setHospital]=useState({
@@ -74,66 +75,34 @@ function InfoHspContent({user}){
         })
     }
 
-    const divstyle={
-        display:'inline-block',
-        textAlign:'center'
-    }
-    const input={
-        height:'50px',
-        width:'40vw',
-        maxWidth:'350px',
-        borderRadius:'25px',
-        border:'3px solid #55569960',
-        textAlign:'center',
-        backgroundColor:'#f7f7f7'
-    }
-    const inputDisabled={
-        height:'50px',
-        width:'40vw',
-        maxWidth:'350px',
-        borderRadius:'25px',
-        backgroundColor:'#88888840',
-        color:'gray'
-    }
-    const modifyBtn={
-        width:'150px',
-        height:'50px',
-        padding:'0',
-        color:'white',
-        textAlign:'center',
-        borderRadius:'25px',
-        backgroundColor:'#3547aadd',
-        boxShadow:'0px 0px 0px 0px'
-    }
-
     return(
         <form onSubmit={handleCheck}>
-            <div style={divstyle}>
-                <input style={inputDisabled} type="text" class='mt-2' name="user" value={user} disabled/>  
+            <div className='divstyle'>
+                <input className="inputDisabled mt-2" name="user" value={user} disabled/>  
             </div>
-            <div style={divstyle}>
-                <input style={inputDisabled} type="text" class='mt-2' name="name" value={name} disabled/>
+            <div className='divstyle'>
+                <input className="inputDisabled mt-2" name="name" value={name} disabled/>
             </div>
-            <div style={divstyle}>
-                <input style={input} class='mt-2' name="tel" placeholder="tel" value={tel} onChange={handleChange}/>
+            <div className='divstyle'>
+                <input className="input mt-2" name="tel" placeholder="tel" value={tel} onChange={handleChange}/>
             </div>
-            <div style={divstyle}>
-                <input style={input} class='mt-2' name="old_addr" placeholder="old_addr" value={old_addr} onChange={handleChange}/>
+            <div className='divstyle'>
+                <input className="input mt-2" name="old_addr" placeholder="old_addr" value={old_addr} onChange={handleChange}/>
             </div>
-            <div style={divstyle}>
-                <input style={input} class='mt-2' name="new_addr" placeholder="new_addr" value={new_addr} onChange={handleChange}/>
+            <div className='divstyle'>
+                <input className="input mt-2" name="new_addr" placeholder="new_addr" value={new_addr} onChange={handleChange}/>
             </div>
-            <div style={divstyle}>
-                <input style={input} class='mt-2' name="zip_code" placeholder="zip_code" value={zip_code} onChange={handleChange}/>
+            <div className='divstyle'>
+                <input className="input mt-2" name="zip_code" placeholder="zip_code" value={zip_code} onChange={handleChange}/>
             </div>
-            <div style={divstyle}>
-                <input style={input} type="password" class='mt-2' name="password" placeholder="password" onChange={handleChange}/>
+            <div className='divstyle'>
+                <input className="input mt-2" type="password" name="password" placeholder="password" onChange={handleChange}/>
             </div>
-            <div style={divstyle}>
-                <input style={input} type="password" class='mt-2' name="passwordConfirm" placeholder="confirm password" value={passwordConfirm} onChange={handleChange}/>
+            <div className='divstyle'>
+                <input className="input mt-2" type="password" name="passwordConfirm" placeholder="confirm password" onChange={handleChange}/>
             </div>
             <div>
-                <button style={modifyBtn} type="submit" class="mt-4">수정하기</button>
+                <button className="modifyBtn mt-4" type="submit">수정하기</button>
             </div>
         </form>
     )

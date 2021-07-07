@@ -1,6 +1,7 @@
 //import Joi from 'Joi'
 //import Account from '../../models/account'
 import Auth from '../../models/auth'
+import pets from '../pets'
 
 // 로컬 회원가입
 export const write=async(ctx)=>{
@@ -64,6 +65,36 @@ export const update=async(ctx)=>{
     }
     ctx.body=auth
 }
+
+// 새로운 반려동물 등록
+export const updatePet = async (ctx) => {
+    const { email, pet } = ctx.params
+    let auth
+    try {
+      auth = await Auth.findOneAndUpdate(
+        { email: email },
+        { $addToSet: {pet: pet,} }
+      ).exec()
+    } catch (e) {
+      ctx.throw(500, e)
+    }
+    ctx.body = auth
+  }
+
+  // 등록된 반려동물 삭제
+  export const removePet = async (ctx) => {
+    const { email, pet } = ctx.params
+    let auth
+    try {
+        auth = await Auth.findOneAndUpdate(
+        { email: email },
+        { $pull: {pet: pet} }
+      )
+    } catch (e) {
+      ctx.throw(500, e)
+    }
+    ctx.body = auth
+  }
 /* 
 export const localRegister = async (ctx) => {
     const schema = Joi.object().keys({

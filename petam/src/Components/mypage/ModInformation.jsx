@@ -10,9 +10,17 @@ import InfoTitle from './InfoTitle'
 
 // 정보 수정 페이지
 function ModInformation({history,props}){
-    
+    const res=useHistory()
     const user=useLocation().user
     const isHospital=useLocation().isHospital
+
+    const myPet=()=>{
+        res.push({
+            pathname:'/addPet/',
+            email:user
+        })
+    }
+
     const articleStyle={
         maxWidth: '500px',
         padding:'20px 0',
@@ -61,7 +69,7 @@ function ModInformation({history,props}){
                         </div>
                         <div style={bottom}>
                             <small style={text}>반려동물 등록하기 <h5 style={text}>👉</h5></small>
-                            <button style={pet} onClick={()=>history.push('/addPet/'+email)}>MY PET</button>
+                            <button style={pet} onClick={myPet}>MY PET</button>
                         </div>
                     </article>
                     }

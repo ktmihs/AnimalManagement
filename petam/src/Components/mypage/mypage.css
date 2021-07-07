@@ -1,0 +1,80 @@
+.title{
+    text-align: center;
+    padding:auto;
+}
+.divstyle{
+    display:inline-block;
+    text-align:center;
+}
+.radio{
+    margin:0 5px;
+    display: inline-block;
+    width: 15vw;
+    max-width: 150px;
+    height: 50px;
+}
+.input{
+    height:50px;
+    width:40vw;
+    max-width:350px;
+    border-radius:25px;
+    border:0;
+    text-align:center;
+    background-color:#f0f0f0
+}
+.inputDisabled{
+    height:50px;
+    width:40vw;
+    max-width:350px;
+    border-radius:25px;
+    border:0;
+    text-align:center;
+    background-color:#88888840;
+    color:rgb(163, 163, 163);
+}
+.modifyBtn{
+    width:150px;
+    height:50px;
+    padding:0;
+    color:white;
+    text-align:center;
+    border:0;
+    border-radius:25px;
+    background-color:#3547aadd;
+    box-shadow:0px 0px 0px 0px
+}
+.input-pet{
+    margin:0 5px;
+    height:50px;
+    width:20vw;
+    max-width:200px;
+    border-radius:25px;
+    border:0;
+    text-align:center;
+    color:black;
+    background-color:#f0f0f0
+}
+.inputDisabled-pet{
+    font-size:14px;
+    margin:0 5px;
+    height:50px;
+    width:25vw;
+    max-width:250px;
+    border-radius:25px;
+    border:0;
+    text-align:center;
+    background-color:#88888840;
+    color:rgb(163, 163, 163)
+}
+.addBtn{
+    width:100px;
+    height:40px;
+    padding:0;
+    font-size: small;
+    color:white;
+    text-align:center;
+    border:0;
+    border-radius:25px;
+    background-color:#3547aadd;
+    box-shadow:0px 0px 0px 0px
+}

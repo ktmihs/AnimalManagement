@@ -60,17 +60,21 @@ function Information(){
     return(
         <Content>    
             {isHospital?
-            <div>
-                <button className='regbtn' style={leftButton} id="common" onClick={handleClick}>
+            <div style={buttons}>
+                <button className='regbtn' style={leftButton} onClick={handleClick}>
                     <h4>병원 정보 수정하기</h4><br/>
+                </button> 
+                <button className='regbtn' style={leftButton} onClick={handleClick/*병원 예약 내역확인*/}>
+                    <h4>병원 예약 내역 확인하기</h4><br/>
                 </button> 
             </div>
             :
             <div style={buttons}>
-                <button className='regbtn' style={leftButton} id="common" onClick={handleClick}>
+                <button className='regbtn' style={leftButton} onClick={handleClick}>
                     <h4>정보 수정하기</h4><br/>
+                    <h4>반려동물 등록하기</h4>
                 </button> 
-                <button className='regbtn' style={rightButton} id="hospital" onClick={myReservation}>
+                <button className='regbtn' style={rightButton} onClick={myReservation}>
                     <h4>내 예약 내역 확인하기</h4><br/>
                 </button>
             </div>
