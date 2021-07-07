@@ -9,7 +9,7 @@ import { useState,useEffect } from 'react';
 function CheckReservationPage({location,history}){
     const [reservation,setReservation]=useState({
         hospitalName:'',
-        hostId:'ktmihs',        // 로그인 후, 유저 정보로 변경
+        hostId:'1410ahs@naver.com',        // 로그인 후, 유저 정보로 변경
         type:'',
         memo:'',
         dateDay:'',

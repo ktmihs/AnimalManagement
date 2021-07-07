@@ -1,33 +1,81 @@
-import React from 'react'
-import { useHistory, useLocation } from 'react-router'
-
+import React,{useEffect,useState} from 'react'
+import { useHistory } from 'react-router'
+import Content from '../Content'
 import '../../style.css'
 import "../sign/Register.css"
 import "../sign/sign.css"
 
 function Information(){
-    const articleStyle={
-        maxWidth: '600px',
-        padding:'20px 10%',
-        margin:'10px'
-    }
-    const margin={
-        marginTop:'55px'
-    }
+    const res=useHistory()
+    const [isHospital,setIsHospital]=useState(false) // 병원인지 개인인지 여부 확인
+    const [hospital,setHospital]=useState('12345678910')   // 현재 로그인 된 사업자번호로 접근
+    const [email,setEmail]=useState('1410ahs@naver.com')    // 현재 로그인 된 이메일로 접근
     
+    useEffect(() => {
+        // 로그인 된 정보에 따라 병원인지 개인인지 구분하기
+        // isHospital true or false 로 변경하기
+        // 에 따라 setHospital or setEmail 해주기
+    }, [])
+
+    const handleClick=(e)=>{
+        console.log(e)
+        {
+            isHospital? 
+            (
+                res.push({      //전부 작성되면 다음 페이지로 이동 & 정보 보내기
+                    pathname:`/modify`,
+                    user:hospital,
+                    isHospital:isHospital
+                })
+            )
+            : 
+            (
+                res.push({      //전부 작성되면 다음 페이지로 이동 & 정보 보내기
+                    pathname:`/modify`,
+                    user:email,
+                    isHospital:isHospital
+                })
+            )
+        }
+    }
+    const myReservation=()=>{
+        res.push({      //전부 작성되면 다음 페이지로 이동 & 정보 보내기
+            pathname:`/reservation`,
+            hostId:'ktmihs' // 본인 아이디
+        })
+    }
+    const buttons={
+        textAlign:'center',
+        height:'100%',
+        margin:'10vh 5vw'
+    }
+    const leftButton={
+        backgroundColor:'rgb(209, 225, 245)',
+        color:'#333333'
+    }
+    const rightButton={
+        backgroundColor:'#5F8DDA',
+    }
+
     return(
-        <div style={margin}>
-            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"/>
-            <div class="container container fadeInDown">
-                <div>
-                    <article id="formContent" class="card-body mx-auto" style={articleStyle}>
-                        회원 정보 수정
-                        .......
-                        <button onClick={"/pet"}>동물 등록</button>
-                    </article>
-                </div>
-            </div> 
-        </div>
+        <Content>    
+            {isHospital?
+            <div>
+                <button className='regbtn' style={leftButton} id="common" onClick={handleClick}>
+                    <h4>병원 정보 수정하기</h4><br/>
+                </button> 
+            </div>
+            :
+            <div style={buttons}>
+                <button className='regbtn' style={leftButton} id="common" onClick={handleClick}>
+                    <h4>정보 수정하기</h4><br/>
+                </button> 
+                <button className='regbtn' style={rightButton} id="hospital" onClick={myReservation}>
+                    <h4>내 예약 내역 확인하기</h4><br/>
+                </button>
+            </div>
+            }
+        </Content>
     )
 }
 export default Information

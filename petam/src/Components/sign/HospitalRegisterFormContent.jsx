@@ -53,6 +53,7 @@ function HospitalRegisterFormContent(){
     }
     const [id,setId]=useState()         // 병원 이름으로 검색하여 id 받아옴
     const [newClient,setNewClient]=useState(false)  // 기존 병원인지 새 병원인지 구분
+    const [checkCom,setCheckCom]=useState(false)
 
     const findHospital=(e)=>{           // 기존 병원인지 확인하는 함수(찾기 버튼 클릭시 발생)
         console.log(e)
@@ -72,23 +73,49 @@ function HospitalRegisterFormContent(){
         ).catch( console.log(e) )
     }
     
+    const checkCompany=(e)=>{           // 사업자 등록번호 중복 확인
+        axios.get('/api/hospitals/read/company/'+company_number)     // 사업자 등록 번호 검색해서 데이터 확인
+        .then(
+            ctx=>{
+                !ctx.data._id?                           // 등록되지 않은 번호일 경우(사용할 수 있는 경우)
+                (
+                console.log(ctx.data),
+                swal('','사용 가능한 사업자 등록 번호입니다.','success')
+                .then(
+                    setCheckCom(true)
+                )
+                )
+                :
+                swal('','사용할 수 없는 번호입니다.','warning')
+                .then( 
+                    setHospital({
+                        ...hospital,
+                        company_number:''
+                    }) ,
+                    setCheckCom(false)
+                )          // 새로운 병원임을 표시
+            }
+        ).catch( console.log(e) )
+    }
+
     const handleClick=(e)=>{
         e.preventDefault();         // 화면 그대로 유지한 채 나머지 수행(리로딩 방지)
-
-        (name==='' || company_number==='' || password==='' || passwordConfirm==='')?    //미입력 사항 존재할 때
-            swal('','모두 작성해주세요!','warning')
+        !checkCom?                  // 사업자 등록 번호 중복 체크 여부(통과되었는지)
+            swal('','사업자 등록번호 중복확인을 해주세요!','warning')
         :
-        password !== passwordConfirm?       // 비밀번호와 비밀번호 확인이 일치하지 않을 때
-            swal('','비밀번호를 다시한번 확인해주세요!','warning')
-            :                               
-            (                               // 모두 정상적으로 입력되었을 시,
-            handleSubmit(),
-            swal('','회원가입을 축하합니다!', 'success'),
-            res.push({      //전부 작성되면 다음 페이지로 이동 & 정보 보내기
-                pathname:'/login',
-            })
-        )
-        
+            (name==='' || company_number==='' || password==='' || passwordConfirm==='')?    //미입력 사항 존재할 때
+                swal('','모두 작성해주세요!','warning')
+            :
+                password !== passwordConfirm?       // 비밀번호와 비밀번호 확인이 일치하지 않을 때
+                    swal('','비밀번호를 다시한번 확인해주세요!','warning')
+                :                               
+                    (                               // 모두 정상적으로 입력되었을 시,
+                    handleSubmit(),
+                    swal('','회원가입을 축하합니다!', 'success'),
+                    res.push({      //전부 작성되면 다음 페이지로 이동 & 정보 보내기
+                        pathname:'/login',
+                    })
+                    )
     }
 
     const res=useHistory()  // 페이지 이동
@@ -121,6 +148,7 @@ function HospitalRegisterFormContent(){
             <div class="form-group input-group">
                 <div class="input-group-prepend"><span class="input-group-text"> <i class="fa fa-envelope"></i> </span></div>
                 <input name="company_number" value={company_number} onChange={handleChange} class="form-control" placeholder="Company Registration Number"/>
+                <span class="input-group-text" onClick={checkCompany}>중복확인</span>
             </div>
             <div class="form-group input-group">
                 <div class="input-group-prepend">

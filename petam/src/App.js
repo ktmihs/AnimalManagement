@@ -24,6 +24,8 @@ import AllProductListPage from "./Pages/AllProductListPage";
 import ProductViewPage from "./Pages/ProductViewPage";
 
 import Axios from "axios";
+import Modify from "./Components/mypage/ModInformation";
+import AddPet from "./Components/mypage/AddPet";
 import Information from "./Components/mypage/Information";
 
 export default class App extends Component {
@@ -58,8 +60,11 @@ export default class App extends Component {
                 <Route path="/checkReservationPage" component={CheckReservationPage}/>
                 <Route path="/reservation/:_id" component={ConfirmReservationPage}/>
                 <Route exact path="/reservation" component={MyReservationPage} />
-                <Route path="/information" component={Information} />
-{/*                <Route path="/information/:_id" component={Information} />*/}
+                <Route path="/modify/:_id" component={Modify} />
+                <Route exact path="/modify" component={Modify} />
+                <Route path="/addPet/:_id" component={AddPet} />
+                
+                <Route path="/info" component={Information} />
 
                 <Route exact path="/hospital" component={SearchPage} />
                 <Route path="/PostListPage" component={PostListPage} />

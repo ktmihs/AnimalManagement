@@ -95,6 +95,24 @@ export const readName=async(ctx)=>{
     ctx.body=data
 }
 
+// 사업자 등록번호로 하나만 검색
+export const readCompany=async(ctx)=>{
+    const company_number=ctx.params
+    let data
+    try{
+        data=await Hospital.findOne(company_number).exec()
+    }catch(e){
+        return ctx.throw(200,e)
+    }
+    if(!data){
+        data='x'
+        // ctx.status=404
+        // ctx.body={message:'data not found'}
+        // return 
+    }
+    ctx.body=data
+}
+
 // 병원 정보 업데이트 (수정할 내용만 변경)
 export const update=async(ctx)=>{
     const id=ctx.params
