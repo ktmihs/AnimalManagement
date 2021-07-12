@@ -8,7 +8,7 @@ import './mypage.css'
 function Item({item}){
 
     const [ modalOpen, setModalOpen ] = useState(false);
-
+    let header=`${item.name}\'s info`
     const openModal = () => {
         setModalOpen(true)
     }
@@ -20,9 +20,8 @@ function Item({item}){
         <React.Fragment>
             <button className="petDiv" onClick={openModal}>
                 <h6>{item.name}</h6>
-                <h6>{item.gender}/{item.age}살</h6>
             </button>
-            <PetInfo open={modalOpen} close={closeModal} header="Modal heading" item={item} />
+            <PetInfo open={modalOpen} close={closeModal} header={header} item={item} />
         </React.Fragment>
     )
 }

@@ -10,8 +10,7 @@ function AddPet(){
     const email='1410ahs@naver.com'
     const [pets,setPets]=useState([])
     const [pet,setPet]=useState({
-        parent:email,   // 보호자email
-        //parent:'1410ahs@naver.com',
+        parent:'1410ahs@naver.com',   // 보호자email
         name:'',        // 동물 이름
         age:'',         // 동물 나이
         gender:''       // 성별
@@ -25,16 +24,15 @@ function AddPet(){
         )
     }, [pets])
 
-    const handleClick=(e)=>{
-        console.log(e)
-    }
     const handleChange=(e)=>{
         const {name,value}=e.target
         setPet({
             ...pet,
+            parent:'1410ahs@naver.com', //임시로 넣어줌 (맨 처음만 되고 새로고침 될 때마다 사라짐)
             [name]: value
         })
         console.log(name,value)
+        console.log(pet)
     }
     const handleCheck=(e)=>{
         e.preventDefault();
@@ -87,7 +85,7 @@ function AddPet(){
                 <div className="divstyle mt-4">새로운 반려 동물 등록</div>
                 <form onSubmit={handleCheck}>
                     <div className="divstyle">
-                        <input className="inputDisabled-pet mt-4" name="parent" value={parent} disabled/>
+                        <input className="inputDisabled-pet mt-4" /*name="parent"*/ value={parent} disabled/>
                     </div>
                     <div className="divstyle">
                         <div className="radio">
@@ -99,7 +97,7 @@ function AddPet(){
                         <input className="input-pet mt-2" name="name" value={name} placeholder="이름" onChange={handleChange}/>
                     </div>
                     <div className="divstyle">
-                        <input className="input-pet mt-2" name="age" value={age} placeholder="나이(숫자만 입력)" onChange={handleChange}/>
+                        <input className="input-pet mt-2" name="age" value={age} placeholder="생년월일(숫자 6자리)" onChange={handleChange}/>
                     </div>
                     <div>
                         <button className="addBtn mt-4 mb-4" type="submit">등록하기</button>

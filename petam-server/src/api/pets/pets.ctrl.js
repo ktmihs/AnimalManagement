@@ -48,3 +48,16 @@ export const update=async(ctx)=>{
     }
     ctx.body=pet
 }
+// 특정 반려동물 정보 삭제
+export const remove=async(ctx)=>{
+    const {email,name}=ctx.params
+    let pet
+    try {
+        pet = await Pet.findOneAndDelete(
+        { parent: email,name: name }
+      )
+    } catch (e) {
+      ctx.throw(500, e)
+    }
+    ctx.body=pet
+}
