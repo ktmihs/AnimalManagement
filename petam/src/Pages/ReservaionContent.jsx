@@ -1,20 +1,31 @@
-import React, { useState } from 'react'
+import axios from 'axios'
+import React, { useState,useEffect } from 'react'
 import '../Components/Content.css'
 
 function ReservationContent({time,getReserve}){
     //const [selectTime,setSeleteTime]=useState()
+    const email='1410ahs@naver.com'
+    const [pets,setPets]=useState([])
     const [reserve,setReserve]=useState({
+        pet:'x',
         option:'x',
         text:'없음'
     })
-    const {option,text}=reserve
+    const {pet,option,text}=reserve
+    useEffect(() => {
+        axios.get('/api/auth/email/'+email)
+        .then(ctx=>{
+            setPets(ctx.data.pet)
+            console.log(ctx.data.pet)
+        }
+        )
+    }, [])
     const handleChange=(e)=>{
         const {name,value}=e.target
         setReserve({
             ...reserve,
             [name]: value
         })
-        
         getReserve(name,value)
     }
     const selectBox={
@@ -33,6 +44,18 @@ function ReservationContent({time,getReserve}){
     return(
         <div className='contentBox'>
             <div>
+            예약 동물 :
+                <select name='pet' value={pet} onChange={handleChange} style={selectBox}>
+                <option value="x" hidden>=== 선택 ===</option>
+                {
+                    pets.map(item=>{
+                        return(
+                            <option value={item}>{item}</option>
+                        )
+                    })
+                }
+                </select>
+                <br/>
                 예약 일정 : {time.year}년 {time.month}월 {time.dates}일 {time.hour}시 {time.minute}분<br/>
                 예약 목적 : 
                 <select name='option' value={option} onChange={handleChange} style={selectBox}>      

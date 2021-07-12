@@ -13,6 +13,9 @@ const ReservationSchema=new Schema({
     hospitalName:{
         type: String
     },  //병원이름
+    pet:{
+        type:String
+    },   //예약한 펫 이름
     type:{
         type: String
     },  //방문목적(선택)

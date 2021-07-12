@@ -10,11 +10,12 @@ function ConfirmReservationPage(props){
     const [reservation,setReservation]=useState({
         no:0,
         name:'',
+        pet:'',
         type:'',
         memo:'',
         dateDay:''
     })
-    const {no,name,type,memo,dateDay}=reservation
+    const {no,name,pet,type,memo,dateDay}=reservation
     const [hsp,setHsp]=useState()
     useEffect(() => {
         const findReserve=async()=>{
@@ -23,6 +24,7 @@ function ConfirmReservationPage(props){
                 ctx=>{setReservation({
                     no:ctx.data.no,                 //넘겨오는 정보 중 data 안에 들어있는 상세 예약 정보들을 하나씩 받아줌
                     name:ctx.data.hospitalName,
+                    pet:ctx.data.pet,
                     type:ctx.data.type,
                     memo:ctx.data.memo,
                     dateDay:ctx.data.dateDay
@@ -98,7 +100,7 @@ function ConfirmReservationPage(props){
                     <div>
                         예약 번호 : {no}<br/>
                         예약 병원 : {name}<br/>
-                        예약자 : 보리<br/>
+                        예약 동물 : {pet}<br/>
                         예약 일정 : {dateDay}<br/>
                         예약 목적 : {type}<br/>
                         기타 내용 : {memo}

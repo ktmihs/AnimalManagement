@@ -15,6 +15,7 @@ function ReservationPage({location,history}){
         minute:''
     })
     const [reserve,setReserve]=useState({
+        pet:'',
         option:'',
         text:''
     })
@@ -37,10 +38,10 @@ function ReservationPage({location,history}){
 
     const res=useHistory()
     const toCheck=()=>{{    
-        reserve.option==='' || reserve.option==='기타' && reserve.text===''?    //미입력 사항 존재할 때
+        reserve.pet==='' || reserve.option==='' || reserve.option==='기타' && reserve.text===''?    //미입력 사항 존재할 때
         (
-            reserve.option===''?
-            swal('','예약 목적을 선택해주세요!','warning')
+            reserve.pet==='' || reserve.option===''?
+            swal('','예약 동물과 예약 목적을 선택해주세요!','warning')
             :
             swal('','예약 목적에 대한 메시지를 작성해주세요!','warning')
         )
@@ -49,6 +50,7 @@ function ReservationPage({location,history}){
             pathname:'/CheckReservationPage',
             id:hsp.Id,
             name:hsp.Name,
+            pet:reserve.pet,
             option:reserve.option,
             text:reserve.text,
             dateDay:`${time.year}년 ${time.month}월 ${time.dates}일 ${time.hour}시 ${time.minute}분`
