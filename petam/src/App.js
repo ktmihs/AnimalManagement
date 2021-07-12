@@ -62,8 +62,8 @@ export default class App extends Component {
                 <Route exact path="/reservation" component={MyReservationPage} />
                 <Route path="/modify/:_id" component={Modify} />
                 <Route exact path="/modify" component={Modify} />
-                <Route path="/addPet" component={AddPet} />
-                
+                <Route exact path="/addPet" component={AddPet} />
+
                 <Route path="/info" component={Information} />
 
                 <Route exact path="/hospital" component={SearchPage} />

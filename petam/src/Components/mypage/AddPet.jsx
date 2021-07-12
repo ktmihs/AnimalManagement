@@ -3,6 +3,7 @@ import React,{useState,useEffect} from 'react'
 import { useLocation } from 'react-router-dom'
 import Content from '../Content'
 import "./mypage.css"
+import PetsInfo from './PetsInfo'
 
 function AddPet(){
     //const email=useLocation().email
@@ -77,16 +78,9 @@ function AddPet(){
         <Content>
             <div className="title mt-4"><h3>등록된 반려 동물 리스트</h3></div>
             <div className="petsDiv">
-            {
-                pets.map(item=>{
-                    return(
-                        <div className="petDiv" onClick={handleClick}>
-                            <h6>{item.name}</h6>
-                            <h6>{item.gender}/{item.age}살</h6>
-                        </div>
-                    )
-                })
-            }
+            
+            <PetsInfo info={pets}/>
+
             </div>
             <hr style={line}/>
             <div style={info}>
@@ -115,4 +109,5 @@ function AddPet(){
         </Content>
     )
 }
+//AddPet > PetsInfo > Item > PetInfo
 export default AddPet
