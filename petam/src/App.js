@@ -25,7 +25,7 @@ import ProductViewPage from "./Pages/ProductViewPage";
 
 import Axios from "axios";
 import Modify from "./Components/mypage/ModInformation";
-import AddPet from "./Components/mypage/AddPet";
+import AddPet from "./Components/mypage/AddPetPage";
 import Information from "./Components/mypage/Information";
 
 export default class App extends Component {

@@ -5,7 +5,7 @@ import Content from '../Content'
 import "./mypage.css"
 import PetsInfo from './PetsInfo'
 
-function AddPet(){
+function AddPetPage(){
     //const email=useLocation().email
     const email='1410ahs@naver.com'
     const [pets,setPets]=useState([])
@@ -107,5 +107,5 @@ function AddPet(){
         </Content>
     )
 }
-//AddPet > PetsInfo > Item > PetInfo
-export default AddPet
+//AddPetPage > PetsInfo > Item > PetInfo
+export default AddPetPage
