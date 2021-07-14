@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import swal from 'sweetalert';
 import { useHistory, useLocation } from 'react-router'
-import "./mypage.css"
+import "../mypage/mypage.css"
 
 function InfoHspContent({user}){
     const [hospital,setHospital]=useState({

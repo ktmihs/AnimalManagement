@@ -1,9 +1,9 @@
 import axios from 'axios'
 import React,{useState,useEffect} from 'react'
 import { useLocation } from 'react-router-dom'
-import Content from '../Content'
-import "./mypage.css"
-import PetsInfo from './PetsInfo'
+import Content from '../Components/Content'
+import "../Components/mypage/mypage.css"
+import PetsInfo from '../Components/mypage/PetsInfo'
 
 function AddPetPage(){
     //const email=useLocation().email
@@ -18,7 +18,7 @@ function AddPetPage(){
     const {parent,name,age,gender}=pet
 
     useEffect(() => {
-        axios.get('/api/pets/')
+        axios.get('/api/pets/'+'1410ahs@naver.com') //나중에 로그인 이메일 넣기
         .then(
             res=>setPets(res.data)
         )
