@@ -1,15 +1,14 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import '../Components/Content.css'
 import DatePicker from "react-datepicker"
 import { ko } from "date-fns/esm/locale"
+import "react-datepicker/dist/react-datepicker.css"
 import setHours from "date-fns/setHours"
 import setMinutes from "date-fns/setMinutes"
 import setDate from "date-fns/setDate"
 import setMonth from "date-fns/setMonth"
-import "react-datepicker/dist/react-datepicker.css"
 import { addDays } from 'date-fns'
 import swal from 'sweetalert'
-import { useEffect } from 'react'
 
 function TimeTable(props){
     
@@ -61,10 +60,14 @@ function TimeTable(props){
     const picker={
       backgroundColor:"#0000aa"
     }
+    const divdiv={
+      display:'grid'
+    }
 
     return(
         <>
           <div style={contentBox} className='contentBox'>
+            <div style={divdiv}>
             <DatePicker
               inline
               style={picker}
@@ -79,6 +82,7 @@ function TimeTable(props){
               filterTime={filterPassedTime}
               excludeTimes={[setMonth(setDate(setHours(setMinutes(new Date(),0),17),10),8)]}
             />
+            </div>
           </div>
           <div style={info}>※ 예약은 최소 30분 전까지 가능합니다<br/>회색 칸은 이미 예약된 시간이거나, 불가능한 시간입니다. ※</div>
           <button style={button} className='button' onClick={selectTime}>날짜 선택</button>
