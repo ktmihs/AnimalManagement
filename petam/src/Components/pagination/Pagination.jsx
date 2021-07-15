@@ -1,7 +1,6 @@
 //pagination
 
 import React from "react"
-import PageButton from "./PageButton"
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumber = []
@@ -10,10 +9,10 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
     pageNumber.push(i)
   }
   let pArr=pageNumber.slice(0,10)
-  let pgNum=50-pageNumber.length
+  let pgNum=50-(pageNumber.length)*2
 
   const style={
-    margin:`3vw ${pgNum}%`,
+    margin:`3vw 0 0 ${pgNum}%`,
     padding:'5px 0',
     textAlign:'center'
 }

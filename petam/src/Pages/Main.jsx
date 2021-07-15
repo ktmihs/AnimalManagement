@@ -1,7 +1,8 @@
 import React from 'react'
 import Content from '../Components/Content'
 import '../Components/Content.css'
-import MainHospitalContent from './MainHospitalContent'
+import MainAd from '../Components/main/MainAd'
+import MainHospitalContent from '../Components/main/MainHospitalContent'
 
 function Main() {
 
@@ -9,13 +10,7 @@ function Main() {
     textAlign:'center',
     marginTop:'30px'
   }
-  const mainAd={
-    border:'1px dotted #bbbcbc',
-    textAlign:'center',
-    margin:'20px 10%',
-    padding:'20px 0',
-    width:'80%'
-  }
+  
 
   return (
     <Content>
@@ -24,9 +19,7 @@ function Main() {
         <MainHospitalContent/>
         <MainHospitalContent/> {/*나중에 제품으로 변경*/}
       </div>
-      <div style={mainAd}>
-        main page default ad
-      </div>
+      <MainAd/>
     </Content>
   )
 }

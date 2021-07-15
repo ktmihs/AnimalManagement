@@ -76,6 +76,17 @@ export const readOne=async(ctx)=>{
     }
     ctx.body=data
 }
+export const readLast=async(ctx)=>{
+  let hospitals,one
+    try{
+        hospitals=await Hospital.find().exec()
+        one=[hospitals[hospitals.length-4],hospitals[hospitals.length-3]]
+    }catch(e){
+        return ctx.throw(200,e)
+    }
+    
+    ctx.body=one
+}
 
 // 특정 이름으로 하나만 검색
 export const readName=async(ctx)=>{

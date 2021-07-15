@@ -46,20 +46,29 @@ function SearchPage(){
     const getSearchWord=(word)=>{ setSearchWord(word) }
     const button={
         position:'relative',
-        left:'95%',
-        textAlign:'right'
+        textAlign:'right',
+        left:'85%',
+        textDecoration:'none',
+        fontSize:'14px',
+        color:'#f98',
+        height:'20px',
+        padding:'7px',
+        backgroundColor:'white',
+        border:'3px solid #f98',
+        borderRadius:'20px'
     }
     return (
         <Content>
             <a name='top'/>
-            <h2 className='name'>'{searchWord}' 검색 결과</h2>
-            <a href='#bottom' style={button}>🔽</a>
+            <h2 className='name'>{searchWord} 검색 결과</h2>
             <Search getSearchWord={getSearchWord} />
+            <a href='#bottom' style={button}>Down</a>
             <div className='bodyContainer'>
                 <SearchContent linkName={linkName} info={currentPosts} loading={loading}/>
                 <Pagination postsPerPage={postsPerPage} totalPosts={info.length} paginate={paginate}/>
             </div>
-            <a href='#top' name='bottom' style={button}>🔼</a>
+            <a href='#top' name='bottom' style={button}>&ensp;Up&ensp;</a>
+            <br/><br/>
         </Content>
       )
 }
