@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { useHistory, useLocation } from 'react-router'
 import Content from '../Components/Content'
 import '../Components/Content.css'
-import ReservationContent from './ReservaionContent'
-import TimeTable from './TimeTable'
+import ReservationContent from '../Components/reservation/ReservaionContent'
+import TimeTable from '../Components/reservation/TimeTable'
 import swal from 'sweetalert'
 
 function ReservationPage({location,history}){
@@ -56,13 +56,13 @@ function ReservationPage({location,history}){
             dateDay:`${time.year}년 ${time.month}월 ${time.dates}일 ${time.hour}시 ${time.minute}분`
         })
     }}
-    const getTime=(startDate)=>{
+    const getTime=(startDate,startTime)=>{
         setTime({
             year:startDate.getFullYear(),
             month:startDate.getMonth()+1,
             dates:startDate.getDate(),
-            hour:startDate.getHours(),
-            minute:startDate.getMinutes()
+            hour:startTime.split(':')[0],
+            minute:startTime.split(':')[1]
         })
     }
     const inner={
@@ -96,7 +96,7 @@ function ReservationPage({location,history}){
                     </>
                     :
                     <>
-                        <TimeTable getTime={getTime}/>
+                        <TimeTable getTime={getTime} hsp={hsp}/>
                         {time.minute!==''?
                             <div style={buttons}>
                                 <button style={leftButton} className='button' onClick={()=>history.push('/Hospital/'+hsp.Name)}>취소</button>
