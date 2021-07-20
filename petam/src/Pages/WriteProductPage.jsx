@@ -112,10 +112,10 @@ export default class WriteProductPage extends Component {
                 <div style={floatLeft}>
                   <div className=" product-image-preview"></div>
                   <input
-                  // className="product-input-image"
-                  // type="file"
-                  // accept="image/jpg, image/jpeg, image/png"
-                  // onChange={this.isSelectedImg}
+                  className="product-input-image"
+                  type="file"
+                  accept="image/jpg, image/jpeg, image/png"
+                  onChange={this.isSelectedImg}
                   ></input>
                 </div>
                 <input
