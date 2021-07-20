@@ -10,16 +10,22 @@ import "../Components/Content.css";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 const headers = { withCredentials: true };
+import { useSelector } from "react-redux";
 
 const WritePostPage = ({ postTitle, postContent }) => {
+  // user 정보 조회
+  
   // 먼저 병원 정보 조회
   useEffect(async () => {
     try {
+
+          const user = useSelector((state) => state.user.userData);
       console.log(hospitalId);
       const res = axios
         .get("/api/hospitals/readone/" + hospitalId)
         .then((response) => {
           console.log("response.data : ", response.data);
+          console.log("로그인 정보 : ", user);
           setHospitalData({
             _id: hospitalId,
             score: response.data.score,
