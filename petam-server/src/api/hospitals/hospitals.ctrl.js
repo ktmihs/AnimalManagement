@@ -12,6 +12,7 @@ export const write=async(ctx)=>{
         zip_code,
         score,
         count,
+        timeList,
         company_number
     }=ctx.request.body
 
@@ -25,6 +26,7 @@ export const write=async(ctx)=>{
         zip_code,
         score,
         count,
+        timeList,
         company_number
     })
     try{
