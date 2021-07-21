@@ -3,6 +3,73 @@
 import Auth from '../../models/auth'
 import pets from '../pets'
 
+export const login = async (ctx) => {
+  const { email, password } = ctx.request.body;
+let data
+//   const auth = new Auth({
+//     username,//     email,
+//     password,
+//   });
+    try {
+        data = await Auth.findOne({ email: email, password: password }).exec();
+        console.log(data)
+    // await auth.save();
+  } catch (e) {
+    return ctx.throw(500, e);
+  }
+  ctx.body = data;
+};
+
+// export const read = async (ctx) => {
+//   let auth
+//   try {
+//     auth = await Auth.find().exec();
+//   } catch (e) {
+//     return ctx.throw(200, e);
+//   }
+
+//   ctx.body = auth;
+// };
+// export const readEmail = async (ctx) => {
+//   const email = ctx.params;
+//   let data;
+//   try {
+//     data = await Auth.findOne({ email: email }).exec();
+//     console.log(data);
+
+//     if (!data) {
+//       data = 'x';
+//       //   ctx.status = 404;
+//       // ctx.body={message:'data not found'}
+//       // return
+//     }
+//   } catch (e) {
+//     return ctx.throw(404, e);
+//   }
+
+//   ctx.body = data;
+// };
+
+export const readPassword = async (ctx) => {
+  const password = ctx.params;
+  let data;
+  try {
+    data = await Auth.findOne({ password: password }).exec();
+  } catch (e) {
+    return ctx.throw(200, e);
+  }
+  if (!data) {
+    data = 'x';
+    // ctx.status=404
+    // ctx.body={message:'data not found'}
+    // return
+  }
+  ctx.body = data;
+  console.log(data);
+};
+
+
+
 // 로컬 회원가입
 export const write=async(ctx)=>{
     const {
@@ -95,6 +162,7 @@ export const updatePet = async (ctx) => {
     }
     ctx.body = auth
   }
+
 /* 
 export const localRegister = async (ctx) => {
     const schema = Joi.object().keys({

@@ -79,7 +79,8 @@ function PostListPage({ location, history }) {
             >
               {lastIdx !== 0 ? (
                 // 포스트를 역순으로 출력하고 싶다면 .reverse()를 추가하면 된다
-                postData.reverse().map(
+                // postData.reverse().map(
+                postData.map(
                   (rowData) =>
                     // 최초 선언한 기본값은 나타내지 않음
                     rowData._id !== "" && (

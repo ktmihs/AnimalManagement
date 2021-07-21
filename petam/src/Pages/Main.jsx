@@ -2,6 +2,10 @@ import React from 'react'
 import Content from '../Components/Content'
 import '../Components/Content.css'
 import MainHospitalContent from './MainHospitalContent'
+import reducer from "../_reducers";
+
+// import user from "../_reducers/userReducer";
+import user from "../_reducers/userReducer"
 
 function Main() {
 
@@ -16,6 +20,9 @@ function Main() {
     padding:'20px 0',
     width:'80%'
   }
+  // const a = reducer.user
+  console.log("user ==== ", user)
+  // console.log(reducer.user)
 
   return (
     <Content>
@@ -25,6 +32,7 @@ function Main() {
         <MainHospitalContent/> {/*나중에 제품으로 변경*/}
       </div>
       <div style={mainAd}>
+        {/* { a } */}
         main page default ad
       </div>
     </Content>

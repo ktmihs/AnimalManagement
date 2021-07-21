@@ -1,3 +1,4 @@
+
 import Router from "koa-router"
 import {write, read, readOne, readCompany, update, updateTime, remove, removeTime, readName, filter, updateProduct, removeProduct,} from "./hospitals.ctrl"
 
@@ -13,7 +14,8 @@ hospitals.put('/:_id',update)
 hospitals.put('/:_id/:reservationTime', updateTime)
 hospitals.delete('/:_id/:reservationTime',removeTime)
 hospitals.delete('/:id',remove)
+
 hospitals.put('/product/:_id/:productId/:price', updateProduct);
 hospitals.delete('/product/:_id/:productId', removeProduct);
 
-export default hospitals
+export default hospitals;
