@@ -4,6 +4,7 @@ import mongoose from "mongoose"
 // const saltRounds = 10;
 // const jwt = require('jsonwebtoken');
 const {Schema} = mongoose
+
 const AuthSchema = new Schema({
   username: {
     type: String,
@@ -21,6 +22,10 @@ const AuthSchema = new Schema({
 //   tokenExp: {
 //     type: Number,
 //   },
+  // 비밀번호
+    pet:[]
+        // 등록된 동물(이름으로 등록)
+
 })
 
 // AuthSchema.methods.comparePassword = function (plainPassword, cb) {

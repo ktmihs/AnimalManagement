@@ -1,34 +1,8 @@
 //import Joi from 'Joi'
 //import Account from '../../models/account'
-import Auth from '../../models/auth';
+import Auth from '../../models/auth'
+import pets from '../pets'
 
-// 로컬 회원가입
-export const write = async (ctx) => {
-  const { username, email, password } = ctx.request.body;
-
-  const auth = new Auth({
-    username,
-    email,
-    password,
-  });
-  try {
-    await auth.save();
-  } catch (e) {
-    return ctx.throw(500, e);
-  }
-  ctx.body = auth;
-};
-
-export const read = async (ctx) => {
-  let auth;
-  try {
-    auth = await Auth.find().exec();
-  } catch (e) {
-    return ctx.throw(200, e);
-  }
-
-  ctx.body = auth;
-};
 export const login = async (ctx) => {
   const { email, password } = ctx.request.body;
 let data
@@ -75,23 +49,7 @@ let data
 
 //   ctx.body = data;
 // };
-export const readEmail = async (ctx) => {
-  const email = ctx.params;
-  let data;
 
-  try {
-    data = await Auth.findOne(email).exec();
-  } catch (e) {
-    return ctx.throw(200, e);
-  }
-  if (!data) {
-    data = 'x';
-    // ctx.status=404
-    // ctx.body={message:'data not found'}
-    // return
-  }
-  ctx.body = data;
-};
 export const readPassword = async (ctx) => {
   const password = ctx.params;
   let data;
@@ -109,6 +67,102 @@ export const readPassword = async (ctx) => {
   ctx.body = data;
   console.log(data);
 };
+
+
+
+// 로컬 회원가입
+export const write=async(ctx)=>{
+    const {
+        username,
+        email,
+        password
+    }=ctx.request.body
+
+    const auth=new Auth({
+        username,
+        email,
+        password
+    })
+    try{
+        await auth.save()
+    } catch(e){
+        return ctx.throw(500,e)
+    }
+    ctx.body=auth
+}
+
+// 모든 회원정보 읽기
+export const read=async(ctx)=>{
+    let auth
+    try{
+        auth=await Auth.find().exec()
+    }catch(e){
+        return ctx.throw(200,e)
+    }
+    
+    ctx.body=auth
+}
+
+// 이메일로 회원정보 확인
+export const readEmail=async(ctx)=>{
+    const email=ctx.params
+    let data
+    try{
+        data=await Auth.findOne(email).exec()
+    }catch(e){
+        return ctx.throw(200,e)
+    }
+    if(!data){
+        data='x'
+    }
+    ctx.body=data
+}
+
+// 회원 정보 업데이트 (수정할 내용만 변경)
+export const update=async(ctx)=>{
+    const email=ctx.params
+    let auth
+    try{
+        auth=await Auth.updateOne(email,ctx.request.body,{
+            upsert: true,
+            new:true
+        }).exec()
+    } catch(e){
+        return ctx.throw(500,e)
+    }
+    ctx.body=auth
+}
+
+// 새로운 반려동물 등록
+export const updatePet = async (ctx) => {
+    const { email, pet } = ctx.params
+    let auth
+    try {
+      auth = await Auth.findOneAndUpdate(
+        { email: email },
+        { $addToSet: {pet: pet,} }
+      ).exec()
+    } catch (e) {
+      ctx.throw(500, e)
+    }
+    ctx.body = auth
+  }
+
+  // 등록된 반려동물 삭제
+  export const removePet = async (ctx) => {
+    const { email, pet } = ctx.params
+    let auth
+    try {
+        auth = await Auth.findOneAndUpdate(
+        { email: email },
+        { $pull: {pet: pet} }
+      )
+    } catch (e) {
+      ctx.throw(500, e)
+    }
+    ctx.body = auth
+  }
+
 /* 
 export const localRegister = async (ctx) => {
     const schema = Joi.object().keys({

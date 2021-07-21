@@ -5,6 +5,7 @@ import products from './products';
 import hospitals from './hospitals';
 import reservations from './reservations';
 import auth from './auth';
+import pets from './pets';
 
 const api = new Router();
 
@@ -14,7 +15,7 @@ api.use('/posts', posts.routes());
 api.use('/comments', comments.routes());
 api.use('/products', products.routes());
 api.use('/auth', auth.routes());
-
+api.use('/pets',pets.routes())
 api.use('/reservations', reservations.routes());
 api.use('/hospitals', hospitals.routes());
 
