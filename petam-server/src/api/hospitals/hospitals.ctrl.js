@@ -12,6 +12,7 @@ export const write=async(ctx)=>{
         zip_code,
         score,
         count,
+        timeList,
         company_number
     }=ctx.request.body
 
@@ -25,6 +26,7 @@ export const write=async(ctx)=>{
         zip_code,
         score,
         count,
+        timeList,
         company_number
     })
     try{
@@ -75,6 +77,17 @@ export const readOne=async(ctx)=>{
         return
     }
     ctx.body=data
+}
+export const readLast=async(ctx)=>{
+  let hospitals,one
+    try{
+        hospitals=await Hospital.find().exec()
+        one=[hospitals[hospitals.length-4],hospitals[hospitals.length-3]]
+    }catch(e){
+        return ctx.throw(200,e)
+    }
+    
+    ctx.body=one
 }
 
 // 특정 이름으로 하나만 검색

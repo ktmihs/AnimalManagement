@@ -7,7 +7,7 @@ import "../sign/sign.css"
 
 function Information(){
     const res=useHistory()
-    const [isHospital,setIsHospital]=useState(false) // 병원인지 개인인지 여부 확인
+    const [isHospital,setIsHospital]=useState(true) // 병원인지 개인인지 여부 확인
     const [hospital,setHospital]=useState('12345678910')   // 현재 로그인 된 사업자번호로 접근
     const [email,setEmail]=useState('1410ahs@naver.com')    // 현재 로그인 된 이메일로 접근
     
@@ -44,6 +44,12 @@ function Information(){
             hostId:'ktmihs' // 본인 아이디
         })
     }
+    const hspReservation=()=>{
+        res.push({      //전부 작성되면 다음 페이지로 이동 & 정보 보내기
+            pathname:`/hspReservation`,
+            hostId:'ktmihs' // 본인 아이디
+        })
+    }
     const buttons={
         textAlign:'center',
         height:'100%',
@@ -64,7 +70,7 @@ function Information(){
                 <button className='regbtn' style={leftButton} onClick={handleClick}>
                     <h4>병원 정보 수정하기</h4><br/>
                 </button> 
-                <button className='regbtn' style={leftButton} onClick={handleClick/*병원 예약 내역확인*/}>
+                <button className='regbtn' style={leftButton} onClick={hspReservation}>
                     <h4>병원 예약 내역 확인하기</h4><br/>
                 </button> 
             </div>

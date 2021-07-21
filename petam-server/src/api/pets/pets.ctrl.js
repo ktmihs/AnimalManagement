@@ -33,6 +33,32 @@ export const read=async(ctx)=>{
     }
     ctx.body=pet
 }
+// 나의 반려동물 정보 읽기
+export const readMyPet=async(ctx)=>{
+    const email=ctx.params
+    let total, pet
+    try{
+        total=await Pet.find().exec()
+        pet=total.filter(item=>item.parent.includes(Object.values(email)))
+    }catch(e){
+        return ctx.throw(200,e)
+    }
+    ctx.body=pet
+}
+
+// 특정 반려동물 정보 읽기
+export const readOnePet=async(ctx)=>{
+    const {email,pet}=ctx.params
+    let pets
+    try {
+        pets = await Pet.findOne(
+        { parent: email,name: pet }
+      )
+    } catch (e) {
+      ctx.throw(500, e)
+    }
+    ctx.body=pets
+}
 
 // 반려동물 정보 업데이트 (수정할 내용만 변경)
 export const update=async(ctx)=>{
@@ -45,6 +71,19 @@ export const update=async(ctx)=>{
         }).exec()
     } catch(e){
         return ctx.throw(500,e)
+    }
+    ctx.body=pet
+}
+// 특정 반려동물 정보 삭제
+export const remove=async(ctx)=>{
+    const {email,name}=ctx.params
+    let pet
+    try {
+        pet = await Pet.findOneAndDelete(
+        { parent: email,name: name }
+      )
+    } catch (e) {
+      ctx.throw(500, e)
     }
     ctx.body=pet
 }

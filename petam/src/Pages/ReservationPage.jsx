@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { useHistory, useLocation } from 'react-router'
 import Content from '../Components/Content'
 import '../Components/Content.css'
-import ReservationContent from './ReservaionContent'
-import TimeTable from './TimeTable'
+import ReservationContent from '../Components/reservation/ReservaionContent'
+import TimeTable from '../Components/reservation/TimeTable'
 import swal from 'sweetalert'
 
 function ReservationPage({location,history}){
@@ -15,6 +15,7 @@ function ReservationPage({location,history}){
         minute:''
     })
     const [reserve,setReserve]=useState({
+        pet:'',
         option:'',
         text:''
     })
@@ -37,10 +38,10 @@ function ReservationPage({location,history}){
 
     const res=useHistory()
     const toCheck=()=>{{    
-        reserve.option==='' || reserve.option==='기타' && reserve.text===''?    //미입력 사항 존재할 때
+        reserve.pet==='' || reserve.option==='' || reserve.option==='기타' && reserve.text===''?    //미입력 사항 존재할 때
         (
-            reserve.option===''?
-            swal('','예약 목적을 선택해주세요!','warning')
+            reserve.pet==='' || reserve.option===''?
+            swal('','예약 동물과 예약 목적을 선택해주세요!','warning')
             :
             swal('','예약 목적에 대한 메시지를 작성해주세요!','warning')
         )
@@ -49,18 +50,19 @@ function ReservationPage({location,history}){
             pathname:'/CheckReservationPage',
             id:hsp.Id,
             name:hsp.Name,
+            pet:reserve.pet,
             option:reserve.option,
             text:reserve.text,
             dateDay:`${time.year}년 ${time.month}월 ${time.dates}일 ${time.hour}시 ${time.minute}분`
         })
     }}
-    const getTime=(startDate)=>{
+    const getTime=(startDate,startTime)=>{
         setTime({
             year:startDate.getFullYear(),
             month:startDate.getMonth()+1,
             dates:startDate.getDate(),
-            hour:startDate.getHours(),
-            minute:startDate.getMinutes()
+            hour:startTime.split(':')[0],
+            minute:startTime.split(':')[1]
         })
     }
     const inner={
@@ -94,7 +96,7 @@ function ReservationPage({location,history}){
                     </>
                     :
                     <>
-                        <TimeTable getTime={getTime}/>
+                        <TimeTable getTime={getTime} hsp={hsp}/>
                         {time.minute!==''?
                             <div style={buttons}>
                                 <button style={leftButton} className='button' onClick={()=>history.push('/Hospital/'+hsp.Name)}>취소</button>

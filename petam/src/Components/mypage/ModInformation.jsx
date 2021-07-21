@@ -5,7 +5,7 @@ import '../../style.css'
 import "../sign/Register.css"
 import "../sign/sign.css"
 import InfoContent from './InfoContent'
-import InfoHspContent from './InfoHspContent'
+import InfoHspContent from '../hsppage/InfoHspContent'
 import InfoTitle from './InfoTitle'
 
 // 정보 수정 페이지

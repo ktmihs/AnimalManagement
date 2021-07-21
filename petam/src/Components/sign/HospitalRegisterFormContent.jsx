@@ -12,13 +12,30 @@ import swal from 'sweetalert'
 import { useHistory, useLocation } from 'react-router'
 
 function HospitalRegisterFormContent(){
+    const [time,setTime]=useState({
+        hour:[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
+        minute:[0,30]
+    })
+
     const [hospital,setHospital]=useState({
         name:'',
         company_number:'',
         password:'',
+        timeList:{
+            openHour:1,
+            openMinute:1,
+            closeHour:1,
+            closeMinute:1,
+            lunchOpenHour:1,
+            lunchOpenMinute:1,
+            lunchCloseHour:1,
+            lunchCloseMinute:1
+        },
         form:'register'
     })
-    const {name,company_number,password}=hospital           // 기존 병원 입력 데이터
+    const {name,company_number,password,timeList}=hospital           // 기존 병원 입력 데이터
+    const {openHour,openMinute,closeHour,closeMinute,lunchOpenHour,lunchOpenMinute,lunchCloseHour,lunchCloseMinute}=timeList
+
     const [passwordConfirm,setPasswordConfirm]=useState('')
 
     const [newHospital,setNewHospital]=useState({
@@ -28,7 +45,17 @@ function HospitalRegisterFormContent(){
         zip_code:'',
         name:'',
         company_number:'',
-        password:''
+        password:'',
+        timeList:{
+            openHour:1,
+            openMinute:1,
+            closeHour:1,
+            closeMinute:1,
+            lunchOpenHour:1,
+            lunchOpenMinute:1,
+            lunchCloseHour:1,
+            lunchCloseMinute:1
+        },
     })
     const {tel,old_addr,new_addr,zip_code}=newHospital      // 새로운 병원 입력 데이터
 
@@ -46,9 +73,29 @@ function HospitalRegisterFormContent(){
     }
     const newHandleChange=(e)=>{        // 새로운 병원일 경우 추가 데이터 작성 & 저장
         const {name,value}=e.target
+        name==='passwordConfirm'?       // 비밀번호 확인일 경우에만 따로 저장
+        setPasswordConfirm(value)
+        :
         setNewHospital({
             ...newHospital,
             [name]:value
+        })
+    }
+    const timeHandleChange=(e)=>{
+        const {name,value}=e.target
+        setNewHospital({
+            ...newHospital,
+            timeList:{
+                ...timeList,
+                [name]:value
+            }
+        }),
+        setHospital({
+            ...hospital,
+            timeList:{
+                ...timeList,
+                [name]:value
+            }
         })
     }
     const [id,setId]=useState()         // 병원 이름으로 검색하여 id 받아옴
@@ -138,6 +185,15 @@ function HospitalRegisterFormContent(){
             })
     }
     
+    const selectBox={
+        width:'97px',
+        height:'35px',
+        margin:'5px',
+        border:'0',
+        borderRadius:'5px',
+        backgroundColor:'#b0cdff45',
+
+    }
     return(
         <form onSubmit={handleClick}>
             <div class="form-group input-group">
@@ -162,9 +218,108 @@ function HospitalRegisterFormContent(){
                 </div>
                 <input name="passwordConfirm"  value={passwordConfirm} onChange={handleChange} class="form-control" placeholder="Repeat password" type="password"/>
             </div>
-            {
 
-            }
+            {/* time select */}
+            <h5>병원 운영 시간</h5>
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                <select name='openHour' value={openHour} onChange={timeHandleChange} style={selectBox}>      
+                    {
+                        time.hour.map(item=>{
+                            return(
+                                <option value={item}>{item}</option>
+                            )
+                        })
+                    }
+                    <option value="1" hidden> open hour </option>
+                </select>
+                <h3>:</h3>
+                <select name='openMinute' value={openMinute} onChange={timeHandleChange} style={selectBox}>      
+                    {
+                        time.minute.map(item=>{
+                            return(
+                                <option value={item}>{item}</option>
+                            )
+                        })
+                    }
+                    <option value="1" hidden> open minute </option>
+                </select>
+                </div>
+                <h4>~</h4>
+                <div class="input-group-append">
+                <select name='closeHour' value={closeHour} onChange={timeHandleChange} style={selectBox}>      
+                {
+                        time.hour.map(item=>{
+                            return(
+                                <option value={item}>{item}</option>
+                            )
+                        })
+                    }
+                    <option value='1' hidden> close hour </option>
+                </select>
+                <h3>:</h3>
+                <select name='closeMinute' value={closeMinute} onChange={timeHandleChange} style={selectBox}>      
+                {
+                        time.minute.map(item=>{
+                            return(
+                                <option value={item}>{item}</option>
+                            )
+                        })
+                    }
+                    <option value="1" hidden> close minute </option>
+                </select>
+                </div>
+            </div>
+            <h5>병원 점심 시간</h5>
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                <select name='lunchOpenHour' value={lunchOpenHour} onChange={timeHandleChange} style={selectBox}>      
+                    {
+                        time.hour.map(item=>{
+                            return(
+                                <option value={item}>{item}</option>
+                            )
+                        })
+                    }
+                    <option value="1" hidden> lunch open hour </option>
+                </select>
+                <h3>:</h3>
+                <select name='lunchOpenMinute' value={lunchOpenMinute} onChange={timeHandleChange} style={selectBox}>      
+                    {
+                        time.minute.map(item=>{
+                            return(
+                                <option value={item}>{item}</option>
+                            )
+                        })
+                    }
+                    <option value="1" hidden> lunch open minute </option>
+                </select>
+                </div>
+                <h4>~</h4>
+                <div class="input-group-append">
+                <select name='lunchCloseHour' value={lunchCloseHour} onChange={timeHandleChange} style={selectBox}>      
+                {
+                        time.hour.map(item=>{
+                            return(
+                                <option value={item}>{item}</option>
+                            )
+                        })
+                    }
+                    <option value="1" hidden> lunch close hour </option>
+                </select>
+                <h3>:</h3>
+                <select name='lunchCloseMinute' value={lunchCloseMinute} onChange={timeHandleChange} style={selectBox}>      
+                {
+                        time.minute.map(item=>{
+                            return(
+                                <option value={item}>{item}</option>
+                            )
+                        })
+                    }
+                    <option value="1" hidden> lunch close minute </option>
+                </select>
+                </div>
+            </div>
             {
                 newClient?
                 <>
@@ -194,8 +349,10 @@ function HospitalRegisterFormContent(){
                     </div>
                 </>
                 :
-                <></>
+                null
             }
+            
+            
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block" > Create Account  </button>
             </div>  

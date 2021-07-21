@@ -33,6 +33,16 @@ const HospitalSchema=new Schema({
     image:{
         type: []
     },  //병원 이미지
+    timeList:{
+        openHour:{ Number },
+        openMinute:{ Number },
+        closeHour:{ Number },
+        closeMinute:{ Number },
+        lunchOpenHour:{ Number },
+        lunchOpenMinute:{ Number },
+        lunchCloseHour:{ Number },
+        lunchCloseMinute:{ Number }
+    },  // 병원 운영시간, 점심시간
     reservationTime: [], //예약 정보
     products: [
     {

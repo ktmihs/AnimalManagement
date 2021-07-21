@@ -9,6 +9,7 @@ import MyReservationPage from "./Pages/MyReservationPage";
 import CheckReservationPage from "./Pages/CheckReservationPage";
 import ConfirmReservationPage from "./Pages/ConfirmReservationPage";
 import ReservationPage from "./Pages/ReservationPage";
+import HospitalReservationPage from "./Pages/HospitalReservationPage";
 import HospitalPage from "./Pages/HospitalPage";
 import ErrorPage from "./Pages/ErrorPage";
 import MyPostListPage from "./Pages/MyPostListPage";
@@ -25,7 +26,7 @@ import ProductViewPage from "./Pages/ProductViewPage";
 
 import Axios from "axios";
 import Modify from "./Components/mypage/ModInformation";
-import AddPet from "./Components/mypage/AddPet";
+import AddPet from "./Pages/AddPetPage";
 import Information from "./Components/mypage/Information";
 import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
@@ -69,10 +70,11 @@ const App=()=> {
                 <Route path="/checkReservationPage" component={CheckReservationPage}/>
                 <Route path="/reservation/:_id" component={ConfirmReservationPage}/>
                 <Route exact path="/reservation" component={MyReservationPage} />
+                <Route exact path="/hspReservation" component={HospitalReservationPage} />
                 <Route path="/modify/:_id" component={Modify} />
                 <Route exact path="/modify" component={Modify} />
-                <Route path="/addPet" component={AddPet} />
-                
+                <Route exact path="/addPet" component={AddPet} />
+
                 <Route path="/info" component={Information} />
 
 

@@ -10,12 +10,14 @@ function CheckReservationPage({location,history}){
     const [reservation,setReservation]=useState({
         hospitalName:'',
         hostId:'1410ahs@naver.com',        // 로그인 후, 유저 정보로 변경
+        pet:'', 
         type:'',
         memo:'',
         dateDay:'',
     })
     const hsp=useLocation()       // 이전 페이지에서 location으로 받은 정보를 저장
-    const reserve=useLocation({     
+    const reserve=useLocation({  
+        pet:location.pet,   
         option:location.option,
         text:location.text,
         dateDay:location.dateDay
@@ -26,6 +28,7 @@ function CheckReservationPage({location,history}){
             setReservation({
                 ...reservation,
                 hospitalName:hsp.name,
+                pet:reserve.pet,
                 type:reserve.option,
                 memo:reserve.text,
                 dateDay:reserve.dateDay
@@ -99,7 +102,7 @@ function CheckReservationPage({location,history}){
                 <div className='contentBox' style={contentBox}>
                     <div>
                         예약 병원 : {hsp.name}<br/>
-                        예약자 : 보리<br/>
+                        예약 동물 : {reserve.pet}<br/>
                         예약 일정 : {reserve.dateDay}<br/>
                         예약 목적 : {reserve.option}<br/>
                         기타 내용 : {reserve.text}
