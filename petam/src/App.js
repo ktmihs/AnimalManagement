@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useUserState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Topbar from "./Components/Topbar.js";
@@ -28,8 +28,15 @@ import Axios from "axios";
 import Modify from "./Components/mypage/ModInformation";
 import AddPet from "./Pages/AddPetPage";
 import Information from "./Components/mypage/Information";
+import LoginPage from "./Pages/LoginPage";
+import RegisterPage from "./Pages/RegisterPage";
+import LandingPage from "./Pages/LandingPage";
+import Test from "./Pages/Test";
 
-export default class App extends Component {
+import Auth from "./hoc/auth";
+
+const App=()=> {
+// export default class App extends Component {
   // const submitReview = () => {
   //   Axios.post('https://localhost:4000/api/posts', {
   //     title: '',
@@ -38,8 +45,9 @@ export default class App extends Component {
   //     alert('등록 완료!');
   //   })
   // }
-
-  render() {
+  // const { user } = useUserState(); 
+// const isLogin = false;
+  // render() {
     return (
       <>
         <Router>
@@ -48,6 +56,7 @@ export default class App extends Component {
             <Route path="*" component={Leftbar} />
             <div className="body">
               <Switch>
+                <Route path="/test" component={Test} />
                 <Route path="/" exact component={Main} />
                 <Route path="/main" component={Main} />
                 <Route path="/login" component={Login} />
@@ -68,6 +77,7 @@ export default class App extends Component {
 
                 <Route path="/info" component={Information} />
 
+
                 <Route exact path="/hospital" component={SearchPage} />
                 <Route path="/PostListPage" component={PostListPage} />
                 <Route path="/MyPostListPage" component={MyPostListPage} />
@@ -81,6 +91,17 @@ export default class App extends Component {
                   path="/product/detail/:_id"
                   component={ProductViewPage}
                 />
+
+                <Route exact path="/j" component={Auth(LandingPage, null)} />
+                <Route exact path="/jlogin" component={Auth(LoginPage, false)} />
+                <Route
+                  exact
+                  path="/jregister"
+                  component={Auth(RegisterPage, false)}
+                />
+                {/* <Route path="/j" component={LandingPage} />
+                <Route path="/jlogin" component={LoginPage} />
+                <Route path="/jregister" component={RegisterPage} /> */}
                 <Route path="/PostView/:_id" component={PostViewPage} />
                 <Route render={() => <ErrorPage />} />
               </Switch>
@@ -90,4 +111,5 @@ export default class App extends Component {
       </>
     );
   }
-}
+export default App;
+

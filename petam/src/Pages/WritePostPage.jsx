@@ -10,15 +10,22 @@ import "../Components/Content.css";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 const headers = { withCredentials: true };
+import { useSelector } from "react-redux";
 
 const WritePostPage = ({ postTitle, postContent }) => {
+  // user 정보 조회
+  
   // 먼저 병원 정보 조회
   useEffect(async () => {
     try {
+
+          const user = useSelector((state) => state.user.userData);
+      console.log(hospitalId);
       const res = axios
-        .get("/api/hospitals/read/" + hospitalId)
+        .get("/api/hospitals/readone/" + hospitalId)
         .then((response) => {
           console.log("response.data : ", response.data);
+          console.log("로그인 정보 : ", user);
           setHospitalData({
             _id: hospitalId,
             score: response.data.score,
@@ -85,6 +92,16 @@ const WritePostPage = ({ postTitle, postContent }) => {
       hospitalId: hospitalId,
     };
 
+    // 게시글 저장
+    axios
+      .post("/api/posts/", send_param)
+      .then((response) => {
+        console.log("save post", response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     // 병원 별점 계산을 위해 병원 데이터 업데이트
     // count 1 더해주고 score도 합해준다
     const res2 = axios.put("/api/hospitals/" + hospitalId, {
@@ -94,16 +111,6 @@ const WritePostPage = ({ postTitle, postContent }) => {
     });
     console.log(send_param);
     console.log("res : ", res);
-
-    // 게시글 저장
-    axios
-      .post("/api/posts", send_param)
-      .then((response) => {
-        console.log("save post", response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   const hospitalId = "60dea37e2aff16e271bb70b4";
@@ -136,7 +143,7 @@ const WritePostPage = ({ postTitle, postContent }) => {
             class="user"
             id="WritePostPage"
             // onSubmit={this.postWrite}
-            onSubmit={postWrite}
+            // onSubmit={postWrite}
           >
             <div class="form-group ">
               {/* <p>제목</p> */}
@@ -202,6 +209,7 @@ const WritePostPage = ({ postTitle, postContent }) => {
                   <Button
                     class=" btn w-100  btn-success "
                     // onClick={this.postWrite}
+                    onClick={postWrite}
                     variant="success"
                     type="submit"
                     block
