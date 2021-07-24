@@ -4,6 +4,7 @@ import './main.css'
 import SmallAd from './SmallAd'
 import Title from './Title'
 
+// 메인 페이지 병원 관련 content
 function MainHospitalContent(){
   const [adHsp,setAdHsp]=useState({
     fir:'',
@@ -27,8 +28,8 @@ function MainHospitalContent(){
         </div>
         <div className="BottomContent">
           <div className="adTitle"><a><a className="news">[new!]</a> 새로 등록된 병원</a></div>
-          <SmallAd data={adHsp.fir}/>
-          <SmallAd data={adHsp.sec}/>
+          {adHsp.fir?<SmallAd data={adHsp.fir}/>:null} {/* 광고할 병원이 있을 경우에만 */}
+          {adHsp.sec?<SmallAd data={adHsp.sec}/>:null}
         </div>
       </div>
   )

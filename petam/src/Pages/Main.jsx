@@ -9,7 +9,7 @@ import reducer from "../_reducers";
 // import user from "../_reducers/userReducer";
 import user from "../_reducers/userReducer"
 
-
+// 메인 페이지
 function Main() {
 
   const contents={

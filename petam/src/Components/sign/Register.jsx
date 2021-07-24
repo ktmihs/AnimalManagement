@@ -5,6 +5,7 @@ import '../../style.css'
 import "./Register.css"
 import "./sign.css"
 
+// 회원 가입(병원과 일반 구분해서 회원가입)
 function Register(){
     const res=useHistory()
 

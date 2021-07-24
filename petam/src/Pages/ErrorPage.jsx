@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import Content from '../Components/Content'
 
+// 잘못된 링크, url 입력 시 error page
 function ErrorPage(){
     const error={
         textAlign:'center',

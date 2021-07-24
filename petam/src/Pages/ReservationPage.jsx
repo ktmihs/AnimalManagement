@@ -6,6 +6,7 @@ import ReservationContent from '../Components/reservation/ReservaionContent'
 import TimeTable from '../Components/reservation/TimeTable'
 import swal from 'sweetalert'
 
+// 예약 페이지
 function ReservationPage({history}){
     const [time,setTime]=useState({     // 예약된 날짜 정보 받아오기
         year:'',

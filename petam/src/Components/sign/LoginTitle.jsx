@@ -1,6 +1,7 @@
 import React from 'react'
 import "./sign.css"
 
+// 로그인 title
 function LoginTitle(){
     return(
         <div>

@@ -2,8 +2,8 @@ import '../../style.css';
 import React from "react";
 import { Link } from 'react-router-dom';
 
+// 로그인, 회원가입 버튼
 function SignButton(){
-
     return(
         <>
             <Link to='/login'>

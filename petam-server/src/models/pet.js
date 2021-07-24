@@ -7,6 +7,9 @@ const PetSchema=new Schema({
     name: {
         type: String
     },   // pet 이름
+    species: {
+        type: String
+    },   // pet 종
     age: {
         type: String
     },   // 나이

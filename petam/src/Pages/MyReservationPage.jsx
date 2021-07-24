@@ -6,6 +6,7 @@ import SearchContent from '../Components/search/SearchContent'
 import axios from 'axios'
 import Pagination from '../Components/pagination/Pagination'
 
+// 내 예약 내역 페이지
 function MyReservationPage(){
     const [info,setInfo]=useState([])   //병원 정보
     const [loading,setLoading]=useState(false)    //로딩 중 표시
@@ -25,7 +26,7 @@ function MyReservationPage(){
     useEffect(() => {
         const fetchPosts=async()=>{
             setLoading(true)
-            axios.get('api/reservations/filter/'+'1410ahs@naver.com')
+            axios.get('api/reservations/filter/'+'1410ahs@naver.com')   // 현재 로그인 된 아이디로 예약된 내역 모두 불러오기
             .then(
                 res=>setInfo(res.data),
                 setLoading(false)
@@ -49,7 +50,6 @@ function MyReservationPage(){
                     <Pagination postsPerPage={postsPerPage} totalPosts={info.length} paginate={paginate}/>
                 </div>
                 <hr/>
-                {/*<div style={buttonlocate}><button style={button} className='button' onClick={()=>history.push('/')}>main</button></div>*/}
             </div>
         </Content>
     )
