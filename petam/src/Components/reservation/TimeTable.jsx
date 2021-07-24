@@ -1,64 +1,29 @@
 import React,{useState,useEffect} from 'react'
-import './reservation.css'
 import DatePicker from "react-datepicker"
 import { ko } from "date-fns/esm/locale"
 import "react-datepicker/dist/react-datepicker.css"
-import setHours from "date-fns/setHours"
-import setMinutes from "date-fns/setMinutes"
-import setDate from "date-fns/setDate"
-import setMonth from "date-fns/setMonth"
 import { addDays } from 'date-fns'
 import swal from 'sweetalert'
 import axios from 'axios'
 import TimeList from './TimeList'
+import './reservation.css'
 
 function TimeTable(props){
     
-  const [startDate, setStartDate] = useState(new Date())
-  const [startTime, setStartTime]= useState()
+  const [startDate, setStartDate] = useState(new Date())    // DatePicker에서 선택된 날짜 저장(시간 정보 x)
+  const [startTime, setStartTime]= useState()               // TimeList에서 선택된 시간 저장(string 형식)
 
   const {hsp}=props   // 이전 페이지에서 병원 정보 가져오기(id, name)
-  const [reservationTime,setReservationTime]=useState(['13:30','18:00'])
-  const [timeList,setTimeList]=useState({
-    openHour:1,
-    openMinute:1,
-    closeHour:1,
-    closeMinute:1,
-    lunchOpenHour:1,
-    lunchOpenMinute:1,
-    lunchCloseHour:1,
-    lunchCloseMinute:1
-  })
-  const {openHour,openMinute,closeHour,closeMinute,lunchOpenHour,lunchOpenMinute,lunchCloseHour,lunchCloseMinute}=timeList
+  const [allReservationTime,setAllReservationTime]=useState([])   // 모든 예약된 시간 정보
+  const [reservationTime,setReservationTime]=useState([])         // 현재 선택된 날짜의 시간 정보
 
-  let hour=[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
-  let minute=openMinute
-  const [time,setTime]=useState([])
-
-  useEffect(() => {
-    axios.get('/api/hospitals/readone/'+hsp.Id)
-      .then(ctx=>{
-        if(ctx.data.reservationTime)
-        setReservationTime(ctx.data.reservationTime)
-        if(ctx.data.timeList)
-        setTimeList({
-          openHour:ctx.data.timeList.openHour,
-          openMinute:ctx.data.timeList.openMinute,
-          closeHour:ctx.data.timeList.closeHour,
-          closeMinute:ctx.data.timeList.closeMinute,
-          lunchOpenHour:ctx.data.timeList.lunchOpenHour,
-          lunchOpenMinute:ctx.data.timeList.lunchOpenMinute,
-          lunchCloseHour:ctx.data.timeList.lunchCloseHour,
-          lunchCloseMinute:ctx.data.timeList.lunchCloseMinute
-        })
-        console.log(ctx,timeList)
-        console.log(timeToList())
-      })
-  }, [time])
-
-  const timeToList=()=>{
+  const [time,setTime]=useState([])             // TimeList에 보낼 해당 병원 운영 시간 list
+  
+  // 해당 병원 운영 시간을 time에 array로 저장
+  const timeToList=(t)=>{
     let time=[]
-    //hour=hour.filter(item=>openHour<=item && closeHour>=item)
+    const {openHour,openMinute,closeHour,closeMinute,lunchOpenHour,lunchOpenMinute,lunchCloseHour,lunchCloseMinute}=t
+
     for(let i=Number(openHour);i<Number(closeHour);i++){
       if(i==Number(openHour) && Number(openMinute)==30){
         time.push(`${i}:30`)
@@ -83,33 +48,58 @@ function TimeTable(props){
   return time
   }
 
+  // 현재 시각에서 지난 시간들은 제외 시키기
+  const currentDate = new Date()
+  let minute=currentDate.getMinutes()
+  let hour=currentDate.getHours()
+  let date=currentDate.getDate()
+  // 예약 시간 기준 30분 이전에는 예약할 수 없도록 조정
+  if(minute>30){
+    minute-=30
+    hour+=1
+  } else {minute+=30}
+  const [lastTime,setLastTime]=useState({
+    hour:hour,
+    minute:minute,
+    date:date,
+    present:true    // 예약 날짜가 오늘인지 boolean으로 체크
+  })
 
-  // const [timeList,setTimeList]=useState([
-  //   '7:00','7:30','8:00','8:30','9:00','9:30','10:00','10:30',
-  //   '11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30',
-  //   '15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30',
-  //   '19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30'
-  // ])
+  // 병원 운영 시간 받아오기
+  useEffect(() => {
+    axios.get('/api/hospitals/readone/'+hsp.Id)
+      .then(ctx=>{
+        if(ctx.data.reservationTime)    // 여는 시간, 닫는 시간, 점심 시간이 담겨있음
+        setAllReservationTime(ctx.data.reservationTime)
+        if(ctx.data.timeList)
+        setTime(timeToList(ctx.data.timeList))
+      })
+  }, [])
 
-  const filterPassedTime = time => {
-    const currentDate = new Date()
-    const selectedDate = new Date(time)
-    
-    return currentDate.getTime()+1800000 < selectedDate.getTime()   //지난 시간은 선택할 수 없도록 설정(+ 30분 전에는 불가능)
+  // 예약할 날짜 선택 시,
+  const handleClick=(date)=>{
+    setStartDate(date)    // 선택된 날짜 startDate에 저장
+    setReservationTime(   // 현재 선택된 날짜에 맞춰 이미 예약된 날짜들 중, 현재 날짜에 해당되는 시간만 걸러줌
+      allReservationTime.filter(item=>item.split('.')[0]==date.getMonth()+1 && item.split('.')[1]==date.getDate())
+    )
+    if(date.getDate()==lastTime.date) setLastTime({...lastTime, present:true})  // 예약한 날짜가 오늘인 경우, 
+    else setLastTime({...lastTime, present:false})          // 아닐 경우
   }
-  const selectTime=()=>{
-    const currentDate = new Date()
-    {(startDate.getDate()===currentDate.getDate() && startDate.getHours()===currentDate.getHours())
-      || (startDate.getHours()<9 || startDate.getHours()>20)?
-      swal('','시간을 선택해주세요','warning')
-      :
+
+  const selectDate=()=>{    // 날짜와 시간 모두 선택 후, 다음으로 넘어가는 버튼 생성하는 click event
+    {
+      startTime?    // 시간을 선택했을 경우에만 다음으로 넘어갈 수 있도록 설정
       checking()
+      :
+      swal('','시간을 선택해주세요','warning')    // 시간을 선택하지 않았을 때, 경고 알림
       }
   }
+
   const checking=()=>{
-    props.getTime(startDate,startTime)
-    swal('',`${startDate.getMonth()+1}월 ${startDate.getDate()}일 ${startDate.getHours()}시 ${startDate.getMinutes()}분을 선택하셨습니다`, 'success')
+    props.getTime(startDate,startTime)    // 이전 페이지(ReservationPage)에 예약된 날짜와 시간 정보 넘겨줌
+    swal('',`${startDate.getMonth()+1}월 ${startDate.getDate()}일 ${startTime}을 선택하셨습니다`, 'success')  // 확인 알림창
   }
+
   const info={
     fontSize:'11px',
     marginBottom:'7px'
@@ -120,30 +110,45 @@ function TimeTable(props){
     backgroundColor:'rgb(255,170,170)'
   }
   const picker={
-    backgroundColor:"#0000aa"
+    width:'100%',
+    height:'100%'
+  }
+  const datePicker={
+    display:'inline-block',
+    width:'300px',
+    height:'250px',
+    margin:'0 10px',
+  }
+  const timePicker={
+    display:'inline-block',
+    width:'400px',
+    height:'250px',
+    padding:'50px 0',
+    margin:'0 10px',
+
   }
   
   return(
       <>
-        <div className='content'>
-          <DatePicker
-            inline
-            style={picker}
-            locale={ko}
-            selected={startDate}
-            onChange={date => setStartDate(date)}
-          //  showTimeSelect
-            minDate={new Date()}
-            maxDate={addDays(new Date(), 30)}
-          //  minTime={setHours(setMinutes(new Date(),0),9)}
-          //  maxTime={setHours(setMinutes(new Date(),0),20)}
-          //  filterTime={filterPassedTime}
-          //  excludeTimes={[setMonth(setDate(setHours(setMinutes(new Date(),0),17),10),8)]}
-          />
-          <TimeList timeList={time} reservationTime={reservationTime} selectTime={startTime}/>
+        <div className='content' style={picker}>
+          <div style={datePicker}>
+            <DatePicker
+              inline
+              locale={ko}
+              selected={startDate}
+              onChange={handleClick}
+              minDate={new Date()}
+              maxDate={addDays(new Date(), 30)}
+            />
+          </div>
+          
+          <div style={timePicker}>
+            <TimeList lastTime={lastTime} timeList={time} reservationTime={reservationTime} selectTime={setStartTime}/>
+          </div>
+        
         </div>
         <div style={info}>※ 예약은 최소 30분 전까지 가능합니다<br/>회색 칸은 이미 예약된 시간이거나, 불가능한 시간입니다. ※</div>
-        <button style={button} className='button' onClick={selectTime}>날짜 선택</button>
+        <button style={button} className='button' onClick={selectDate}>날짜 선택</button>
       </>
   )
 }
