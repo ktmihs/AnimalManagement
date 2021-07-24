@@ -5,10 +5,11 @@ import '../../style.css'
 import "../sign/Register.css"
 import "../sign/sign.css"
 
+// 마이페이지 첫화면
 function Information(){
     const res=useHistory()
     const [isHospital,setIsHospital]=useState(true) // 병원인지 개인인지 여부 확인
-    const [hospital,setHospital]=useState('12345678910')   // 현재 로그인 된 사업자번호로 접근
+    const [hospital,setHospital]=useState('456456456')   // 현재 로그인 된 사업자번호로 접근
     const [email,setEmail]=useState('1410ahs@naver.com')    // 현재 로그인 된 이메일로 접근
     
     useEffect(() => {

@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React,{useState,useEffect} from 'react'
-import { useLocation } from 'react-router-dom'
 import Content from '../Components/Content'
 import "../Components/mypage/mypage.css"
 import PetsInfo from '../Components/mypage/PetsInfo'
@@ -12,17 +11,18 @@ function AddPetPage(){
     const [pet,setPet]=useState({
         parent:'1410ahs@naver.com',   // 보호자email
         name:'',        // 동물 이름
+        species:'',     // 동물 종
         age:'',         // 동물 나이
         gender:''       // 성별
     })
-    const {parent,name,age,gender}=pet
+    const {parent,name,species,age,gender}=pet
 
     useEffect(() => {
         axios.get('/api/pets/'+'1410ahs@naver.com') //나중에 로그인 이메일 넣기
         .then(
             res=>setPets(res.data)
         )
-    }, [pets])
+    }, [pets])  // 동물 리스트가 업데이트 될 때마다 화면 리렌더링
 
     const handleChange=(e)=>{
         const {name,value}=e.target
@@ -31,12 +31,10 @@ function AddPetPage(){
             parent:'1410ahs@naver.com', //임시로 넣어줌 (맨 처음만 되고 새로고침 될 때마다 사라짐)
             [name]: value
         })
-        console.log(name,value)
-        console.log(pet)
     }
     const handleCheck=(e)=>{
         e.preventDefault();
-        (name==='' || age==='' || gender==='')?    //미입력 사항 존재할 때
+        (name==='' || age==='' || species==='' || gender==='')?    //미입력 사항 존재할 때
             swal('','모두 작성해주세요!','warning')
         :
         (
@@ -46,14 +44,14 @@ function AddPetPage(){
         )
     }
     const handleSubmit=()=>{
-        axios.put('/api/auth/pet/'+email+'/'+name)
+        axios.put('/api/auth/pet/'+email+'/'+`${name}(${species})`)      // 로그인 된 보호자 정보에 동물 추가
         .then((response) => {
             console.log(response)
         })
         .catch((error) => {
             console.log(error)
         })
-        axios.post('/api/pets/',pet)
+        axios.post('/api/pets/',pet)                    // 동물 테이블에 저장
         .then((response) => {
             console.log(response)
         })
@@ -85,7 +83,10 @@ function AddPetPage(){
                 <div className="divstyle mt-4">새로운 반려 동물 등록</div>
                 <form onSubmit={handleCheck}>
                     <div className="divstyle">
-                        <input className="inputDisabled-pet mt-4" /*name="parent"*/ value={parent} disabled/>
+                        <input className="inputDisabled-pet mt-4" value={parent} disabled/>
+                    </div>
+                    <div className="divstyle">
+                        <input className="input-pet mt-2" name="species" value={species} placeholder="종(ex.개,고양이)" onChange={handleChange}/>
                     </div>
                     <div className="divstyle">
                         <div className="radio">

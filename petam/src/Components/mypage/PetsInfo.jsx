@@ -2,8 +2,8 @@ import React from 'react'
 import './mypage.css'
 import Item from './Item'
 
-function PetsInfo({info}){
-    
+// 전체 동물 리스트 보여주기
+function PetsInfo({info}){    
     return(
         <>
             {
