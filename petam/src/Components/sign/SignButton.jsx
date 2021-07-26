@@ -8,7 +8,7 @@ function SignButton(){
         <>
             <Link to='/login'>
                 <button className=" btn-light btn col-5 m-auto text-2140C text-center p-2 m-1">
-                    Sign In
+                    Login
                 </button>
             </Link>
             <Link to='/register'>

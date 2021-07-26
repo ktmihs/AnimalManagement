@@ -1,4 +1,4 @@
-import Reservation from "../../models/reservation"
+import Reservation from "../../models/reservation";
 
 // 예약하기
 export const write=async(ctx, next)=>{
@@ -62,37 +62,37 @@ export const readOne=async(ctx)=>{
 }
 
 // 병원 이름으로 가져오기
-// export const hospital=async(ctx)=>{
-//     const name=ctx.params
-//     let data
-//     try{
-//         data=await Reservation.findOne(name).exec()
-//     }catch(e){
-//         return ctx.throw(200,e)
-//     }
-//     if(!data){
-//         ctx.status=404
-//         ctx.body={message:'data not found'}
-//         return
-//     }
-//     ctx.body=data
-// }
+export const hospital=async(ctx)=>{
+    const name=ctx.params
+    let data
+    try{
+        data=await Reservation.findOne(name).exec()
+    }catch(e){
+        return ctx.throw(200,e)
+    }
+    if(!data){
+        ctx.status=404
+        ctx.body={message:'data not found'}
+        return
+    }
+    ctx.body=data
+}
 
-// export const readName=async(ctx)=>{
-//     const hostId=ctx.params
-//     let data
-//     try{
-//         data=await Reservation.findOne(hostId).exec()
-//     }catch(e){
-//         return ctx.throw(200,e)
-//     }
-//     if(!data){
-//         ctx.status=404
-//         ctx.body={message:'data not found'}
-//         return
-//     }
-//     ctx.body=data
-// }
+export const readName=async(ctx)=>{
+    const hostId=ctx.params
+    let data
+    try{
+        data=await Reservation.findOne(hostId).exec()
+    }catch(e){
+        return ctx.throw(200,e)
+    }
+    if(!data){
+        ctx.status=404
+        ctx.body={message:'data not found'}
+        return
+    }
+    ctx.body=data
+}
 
 // 개인이 예약한 내역만 가져오기
 export const filter=async(ctx)=>{       

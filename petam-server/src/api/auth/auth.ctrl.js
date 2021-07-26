@@ -1,297 +1,110 @@
-//import Joi from 'Joi'
-//import Account from '../../models/account'
-import Auth from '../../models/auth'
-import pets from '../pets'
+import Joi from 'joi';
+import User from '../../models/user';
 
-export const login = async (ctx) => {
-  const { email, password } = ctx.request.body;
-let data
-//   const auth = new Auth({
-//     username,//     email,
-//     password,
-//   });
-    try {
-        data = await Auth.findOne({ email: email, password: password }).exec();
-        console.log(data)
-    // await auth.save();
-  } catch (e) {
-    return ctx.throw(500, e);
+/*
+  POST /api/auth/register
+  {
+    username: 'velopert',
+    password: 'mypass123'
   }
-  ctx.body = data;
-};
+*/
+export const register = async (ctx) => {
+  // Request Body 검증하기
+  const schema = Joi.object().keys({
+    username: Joi.string().alphanum().min(3).max(20).required(),
+    password: Joi.string().required(),
+  });
+  const result = schema.validate(ctx.request.body);
+  if (result.error) {
+    ctx.status = 400;
+    ctx.body = result.error;
+    return;
+  }
 
-// export const read = async (ctx) => {
-//   let auth
-//   try {
-//     auth = await Auth.find().exec();
-//   } catch (e) {
-//     return ctx.throw(200, e);
-//   }
-
-//   ctx.body = auth;
-// };
-// export const readEmail = async (ctx) => {
-//   const email = ctx.params;
-//   let data;
-//   try {
-//     data = await Auth.findOne({ email: email }).exec();
-//     console.log(data);
-
-//     if (!data) {
-//       data = 'x';
-//       //   ctx.status = 404;
-//       // ctx.body={message:'data not found'}
-//       // return
-//     }
-//   } catch (e) {
-//     return ctx.throw(404, e);
-//   }
-
-//   ctx.body = data;
-// };
-
-export const readPassword = async (ctx) => {
-  const password = ctx.params;
-  let data;
+  const { username, password } = ctx.request.body;
   try {
-    data = await Auth.findOne({ password: password }).exec();
+    // username  이 이미 존재하는지 확인
+    const exists = await User.findByUsername(username);
+    if (exists) {
+      ctx.status = 409; // Conflict
+      return;
+    }
+
+    const user = new User({
+      username,
+    });
+    await user.setPassword(password); // 비밀번호 설정
+    await user.save(); // 데이터베이스에 저장
+
+    ctx.body = user.serialize();
+
+    const token = user.generateToken();
+    ctx.cookies.set('access_token', token, {
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 7일
+      httpOnly: true,
+    });
   } catch (e) {
-    return ctx.throw(200, e);
+    ctx.throw(500, e);
   }
-  if (!data) {
-    data = 'x';
-    // ctx.status=404
-    // ctx.body={message:'data not found'}
-    // return
-  }
-  ctx.body = data;
-  console.log(data);
 };
 
+/*
+  POST /api/auth/login
+  {
+    username: 'velopert',
+    password: 'mypass123'
+  }
+*/
+export const login = async (ctx) => {
+  const { username, password } = ctx.request.body;
 
-
-// 로컬 회원가입
-export const write=async(ctx)=>{
-    const {
-        username,
-        email,
-        password
-    }=ctx.request.body
-
-    const auth=new Auth({
-        username,
-        email,
-        password
-    })
-    try{
-        await auth.save()
-    } catch(e){
-        return ctx.throw(500,e)
-    }
-    ctx.body=auth
-}
-
-// 모든 회원정보 읽기
-export const read=async(ctx)=>{
-    let auth
-    try{
-        auth=await Auth.find().exec()
-    }catch(e){
-        return ctx.throw(200,e)
-    }
-    
-    ctx.body=auth
-}
-
-// 이메일로 회원정보 확인
-export const readEmail=async(ctx)=>{
-    const email=ctx.params
-    let data
-    try{
-        data=await Auth.findOne(email).exec()
-    }catch(e){
-        return ctx.throw(200,e)
-    }
-    if(!data){
-        data='x'
-    }
-    ctx.body=data
-}
-
-// 회원 정보 업데이트 (수정할 내용만 변경)
-export const update=async(ctx)=>{
-    const email=ctx.params
-    let auth
-    try{
-        auth=await Auth.updateOne(email,ctx.request.body,{
-            upsert: true,
-            new:true
-        }).exec()
-    } catch(e){
-        return ctx.throw(500,e)
-    }
-    ctx.body=auth
-}
-
-// 새로운 반려동물 등록
-export const updatePet = async (ctx) => {
-    const { email, pet } = ctx.params
-    let auth
-    try {
-      auth = await Auth.findOneAndUpdate(
-        { email: email },
-        { $addToSet: {pet: pet,} }
-      ).exec()
-    } catch (e) {
-      ctx.throw(500, e)
-    }
-    ctx.body = auth
+  // username, password 가 없으면 에러 처리
+  if (!username || !password) {
+    ctx.status = 401; // Unauthorized
+    return;
   }
 
-  // 등록된 반려동물 삭제
-  export const removePet = async (ctx) => {
-    const { email, pet } = ctx.params
-    let auth
-    try {
-        auth = await Auth.findOneAndUpdate(
-        { email: email },
-        { $pull: {pet: pet} }
-      )
-    } catch (e) {
-      ctx.throw(500, e)
+  try {
+    const user = await User.findByUsername(username);
+    // 계정이 존재하지 않으면 에러 처리
+    if (!user) {
+      ctx.status = 401;
+      return;
     }
-    ctx.body = auth
-  }
-
-/* 
-export const localRegister = async (ctx) => {
-    const schema = Joi.object().keys({
-        username: Joi.string().alphanum().min(4).max(15).required(),
-        email: Joi.string().email().required(),
-        password: Joi.string().required().min(6)
+    const valid = await user.checkPassword(password);
+    // 잘못된 비밀번호
+    if (!valid) {
+      ctx.status = 401;
+      return;
+    }
+    ctx.body = user.serialize();
+    const token = user.generateToken();
+    ctx.cookies.set('access_token', token, {
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 7일
+      httpOnly: true,
     });
-
-    const result = Joi.validate(ctx.request.body, schema);
-
-    // 스키마 검증 실패
-    if(result.error) {
-        ctx.status = 400;
-        return;
-    }
-    /* TODO: 아이디 / 이메일 중복처리 구현 
-
-    // 아이디 / 이메일 중복 체크
-    let existing = null;
-    try {
-        existing = await Account.findByEmailOrUsername(ctx.request.body);
-    } catch (e) {
-        ctx.throw(500, e);
-    }
-
-    if(existing) {
-    // 중복되는 아이디/이메일이 있을 경우
-        ctx.status = 409; // Conflict
-        // 어떤 값이 중복되었는지 알려줍니다
-        ctx.body = {
-            key: existing.email === ctx.request.body.email ? 'email' : 'username'
-        };
-        return;
-    }
-
-    // 계정 생성
-    let account = null;
-    try {
-        account = await Account.localRegister(ctx.request.body);
-    } catch (e) {
-        ctx.throw(500, e);
-    }
-
-    let token = null;
-    try {
-        token = await account.generateToken();
-    } catch (e) {
-        ctx.throw(500, e);
-    }
-
-    ctx.cookies.set('access_token', token, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 7 });
-    ctx.body = account.profile; // 프로필 정보로 응답합니다.
+  } catch (e) {
+    ctx.throw(500, e);
+  }
 };
 
-// 로컬 로그인
-export const localLogin = async (ctx) => {
-    const schema = Joi.object().keys({
-        email: Joi.string().email().required(),
-        password: Joi.string().required()
-    });
-
-    const result = Joi.validate(ctx.request.body, schema);
-
-    if(result.error) {
-        ctx.status = 400; // Bad Request
-        return;
-    }
-    const { email, password } = ctx.request.body; 
-
-    let account = null;
-    try {
-        // 이메일로 계정 찾기
-        account = await Account.findByEmail(email);
-    } catch (e) {
-        ctx.throw(500, e);
-    }
-
-    if(!account || !account.validatePassword(password)) {
-    // 유저가 존재하지 않거나 || 비밀번호가 일치하지 않으면
-        ctx.status = 403; // Forbidden
-        return;
-    }
-    
-    let token = null;
-    try {
-        token = await account.generateToken();
-    } catch (e) {
-        ctx.throw(500, e);
-    }
-
-    ctx.cookies.set('access_token', token, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 7 });
-    ctx.body = account.profile // 프로필 정보로 응답합니다.
-
+/*
+  GET /api/auth/check
+*/
+export const check = async (ctx) => {
+  const { user } = ctx.state;
+  if (!user) {
+    // 로그인중 아님
+    ctx.status = 401; // Unauthorized
+    return;
+  }
+  ctx.body = user;
 };
 
-// 이메일 / 아이디 존재유무 확인
-export const exists = async (ctx) => {
-    const { key, value } = ctx.params;
-    let account = null;
-
-    try {
-        // key 에 따라 findByEmail 혹은 findByUsername 을 실행합니다.
-        account = await (key === 'email' ? Account.findByEmail(value) : Account.findByUsername(value));    
-    } catch (e) {
-        ctx.throw(500, e);
-    }
-
-    ctx.body = {
-        exists: account !== null
-    };
-};
-
-// 로그아웃
+/*
+  POST /api/auth/logout
+*/
 export const logout = async (ctx) => {
-    ctx.cookies.set('access_token', null, {
-        maxAge: 0, 
-        httpOnly: true
-    });
-    ctx.status = 204;
+  ctx.cookies.set('access_token');
+  ctx.status = 204; // No Content
 };
-
-// 현재 호그인된 유저 정보 알려줌
-export const check = (ctx) => {
-    const { user } = ctx.request;
-
-    if(!user) {
-        ctx.status = 403; // Forbidden
-        return;
-    }
-
-    ctx.body = user.profile;
-}; */

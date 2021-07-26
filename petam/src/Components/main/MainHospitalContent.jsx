@@ -27,8 +27,8 @@ function MainHospitalContent(){
         </div>
         <div className="BottomContent">
           <div className="adTitle"><a><a className="news">[new!]</a> 새로 등록된 병원</a></div>
-          <SmallAd data={adHsp.fir}/>
-          <SmallAd data={adHsp.sec}/>
+          {/* <SmallAd data={adHsp.fir}/>
+          <SmallAd data={adHsp.sec}/> */}
         </div>
       </div>
   )
