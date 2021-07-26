@@ -3,6 +3,7 @@ import '../../style.css'
 import "./Register.css"
 import "./sign.css"
 
+// 회원가입 title
 function RegisterTitle({category}){
     return(
         <>

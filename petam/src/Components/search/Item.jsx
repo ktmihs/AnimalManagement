@@ -1,9 +1,8 @@
-//data item 하나하나 보여주기
- 
 import React from 'react'
 import '../Content.css'
 import './Search.css'
 
+// 병원 하나씩 보여주기 & 예약 정보 하나씩 보여주기 (linkname으로 구분)
 function Item({linkName,item}){
     const link=linkName
     const name=item.name

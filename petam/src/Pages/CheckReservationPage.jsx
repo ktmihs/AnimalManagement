@@ -77,6 +77,7 @@ function CheckReservationPage({location,history}){
     const goBack=()=>{
         history.push({      //전부 작성되면 다음 페이지로 이동 & 정보 보내기
             pathname:'/ReservationPage',
+            id:hsp.id,
             name:hsp.name
         })
     }
@@ -103,7 +104,7 @@ function CheckReservationPage({location,history}){
                     <div>
                         예약 병원 : {hsp.name}<br/>
                         예약 동물 : {reserve.pet}<br/>
-                        예약 일정 : {reserve.dateDay}<br/>
+                        예약 일정 : {reserve.dateDay.split('.')[0]}월 {reserve.dateDay.split('.')[1]}일 {reserve.dateDay.split('.')[2]}<br/>
                         예약 목적 : {reserve.option}<br/>
                         기타 내용 : {reserve.text}
                     </div>

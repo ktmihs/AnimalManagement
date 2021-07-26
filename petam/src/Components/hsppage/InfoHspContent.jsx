@@ -1,9 +1,10 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import swal from 'sweetalert';
-import { useHistory, useLocation } from 'react-router'
+import { useHistory } from 'react-router'
 import "../mypage/mypage.css"
 
+// 병원 정보 수정 페이지의 내용
 function InfoHspContent({user}){
     const [hospital,setHospital]=useState({
         tel:'',
@@ -19,6 +20,7 @@ function InfoHspContent({user}){
     const [id,setId]=useState()
     const res=useHistory()
 
+    // 현재 로그인 된 병원 정보 받아오기
     useEffect(() => {
         axios.get('/api/hospitals/read/company/'+user)
         .then(

@@ -19,16 +19,16 @@
 
 .search {
   display:inline-block;
-    border:1px solid #bbbcbc;
-    border-radius:5px;
-    width:40%;
-    height:35px;
+  border:1px solid #bbbcbc;
+  border-radius:5px;
+  width:40%;
+  height:35px;
 }
 
 .search-button {
   background-color:#dddddd;
-    margin-left:10px;
-    width:80px;
+  margin-left:10px;
+  width:80px;
 }
 .sign{
   color:#333333;
@@ -36,15 +36,15 @@
   font-size: large;
 } 
 .reservation {
-  height:180px;
-    width:140px;
-    padding:20px 5px;
-    margin:3vw 3vh;
-    border-radius:30px;
-    display:inline-block;
-    text-align:center;
-    font-size:14px;
-    box-shadow: 3px 3px 10px 0 rgba(0,0,0,0.3);
+  height:160px;
+  width:140px;
+  padding:5% 5px;
+  margin:3vw 3vh;
+  border-radius:30px;
+  display:inline-block;
+  text-align:center;
+  font-size:14px;
+  box-shadow: 3px 3px 10px 0 rgba(0,0,0,0.3);
 }
 .b {
   border: 1px solid red;

@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import '../Content.css'
 import './Search.css'
 
+// 검색창
 function Search({getSearchWord}){
     const [searchWord,setSearchWord]=useState('')
 
@@ -10,7 +11,6 @@ function Search({getSearchWord}){
     }
     const handleSubmit=(e)=>{
         e.preventDefault();
-        
         getSearchWord(searchWord)
         
     }

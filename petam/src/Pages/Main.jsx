@@ -4,9 +4,9 @@ import '../Components/Content.css'
 import MainAd from '../Components/main/MainAd'
 import MainHospitalContent from '../Components/main/MainHospitalContent'
 
-// import MainHospitalContent from './MainHospitalContent'
 
 
+// 메인 페이지
 function Main() {
 
   const contents={

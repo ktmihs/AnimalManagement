@@ -1,6 +1,5 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { useHistory, useLocation } from 'react-router'
-
 import '../../style.css'
 import "../sign/Register.css"
 import "../sign/sign.css"
@@ -9,12 +8,12 @@ import InfoHspContent from '../hsppage/InfoHspContent'
 import InfoTitle from './InfoTitle'
 
 // 정보 수정 페이지
-function ModInformation({history,props}){
+function ModInformation(){
     const res=useHistory()
     const user=useLocation().user
     const isHospital=useLocation().isHospital
 
-    const myPet=()=>{
+    const myPet=()=>{   // 펫 정보 페이지로 이동
         res.push({
             pathname:'/addPet/',
             email:user

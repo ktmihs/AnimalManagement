@@ -33,12 +33,14 @@ sagaMiddleware.run(rootSaga);
 loadUser();
 
 ReactDOM.render(
+
   <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
   </Provider>,
   document.getElementById('root'),
+
 );
 
 serviceWorker.unregister();

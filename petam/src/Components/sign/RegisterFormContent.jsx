@@ -9,9 +9,9 @@ import {bindActionCreators} from 'redux';
 import * as authActions from '../../redux/modules/auth'; */
 import axios from 'axios'
 import swal from 'sweetalert';
-import { useHistory, useLocation } from 'react-router'
+import { useHistory } from 'react-router'
 
-
+// 일반 회원가입 content 
 function RegisterFormContent(){
     const [authActions,setAuthActions]=useState({
         username:'',
@@ -73,7 +73,7 @@ function RegisterFormContent(){
     }
     
     const handleSubmit=()=>{
-        axios.post("/api/auth",authActions)
+        axios.post("/api/auth",authActions)     // 회원가입 정보 db에 저장
         .then((response) => {
             console.log(response)
         })

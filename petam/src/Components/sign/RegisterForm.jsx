@@ -1,6 +1,5 @@
 import React from 'react'
-import { useHistory, useLocation } from 'react-router'
-
+import { useLocation } from 'react-router'
 import '../../style.css'
 import "./Register.css"
 import "./sign.css"
@@ -8,6 +7,7 @@ import RegisterTitle from './RegisterTitle'
 import RegisterFormContent from './RegisterFormContent'
 import HospitalRegisterFormContent from './HospitalRegisterFormContent'
 
+// 회원가입 폼
 function RegisterForm(){
     const articleStyle={
         maxWidth: '600px',

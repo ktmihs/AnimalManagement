@@ -10,6 +10,8 @@ import {bindActionCreators} from 'redux';
 */
 // function LoginFormContent() {
 // export default class LoginFormContent extends Component {
+
+// 로그인 content
 function LoginFormContent({ userEmail, userPassword, his }) {
   const login = () => {
     const password = userPassword.value;
