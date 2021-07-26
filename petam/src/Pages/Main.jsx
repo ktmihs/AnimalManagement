@@ -4,10 +4,7 @@ import '../Components/Content.css'
 import MainAd from '../Components/main/MainAd'
 import MainHospitalContent from '../Components/main/MainHospitalContent'
 
-import reducer from "../_reducers";
 
-// import user from "../_reducers/userReducer";
-import user from "../_reducers/userReducer"
 
 // 메인 페이지
 function Main() {
@@ -18,7 +15,7 @@ function Main() {
   }
 
   // const a = reducer.user
-  console.log("user ==== ", user)
+  // console.log("user ==== ", user)
 
 
   return (

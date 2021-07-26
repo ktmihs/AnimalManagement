@@ -2,10 +2,6 @@ import React, { useEffect } from "react";
 import Content from "../Components/Content";
 import "../Components/Content.css";
 // import MainHospitalContent from "./MainHospitalContent";
-// import reducer from "../_reducers";
-
-// import user from "../_reducers/userReducer";
-// import user from "../_reducers/userReducer";
 
 import { useSelector } from "react-redux";
 import { render } from "react-dom";
@@ -24,7 +20,7 @@ const user = useSelector((state) => state);
   useEffect(async () => {
     
 // const a = reducer.user
-console.log("user ==== ", user);
+console.log("user ==== ", user.userData);
       if (!user.data) {
     console.log("유저 정보 없음!")
       } else {
