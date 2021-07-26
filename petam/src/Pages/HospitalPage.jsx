@@ -1,5 +1,3 @@
-// 병원 세부 정보 & 예약 및 후기 링크
-
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import Content from "../Components/Content";
@@ -8,6 +6,7 @@ import Search from "../Components/search/Search";
 import ProductXscroll from "../Components/product/ProductXscroll";
 import axios from "axios";
 
+// 병원 세부 정보 & 예약 및 후기 링크
 function HospitalPage(props) {
   const [hospitalInfo, setHospitalInfo] = useState({
     //나중에 ''로 초기화 후, db에서 받아 set에 넣어주기

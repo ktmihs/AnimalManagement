@@ -1,5 +1,3 @@
-//검색 페이지
-
 import React, { useState,useEffect } from 'react'
 import Content from '../Components/Content'
 import '../Components/Content.css'
@@ -8,6 +6,7 @@ import SearchContent from '../Components/search/SearchContent'
 import axios from 'axios'
 import Pagination from '../Components/pagination/Pagination'
 
+// 검색 페이지
 function SearchPage(){
     const [searchWord,setSearchWord]=useState('')
     const [info,setInfo]=useState([])   //병원 정보

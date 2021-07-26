@@ -2,24 +2,23 @@ import axios from 'axios'
 import React, { useState,useEffect } from 'react'
 import './reservation.css'
 
+// 예약 시간 정한 후의 예약할 동물과 예약 목적을 선택할 페이지
 function ReservationContent({time,getReserve}){
-    //const [selectTime,setSeleteTime]=useState()
-    const email='1410ahs@naver.com'
-    const [pets,setPets]=useState([])
-    const [reserve,setReserve]=useState({
+    const email='1410ahs@naver.com'     // 예약자 이메일
+    const [pets,setPets]=useState([])   // 예약자의 반려동물 list
+    const [reserve,setReserve]=useState({   // 예약 내역 정보
         pet:'x',
         option:'x',
         text:'없음'
     })
     const {pet,option,text}=reserve
+
     useEffect(() => {
         axios.get('/api/auth/email/'+email)
-        .then(ctx=>{
-            setPets(ctx.data.pet)
-            console.log(ctx.data.pet)
-        }
-        )
+        .then(ctx=>setPets(ctx.data.pet))       // 현재 로그인 된 예약자의 정보 중 반려동물 정보를 pets에 저장
     }, [])
+
+    // 예약 정보 입력 시
     const handleChange=(e)=>{
         const {name,value}=e.target
         setReserve({
@@ -28,6 +27,7 @@ function ReservationContent({time,getReserve}){
         })
         getReserve(name,value)
     }
+    
     const selectBox={
         width:'40%',
         marginLeft:'5px'

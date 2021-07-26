@@ -4,6 +4,7 @@ import LoginTitle from "./LoginTitle";
 import LoginFormContent from "./LoginFormContent";
 import LoginFormFooter from "./LoginFormFooter";
 
+// 로그인 페이지 상세정보
 function LoginForm({ his }) {
   return (
     <div class="wrapper fadeInDown">

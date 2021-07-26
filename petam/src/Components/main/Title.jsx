@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
+// 메인페이지 title
 function Title({title}){
     return(
         <>

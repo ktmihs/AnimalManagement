@@ -9,8 +9,9 @@ import {bindActionCreators} from 'redux';
 import * as authActions from '../../redux/modules/auth'; */
 import axios from 'axios'
 import swal from 'sweetalert'
-import { useHistory, useLocation } from 'react-router'
+import { useHistory } from 'react-router'
 
+// 병원 회원가입 페이지
 function HospitalRegisterFormContent(){
     const [time,setTime]=useState({
         hour:[6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],

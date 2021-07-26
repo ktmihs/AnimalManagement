@@ -5,6 +5,7 @@ import '../Components/Content.css'
 import axios from 'axios'
 import swal from 'sweetalert'
 
+// 예약된 정보 확인 페이지
 function ConfirmReservationPage(props){
     const [id,setId]=useState(props.match.params._id)
     const [reservation,setReservation]=useState({
@@ -29,7 +30,6 @@ function ConfirmReservationPage(props){
                     memo:ctx.data.memo,
                     dateDay:ctx.data.dateDay
                 })
-                console.log(ctx.data.dateDay)
                 axios.get('/api/hospitals/read/name/'+ctx.data.hospitalName)
                 .then(ctx=>{setHsp(ctx.data._id)
                 }).catch(err=>console.log(err))
@@ -44,7 +44,6 @@ function ConfirmReservationPage(props){
         swal({
             text:'예약이 취소되었습니다.',
             icon:'success',
-            //closeOnClickOutside:false,
             confirm:{
                 text:'확인',
                 value:true
@@ -56,9 +55,8 @@ function ConfirmReservationPage(props){
         )
     }
 
+    // 예약 취소 버튼 클릭 시
     const handleClick=()=>{
-        console.log(hsp,dateDay,':dateid')
-        console.log(reservation.name,reservation.type,reservation.dateDay)
         swal({
             title:'예약을 취소하시겠습니까?',
             text:`예약병원: ${reservation.name}

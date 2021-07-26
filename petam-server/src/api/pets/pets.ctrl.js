@@ -5,6 +5,7 @@ export const write=async(ctx)=>{
     const {
         parent,
         name,
+        species,
         age,
         gender
     }=ctx.request.body
@@ -12,6 +13,7 @@ export const write=async(ctx)=>{
     const pet=new Pet({
         parent,
         name,
+        species,
         age,
         gender
     })

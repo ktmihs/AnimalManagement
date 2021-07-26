@@ -1,10 +1,8 @@
-//data item 하나하나 보여주기
- 
 import React,{useState} from 'react'
 import PetInfo from './PetInfo'
-
 import './mypage.css'
 
+// 각 반려 동물마다 클릭 시, 모달창 오픈
 function Item({item}){
 
     const [ modalOpen, setModalOpen ] = useState(false);

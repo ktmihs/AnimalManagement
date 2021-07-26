@@ -1,9 +1,10 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import swal from 'sweetalert';
-import { useHistory, useLocation } from 'react-router'
+import { useHistory } from 'react-router'
 import "./mypage.css"
 
+// 개인 회원의 개인정보 수정 페이지
 function InfoContent({user}){
     const [information,setInformation]=useState({
             email:'',

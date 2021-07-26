@@ -1,9 +1,8 @@
-// 검색어에 맞는 병원 정보 보여주기(map으로)
-
 import React from 'react'
 import './hsppage.css'
 import Item from './Item'
 
+// 로그인 된 병원에 예약된 정보 보여주기(map으로 칼럼 하나씩)
 function reserveContent({hspId,info}){
 
     return(
