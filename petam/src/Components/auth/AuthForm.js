@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
 import Button from '../common/Button';
-import "../../style.css"
+import '../../style.css';
 
 /**
  * 회원가입 또는 로그인 폼을 보여줍니다.
@@ -24,9 +24,13 @@ const AuthFormBlock = styled.div`
 const StyledInput = styled.input`
   font-size: 1rem;
   border: none;
-  border-bottom: 1px solid ${palette.gray[5]};
-  padding-bottom: 0.5rem;
+  border: 1px solid ${palette.gray[5]};
+  // padding-bottom: 0.5rem;
+  // padding: 0.7rem;
+  padding: 13px 20px;
   outline: none;
+  border-radius: 20px;
+  // border-radius: 0.5rem;
   width: 100%;
   &:focus {
     color: $oc-teal-7;
@@ -58,7 +62,8 @@ const ButtonWithMarginTop = styled(Button)`
 
 const textMap = {
   login: '로그인',
-  register: '회원가입'
+  register: '개인 회원가입',
+  hregister: '병원 회원가입',
 };
 
 /**
@@ -70,46 +75,170 @@ const ErrorMessage = styled.div`
   font-size: 0.875rem;
   margin-top: 1rem;
 `;
+const title = {
+  textAlign: 'center',
+  marginBottom:'2rem',
+};
+
+const link = {
+  marginRight: '1.5rem',
+}
 
 const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
   const text = textMap[type];
   return (
     <AuthFormBlock>
-      <h3 className="mt-lg-2">{text}</h3>
+      <h3 className="mt-lg-2" style={title}>
+        {text}
+      </h3>
       <form onSubmit={onSubmit}>
-        <StyledInput
-          autoComplete="username"
-          name="username"
-          placeholder="아이디"
-          onChange={onChange}
-          value={form.username}
-        />
-        <StyledInput
-          autoComplete="new-password"
-          name="password"
-          placeholder="비밀번호"
-          type="password"
-          onChange={onChange}
-          value={form.password}
-        />
+        {type !== 'hregister' ? (
+          <>
+            <StyledInput
+              autoComplete="username"
+              name="username"
+              placeholder="아이디"
+              onChange={onChange}
+              value={form.username}
+            />
+            <StyledInput
+              autoComplete="new-password"
+              name="password"
+              placeholder="비밀번호"
+              type="password"
+              onChange={onChange}
+              value={form.password}
+            />
+          </>
+        ) : (
+          <>
+            <StyledInput
+              autoComplete="name"
+              name="name"
+              placeholder="병원 이름"
+              onChange={onChange}
+              value={form.name}
+            />
+            <StyledInput
+              // autoComplete="openTime"
+              name="companyNumber"
+              placeholder="사업자 번호"
+              // type="password"
+              onChange={onChange}
+              value={form.companyNumber}
+            />
+            <StyledInput
+              autoComplete="username"
+              name="username"
+              placeholder="병원 아이디"
+              onChange={onChange}
+              value={form.username}
+            />
+            {/* <StyledInput
+              // autoComplete="company_number"
+              name="company_number"
+              placeholder="사업자번호"
+              onChange={onChange}
+              value={form.company_number}
+            /> */}
+            <StyledInput
+              autoComplete="new-password"
+              name="password"
+              placeholder="비밀번호"
+              type="password"
+              onChange={onChange}
+              value={form.password}
+            />
+            <StyledInput
+              autoComplete="new-password"
+              name="passwordConfirm"
+              placeholder="비밀번호 확인"
+              type="password"
+              onChange={onChange}
+              value={form.passwordConfirm}
+            />
+            <StyledInput
+              // autoComplete="openTime"
+              name="tel"
+              placeholder="도로명 주소"
+              // type="password"
+              onChange={onChange}
+              value={form.tel}
+            />
+            <StyledInput
+              // autoComplete="openTime"
+              name="newAddr"
+              placeholder="도로명 주소"
+              // type="password"
+              onChange={onChange}
+              value={form.newAddr}
+            />
+            <StyledInput
+              // autoComplete="new-password"
+              name="oldAddr"
+              placeholder="지번 주소"
+              // type="password"
+              onChange={onChange}
+              value={form.oldAddr}
+            />
+            <StyledInput
+              // autoComplete="new-password"
+              name="zipCode"
+              placeholder="우편번호"
+              // type="password"
+              onChange={onChange}
+              value={form.zipCode}
+            />
+          </>
+        )}
+
         {type === 'register' && (
-          <StyledInput
-            autoComplete="new-password"
-            name="passwordConfirm"
-            placeholder="비밀번호 확인"
-            type="password"
-            onChange={onChange}
-            value={form.passwordConfirm}
-          />
+          <>
+            <StyledInput
+              autoComplete="new-password"
+              name="passwordConfirm"
+              placeholder="비밀번호 확인"
+              type="password"
+              onChange={onChange}
+              value={form.passwordConfirm}
+            />
+            <StyledInput
+              autoComplete="name"
+              name="name"
+              placeholder="이름"
+              onChange={onChange}
+              value={form.name}
+            />
+            <StyledInput
+              autoComplete="email"
+              name="email"
+              placeholder="이메일"
+              onChange={onChange}
+              value={form.email}
+            />
+            <StyledInput
+              // autoComplete="phone"
+              name="phone"
+              placeholder="전화번호"
+              onChange={onChange}
+              value={form.phone}
+            />
+          </>
         )}
         {error && <ErrorMessage>{error}</ErrorMessage>}
-        <ButtonWithMarginTop cyan fullWidth style={{ marginTop: '1rem' }}>
+        <ButtonWithMarginTop cyan fullWidth style={{ marginTop: '3rem' }}>
           {text}
         </ButtonWithMarginTop>
       </form>
       <Footer>
         {type === 'login' ? (
-          <Link to="/register">회원가입</Link>
+          <>
+            <Link to="/register" style={link}>
+              개인 회원가입
+            </Link>
+
+            <Link to="/hregister">병원 회원가입</Link>
+          </>
         ) : (
           <Link to="/login">로그인</Link>
         )}

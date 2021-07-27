@@ -3,8 +3,13 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 const UserSchema = new Schema({
-  username: String,
-  hashedPassword: String,
+  username: String,       // 아이디
+  hashedPassword: String, // 비밀번호
+  name: String,         // 이름
+  phone: String,        // 전화번호
+  email: String,        // 이메일
+  pet: [],              // 반려동물
+  image: String,        // 프로필 이미지
 });
 
 UserSchema.methods.setPassword = async function(password) {
