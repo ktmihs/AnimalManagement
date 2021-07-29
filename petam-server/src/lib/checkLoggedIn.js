@@ -1,5 +1,5 @@
 const checkLoggedIn = (ctx, next) => {
-  if (!ctx.state.user) {
+  if ((!ctx.state.user) & (!ctx.state.hospital)) {
     ctx.status = 401; // Unauthorized
     return;
   }

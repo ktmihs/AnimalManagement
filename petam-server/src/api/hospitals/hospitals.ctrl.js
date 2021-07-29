@@ -97,6 +97,7 @@ export const login = async (ctx) => {
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7일
       httpOnly: true,
     });
+    console.log("토큰 발급 완료")
   } catch (e) {
     ctx.throw(500, e);
   }
@@ -105,6 +106,7 @@ export const check = async (ctx) => {
   const { hospital } = ctx.state;
   if (!hospital) {
     // 로그인중 아님
+    console.log("*********f로그인중 아님")
     ctx.status = 401; // Unauthorized
     return;
   }

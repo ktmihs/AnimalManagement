@@ -28,6 +28,7 @@ import WritePage from './Pages/WritePage';
 import Test from './Pages/Test';
 // import HRegisterForm from './Containers/auth/HRegisterForm.js';
 import HRegisterPage from "./Pages/HRegisterPage";
+import HLoginPage from './Pages/HLoginPage';
 
 const App = () => {
   return (
@@ -38,8 +39,9 @@ const App = () => {
         <div className="body">
           {/* <Route component={PostListPage} path={['/@:username', '/']} exact /> */}
           <Route path="/login" component={LoginPage} />
+          <Route path="/hlogin" component={HLoginPage} />
           <Route path="/register" component={RegisterPage} />
-          <Route path="/hregister" component={HRegisterPage}/>
+          <Route path="/hregister" component={HRegisterPage} />
           <Route component={WritePage} path="/write" />
           <Route path="/test" component={Test} />
           <Route path="/" exact component={Main} />
@@ -52,7 +54,10 @@ const App = () => {
           <Route path="/writeproductpage" component={WriteProductPage} />
           <Route path="/AllProductListPage" component={AllProductListPage} />
           <Route path="/product/detail/:_id" component={ProductViewPage} />
-          <Route path="/checkReservationPage" component={CheckReservationPage} />
+          <Route
+            path="/checkReservationPage"
+            component={CheckReservationPage}
+          />
           <Route path="/reservation/:_id" component={ConfirmReservationPage} />
           <Route exact path="/reservation" component={MyReservationPage} />
           <Route

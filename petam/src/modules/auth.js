@@ -18,6 +18,8 @@ const [HREGISTER, HREGISTER_SUCCESS, HREGISTER_FAILURE] =
 const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes(
   'auth/LOGIN'
 );
+const [HLOGIN, HLOGIN_SUCCESS, HLOGIN_FAILURE] =
+  createRequestActionTypes('auth/HLOGIN');
 
 export const changeField = createAction(
   CHANGE_FIELD,
@@ -50,14 +52,20 @@ export const login = createAction(LOGIN, ({ username, password }) => ({
   password
 }));
 
+export const hlogin = createAction(HLOGIN, ({ username, password }) => ({
+  username,
+  password,
+}));
 // saga 생성
 const registerSaga = createRequestSaga(REGISTER, authAPI.register);
 const hregisterSaga = createRequestSaga(HREGISTER, authAPI.hregister);
 const loginSaga = createRequestSaga(LOGIN, authAPI.login);
+const hloginSaga = createRequestSaga(HLOGIN, authAPI.hlogin);
 export function* authSaga() {
   yield takeLatest(REGISTER, registerSaga);
   yield takeLatest(HREGISTER, hregisterSaga);
   yield takeLatest(LOGIN, loginSaga);
+  yield takeLatest(HLOGIN, hloginSaga);
 }
 
 const initialState = {
@@ -81,6 +89,10 @@ const initialState = {
     zip_code: '',
   },
   login: {
+    username: '',
+    password: '',
+  },
+  hlogin: {
     username: '',
     password: '',
   },
@@ -129,6 +141,17 @@ const auth = handleActions(
     }),
     // 로그인 실패
     [LOGIN_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      authError: error,
+    }),
+    // 병원 로그인 성공
+    [HLOGIN_SUCCESS]: (state, { payload: auth }) => ({
+      ...state,
+      authError: null,
+      auth,
+    }),
+    // 병원 로그인 실패
+    [HLOGIN_FAILURE]: (state, { payload: error }) => ({
       ...state,
       authError: error,
     }),

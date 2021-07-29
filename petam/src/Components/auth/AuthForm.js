@@ -64,6 +64,7 @@ const textMap = {
   login: '로그인',
   register: '개인 회원가입',
   hregister: '병원 회원가입',
+  hlogin: '병원 로그인'
 };
 
 /**
@@ -92,6 +93,17 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
         {text}
       </h3>
       <form onSubmit={onSubmit}>
+        {/* {type === 'hlogin' && (
+          <>
+            <StyledInput
+              autoComplete="name"
+              name="name"
+              placeholder="병원명"
+              onChange={onChange}
+              value={form.name}
+            />
+          </>
+        )} */}
         {type !== 'hregister' ? (
           <>
             <StyledInput
@@ -225,23 +237,83 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
             />
           </>
         )}
+
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <ButtonWithMarginTop cyan fullWidth style={{ marginTop: '3rem' }}>
           {text}
         </ButtonWithMarginTop>
       </form>
       <Footer>
-        {type === 'login' ? (
+        {type === 'login' && (
+          <>
+            <Link to="/register" style={link}>
+              개인 회원가입
+            </Link>
+
+            <Link to="/hregister" style={link}>
+              병원 회원가입
+            </Link>
+
+            <Link to="/hlogin">병원 로그인</Link>
+          </>
+        )}
+        {type === 'hlogin' && (
+          <>
+            <Link to="/register" style={link}>
+              개인 회원가입
+            </Link>
+            <Link to="/hregister" style={link}>
+              병원 회원가입
+            </Link>
+
+            <Link to="/login">개인 로그인</Link>
+          </>
+        )}
+        {type === 'register' && (
+          <>
+            <Link to="/hregister" style={link}>
+              병원 회원가입
+            </Link>
+            <Link to="/login" style={link}>
+              개인 로그인
+            </Link>
+
+            <Link to="/hlogin">병원 로그인</Link>
+          </>
+        )}
+        {type === 'hregister' && (
+          <>
+            <Link to="/register" style={link}>
+              개인 회원가입
+            </Link>
+            <Link to="/login" style={link}>
+              개인 로그인
+            </Link>
+
+            <Link to="/hlogin">병원 로그인</Link>
+          </>
+        )}
+        {/* {type === 'login' ? (
           <>
             <Link to="/register" style={link}>
               개인 회원가입
             </Link>
 
             <Link to="/hregister">병원 회원가입</Link>
+
+            <Link to="/hlogin">병원 로그인</Link>
           </>
         ) : (
-          <Link to="/login">로그인</Link>
-        )}
+          <>
+            <Link to="/login">개인 로그인</Link>
+            <Link to="/register" style={link}>
+              개인 회원가입
+            </Link>
+
+
+            <Link to="/hlogin">병원 로그인</Link>
+          </>
+        )} */}
       </Footer>
     </AuthFormBlock>
   );

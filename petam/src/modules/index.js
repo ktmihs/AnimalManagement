@@ -8,7 +8,9 @@ import hospital, {hospitalSaga} from './hospital';
 const rootReducer = combineReducers({
   auth,
   loading,
-  user
+  
+  user,
+  hospital,
 });
 
 export function* rootSaga() {

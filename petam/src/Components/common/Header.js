@@ -42,48 +42,58 @@ const UserInfo = styled.div`
   margin-right: 1rem;
 `;
 
-const Header = ({ user, onLogout }) => {
+const Header = ({ user, onLogout, onHLogout, hospital }) => {
+  console.log(hospital)
+  console.log("user : ", user)
   return (
     <>
-          <nav class=" shadow-sm navbar navbar-expand navbar-light bg-primary topbar  static-top shadow">
+      <nav class=" shadow-sm navbar navbar-expand navbar-light bg-primary topbar  static-top shadow">
         <div className=" col-12">
-      <HeaderBlock>
-        <Wrapper>
-                <Link to="/main">
-            <h3
-              class="main-button"
-              // className="b bg-primary m-auto text-2140C text-center p-3 "
-            >
-              <span className="text-pet h4">
-                <b>pet</b>
-              </span>
-              <span className="text-white">
-                <b>A</b>
-              </span>
-              <span className="text-2140C h4">
-                <b>m</b>
-              </span>
+          <HeaderBlock>
+            <Wrapper>
+              <Link to="/main">
+                <h3
+                  class="main-button"
+                  // className="b bg-primary m-auto text-2140C text-center p-3 "
+                >
+                  <span className="text-pet h4">
+                    <b>pet</b>
+                  </span>
+                  <span className="text-white">
+                    <b>A</b>
+                  </span>
+                  <span className="text-2140C h4">
+                    <b>m</b>
+                  </span>
 
-              {/* <img src={imgUser} className="w-25 h-25"></img> */}
-            </h3>
-          </Link>
-          {user ? (
-            <div className="right">
-              <UserInfo>{user.username}</UserInfo>
-              <Button onClick={onLogout}>로그아웃</Button>
-            </div>
-          ) : (
-            <div className="right">
-              <Button to="/login">로그인</Button>
-            </div>
-          )}
-        </Wrapper>
+                  {/* <img src={imgUser} className="w-25 h-25"></img> */}
+                </h3>
+              </Link>
+
+              {hospital && (
+                <div className="right b">
+                  <UserInfo> {hospital.username}</UserInfo>
+                  <Button onClick={onHLogout}>로그아웃</Button>
+                </div>
+              )}
+              {user && (
+                <div className="right b">
+                  <UserInfo>{user.username}</UserInfo>
+                  <Button onClick={onLogout}>로그아웃--</Button>
+                </div>
+              )}
+              {!user & !hospital && (
+                <div className="right b">
+                  <Button to="/login">개인 로그인</Button>
+                  <Button to="/hlogin">병원 로그인</Button>
+                </div>
+              )}
+            </Wrapper>
           </HeaderBlock>
-     
+
           <Spacer />
-               </div>
-            </nav>
-          
+        </div>
+      </nav>
     </>
   );
 };

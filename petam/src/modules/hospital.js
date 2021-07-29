@@ -11,15 +11,15 @@ const [CHECK, CHECK_SUCCESS, CHECK_FAILURE] =
   createRequestActionTypes('hospital/CHECK');
 const LOGOUT = 'hospital/LOGOUT';
 
-export const tempSetUser = createAction(TEMP_SET_HOSPITAL, (user) => user);
+export const tempSetHospital = createAction(TEMP_SET_HOSPITAL, (hospital) => hospital);
 export const check = createAction(CHECK);
-export const logout = createAction(LOGOUT);
+export const hlogout = createAction(LOGOUT);
 
 const checkSaga = createRequestSaga(CHECK, authAPI.check);
 
 function checkFailureSaga() {
   try {
-    localStorage.removeItem('user'); // localStorage 에서 user 제거하고
+    localStorage.removeItem('hospital'); // localStorage 에서 user 제거하고
   } catch (e) {
     console.log('localStorage is not working');
   }
@@ -28,7 +28,7 @@ function checkFailureSaga() {
 function* logoutSaga() {
   try {
     yield call(authAPI.logout); // logout API 호출
-    localStorage.removeItem('user'); // localStorage 에서 user 제거
+    localStorage.removeItem('hospital'); // localStorage 에서 user 제거
   } catch (e) {
     console.log(e);
   }
@@ -41,29 +41,29 @@ export function* hospitalSaga() {
 }
 
 const initialState = {
-  user: null,
+  hospital: null,
   checkError: null,
 };
 
 export default handleActions(
   {
-    [TEMP_SET_HOSPITAL]: (state, { payload: user }) => ({
+    [TEMP_SET_HOSPITAL]: (state, { payload: hospital }) => ({
       ...state,
-      user,
+      hospital,
     }),
-    [CHECK_SUCCESS]: (state, { payload: user }) => ({
+    [CHECK_SUCCESS]: (state, { payload: hospital }) => ({
       ...state,
-      user,
+      hospital,
       checkError: null,
     }),
     [CHECK_FAILURE]: (state, { payload: error }) => ({
       ...state,
-      user: null,
+      hospital: null,
       checkError: error,
     }),
     [LOGOUT]: (state) => ({
       ...state,
-      user: null,
+      hospital: null,
     }),
   },
   initialState,
