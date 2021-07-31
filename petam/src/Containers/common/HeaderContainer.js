@@ -15,12 +15,9 @@ const HeaderContainer = () => {
    };
   return (
     <>
+      {(!user && !hospital) && <Header />}
       {user && <Header user={user} onLogout={onLogout} />}
-      {hospital && <Header user={hospital} onLogout={onHLogout} ></Header>}
-      {!user & !hospital && (
-        <Header />
-      )}
-  
+      {hospital && <Header user={hospital} onLogout={onHLogout}></Header>}
     </>
   );
 };

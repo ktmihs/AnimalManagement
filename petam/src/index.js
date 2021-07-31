@@ -10,6 +10,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer, { rootSaga } from './modules';
 import { tempSetUser, check } from './modules/user';
+import { tempSetHospital, hcheck } from './modules/hospital';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
@@ -20,10 +21,18 @@ const store = createStore(
 function loadUser() {
   try {
     const user = localStorage.getItem('user');
-    if (!user) return; // 로그인 상태가 아니라면 아무것도 안함
+    const hospital = localStorage.getItem('hospital');
 
+    if (!user && !hospital) return; // 로그인 상태가 아니라면 아무것도 안함
+
+    if (user) {
     store.dispatch(tempSetUser(user));
     store.dispatch(check());
+    } else if (hospital) {
+         store.dispatch(tempSetHospital(hospital));
+         store.dispatch(hcheck());
+    }
+ 
   } catch (e) {
     console.log('localStorage is not working');
   }

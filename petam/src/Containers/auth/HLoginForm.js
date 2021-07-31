@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { changeField, initializeForm, hlogin } from '../../modules/auth';
 import AuthForm from '../../Components/auth/AuthForm';
-import { check } from '../../modules/hospital';
+import { hcheck } from '../../modules/hospital';
 
 const HLoginForm = ({ history }) => {
   const [error, setError] = useState(null);
@@ -51,7 +51,7 @@ const HLoginForm = ({ history }) => {
       console.log("auth : ", auth);
       // console.log("----", user)
         
-      dispatch(check());
+      dispatch(hcheck());
     }
   }, [auth, authError, dispatch]);
 

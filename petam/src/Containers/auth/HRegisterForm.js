@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeField, initializeForm, hregister } from '../../modules/auth';
 import AuthForm from '../../Components/auth/AuthForm';
-import { check } from '../../modules/hospital';
+import { hcheck } from '../../modules/hospital';
 import { withRouter } from 'react-router-dom';
 
 const HRegisterForm = ({ history }) => {
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
-  const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
+  const { form, auth, authError, hospital } = useSelector(({ auth, hospital }) => ({
     form: auth.hregister,
     auth: auth.auth,
     authError: auth.authError,
-    user: user.user,
+    hospital: hospital.hospital,
   }));
   // 인풋 변경 이벤트 핸들러
   const onChange = (e) => {
@@ -79,21 +79,21 @@ const HRegisterForm = ({ history }) => {
     if (auth) {
       console.log('회원가입 성공');
       console.log(auth);
-      dispatch(check());
+      dispatch(hcheck());
     }
   }, [auth, authError, dispatch]);
 
   // user 값이 잘 설정되었는지 확인
   useEffect(() => {
-    if (user) {
+    if (hospital) {
       history.push('/'); // 홈 화면으로 이동
       try {
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('hospital', JSON.stringify(hospital));
       } catch (e) {
         console.log('localStorage is not working');
       }
     }
-  }, [history, user]);
+  }, [history, hospital]);
 
   return (
     <AuthForm

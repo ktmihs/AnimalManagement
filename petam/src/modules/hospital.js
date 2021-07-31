@@ -12,7 +12,7 @@ const [CHECK, CHECK_SUCCESS, CHECK_FAILURE] =
 const LOGOUT = 'hospital/LOGOUT';
 
 export const tempSetHospital = createAction(TEMP_SET_HOSPITAL, (hospital) => hospital);
-export const check = createAction(CHECK);
+export const hcheck = createAction(CHECK);
 export const hlogout = createAction(LOGOUT);
 
 const checkSaga = createRequestSaga(CHECK, authAPI.check);

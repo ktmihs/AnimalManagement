@@ -43,8 +43,8 @@ const UserInfo = styled.div`
 `;
 
 const Header = ({ user, onLogout, onHLogout, hospital }) => {
-  console.log(hospital)
-  console.log("user : ", user)
+  // console.log(hospital)
+  // console.log("user : ", user)
   return (
     <>
       <nav class=" shadow-sm navbar navbar-expand navbar-light bg-primary topbar  static-top shadow">
@@ -65,24 +65,16 @@ const Header = ({ user, onLogout, onHLogout, hospital }) => {
                   <span className="text-2140C h4">
                     <b>m</b>
                   </span>
-
-                  {/* <img src={imgUser} className="w-25 h-25"></img> */}
                 </h3>
               </Link>
 
-              {hospital && (
-                <div className="right b">
-                  <UserInfo> {hospital.username}</UserInfo>
-                  <Button onClick={onHLogout}>로그아웃</Button>
-                </div>
-              )}
               {user && (
-                <div className="right b">
+                <div className="right">
                   <UserInfo>{user.username}</UserInfo>
-                  <Button onClick={onLogout}>로그아웃--</Button>
+                  <Button onClick={onLogout}>로그아웃</Button>
                 </div>
               )}
-              {!user & !hospital && (
+              {!user && !hospital && (
                 <div className="right b">
                   <Button to="/login">개인 로그인</Button>
                   <Button to="/hlogin">병원 로그인</Button>
@@ -90,7 +82,6 @@ const Header = ({ user, onLogout, onHLogout, hospital }) => {
               )}
             </Wrapper>
           </HeaderBlock>
-
           <Spacer />
         </div>
       </nav>
