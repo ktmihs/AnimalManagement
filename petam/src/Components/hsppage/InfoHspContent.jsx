@@ -19,6 +19,14 @@ function InfoHspContent({user}){
     const [passwordConfirm,setPasswordConfirm]=useState('')
     const [id,setId]=useState()
     const res=useHistory()
+    
+    const [image,setImage]=useState()
+    const formData=new FormData()
+    const config = {
+        headers: {
+        'content-type': 'multipart/form-data'
+        }    
+    }
 
     // 현재 로그인 된 병원 정보 받아오기
     useEffect(() => {
@@ -37,9 +45,16 @@ function InfoHspContent({user}){
             console.log(ctx,ctx.data)
             })
     }, [])
-
+    const handleImage=(e)=>{
+        console.log(e.target.files[0])
+        setImage(e.target.value)
+        formData.append('image', e.target.files[0])
+        formData.append('filename',e.target.files[0].name)
+        formData.append('hospitalname',name)
+    }
     const handleChange=(e)=>{
         const {name,value}=e.target
+        
         name==='passwordConfirm'?       // 비밀번호 확인일 경우에만 따로 저장
         setPasswordConfirm(value)
         :
@@ -68,6 +83,17 @@ function InfoHspContent({user}){
         )
     }
     const handleSubmit=()=>{
+        axios.post("/api/images/image",formData,{
+            headers: {
+            'content-type': 'multipart/form-data'
+            }    
+        })
+        .then((response) => {
+            console.log(response)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
         axios.put("/api/hospitals/"+id,hospital)        // 기존 등록 병원
         .then((response) => {
             console.log(response)
@@ -79,6 +105,9 @@ function InfoHspContent({user}){
 
     return(
         <form onSubmit={handleCheck}>
+            <div className='divstyle'>
+            <input type="file" value={image} accept="image/*" name="image" onChange={handleImage} />
+            </div>
             <div className='divstyle'>
                 <input className="inputDisabled mt-2" name="user" value={user} disabled/>  
             </div>

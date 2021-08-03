@@ -6,6 +6,7 @@ import hospitals from './hospitals';
 import reservations from './reservations';
 import auth from './auth';
 import pets from './pets';
+import images from './images';
 
 const api = new Router();
 
@@ -18,6 +19,7 @@ api.use('/auth', auth.routes());
 api.use('/pets',pets.routes())
 api.use('/reservations', reservations.routes());
 api.use('/hospitals', hospitals.routes());
+api.use('/images',images.routes());
 
 // 라우터를 내보냅니다.
 export default api;
