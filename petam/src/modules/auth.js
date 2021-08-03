@@ -37,16 +37,44 @@ export const register = createAction(REGISTER, ({ username, password, name, emai
   email,
   phone
 }));
-export const hregister = createAction(HREGISTER, ({ username, password, companyNumber, tel, name, newAddr, oldAddr, zipCode }) => ({
-  username,
-  password,
-  name,
-  companyNumber,
-  tel, 
-  newAddr,
-  oldAddr,
-  zipCode
-}));
+export const hregister = createAction(
+  HREGISTER,
+  ({
+    username,
+    password,
+    companyNumber,
+    tel,
+    name,
+    newAddr,
+    oldAddr,
+    openHour,
+    openMinute,
+    closeHour,
+    closeMinute,
+    lunchOpenHour,
+    lunchOpenMinute,
+    lunchCloseHour,
+    lunchCloseMinute,
+    zipCode,
+  }) => ({
+    username,
+    password,
+    name,
+    companyNumber,
+    tel,
+    newAddr,
+    oldAddr,
+    zipCode,
+    openHour,
+    openMinute,
+    closeHour,
+    closeMinute,
+    lunchOpenHour,
+    lunchOpenMinute,
+    lunchCloseHour,
+    lunchCloseMinute,
+  }),
+);
 export const login = createAction(LOGIN, ({ username, password }) => ({
   username,
   password

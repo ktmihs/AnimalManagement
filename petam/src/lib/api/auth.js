@@ -29,6 +29,14 @@ export const hregister = ({
   oldAddr,
   zipCode,
   tel,
+  openHour,
+  openMinute,
+  closeHour,
+  closeMinute,
+  lunchOpenHour,
+  lunchOpenMinute,
+  lunchCloseHour,
+  lunchCloseMinute,
 }) =>
   client.post('/api/hospitals/hregister', {
     username,
@@ -38,7 +46,15 @@ export const hregister = ({
     oldAddr,
     zipCode,
     name,
-    tel, 
+    tel,
+    openHour,
+    openMinute,
+    closeHour,
+    closeMinute,
+    lunchOpenHour,
+    lunchOpenMinute,
+    lunchCloseHour,
+    lunchCloseMinute,
   });
 // 로그인 상태 확인
 export const check = () => client.get('/api/auth/check');

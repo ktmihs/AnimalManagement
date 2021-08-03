@@ -38,7 +38,14 @@ const HRegisterForm = ({ history }) => {
       newAddr,
         oldAddr,
       tel,
-    //   company_number,
+      openHour,
+      openMinute,
+      closeHour,
+      closeMinute,
+      lunchOpenHour,
+      lunchOpenMinute,
+      lunchCloseHour,
+      lunchCloseMinute,
       zipCode,
     } = form;
     // 하나라도 비어있다면
@@ -55,7 +62,27 @@ const HRegisterForm = ({ history }) => {
       );
       return;
     }
-    dispatch(hregister({ username, password, name, companyNumber, newAddr, oldAddr,tel, zipCode }));
+    console.log("시간 출력 : ", name)
+    dispatch(
+      hregister({
+        username,
+        password,
+        name,
+        companyNumber,
+        newAddr,
+        oldAddr,
+        tel,
+        zipCode,
+        openHour,
+        openMinute,
+        closeHour,
+        closeMinute,
+        lunchOpenHour,
+        lunchOpenMinute,
+        lunchCloseHour,
+        lunchCloseMinute,
+      }),
+    );
   };
 
   // 컴포넌트가 처음 렌더링 될 때 form 을 초기화함

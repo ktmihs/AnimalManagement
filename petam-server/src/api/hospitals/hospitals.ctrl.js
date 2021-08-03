@@ -12,6 +12,14 @@ export const hregister = async (ctx) => {
     newAddr: Joi.string(),
     oldAddr: Joi.string(),
     zipCode: Joi.string(),
+    openHour: Joi.number(),
+    openMinute: Joi.number(),
+    closeHour: Joi.number(),
+    closeMinute: Joi.number(),
+    lunchOpenHour: Joi.number(),
+    lunchOpenMinute: Joi.number(),
+    lunchCloseHour: Joi.number(),
+    lunchCloseMinute: Joi.number(),
   });
   const result = schema.validate(ctx.request.body);
   console.log(result);
@@ -31,6 +39,14 @@ export const hregister = async (ctx) => {
     newAddr,
     oldAddr,
     zipCode,
+    openHour,
+    openMinute,
+    closeHour,
+    closeMinute,
+    lunchOpenHour,
+    lunchOpenMinute,
+    lunchCloseHour,
+    lunchCloseMinute,
   } = ctx.request.body;
   try {
     // username  이 이미 존재하는지 확인
@@ -52,7 +68,18 @@ export const hregister = async (ctx) => {
       new_addr: newAddr,
       old_addr: oldAddr,
       zip_code: zipCode,
+      timeList: {
+        openHour: openHour,
+        openMinute: openMinute,
+        closeHour: closeHour,
+        closeMinute: closeMinute,
+        lunchOpenHour: lunchOpenHour,
+        lunchOpenMinute: lunchOpenMinute,
+        lunchCloseHour: lunchCloseHour,
+        lunchCloseMinute: lunchCloseMinute,
+      }
     });
+    console.log("운영 시간 : ", openHour)
     await hospital.setPassword(password); // 비밀번호 설정
     await hospital.save(); // 데이터베이스에 저장
 
