@@ -1,5 +1,6 @@
 import Hospital from "../../models/hospital"
 import Joi from 'joi';
+import hospitals from "./index";
 
 export const hregister = async (ctx) => {
   // Request Body 검증하기
@@ -12,6 +13,14 @@ export const hregister = async (ctx) => {
     newAddr: Joi.string(),
     oldAddr: Joi.string(),
     zipCode: Joi.string(),
+    // openHour,
+    // openMinute,
+    // closeHour,
+    // closeMinute,
+    // lunchOpenHour,
+    // lunchOpenMinute,
+    // lunchCloseHour,
+    // lunchCloseMinute,
     openHour: Joi.number(),
     openMinute: Joi.number(),
     closeHour: Joi.number(),
@@ -77,9 +86,11 @@ export const hregister = async (ctx) => {
         lunchOpenMinute: lunchOpenMinute,
         lunchCloseHour: lunchCloseHour,
         lunchCloseMinute: lunchCloseMinute,
-      }
+      },
     });
     console.log("운영 시간 : ", openHour)
+    console.log("아이디 : ", username)
+    console.log("hospital.timeList : ", hospital.timeList)
     await hospital.setPassword(password); // 비밀번호 설정
     await hospital.save(); // 데이터베이스에 저장
 

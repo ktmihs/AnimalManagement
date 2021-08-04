@@ -94,11 +94,14 @@ const WritePostPage = ({ postTitle, postContent }) => {
       return;
     }
 
+    console.log(user.username)
+
     const send_param = {
       content: postContent.value,
       title: postTitle.value,
       score: clicked[5],
       view: 0,
+      writer: user.username,
       hospitalId: hospitalId,
     };
 
@@ -123,7 +126,7 @@ const WritePostPage = ({ postTitle, postContent }) => {
     console.log("res : ", res);
   };
 
-  const hospitalId = "60dea37e2aff16e271bb70b4";
+  const hospitalId = '6108d6ad3bc5d0b0e56ae1ac';
   const [hospitalData, setHospitalData] = useState([
     {
       _id: hospitalId,

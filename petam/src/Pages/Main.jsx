@@ -26,11 +26,11 @@ function Main() {
 
   return (
     <Content>
-      {hospital && (
+      {/* {hospital && (
         <div>
           {hospital.username}
         </div>
-    )}
+    )} */}
       
       <h2 className="name">Main Page!!</h2>
       <div style={contents} className="bodyContainer">

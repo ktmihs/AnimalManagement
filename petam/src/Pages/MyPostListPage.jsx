@@ -13,19 +13,26 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { useHistory, useLocation } from "react-router";
 import dateFormat from "dateformat";
 import axios from "axios";
+import { useSelector } from 'react-redux';
 
 function MyPostListPage({ location, history }) {
   // function getPostDetail(e) {
   //   console.log("/PostView/" + this.postid.value);
   //   window.location.href = "/PostView/" + this.postid.value;
   // }
+
+  // user 정보 조회
+  const { user, hospital } = useSelector(({ user, hospital }) => ({
+    user: user.user,
+    hospital: hospital.hospital,
+  }));
   const [postData, setpostData] = useState([
     {
-      _id: "",
-      title: "",
-      content: "",
-      writer: "",
-      enrollTime: "",
+      _id: '',
+      title: '',
+      content: '',
+      writer: '',
+      enrollTime: '',
     },
   ]);
 
@@ -34,7 +41,7 @@ function MyPostListPage({ location, history }) {
   useEffect(async () => {
     try {
       // 데이터를 받아오는 동안 시간 소요 되므로 await로 대기
-      const res = await axios.get("/api/posts/read/" + "jooju");
+      const res = await axios.get('/api/posts/read/' + user.username);
       console.log(res);
       const _postData = await res.data.map(
         (rowData) => (
@@ -47,10 +54,10 @@ function MyPostListPage({ location, history }) {
             content: rowData.content,
             writer: rowData.writer,
             // dateformat을 이용하여 년-월-일 로 표현
-            enrollTime: dateFormat(rowData.enrollTime, "yyyy-mm-dd"),
+            enrollTime: dateFormat(rowData.enrollTime, 'yyyy-mm-dd'),
             // enrollTime: rowData.enrollTime,
           }
-        )
+        ),
       );
       setpostData(postData.concat(_postData));
     } catch (e) {
@@ -60,7 +67,7 @@ function MyPostListPage({ location, history }) {
 
   const toPostDetail = () => {
     {
-      console.log("toPostDetail");
+      console.log('toPostDetail');
     }
   };
   return (
@@ -74,14 +81,14 @@ function MyPostListPage({ location, history }) {
         <div className="col-12 m-auto pt-3">
           <div className="table table-responsive">
             <PostTable
-              headersName={["no", "", "제목", "등록일", "작성자", "조회수"]}
+              headersName={['no', '', '제목', '등록일', '작성자', '조회수']}
             >
               {lastIdx !== 0 ? (
                 // 포스트를 역순으로 출력하고 싶다면 .reverse()를 추가하면 된다
                 postData.reverse().map(
                   (rowData) =>
                     // 최초 선언한 기본값은 나타내지 않음
-                    rowData._id !== "" && (
+                    rowData._id !== '' && (
                       // <a
                       //   class="test"
                       //   href="http://localhost:3000/PostView/${rowData._id}"
@@ -130,7 +137,7 @@ function MyPostListPage({ location, history }) {
                           type="post"
                           _id={rowData._id}
                         >
-                          {" "}
+                          {' '}
                           {rowData.writer}
                         </PostTableColumn>
                         <PostTableColumn
@@ -142,7 +149,7 @@ function MyPostListPage({ location, history }) {
                         </PostTableColumn>
                       </PostTableRow>
                       // </a>
-                    )
+                    ),
                 )
               ) : (
                 <PostTableRow>

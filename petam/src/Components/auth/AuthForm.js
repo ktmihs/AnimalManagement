@@ -315,7 +315,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, timeHandleChange, error }) =
               <select
                 name="openHour"
                 value={form.openHour}
-                onChange={timeHandleChange}
+                onChange={onChange}
                 style={startTime}
               >
                 {time.hour.map((item) => {
@@ -330,7 +330,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, timeHandleChange, error }) =
               <select
                 name="openMinute"
                 value={form.openMinute}
-                onChange={timeHandleChange}
+                onChange={onChange}
                 style={startTime}
               >
                 {time.minute.map((item) => {
@@ -345,7 +345,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, timeHandleChange, error }) =
               <select
                 name="closeMinute"
                 value={form.closeMinute}
-                onChange={timeHandleChange}
+                onChange={onChange}
                 style={endTime}
               >
                 {time.minute.map((item) => {
@@ -360,7 +360,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, timeHandleChange, error }) =
               <select
                 name="closeHour"
                 value={form.closeHour}
-                onChange={timeHandleChange}
+                onChange={onChange}
                 style={endTime}
               >
                 {time.hour.map((item) => {
@@ -381,7 +381,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, timeHandleChange, error }) =
               <select
                 name="lunchOpenHour"
                 value={form.lunchOpenHour}
-                onChange={timeHandleChange}
+                onChange={onChange}
                 style={startTime}
               >
                 {time.hour.map((item) => {
@@ -396,7 +396,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, timeHandleChange, error }) =
               <select
                 name="lunchOpenMinute"
                 value={form.lunchOpenMinute}
-                onChange={timeHandleChange}
+                onChange={onChange}
                 style={startTime}
               >
                 {time.minute.map((item) => {
@@ -411,7 +411,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, timeHandleChange, error }) =
               <select
                 name="lunchCloseMinute"
                 value={form.lunchCloseMinute}
-                onChange={timeHandleChange}
+                onChange={onChange}
                 style={endTime}
               >
                 {time.minute.map((item) => {
@@ -426,7 +426,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, timeHandleChange, error }) =
               <select
                 name="lunchCloseHour"
                 value={form.lunchCloseHour}
-                onChange={timeHandleChange}
+                onChange={onChange}
                 style={endTime}
               >
                 {time.hour.map((item) => {
@@ -442,7 +442,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, timeHandleChange, error }) =
             <StyledInput
               name="oldAddr"
               placeholder="지번 주소"
-              onChange={onChange}
+              // onChange={onChange}
               value={form.oldAddr}
             />
             <Label>도로명 주소</Label>
