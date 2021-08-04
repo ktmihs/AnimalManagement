@@ -9,8 +9,7 @@ import Leftbar from '../Components/Leftbar.js';
 const LoginPage = () => {
   return (
     <>
-      {/* <Leftbar/> */}
-      {/* <HeaderContainer/> */}
+
       <Content>
         <AuthTemplate>
           <HLoginForm />
