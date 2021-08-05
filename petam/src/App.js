@@ -18,7 +18,7 @@ import PostListPage from './Pages/PostListPage';
 import PostViewPage from './Pages/PostViewPage';
 import WritePostPage from './Pages/WritePostPage';
 import WriteProductPage from './Pages/WriteProductPage';
-import AllProductListPage from './Pages/AllProductListPage';
+import ProductListPage from './Pages/ProductListPage';
 import ProductViewPage from './Pages/ProductViewPage';
 import Modify from './Components/mypage/ModInformation';
 import AddPet from './Pages/AddPetPage';
@@ -29,6 +29,8 @@ import Test from './Pages/Test';
 // import HRegisterForm from './Containers/auth/HRegisterForm.js';
 import HRegisterPage from "./Pages/HRegisterPage";
 import HLoginPage from './Pages/HLoginPage';
+import AllProductPage from './Pages/AllProductPage.jsx';
+import ProductOnSale from './Pages/ProductOnSale.jsx';
 
 const App = () => {
   return (
@@ -52,8 +54,10 @@ const App = () => {
           <Route path="/MyPostListPage" component={MyPostListPage} />
           <Route path="/WritePostPage" component={WritePostPage} />
           <Route path="/writeproductpage" component={WriteProductPage} />
-          <Route path="/AllProductListPage" component={AllProductListPage} />
+          <Route path="/ProductListPage" component={ProductListPage} />
+          <Route path="/allproduct" component={AllProductPage}/>
           <Route path="/product/detail/:_id" component={ProductViewPage} />
+          <Route path="/ProductOnSale" component={ProductOnSale}/>
           <Route
             path="/checkReservationPage"
             component={CheckReservationPage}

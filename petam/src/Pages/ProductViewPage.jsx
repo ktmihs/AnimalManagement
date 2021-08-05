@@ -89,7 +89,7 @@ function ProductViewPage(props) {
 
           <ProductViewDetail>{productData.discription}</ProductViewDetail>
 
-          <Link style={{ textDecorationLine: "none" }} to="/allproductlistpage">
+          <Link style={{ textDecorationLine: "none" }} to="/productlistpage">
             <div class="tolist">목록으로</div>
           </Link>
         </div>

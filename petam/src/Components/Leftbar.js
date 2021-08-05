@@ -52,50 +52,50 @@ import LeftbarCategory from "./leftbar/LeftbarCategory";
                 title: '병원검색',
                 address: '/hospital',
               },
-              {
-                title: '내 예약 내역',
-                address: '/reservation',
-              },
+              // {
+              //   title: '내 예약 내역',
+              //   address: '/reservation',
+              // },
               // {
               //   title: "내",
               //   address: "/reservation",
               // },
             ]}
-            h={95}
+            h={47}
           >
             Hospital
           </LeftbarCategory>
           <LeftbarCategory
             selections={[
+              // {
+              //   title: '제품 등록',
+              //   address: '/writeproductpage',
+              // },
               {
-                title: '제품 등록',
-                address: '/writeproductpage',
-              },
-              {
-                title: 'All Products',
-                address: '/allproductlistpage',
+                title: '전제 제품',
+                address: '/allproduct',
               },
             ]}
-            h={95}
+            h={47}
           >
             Product
           </LeftbarCategory>
           <LeftbarCategory
             selections={[
               {
-                title: '후기',
+                title: '전체 글',
                 address: '/postlistpage',
               },
-              {
-                title: '후기 작성',
-                address: '/writepostpage',
-              },
+              // {
+              //   title: '후기 작성',
+              //   address: '/writepostpage',
+              // },
               // {
               //   title: '내가 쓴 글',
               //   address: '/mypostlistpage',
               // },
             ]}
-            h={95}
+            h={47}
           >
             Community
           </LeftbarCategory>
@@ -112,7 +112,7 @@ import LeftbarCategory from "./leftbar/LeftbarCategory";
                 },
                 {
                   title: '내 진료 내역',
-                  address: '/',
+                  address: '/reservation',
                 },
               ]}
               h={141}
@@ -131,16 +131,21 @@ import LeftbarCategory from "./leftbar/LeftbarCategory";
                   title: '진료 내역',
                   address: '/',
                 },
-                {
-                  title: '판매 중인 제품',
-                  address: '/',
-                },
+                // {
+                //   title: '판매 중인 제품',
+                //   address: '/productonsale',
+                // },
                 {
                   title: '판매 제품 변경',
-                  address: '/',
+                  address: '/productlistpage',
+                },
+                {
+                  title: '새 제품 등록',
+                  address: '/writeproductpage',
                 },
               ]}
               h={188}
+              // h={235}
             >
               My Page
             </LeftbarCategory>
