@@ -82,6 +82,7 @@ HospitalSchema.methods.generateToken = function () {
     // 첫번째 파라미터엔 토큰 안에 집어넣고 싶은 데이터를 넣습니다
     {
       _id: this.id,
+      company_number: this.company_number,
       username: this.username,
     },
     process.env.JWT_SECRET, // 두번째 파라미터에는 JWT 암호를 넣습니다
@@ -95,8 +96,8 @@ HospitalSchema.methods.generateToken = function () {
 HospitalSchema.statics.findByUsername = function (username) {
   return this.findOne({ username });
 };
-// HospitalSchema.statics.findByCompany_number = function (company_number) {
-//   return this.findOne({ company_number });
-// };
+HospitalSchema.statics.findByCompany_number = function (company_number) {
+  return this.findOne({ company_number });
+};
 const Hospital = mongoose.model('Hospital', HospitalSchema);
 export default Hospital;

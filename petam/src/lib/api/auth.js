@@ -4,9 +4,10 @@ import client from './client';
 export const login = ({ username, password }) => 
   // var res =
     client.post('/api/auth/login', { username, password });
-  export const hlogin = ({ username, password }) =>
-
-    client.post('/api/hospitals/hlogin', { username, password });
+  // export const hlogin = ({ username, password }) =>
+    // client.post('/api/hospitals/hlogin', { username, password });
+     export const hlogin = ({ company_number, password }) =>
+       client.post('/api/hospitals/hlogin', { company_number, password });
   // console.log(res)
 // console.log("--------", login)
 
@@ -25,7 +26,7 @@ export const hregister = ({
   password,
   name,
   newAddr,
-  companyNumber,
+  company_number,
   oldAddr,
   zipCode,
   tel,
@@ -42,7 +43,7 @@ export const hregister = ({
     username,
     password,
     newAddr,
-    companyNumber,
+    company_number,
     oldAddr,
     zipCode,
     name,

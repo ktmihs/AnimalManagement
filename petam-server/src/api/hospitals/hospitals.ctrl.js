@@ -7,7 +7,7 @@ export const hregister = async (ctx) => {
   const schema = Joi.object().keys({
     username: Joi.string().alphanum().min(3).max(20).required(),
     password: Joi.string().required(),
-    companyNumber: Joi.string(),
+    company_number: Joi.string().required(),
     tel: Joi.string(),
     name: Joi.string(),
     newAddr: Joi.string(),
@@ -42,7 +42,7 @@ export const hregister = async (ctx) => {
   const {
     username,
     password,
-    companyNumber,
+    company_number,
     tel,
     name,
     newAddr,
@@ -72,7 +72,7 @@ export const hregister = async (ctx) => {
     const hospital = new Hospital({
       username: username,
       name: name,
-      company_number: companyNumber,
+      company_number: company_number,
       tel: tel,
       new_addr: newAddr,
       old_addr: oldAddr,
@@ -108,19 +108,21 @@ export const hregister = async (ctx) => {
 
 
 export const login = async (ctx) => {
-  const { username, password } = ctx.request.body;
+  const { company_number, password } = ctx.request.body;
 
   // username, password 가 없으면 에러 처리
-  if (!username || !password) {
+  if (!company_number || !password) {
     ctx.status = 401; // Unauthorized
     return;
   }
 
   try {
-    const hospital = await Hospital.findByUsername(username);
+    const hospital = await Hospital.findByCompany_number(company_number);
+    console.log(hospital)
     // 계정이 존재하지 않으면 에러 처리
     if (!hospital) {
       ctx.status = 401;
+      console.log("---")
       return;
     }
     const valid = await hospital.checkPassword(password);

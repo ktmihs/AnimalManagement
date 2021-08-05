@@ -11,10 +11,13 @@ const jwtMiddleware = async (ctx, next) => {
     ctx.state.user = {
       _id: decoded._id,
       username: decoded.username,
+
+      company_number: decoded.company_number,
     };
     ctx.state.hospital = {
       _id: decoded._id,
       username: decoded.username,
+      company_number: decoded.company_number,
     };
     // 토큰 3.5일 미만 남으면 재발급
     const now = Math.floor(Date.now() / 1000);

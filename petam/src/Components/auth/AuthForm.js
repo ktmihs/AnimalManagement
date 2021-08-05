@@ -230,18 +230,26 @@ const AuthForm = ({ type, form, onChange, onSubmit, timeHandleChange, error }) =
         {text}
       </h3>
       <form onSubmit={onSubmit}>
-        {/* {type === 'hlogin' && (
+        {type === 'hlogin' && (
           <>
             <StyledInput
-              autoComplete="name"
-              name="name"
-              placeholder="병원명"
+              autoComplete="username"
+              name="company_number"
+              placeholder="사업자 번호"
               onChange={onChange}
-              value={form.name}
+              value={form.company_number}
+            />
+            <StyledInput
+              autoComplete="new-password"
+              name="password"
+              placeholder="비밀번호"
+              type="password"
+              onChange={onChange}
+              value={form.password}
             />
           </>
-        )} */}
-        {type !== 'hregister' ? (
+        )}
+        {type === 'login' && (
           <>
             <StyledInput
               autoComplete="username"
@@ -259,7 +267,27 @@ const AuthForm = ({ type, form, onChange, onSubmit, timeHandleChange, error }) =
               value={form.password}
             />
           </>
-        ) : (
+        )}
+        {type === 'register' && (
+          <>
+            <StyledInput
+              autoComplete="username"
+              name="username"
+              placeholder="아이디"
+              onChange={onChange}
+              value={form.username}
+            />
+            <StyledInput
+              autoComplete="new-password"
+              name="password"
+              placeholder="비밀번호"
+              type="password"
+              onChange={onChange}
+              value={form.password}
+            />
+          </>
+        )}
+        {type === 'hregister' && (
           <>
             <Label>병원 이름</Label>
             <StyledInput
@@ -272,11 +300,11 @@ const AuthForm = ({ type, form, onChange, onSubmit, timeHandleChange, error }) =
             <Label>사업자 번호</Label>
             <StyledInput
               // autoComplete="openTime"
-              name="companyNumber"
+              name="company_number"
               placeholder="사업자 번호"
               // type="password"
               onChange={onChange}
-              value={form.companyNumber}
+              value={form.company_number}
             />
             <Label>병원 아이디</Label>
             <StyledInput
@@ -321,10 +349,9 @@ const AuthForm = ({ type, form, onChange, onSubmit, timeHandleChange, error }) =
                 {time.hour.map((item) => {
                   return <option value={item}>{item}</option>;
                 })}
-                {/* <option value="1" hidden>
-                  {' '}
-                  open hour{' '}
-                </option> */}
+                <option value="1" hidden>
+                  open hour
+                </option>
               </select>
               <StartTimeText>:</StartTimeText>
               <select

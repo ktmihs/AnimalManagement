@@ -42,7 +42,7 @@ export const hregister = createAction(
   ({
     username,
     password,
-    companyNumber,
+    company_number,
     tel,
     name,
     newAddr,
@@ -60,7 +60,7 @@ export const hregister = createAction(
     username,
     password,
     name,
-    companyNumber,
+    company_number,
     tel,
     newAddr,
     oldAddr,
@@ -80,8 +80,8 @@ export const login = createAction(LOGIN, ({ username, password }) => ({
   password
 }));
 
-export const hlogin = createAction(HLOGIN, ({ username, password }) => ({
-  username,
+export const hlogin = createAction(HLOGIN, ({ company_number, password }) => ({
+  company_number,
   password,
 }));
 // saga 생성
@@ -129,7 +129,8 @@ const initialState = {
     password: '',
   },
   hlogin: {
-    username: '',
+    // username: '',
+    company_number: '',
     password: '',
   },
   auth: null,

@@ -76,7 +76,14 @@ const Header = ({ user, onLogout, onHLogout,onMy, hospital }) => {
                 <div className="right">
                   <UserInfo>{user.username}</UserInfo>
                   <Button onClick={onLogout}>로그아웃</Button>
-                  <Button style={mypage}to="/mypage">My</Button>
+                  {/* <Button style={mypage}to="/mypage">My</Button> */}
+                </div>
+              )}
+              {hospital && (
+                <div className="right">
+                  <UserInfo>{hospital.username}</UserInfo>
+                  <Button onClick={onLogout}>로그아웃</Button>
+                  {/* <Button style={mypage}to="/mypage">My</Button> */}
                 </div>
               )}
               {!user && !hospital && (
