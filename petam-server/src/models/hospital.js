@@ -31,7 +31,7 @@ const HospitalSchema=new Schema({
         type: String
     },  //사업자 등록번호
     image:{
-        type: []
+        type: String
     },  //병원 이미지
     timeList:{
         openHour:{ Number },

@@ -13,12 +13,22 @@ function InfoHspContent({user}){
         zip_code:'',
         name:'',
         company_number:'',
-        password:''
+        password:'',
+        image:''
     })
     const {tel,old_addr,new_addr,zip_code,name,company_number,password}=hospital 
     const [passwordConfirm,setPasswordConfirm]=useState('')
     const [id,setId]=useState()
     const res=useHistory()
+    
+    const [image,setImage]=useState('')
+    const formData=new FormData()
+    const [form,setForm]=useState(new FormData)
+    const config = {
+        headers: {
+        'content-type': 'multipart/form-data'
+        }    
+    }
 
     // 현재 로그인 된 병원 정보 받아오기
     useEffect(() => {
@@ -37,9 +47,22 @@ function InfoHspContent({user}){
             console.log(ctx,ctx.data)
             })
     }, [])
-
+    const handleImage=(e)=>{
+        console.log(e.target.files[0],e.target.files[0].name)
+        setHospital({
+            ...hospital,
+            image:e.target.value
+        })
+        setImage(e.target.value)
+        formData.append('image', e.target.files[0])
+        formData.append('filename',e.target.files[0].name)
+        formData.append('hospitalname',name)
+        setForm(formData)
+        for(let data of formData){console.log(data[0],data[1])}
+    }
     const handleChange=(e)=>{
         const {name,value}=e.target
+        
         name==='passwordConfirm'?       // 비밀번호 확인일 경우에만 따로 저장
         setPasswordConfirm(value)
         :
@@ -68,6 +91,15 @@ function InfoHspContent({user}){
         )
     }
     const handleSubmit=()=>{
+        for(let data of form){console.log(data[0],data[1])}
+        axios.post("/api/images/image",form,config)
+        .then((response) => {
+            console.log(response,form.entries()[0])
+            //for(let i of formData.entries()){ console.log('form',i[0],i[1])}
+        })
+        .catch((error) => {
+            console.log(error)
+        })
         axios.put("/api/hospitals/"+id,hospital)        // 기존 등록 병원
         .then((response) => {
             console.log(response)
@@ -79,6 +111,9 @@ function InfoHspContent({user}){
 
     return(
         <form onSubmit={handleCheck}>
+            <div className='divstyle'>
+            <input type="file" value={image} accept="image/*" name="image" onChange={handleImage} />
+            </div>
             <div className='divstyle'>
                 <input className="inputDisabled mt-2" name="user" value={user} disabled/>  
             </div>
