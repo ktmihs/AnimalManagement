@@ -57,7 +57,7 @@ function AllProductPage({ location, history, keyword }) {
   };
   const [lastIdx, setLastIdx] = useState(0);
   // const hospitalId = "60da89269392a9b8dd76732d";
-  const hospitalId = hospital._id;
+//   const hospitalId = hospital._id;
   useEffect(async () => {
     try {
       console.log('--- state : ', state);

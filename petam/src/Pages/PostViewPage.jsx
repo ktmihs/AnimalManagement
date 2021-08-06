@@ -18,10 +18,15 @@ import CommentTop from "../Components/comment/CommentTop";
 import CommentDetail from "../Components/comment/CommentDetail";
 import CommentButtons from "../Components/comment/CommentButtons";
 
+import { useSelector } from 'react-redux';
 axios.defaults.withCredentials = true;
 const headers = { withCredentials: true };
 
 function PostViewPage(props) {
+    const { user, hospital } = useSelector(({ user, hospital }) => ({
+    user: user.user,
+    hospital: hospital.hospital,
+  }));
   const _id = props.match.params._id;
   const [commentData, setCommentData] = useState([
     {
@@ -162,22 +167,22 @@ function PostViewPage(props) {
         <hr className="w-90" />
         <div className="col-12 m-auto bg-white">
           <PostViewContent>{postData.content}</PostViewContent>
-          <Link style={{ textDecorationLine: "none" }} to="/postlistpage">
+          <Link style={{ textDecorationLine: 'none' }} to="/postlistpage">
             <div class="tolist">목록으로</div>
           </Link>
         </div>
       </Content>
-
-      {/* Comment */}
       <Content>
-        <CommentWrite pid={postData._id}>{postData._id}</CommentWrite>
+        {user && <CommentWrite pid={postData._id}>{postData._id}</CommentWrite>}
+        {/* Comment */}
+
         {lastIdx !== 0 ? (
           // 포스트를 역순으로 출력하고 싶다면 .reverse()를 추가하면 된다
           commentData &&
           commentData.reverse().map(
             (cData) =>
               // 최초 선언한 기본값은 나타내지 않음
-              cData._id !== "" && (
+              cData._id !== '' && (
                 <div className="  ">
                   <CommentTop
                     writer={cData.writer}
@@ -187,7 +192,7 @@ function PostViewPage(props) {
                   <CommentButtons>--</CommentButtons>
                   <hr className="w-90" />
                 </div>
-              )
+              ),
           )
         ) : (
           <CommentTop> 작성된 글이 없습니다.</CommentTop>
