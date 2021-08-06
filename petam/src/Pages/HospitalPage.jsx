@@ -12,10 +12,11 @@ function HospitalPage(props) {
     //나중에 ''로 초기화 후, db에서 받아 set에 넣어주기
     id: "",
     name: "",
-    img: "/sev.jpg",
+    img: "",
     addr: "",
     tel: "",
     time: "09:00 - 18:00",
+    lunch:'',
     avg: "0", //평점
   });
 
@@ -33,6 +34,9 @@ function HospitalPage(props) {
                       name:ctx.data.name,
                       addr:ctx.data.new_addr,
                       tel:ctx.data.tel,
+                      img:ctx.data.image,
+                      time:ctx.data.timeList.openHour+':'+ctx.data.timeList.openMinute+'-'+ctx.data.timeList.closeHour+':'+ctx.data.timeList.closeMinute,
+                      lunch:ctx.data.timeList.lunchOpenHour+':'+ctx.data.timeList.lunchOpenMinute+'-'+ctx.data.timeList.lunchCloseHour+':'+ctx.data.timeList.lunchCloseMinute,
                       _id: ctx.data._id,
                       products: ctx.data.products,
                       avg: _avg,
@@ -92,7 +96,11 @@ function HospitalPage(props) {
             <div className='bodyContainer'>
                 <div className="contentBox">
                     <div style={topContent}>
-                        <img style={hospitalImg} src={hospitalInfo.img} alt="hospitalImg"/>
+                        {hospitalInfo.img && hospitalInfo.img!==''?
+                        <img style={hospitalImg} src={`../${hospitalInfo.img.split('\\')[2]}`} alt="hospitalImg"/>
+                        :
+                        <img style={hospitalImg} src={'no_img.jpg'}/>
+                        }
                         <div style={buttons}>
                             <button style={topButton} className='button' onClick={handleClick}>예약하기</button>
                             <button style={bottomButton} className='button'>후기</button>
@@ -103,6 +111,7 @@ function HospitalPage(props) {
                         병원주소: {hospitalInfo.addr}<br/>
                         전화번호: {hospitalInfo.tel}<br/>
                         운영시간: {hospitalInfo.time}<br/>
+                        점심시간: {hospitalInfo.lunch}<br/>
                         평점: {hospitalInfo.avg}
                     </div>
                 </div>
