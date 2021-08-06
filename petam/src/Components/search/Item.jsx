@@ -1,4 +1,5 @@
-import React from 'react'
+import axios from 'axios'
+import React,{useState,useEffect} from 'react'
 import '../Content.css'
 import './Search.css'
 
@@ -8,14 +9,19 @@ function Item({linkName,item}){
     const name=item.name
     const id=item._id
     const hospitalName=item.hospitalName
-
+    const [image,setImage]=useState('')
+    // useEffect(() => {
+    //     if(link==='hospital' && item.image){
+    //         setImage('C:\Users\yello\AnimalManagement\petam-server\src\api\images/images/'+item.image.split('\\')[2])
+    //     } 'C:/Users/yello/AnimalManagement/petam-server/src/api/images/images/'+item.image.split('\\')[2]
+    // }, [])
     return(
         link==='hospital'?
         <a href={`/${link}/${name}`}>
             <div className="item-box">
                 {
-                    item.image===[]?
-                    <img className="img-style" src={item.image}/>
+                    item.image && item.image!==''?
+                    <img className="img-style" src={item.image.split('\\')[2]}/>
                     :
                     <img className="img-style" src={'no_img.jpg'}/>
                 }

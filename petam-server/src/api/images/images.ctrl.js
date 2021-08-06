@@ -17,3 +17,14 @@ export const write=async(req,res,next)=>{
         return req.throw(500,e)
     }
 }
+export const readOne=async(ctx)=>{
+    const hospital=ctx.params
+    let total, image
+    try{
+        total=await Image.find().exec()
+        image=total.filter(item=>item.hospitalname===String(Object.values(hospital)))
+    }catch(e){
+        return ctx.throw(200,e)
+    }
+    ctx.body=image[image.length-1]
+}

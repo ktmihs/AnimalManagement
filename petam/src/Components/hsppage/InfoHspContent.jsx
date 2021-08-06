@@ -13,15 +13,17 @@ function InfoHspContent({user}){
         zip_code:'',
         name:'',
         company_number:'',
-        password:''
+        password:'',
+        image:''
     })
     const {tel,old_addr,new_addr,zip_code,name,company_number,password}=hospital 
     const [passwordConfirm,setPasswordConfirm]=useState('')
     const [id,setId]=useState()
     const res=useHistory()
     
-    const [image,setImage]=useState()
+    const [image,setImage]=useState('')
     const formData=new FormData()
+    const [form,setForm]=useState(new FormData)
     const config = {
         headers: {
         'content-type': 'multipart/form-data'
@@ -46,11 +48,17 @@ function InfoHspContent({user}){
             })
     }, [])
     const handleImage=(e)=>{
-        console.log(e.target.files[0])
+        console.log(e.target.files[0],e.target.files[0].name)
+        setHospital({
+            ...hospital,
+            image:e.target.value
+        })
         setImage(e.target.value)
         formData.append('image', e.target.files[0])
         formData.append('filename',e.target.files[0].name)
         formData.append('hospitalname',name)
+        setForm(formData)
+        for(let data of formData){console.log(data[0],data[1])}
     }
     const handleChange=(e)=>{
         const {name,value}=e.target
@@ -83,13 +91,11 @@ function InfoHspContent({user}){
         )
     }
     const handleSubmit=()=>{
-        axios.post("/api/images/image",formData,{
-            headers: {
-            'content-type': 'multipart/form-data'
-            }    
-        })
+        for(let data of form){console.log(data[0],data[1])}
+        axios.post("/api/images/image",form,config)
         .then((response) => {
-            console.log(response)
+            console.log(response,form.entries()[0])
+            //for(let i of formData.entries()){ console.log('form',i[0],i[1])}
         })
         .catch((error) => {
             console.log(error)
