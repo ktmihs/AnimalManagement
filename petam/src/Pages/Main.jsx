@@ -4,6 +4,7 @@ import '../Components/Content.css'
 import MainAd from '../Components/main/MainAd'
 import MainHospitalContent from '../Components/main/MainHospitalContent'
 
+import { useSelector, useDispatch } from 'react-redux';
 
 
 // 메인 페이지
@@ -17,17 +18,30 @@ function Main() {
   // const a = reducer.user
   // console.log("user ==== ", user)
 
+  const { user, hospital } = useSelector(({ user, hospital }) => ({
+    user: user.user,
+    hospital: hospital.hospital,
+  }));
+ 
 
   return (
     <Content>
-      <h2 className='name'>Main Page!!</h2>
-      <div style={contents} className='bodyContainer'>
-        <MainHospitalContent/>
-        <MainHospitalContent/> {/*나중에 제품으로 변경*/}
+      {hospital && (
+        <div>
+          
+          {/* {hospital.username}
+          {hospital.company_number} */}
+        </div>
+    )}
+      
+      <h2 className="name">Main Page!!</h2>
+      <div style={contents} className="bodyContainer">
+        <MainHospitalContent />
+        <MainHospitalContent /> {/*나중에 제품으로 변경*/}
       </div>
-      <MainAd/>
+      <MainAd />
     </Content>
-  )
+  );
 }
 
 {/*

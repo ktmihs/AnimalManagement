@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { changeField, initializeForm, login } from '../../modules/auth';
 import AuthForm from '../../Components/auth/AuthForm';
 import { check } from '../../modules/user';
+import hospital from '../../modules/hospital';
 
 const LoginForm = ({ history }) => {
   const [error, setError] = useState(null);
@@ -13,6 +14,7 @@ const LoginForm = ({ history }) => {
     auth: auth.auth,
     authError: auth.authError,
     user: user.user,
+    // hospital: hospital.hospital
   }));
   // 인풋 변경 이벤트 핸들러
   const onChange = e => {
@@ -47,11 +49,14 @@ const LoginForm = ({ history }) => {
     }
     if (auth) {
       console.log('로그인 성공');
+      console.log(auth)
+      // console.log("----", user)
       dispatch(check());
     }
   }, [auth, authError, dispatch]);
 
   useEffect(() => {
+    // console.log("----", user)
     if (user) {
       history.push('/');
       try {

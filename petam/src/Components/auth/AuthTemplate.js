@@ -10,12 +10,12 @@ import "../button/Button.css";
 
 /* 화면 전체를 채움 */
 const AuthTemplateBlock = styled.div`
-  position: absolute;
+  // position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
   right: 0;
-  background: ${palette.gray[2]};
+  // background: ${palette.gray[2]};
   /* flex로 내부 내용 중앙 정렬 */
   display: flex;
   flex-direction: column;
@@ -28,13 +28,14 @@ const WhiteBox = styled.div`
   .logo-area {
     display: block;
     padding-bottom: 2rem;
+    // margin: 3px;
     text-align: center;
     font-weight: bold;
     letter-spacing: 2px;
   }
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
   padding: 2rem;
-  width: 360px;
+  width: 80%;
   background: white;
   // border:1px solid red;
   border-radius: 2px;
@@ -42,29 +43,15 @@ const WhiteBox = styled.div`
 
 const AuthTemplate = ({ children }) => {
   return (
-    <AuthTemplateBlock>
-      <WhiteBox>
-        <div className="logo-area">
-          {/* <Link to="/">REACTERS</Link> */}
+    <AuthTemplateBlock className="b">
+      <WhiteBox className="b">
+        {/* <div className="logo-area b">
+          <Link to="/">REACTERS</Link> 
                 <Link to="/main">
-            <h3
-              class="main-button  mb-lg-2 mb-3"
-              // className="b bg-primary m-auto text-2140C text-center p-3 "
-            >
-              <span className="text-pet h4">
-                <b>pet</b>
-              </span>
-              <span className="text-white">
-                <b>A</b>
-              </span>
-              <span className="text-2140C h4">
-                <b>m</b>
-              </span>
-
-              {/* <img src={imgUser} className="w-25 h-25"></img> */}
-            </h3>
-          </Link>
-        </div>
+        
+          </Link> 
+         </div> */}
+        {/* <h2 className="name">제품 등록</h2> */}
         {children}
       </WhiteBox>
     </AuthTemplateBlock>

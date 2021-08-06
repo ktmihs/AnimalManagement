@@ -13,15 +13,20 @@ export const register = async (ctx) => {
   const schema = Joi.object().keys({
     username: Joi.string().alphanum().min(3).max(20).required(),
     password: Joi.string().required(),
+    name: Joi.string(),
+    email: Joi.string(),
+    phone: Joi.string(),
   });
+  console.log(ctx.request.body);
   const result = schema.validate(ctx.request.body);
+  console.log(result);
   if (result.error) {
     ctx.status = 400;
     ctx.body = result.error;
     return;
   }
 
-  const { username, password } = ctx.request.body;
+  const { username, password, name, email, phone } = ctx.request.body;
   try {
     // username  이 이미 존재하는지 확인
     const exists = await User.findByUsername(username);
@@ -32,6 +37,9 @@ export const register = async (ctx) => {
 
     const user = new User({
       username,
+      name,
+      email,
+      phone,
     });
     await user.setPassword(password); // 비밀번호 설정
     await user.save(); // 데이터베이스에 저장

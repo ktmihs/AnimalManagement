@@ -1,4 +1,165 @@
 import Hospital from "../../models/hospital"
+import Joi from 'joi';
+import hospitals from "./index";
+
+export const hregister = async (ctx) => {
+  // Request Body 검증하기
+  const schema = Joi.object().keys({
+    username: Joi.string().alphanum().min(3).max(20).required(),
+    password: Joi.string().required(),
+    company_number: Joi.string().required(),
+    tel: Joi.string(),
+    name: Joi.string(),
+    newAddr: Joi.string(),
+    oldAddr: Joi.string(),
+    zipCode: Joi.string(),
+    // openHour,
+    // openMinute,
+    // closeHour,
+    // closeMinute,
+    // lunchOpenHour,
+    // lunchOpenMinute,
+    // lunchCloseHour,
+    // lunchCloseMinute,
+    openHour: Joi.number(),
+    openMinute: Joi.number(),
+    closeHour: Joi.number(),
+    closeMinute: Joi.number(),
+    lunchOpenHour: Joi.number(),
+    lunchOpenMinute: Joi.number(),
+    lunchCloseHour: Joi.number(),
+    lunchCloseMinute: Joi.number(),
+  });
+  const result = schema.validate(ctx.request.body);
+  console.log(result);
+  if (result.error) {
+    ctx.status = 400;
+    ctx.body = result.error;
+    console.log(ctx.body)
+    return;
+  }
+
+  const {
+    username,
+    password,
+    company_number,
+    tel,
+    name,
+    newAddr,
+    oldAddr,
+    zipCode,
+    openHour,
+    openMinute,
+    closeHour,
+    closeMinute,
+    lunchOpenHour,
+    lunchOpenMinute,
+    lunchCloseHour,
+    lunchCloseMinute,
+  } = ctx.request.body;
+  try {
+    // username  이 이미 존재하는지 확인
+    const exists1 = await Hospital.findByUsername(username);
+    if (exists1) {
+      ctx.status = 409; // Conflict
+      return;
+    }
+//  const exists2 = await Hospital.findByCompany_number(company_number);
+//  if (exists2) {
+//    ctx.status = 409; // Conflict
+//    return;
+//  }
+    const hospital = new Hospital({
+      username: username,
+      name: name,
+      company_number: company_number,
+      tel: tel,
+      new_addr: newAddr,
+      old_addr: oldAddr,
+      zip_code: zipCode,
+      timeList: {
+        openHour: openHour,
+        openMinute: openMinute,
+        closeHour: closeHour,
+        closeMinute: closeMinute,
+        lunchOpenHour: lunchOpenHour,
+        lunchOpenMinute: lunchOpenMinute,
+        lunchCloseHour: lunchCloseHour,
+        lunchCloseMinute: lunchCloseMinute,
+      },
+    });
+    console.log("운영 시간 : ", openHour)
+    console.log("아이디 : ", username)
+    console.log("hospital.timeList : ", hospital.timeList)
+    await hospital.setPassword(password); // 비밀번호 설정
+    await hospital.save(); // 데이터베이스에 저장
+
+    ctx.body = hospital.serialize();
+
+    const token = hospital.generateToken();
+    ctx.cookies.set('access_token', token, {
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 7일
+      httpOnly: true,
+    });
+  } catch (e) {
+    ctx.throw(500, e);
+  }
+};
+
+
+export const login = async (ctx) => {
+  const { company_number, password } = ctx.request.body;
+
+  // username, password 가 없으면 에러 처리
+  if (!company_number || !password) {
+    ctx.status = 401; // Unauthorized
+    return;
+  }
+
+  try {
+    const hospital = await Hospital.findByCompany_number(company_number);
+    console.log(hospital)
+    // 계정이 존재하지 않으면 에러 처리
+    if (!hospital) {
+      ctx.status = 401;
+      console.log("---")
+      return;
+    }
+    const valid = await hospital.checkPassword(password);
+    // 잘못된 비밀번호
+    if (!valid) {
+      ctx.status = 401;
+      return;
+    }
+    ctx.body = hospital.serialize();
+    const token = hospital.generateToken();
+    ctx.cookies.set('access_token', token, {
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 7일
+      httpOnly: true,
+    });
+    console.log("토큰 발급 완료")
+  } catch (e) {
+    ctx.throw(500, e);
+  }
+};
+export const check = async (ctx) => {
+  const { hospital } = ctx.state;
+  if (!hospital) {
+    // 로그인중 아님
+    console.log("*********f로그인중 아님")
+    ctx.status = 401; // Unauthorized
+    return;
+  }
+  ctx.body = hospital;
+};
+
+/*
+  POST /api/auth/logout
+*/
+export const logout = async (ctx) => {
+  ctx.cookies.set('access_token');
+  ctx.status = 204; // No Content
+};
 
 // 병원 등록
 export const write=async(ctx)=>{

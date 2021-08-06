@@ -12,12 +12,17 @@ import CommentButtons from "../comment/CommentButtons";
 import "../Content.css";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from 'react-redux';
 
 // axios.defaults.withCredentials = true;
 // const headers = { withCredentials: true };
 
 const CommentWrite = ({ children, pid, comContent }) => {
   const post_id = children;
+   const { user, hospital } = useSelector(({ user, hospital }) => ({
+     user: user.user,
+     hospital: hospital.hospital,
+   }));
   // function CommentWrite (props) {
   // class CommentWrite extends Component {
   // constructor(props) {
@@ -77,10 +82,11 @@ const CommentWrite = ({ children, pid, comContent }) => {
 
   const comWrite = () => {
     const content = comContent.value;
+    console.log("user",user)
     const send_param = {
       //   title: this.postTitle.value,
       post_id: children,
-      writer: "joo-ju",
+      writer: user.username,
       // content: this.comContent.value,
       content: comContent.value,
     };

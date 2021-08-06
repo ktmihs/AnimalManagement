@@ -8,24 +8,33 @@ import { Button, Form } from "react-bootstrap";
 import Content from "../Components/Content";
 import "../Components/Content.css";
 import axios from "axios";
+import { useSelector, useDispatch } from 'react-redux';
+
 axios.defaults.withCredentials = true;
 const headers = { withCredentials: true };
-import { useSelector } from "react-redux";
 
 const WritePostPage = ({ postTitle, postContent }) => {
   // user 정보 조회
-  
+        const { user, hospital } = useSelector(({ user, hospital }) => ({
+          user: user.user,
+          hospital: hospital.hospital,
+        }));
   // 먼저 병원 정보 조회
   useEffect(async () => {
     try {
 
-          const user = useSelector((state) => state.user.userData);
-      console.log(hospitalId);
+      console.log("user : ", user.username);
+      // console.log("hospital : ", hospital.username)
+      console.log("dsdfsdf")
+      
+
+          // const user = useSelector((state) => state.user.userData);
+      console.log("--",hospitalId);
       const res = axios
         .get("/api/hospitals/readone/" + hospitalId)
         .then((response) => {
           console.log("response.data : ", response.data);
-          console.log("로그인 정보 : ", user);
+          // console.log("로그인 정보 : ", user);
           setHospitalData({
             _id: hospitalId,
             score: response.data.score,
@@ -69,6 +78,7 @@ const WritePostPage = ({ postTitle, postContent }) => {
     const title = postTitle.value;
     const content = postContent.value;
 
+
     if (title === "" || title === undefined) {
       alert("제목을 입력해주세요.");
       // this.postTitle.focus();
@@ -84,11 +94,14 @@ const WritePostPage = ({ postTitle, postContent }) => {
       return;
     }
 
+    console.log(user.username)
+
     const send_param = {
       content: postContent.value,
       title: postTitle.value,
       score: clicked[5],
       view: 0,
+      writer: user.username,
       hospitalId: hospitalId,
     };
 
@@ -113,7 +126,7 @@ const WritePostPage = ({ postTitle, postContent }) => {
     console.log("res : ", res);
   };
 
-  const hospitalId = "60dea37e2aff16e271bb70b4";
+  const hospitalId = '6108d6ad3bc5d0b0e56ae1ac';
   const [hospitalData, setHospitalData] = useState([
     {
       _id: hospitalId,

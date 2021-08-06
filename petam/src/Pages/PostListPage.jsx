@@ -9,16 +9,19 @@ import PostTableColumn from "../Components/table/PostTableColumn";
 import PostTableRow from "../Components/table/PostTableRow";
 import PostTableColumnNo from "../Components/table/PostTableColumnNo";
 import PostTableColumnTitle from "../Components/table/PostTableColumnTitle";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { useHistory, useLocation } from "react-router";
 import dateFormat from "dateformat";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 function PostListPage({ location, history }) {
   // function getPostDetail(e) {
   //   console.log("/PostView/" + this.postid.value);
   //   window.location.href = "/PostView/" + this.postid.value;
   // }
+    const { user, hospital } = useSelector(({ user, hospital }) => ({
+      user: user.user,
+      hospital: hospital.hospital,
+    }));
   const [postData, setpostData] = useState([
     {
       _id: "",
@@ -35,6 +38,8 @@ function PostListPage({ location, history }) {
     try {
       // 데이터를 받아오는 동안 시간 소요 되므로 await로 대기
       // const res = await axios.get("http://localhost:4000/api/posts/list");
+      console.log("개인 정보 : ", user)
+      console.log("병원 정보 : ", hospital)
       const res = await axios.get("/api/posts/list");
       console.log(res);
       const _postData = await res.data.map(
