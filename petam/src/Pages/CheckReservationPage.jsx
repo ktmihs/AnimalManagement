@@ -1,5 +1,6 @@
 import React from 'react'
 import { useLocation } from 'react-router'
+import { useSelector } from 'react-redux'
 import Content from '../Components/Content'
 import '../Components/Content.css'
 import swal from 'sweetalert';
@@ -7,9 +8,13 @@ import axios from 'axios'
 import { useState,useEffect } from 'react';
 
 function CheckReservationPage({location,history}){
+    const { user, hospital } = useSelector(({ user, hospital }) => ({
+        user: user.user,
+        hospital: hospital.hospital,
+    }))
     const [reservation,setReservation]=useState({
         hospitalName:'',
-        hostId:'1410ahs@naver.com',        // 로그인 후, 유저 정보로 변경
+        hostId:user.username,   
         pet:'', 
         type:'',
         memo:'',

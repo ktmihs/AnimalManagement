@@ -1,15 +1,20 @@
 import axios from 'axios'
 import React,{useState,useEffect} from 'react'
+import { useSelector } from 'react-redux'
+
 import Content from '../Components/Content'
 import "../Components/mypage/mypage.css"
 import PetsInfo from '../Components/mypage/PetsInfo'
 
 function AddPetPage(){
-    //const email=useLocation().email
-    const email='1410ahs@naver.com'
+    const { user, hospital } = useSelector(({ user, hospital }) => ({
+        user: user.user,
+        hospital: hospital.hospital,
+    }))
+    const username=user.username
     const [pets,setPets]=useState([])
     const [pet,setPet]=useState({
-        parent:'1410ahs@naver.com',   // 보호자email
+        parent:user.username,   // 보호자
         name:'',        // 동물 이름
         species:'',     // 동물 종
         age:'',         // 동물 나이
@@ -18,7 +23,7 @@ function AddPetPage(){
     const {parent,name,species,age,gender}=pet
 
     useEffect(() => {
-        axios.get('/api/pets/'+'1410ahs@naver.com') //나중에 로그인 이메일 넣기
+        axios.get('/api/pets/'+username) //나중에 로그인 이메일 넣기
         .then(
             res=>setPets(res.data)
         )
@@ -28,7 +33,7 @@ function AddPetPage(){
         const {name,value}=e.target
         setPet({
             ...pet,
-            parent:'1410ahs@naver.com', //임시로 넣어줌 (맨 처음만 되고 새로고침 될 때마다 사라짐)
+            parent:user.username, //임시로 넣어줌 (맨 처음만 되고 새로고침 될 때마다 사라짐)
             [name]: value
         })
     }
@@ -44,7 +49,7 @@ function AddPetPage(){
         )
     }
     const handleSubmit=()=>{
-        axios.put('/api/auth/pet/'+email+'/'+`${name}(${species})`)      // 로그인 된 보호자 정보에 동물 추가
+        axios.put('/api/auth/pet/'+username+'/'+`${name}(${species})`)      // 로그인 된 보호자 정보에 동물 추가
         .then((response) => {
             console.log(response)
         })

@@ -1,33 +1,38 @@
 import React,{useState,useEffect} from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+
 import axios from 'axios'
 import swal from 'sweetalert';
 import { useHistory } from 'react-router'
 import "./mypage.css"
 
 // 개인 회원의 개인정보 수정 페이지
-function InfoContent({user}){
+function InfoContent(){
+    const { user, hospital } = useSelector(({ user, hospital }) => ({
+        user: user.user,
+        hospital: hospital.hospital,
+    }))
     const [information,setInformation]=useState({
-            email:'',
+            email:user.username,
             username:'',
-            password:'',
-            form:'login'
+            password:''
         })
     const [passwordConfirm,setPasswordConfirm]=useState('')
     const {email,username,password}=information
 
     const res=useHistory()
 
-    useEffect(() => {
-        axios.get('/api/auth/email/'+user)
-        .then(
-            ctx=>{setInformation({
-                ...information,
-                email:ctx.data.email,
-                username:ctx.data.username
-            })
-            console.log(ctx)
-            })
-    }, [])
+    // useEffect(() => {
+    //     axios.get('/api/auth/'+user._id)
+    //     .then(
+    //         ctx=>{setInformation({
+    //             ...information,
+    //             email:ctx.data.email,
+    //             username:ctx.data.username
+    //         })
+    //         console.log(ctx)
+    //         })
+    // }, [])
 
     const handleChange=(e)=>{
         const {name,value}=e.target

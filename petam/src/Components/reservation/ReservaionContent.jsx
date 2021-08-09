@@ -1,10 +1,15 @@
 import axios from 'axios'
 import React, { useState,useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import './reservation.css'
 
 // 예약 시간 정한 후의 예약할 동물과 예약 목적을 선택할 페이지
 function ReservationContent({time,getReserve}){
-    const email='1410ahs@naver.com'     // 예약자 이메일
+    const { user, hospital } = useSelector(({ user, hospital }) => ({
+        user: user.user,
+        hospital: hospital.hospital,
+    }))
+    const email=user.username     // 예약자 이메일
     const [pets,setPets]=useState([])   // 예약자의 반려동물 list
     const [reserve,setReserve]=useState({   // 예약 내역 정보
         pet:'x',
@@ -14,7 +19,7 @@ function ReservationContent({time,getReserve}){
     const {pet,option,text}=reserve
 
     useEffect(() => {
-        axios.get('/api/auth/email/'+email)
+        axios.get('/api/auth/user/'+user._id)
         .then(ctx=>setPets(ctx.data.pet))       // 현재 로그인 된 예약자의 정보 중 반려동물 정보를 pets에 저장
     }, [])
 
