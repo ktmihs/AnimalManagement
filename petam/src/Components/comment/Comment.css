@@ -91,6 +91,7 @@
 .comment-buttons {
   margin: 0px 30px 0px 20px;
   min-height: 30px;
+  /* padding:1 */
 }
 .comment-button {
   float: right;

@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
   }
 })
 
-const upload = multer({ storage: storage })
+const upload = multer({ storage: storage })  
 
 // images.post('/image',
 //     koaBody(), // koaBody를 사용해서 multipart데이터를 허용한다고 설정해준다.
