@@ -116,3 +116,60 @@ export const logout = async (ctx) => {
   ctx.cookies.set('access_token');
   ctx.status = 204; // No Content
 };
+
+
+export const read=async(ctx)=>{
+  let users
+  try{
+      users=await User.find().exec()
+  }catch(e){
+      return ctx.throw(200,e)
+  } 
+  ctx.body=users
+}
+// 특정 아이디로 하나만 검색
+export const readOne=async(ctx)=>{
+  const _id=ctx.params
+  let data
+  try{
+      data=await User.findById(_id).exec()
+  }catch(e){
+      return ctx.throw(200,e)
+  }
+  if(!data){
+      ctx.status=404
+      ctx.body={message:'data not found'}
+      return
+  }
+  ctx.body=data
+}
+
+// 새로운 반려동물 등록
+export const updatePet = async (ctx) => {
+  const { username, pet } = ctx.params
+  let user
+  try {
+    user = await User.findOneAndUpdate(
+      { username: username },
+      { $addToSet: {pet: pet,} }
+    ).exec()
+  } catch (e) {
+    ctx.throw(500, e)
+  }
+  ctx.body = user
+}
+
+// 등록된 반려동물 삭제
+export const removePet = async (ctx) => {
+  const { username, pet } = ctx.params
+  let user
+  try {
+      user = await User.findOneAndUpdate(
+      { username: username },
+      { $pull: {pet: pet} }
+    )
+  } catch (e) {
+    ctx.throw(500, e)
+  }
+  ctx.body = user
+}

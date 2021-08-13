@@ -1,5 +1,7 @@
 import React from 'react'
 import { useHistory, useLocation } from 'react-router'
+import { useSelector, useDispatch } from 'react-redux';
+
 import '../../style.css'
 import "../sign/Register.css"
 import "../sign/sign.css"
@@ -10,8 +12,12 @@ import InfoTitle from './InfoTitle'
 // 정보 수정 페이지
 function ModInformation(){
     const res=useHistory()
-    const user=useLocation().user
-    const isHospital=useLocation().isHospital
+    //const user=useLocation().user
+    //const isHospital=useLocation().isHospital
+    const { user, hospital } = useSelector(({ user, hospital }) => ({
+        user: user.user,
+        hospital: hospital.hospital,
+    }))
 
     const myPet=()=>{   // 펫 정보 페이지로 이동
         res.push({
@@ -51,7 +57,7 @@ function ModInformation(){
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"/>
             <div class="container container fadeInDown">
                 <div>
-                    {isHospital?
+                    {hospital?
                     // 병원 정보 수정 content
                     <article id="formContent" class="card-body mx-auto" style={articleStyle}>
                         <div>

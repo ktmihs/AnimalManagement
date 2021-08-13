@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {Link, useLocation} from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import Content from '../Components/Content'
 import '../Components/Content.css'
 import SearchContent from '../Components/search/SearchContent'
@@ -14,27 +14,31 @@ function MyReservationPage(){
     const [postsPerPage]=useState(4)                //한 페이지에서 보여줄 info 수
 
     const linkName='reservation'         // 링크이름
-    //const [hostId,setHostId]=useState('1410ahs@naver.com')
-    
-    //if (useLocation()) setHostId(useLocation().hostId)
 
     const indexOfLastPost=currentPage*postsPerPage  //해당 페이지에서 마지막 info의 index
     const indexOfFirstPost=indexOfLastPost-postsPerPage //  ...      첫번째 ...
     const currentPosts=info.slice(indexOfFirstPost, indexOfLastPost)    //각 페이지에서 보여질 info 배열
     const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
+    const { user, hospital } = useSelector(({ user, hospital }) => ({
+        user: user.user,
+        hospital: hospital.hospital,
+    }))
+
     useEffect(() => {
+        const read=user.username
+        console.log(read)
         const fetchPosts=async()=>{
             setLoading(true)
-            axios.get('api/reservations/filter/'+'1410ahs@naver.com')   // 현재 로그인 된 아이디로 예약된 내역 모두 불러오기
+            axios.get('api/reservations/filter/'+read)   // 현재 로그인 된 아이디로 예약된 내역 모두 불러오기
             .then(
-                res=>setInfo(res.data),
+                res=>{setInfo(res.data),console.log(res.data)},
                 setLoading(false)
             )
             .catch(err=>console.log(err))
         }
         fetchPosts()
-    }, [])
+    }, [user])
     
     const totalCount={
         textAlign:'right'

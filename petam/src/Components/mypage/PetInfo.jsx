@@ -7,7 +7,7 @@ const PetInfo = ( props ) => {
     const { open, close, header, item } = props
 
     const handleSubmit=()=>{
-        axios.delete('/api/auth/pet/'+item.parent+'/'+item.name)    // 보호자의 반려동물 리스트에서 해당 반려동물 삭제
+        axios.delete('/api/auth/pet/'+item.parent+'/'+`${item.name}(${item.species})`)    // 보호자의 반려동물 리스트에서 해당 반려동물 삭제
         .then((response) => {
             console.log(response)
         })
