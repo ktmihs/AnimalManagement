@@ -19,6 +19,9 @@ import LeftbarCategory from "./leftbar/LeftbarCategory";
         user: user.user,
         hospital: hospital.hospital,
       }));
+    
+    // const userModify = '/modify/' + user._id
+
   // const state = {
   //   height: 0,
   // };
@@ -104,7 +107,8 @@ import LeftbarCategory from "./leftbar/LeftbarCategory";
               selections={[
                 {
                   title: '내 정보',
-                  address: '/',
+                  // address: userModify,
+                  address: '/modify/'+user._id,
                 },
                 {
                   title: '내가 쓴 글',
@@ -121,11 +125,12 @@ import LeftbarCategory from "./leftbar/LeftbarCategory";
             </LeftbarCategory>
           )}
           {hospital && (
+            
             <LeftbarCategory
               selections={[
                 {
                   title: '병원 정보',
-                  address: '/',
+                  address: '/modify/'+hospital._id,
                 },
                 {
                   title: '진료 내역',
