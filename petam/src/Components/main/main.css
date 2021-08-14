@@ -27,7 +27,7 @@
     padding:10px 0;
   }
   .BottomContent{
-    padding:10px 20px;
+    padding:2vh 20px;
   }
   .adTitle{
     height:30px;
@@ -47,16 +47,7 @@
     box-shadow:3px 3px 3px 3px #ffbbaa;
     text-align:center;
     font-size:15px;
-    margin:20px 0;
+    margin-top:30px;
     height:100%;
     width:100%;
-  }
-  .mainAd{
-    font-size: large;
-    border-radius: 5px;
-    background-color: rgba(190, 219, 253, 0.4);
-    text-align:center;
-    margin:0px 10% 20px 10%;
-    padding:10px 0;
-    width:80%;
   }

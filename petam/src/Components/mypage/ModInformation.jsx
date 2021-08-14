@@ -12,8 +12,6 @@ import InfoTitle from './InfoTitle'
 // 정보 수정 페이지
 function ModInformation(){
     const res=useHistory()
-    //const user=useLocation().user
-    //const isHospital=useLocation().isHospital
     const { user, hospital } = useSelector(({ user, hospital }) => ({
         user: user.user,
         hospital: hospital.hospital,
@@ -50,6 +48,7 @@ function ModInformation(){
         display:'inline-block'
     }
     const bottom={
+        margin:'15px 0',
         marginLeft:'130px'
     }
     return(
@@ -62,7 +61,7 @@ function ModInformation(){
                     <article id="formContent" class="card-body mx-auto" style={articleStyle}>
                         <div>
                         <InfoTitle />
-                        <InfoHspContent user={user}/>
+                        <InfoHspContent user={hospital}/>
                         </div>
                     </article>
                     :

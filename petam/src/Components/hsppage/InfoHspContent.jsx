@@ -3,9 +3,15 @@ import axios from 'axios'
 import swal from 'sweetalert';
 import { useHistory } from 'react-router'
 import "../mypage/mypage.css"
+import { useSelector } from 'react-redux'
 
 // 병원 정보 수정 페이지의 내용
-function InfoHspContent({user}){
+function InfoHspContent(){
+    const { userId, hospitalId } = useSelector(({ user, hospital }) => ({
+        userId: user.user,
+        hospitalId: hospital.hospital,
+    }))
+    
     const [hospital,setHospital]=useState({
         tel:'',
         old_addr:'',
@@ -32,7 +38,8 @@ function InfoHspContent({user}){
 
     // 현재 로그인 된 병원 정보 받아오기
     useEffect(() => {
-        axios.get('/api/hospitals/read/company/'+user)
+        if(!hospitalId) {return res.push('/')}
+        axios.get('/api/hospitals/read/company/'+hospitalId.company_number)
         .then(
             ctx=>{setHospital({
                 tel:ctx.data.tel,
@@ -46,7 +53,7 @@ function InfoHspContent({user}){
             setId(ctx.data._id)
             console.log(ctx,ctx.data)
             })
-    }, [])
+    }, [hospitalId])
     const handleImage=(e)=>{
         console.log(e.target.files[0],e.target.files[0].name)
         setHospital({
@@ -85,7 +92,7 @@ function InfoHspContent({user}){
                 handleSubmit(),
                 swal('','수정된 정보로 저장됩니다!', 'success'),
                 res.push({      //전부 작성되면 다음 페이지로 이동 & 정보 보내기
-                    pathname:'/info',
+                    pathname:'/',
                 })
             )
         )
@@ -115,7 +122,7 @@ function InfoHspContent({user}){
             <input type="file" value={image} accept="image/*" name="image" onChange={handleImage} />
             </div>
             <div className='divstyle'>
-                <input className="inputDisabled mt-2" name="user" value={user} disabled/>  
+                <input className="inputDisabled mt-2" name="company_number" value={company_number} disabled/>  
             </div>
             <div className='divstyle'>
                 <input className="inputDisabled mt-2" name="name" value={name} disabled/>

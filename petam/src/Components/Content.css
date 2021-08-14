@@ -21,7 +21,7 @@
 }
 .name {
   color: #395382;
-  margin: 20px 0;
+  margin: 5vh 0;
   text-align: center;
 }
 .headerContainer {
@@ -30,7 +30,7 @@
 }
 .bodyContainer {
   text-align: center;
-  margin: 1vh 3vw;
+  margin: 5vh 3vw;
 }
 .contentBox {
   display: inline-block;

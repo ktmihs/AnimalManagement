@@ -469,7 +469,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, timeHandleChange, error }) =
             <StyledInput
               name="oldAddr"
               placeholder="지번 주소"
-              // onChange={onChange}
+              onChange={onChange}
               value={form.oldAddr}
             />
             <Label>도로명 주소</Label>
