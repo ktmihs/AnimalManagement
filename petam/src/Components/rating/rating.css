@@ -1,5 +1,6 @@
 .clickedstar {
-  color: rgb(212, 180, 0);
+  /* color: rgb(212, 180, 0); */
+  color:#f7d36f;
 }
 svg.rating {
   color: #c7c7c7;
@@ -26,4 +27,17 @@ svg.rating:hover ~ svg {
 }
 .stars {
   margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 12px;
+  margin-right:4px;
+  /* float:left; */
+  /* vertical-align: middle; */
+  /* font-size: small; */
+}
+.score{
+  width: 100px;
+  float:left;
+}
+.laststar{
+  margin-right: 10px;
 }

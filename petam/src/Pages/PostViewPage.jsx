@@ -1,58 +1,60 @@
 // joo-ju
 
-import "../style.css";
-import React, { Component, useEffect, useState } from "react";
-import Content from "../Components/Content";
-import "../Components/button/Button.css";
-import { Button, Form } from "react-bootstrap";
-import "../Components/Content.css";
-import "../Components/comment/Comment.css";
-import { Link } from "react-router-dom";
-import dateFormat from "dateformat";
-import PostViewWriterDate from "../Components/view/PostViewWriterDate";
-import PostViewContent from "../Components/view/PostViewContent";
-import PostViewTitle from "../Components/view/PostViewTitle";
-import axios from "axios";
-import CommentWrite from "../Components/comment/CommentWrite";
-import CommentTop from "../Components/comment/CommentTop";
-import CommentDetail from "../Components/comment/CommentDetail";
-import CommentButtons from "../Components/comment/CommentButtons";
+import '../style.css';
+import '../Components/rating/rating.css';
+import { FaStar } from 'react-icons/fa';
+import React, { Component, useEffect, useState } from 'react';
+import Content from '../Components/Content';
+import '../Components/button/Button.css';
+import { Button, Form } from 'react-bootstrap';
+import '../Components/Content.css';
+import '../Components/comment/Comment.css';
+import { Link } from 'react-router-dom';
+import dateFormat from 'dateformat';
+import PostViewWriterDate from '../Components/view/PostViewWriterDate';
+import PostViewContent from '../Components/view/PostViewContent';
+import PostViewTitle from '../Components/view/PostViewTitle';
+import axios from 'axios';
+import CommentWrite from '../Components/comment/CommentWrite';
+import CommentTop from '../Components/comment/CommentTop';
+import CommentDetail from '../Components/comment/CommentDetail';
+import CommentButtons from '../Components/comment/CommentButtons';
 
 import { useSelector } from 'react-redux';
 axios.defaults.withCredentials = true;
 const headers = { withCredentials: true };
 
 function PostViewPage(props) {
-    const { user, hospital } = useSelector(({ user, hospital }) => ({
+  const { user, hospital } = useSelector(({ user, hospital }) => ({
     user: user.user,
     hospital: hospital.hospital,
   }));
   const _id = props.match.params._id;
   const [commentData, setCommentData] = useState([
     {
-      _id: "",
-      content: "",
-      writer: "",
-      post_id: "",
-      enrollTime: "",
+      _id: '',
+      content: '',
+      writer: '',
+      post_id: '',
+      enrollTime: '',
     },
   ]);
   const [postData, setpostData] = useState([
     {
-      _id: "",
-      title: "",
-      content: "",
-      writer: "",
-      enrollTime: "",
+      _id: '',
+      title: '',
+      content: '',
+      writer: '',
+      enrollTime: '',
+      score: '',
     },
   ]);
+  const [clicked, setClicked] = useState([false, false, false, false, false]);
 
   useEffect(async () => {
     try {
-      console.log("ss");
-      console.log("_id : ", _id);
-      const res = await axios.get("/api/posts/readone/" + _id);
-      console.log("res : ", res.data);
+      const res = await axios.get('/api/posts/readone/' + _id);
+      console.log('res : ', res.data);
 
       setpostData({
         _id: res.data._id,
@@ -60,23 +62,24 @@ function PostViewPage(props) {
         title: res.data.title,
         content: res.data.content,
         writer: res.data.writer,
+        score: res.data.score,
         // view: parseInt(res.data.view) + 1,
         // dateformat을 이용하여 년-월-일 시:분:초 로 표현
-        enrollTime: dateFormat(res.data.enrollTime, "yyyy-mm-dd hh:mm:ss"),
+        enrollTime: dateFormat(res.data.enrollTime, 'yyyy-mm-dd hh:mm:ss'),
       });
 
-      console.log("postData:", postData);
-
       // 게시 글의 조회수를 1씩 증가
-      const req = axios.put("/api/posts/" + _id, {
+      const req = axios.put('/api/posts/' + _id, {
         ...res.data,
         view: parseInt(res.data.view) + 1,
       });
-      console.log("update post view : ", req);
-      console.log("-----comment-----");
+      console.log('update post view : ', req);
+
+      console.log('-----comment-----');
+
       //comments
-      const commentRes = await axios.get("/api/comments/read/post/" + _id);
-      console.log("commentRes : ", commentRes);
+      const commentRes = await axios.get('/api/comments/read/post/' + _id);
+      console.log('commentRes : ', commentRes);
       const _commentData = await commentRes.data.map(
         (cData) => (
           setLastIdx(lastIdx + 1),
@@ -86,10 +89,10 @@ function PostViewPage(props) {
             writer: cData.writer,
             post_id: _id,
             // dateformat을 이용하여 년-월-일 로 표현
-            enrollTime: dateFormat(cData.enrollTime, "yyyy-mm-dd hh:mm"),
+            enrollTime: dateFormat(cData.enrollTime, 'yyyy-mm-dd hh:mm'),
             // enrollTime: rowData.enrollTime,
           }
-        )
+        ),
       );
       setCommentData(commentData.concat(_commentData));
     } catch (e) {
@@ -97,63 +100,12 @@ function PostViewPage(props) {
     }
   }, []);
   const [lastIdx, setLastIdx] = useState(0);
-  // 댓글 작성 함수들
 
-  // const constructor(props) {
-  //   super(props);
-  //   this.state = {value: ' '}
-  // }
+  // 댓글 작성 함수들
   const handleSubmit = (e) => {
-    alert("An essay was submitted: " + this.state.value);
+    alert('An essay was submitted: ' + this.state.value);
     e.preventDefault();
   };
-
-  const writer = "joo-ju";
-  // function submitHandler (async (e) => {
-  //   const writer = "joo-ju"
-  //   const comContent = this.comContent.value;
-  //   e.preventDefault();
-  //   console.log(writer);
-  //   console.log(comContent);
-  // };
-
-  // commentWrite (async () => {
-  //   const commentWrite = (e) => {
-  // e.preventDefault();
-  //   // function commentWrite( async () => {
-  //     // const comContent = this.comContent.value;
-  //     // const comContent = comContent.value;
-  //     const comContent = this.comContent.value;
-  //     // if (title === "" || title === undefined) {
-  //     //   alert("제목을 입력해주세요.");
-  //     //   this.postTitle.focus();
-  //     //   return;
-  //     // } else if (content === "" || content === undefined) {
-  //     //   alert("내용을 입력해주세요.");
-  //     //   this.postContent.focus();
-  //     //   return;
-  //     // }
-
-  //     const send_param = {
-  //       // post_id: this.postId.value,
-  //       post_id: _id,
-  //       // content: comContent,
-  //       content: this.comContent.value,
-  //       // writer: this.writer.value,
-  //       writer: writer,
-  //     };
-  //     console.log("send_param : ", send_param);
-  //     axios
-  //       .post("/api/comments", send_param)
-  //       .then((response) => {
-  //         console.log("response : ", response);
-  //         console.log("success");
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-
-  //   };
 
   return (
     <div>
@@ -164,8 +116,37 @@ function PostViewPage(props) {
           writer={postData.writer}
           date={postData.enrollTime}
         />
-        <hr className="w-90" />
+
         <div className="col-12 m-auto bg-white">
+          <div className="">
+            <div class="stars ">
+              <FaStar
+                size="18"
+                className={postData.score > 0 && 'clickedstar'}
+              />
+              <FaStar
+                size="18"
+                className={postData.score > 1 && 'clickedstar'}
+              />
+              <FaStar
+                size="18"
+                className={postData.score > 2 && 'clickedstar'}
+              />
+              <FaStar
+                size="18"
+                className={postData.score > 3 && 'clickedstar'}
+              />
+              <FaStar
+                size="18"
+                className={postData.score > 4 && 'clickedstar'}
+                className="laststar"
+              />
+              <span></span>
+              {postData.score}.0
+            </div>
+          </div>
+
+          <hr className="w-90" />
           <PostViewContent>{postData.content}</PostViewContent>
           <Link style={{ textDecorationLine: 'none' }} to="/postlistpage">
             <div class="tolist">목록으로</div>

@@ -36,7 +36,6 @@ function MainHospitalContent() {
         <Link to="/allproduct">
           <div className="contentName">제품 검색</div>
         </Link>
-        {/* <Title title={'제품 검색'} /> */}
       </div>
       <div className="BottomContent">
         <div className="adTitle">
