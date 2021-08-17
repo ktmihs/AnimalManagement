@@ -12,6 +12,8 @@ function InfoContent(){
         user: user.user,
         hospital: hospital.hospital,
     }))
+    const main=useHistory()
+    if(!user) return main.push('/')
     const [information,setInformation]=useState({
             email:user.username,
             username:'',
@@ -22,17 +24,17 @@ function InfoContent(){
 
     const res=useHistory()
 
-    // useEffect(() => {
-    //     axios.get('/api/auth/'+user._id)
-    //     .then(
-    //         ctx=>{setInformation({
-    //             ...information,
-    //             email:ctx.data.email,
-    //             username:ctx.data.username
-    //         })
-    //         console.log(ctx)
-    //         })
-    // }, [])
+    useEffect(() => {
+        axios.get('/api/auth/user/'+user._id)
+        .then(
+            ctx=>{setInformation({
+                ...information,
+                email:ctx.data.email,
+                username:ctx.data.username
+            })
+            console.log(ctx)
+            })
+    }, [user])
 
     const handleChange=(e)=>{
         const {name,value}=e.target
@@ -58,7 +60,7 @@ function InfoContent(){
                 handleSubmit(),
                 swal('','수정된 정보로 저장됩니다!', 'success'),
                 res.push({      //전부 작성되면 다음 페이지로 이동 & 정보 보내기
-                    pathname:'/info',
+                    pathname:'/',
                 })
             )
         )
@@ -76,19 +78,19 @@ function InfoContent(){
     return(
         <form onSubmit={handleCheck}>
             <div className='divstyle'>
-                <input className="inputDisabled mt-2" name="email" placeholder="email" value={email} disabled/>
+                <input className="inputDisabled mt-3" name="email" placeholder="email" value={email} disabled/>
             </div>
             <div className='divstyle'>
-                <input className="input mt-2" name="username" value={username} onChange={handleChange}/>
+                <input className="input mt-3" name="username" value={username} onChange={handleChange}/>
             </div>
             <div className='divstyle'>
-                <input className="input mt-2" type="password" name="password" placeholder="password" value={password} onChange={handleChange}/>
+                <input className="input mt-3" type="password" name="password" placeholder="password" value={password} onChange={handleChange}/>
             </div>
             <div className='divstyle'>
-                <input className="input mt-2" type="password" name="passwordConfirm" placeholder="confirm password" value={passwordConfirm} onChange={handleChange}/>
+                <input className="input mt-3" type="password" name="passwordConfirm" placeholder="confirm password" value={passwordConfirm} onChange={handleChange}/>
             </div>
             <div>
-                <button className="modifyBtn mt-4" type="submit">수정하기</button>
+                <button className="modifyBtn mt-4 mb-3" type="submit">수정하기</button>
             </div>
         </form>
     )

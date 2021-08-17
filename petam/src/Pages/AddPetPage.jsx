@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React,{useState,useEffect} from 'react'
 import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 import Content from '../Components/Content'
 import "../Components/mypage/mypage.css"
@@ -11,6 +12,7 @@ function AddPetPage(){
         user: user.user,
         hospital: hospital.hospital,
     }))
+
     const username=user.username
     const [pets,setPets]=useState([])
     const [pet,setPet]=useState({
@@ -27,13 +29,13 @@ function AddPetPage(){
         .then(
             res=>setPets(res.data)
         )
-    }, [pets])  // 동물 리스트가 업데이트 될 때마다 화면 리렌더링
+    }, [pets,username])  // 동물 리스트가 업데이트 될 때마다 화면 리렌더링
 
     const handleChange=(e)=>{
         const {name,value}=e.target
         setPet({
             ...pet,
-            parent:user.username, //임시로 넣어줌 (맨 처음만 되고 새로고침 될 때마다 사라짐)
+            parent:user.username, 
             [name]: value
         })
     }
@@ -88,7 +90,7 @@ function AddPetPage(){
                 <div className="divstyle mt-4">새로운 반려 동물 등록</div>
                 <form onSubmit={handleCheck}>
                     <div className="divstyle">
-                        <input className="inputDisabled-pet mt-4" value={parent} disabled/>
+                        <input className="inputDisabled-pet mt-4" value={username} disabled/>
                     </div>
                     <div className="divstyle">
                         <input className="input-pet mt-2" name="species" value={species} placeholder="종(ex.개,고양이)" onChange={handleChange}/>

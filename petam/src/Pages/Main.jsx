@@ -9,12 +9,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 // 메인 페이지
 function Main() {
-
-  const contents={
-    textAlign:'center',
-    marginTop:'30px'
-  }
-
   // const a = reducer.user
   // console.log("user ==== ", user)
 
@@ -35,11 +29,10 @@ function Main() {
     )}
       
       <h2 className="name">Main Page!!</h2>
-      <div style={contents} className="bodyContainer">
+      <div className="bodyContainer">
         <MainHospitalContent />
         <MainProductContent /> {/*나중에 제품으로 변경*/}
       </div>
-      <MainAd />
     </Content>
   );
 }
