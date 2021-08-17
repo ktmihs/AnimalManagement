@@ -3,7 +3,7 @@ import Content from '../Components/Content'
 import '../Components/Content.css'
 import MainAd from '../Components/main/MainAd'
 import MainHospitalContent from '../Components/main/MainHospitalContent'
-
+import MainProductContent from '../Components/main/MainProductContent';
 import { useSelector, useDispatch } from 'react-redux';
 
 
@@ -31,7 +31,7 @@ function Main() {
       <h2 className="name">Main Page!!</h2>
       <div className="bodyContainer">
         <MainHospitalContent />
-        <MainHospitalContent /> {/*나중에 제품으로 변경*/}
+        <MainProductContent /> {/*나중에 제품으로 변경*/}
       </div>
     </Content>
   );
