@@ -4,11 +4,16 @@ import '../Components/Content.css'
 import ReserveContent from '../Components/hsppage/ReserveContent'
 import axios from 'axios'
 import Pagination from '../Components/pagination/Pagination'
+import { useSelector, useDispatch } from 'react-redux';
 
 // 로그인 된 병원의 예약 확인 페이지
 function HospitalReservationPage(){
-    const name='치료해 주오'        // 현재 로그인 된 병원 이름
-    const [hspId,setHspId]=useState()   //병원 Id
+    const { user, hospital } = useSelector(({ user, hospital }) => ({
+        user: user.user,
+        hospital: hospital.hospital,
+      }));
+    //const [name,setName]=useState()       // 현재 로그인 된 병원 이름
+    const [hspId,setHspId]=useState(hospital._id)   //병원 Id
     const [info,setInfo]=useState([])   //병원 정보
     const [currentPage,setCurrentPage]=useState(1)  //현재 페이지
     const [postsPerPage]=useState(10)                //한 페이지에서 보여줄 info 수
@@ -20,13 +25,16 @@ function HospitalReservationPage(){
 
     useEffect(() => {
         const fetchPosts=async()=>{
-            axios.get('/api/hospitals/read/name/'+name)     // 병원 정보 받아오기
-            .then(res=>setHspId(res.data._id))
-            axios.get('/api/reservations/hspfilter/'+name)  // 예약 정보 중, 해당 병원 정보만 받아오기
-            .then(
-                res=>setInfo(res.data)
-            )
-            .catch(err=>console.log(err))
+            axios.get('/api/hospitals/readone/'+hospital._id)     // 병원 정보 받아오기
+            .then(res=>{
+                setHspId(res.data._id)
+                axios.get('/api/reservations/hspfilter/'+res.data.name)  // 예약 정보 중, 해당 병원 정보만 받아오기
+                .then(
+                    res=>setInfo(res.data)
+                )
+                .catch(err=>console.log(err))
+            })
+            
         }
         fetchPosts()
     }, [info])

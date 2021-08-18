@@ -28,7 +28,11 @@ const ReservationSchema=new Schema({
     reservationTime: {
         type: Date,
         default:Date.now
-    }   //예약한 시간(방문일, 시간)
+    },   //예약한 시간(방문일, 시간)
+    check:{
+        type: Boolean,
+        default:false
+    }   // 진료 확인
 })
 ReservationSchema.plugin(autoIncrement.plugin, {
     model: 'Reservation',
