@@ -10,7 +10,8 @@ export const write=async(ctx, next)=>{
         type,
         memo,
         dateDay,
-        reservationTime
+        reservationTime,
+        check
     }=ctx.request.body
     const reservation=new Reservation({
         no, 
@@ -20,7 +21,8 @@ export const write=async(ctx, next)=>{
         type, 
         memo,
         dateDay, 
-        reservationTime
+        reservationTime,
+        check
     })
     try{
         await reservation.save()
@@ -100,25 +102,54 @@ export const filter=async(ctx)=>{
     let total, reservation
     try{
         total=await Reservation.find().exec()  // 모든 데이터 조회 후
-        reservation=total.filter(item=>item.hostId.includes(Object.values(filter))) //모든 병원 이름 중 입력받은 단어를 포함하는 것만 필터링
+        reservation=total.filter(item=>item.hostId.includes(Object.values(filter))&& !item.check) //모든 병원 이름 중 입력받은 단어를 포함하는 것만 필터링
     }catch(e){
         return ctx.throw(200,e)
     }
     ctx.body=reservation
 }
 
-// 병원에 예약된 내역만 가져오기
+// 병원에 예약된 내역만 가져오기(진료X)
 export const hspfilter=async(ctx)=>{       
     const filter=ctx.params             // 입력 받은 단어(params)
     let total, reservation
     try{
         total=await Reservation.find().exec()  // 모든 데이터 조회 후
-        reservation=total.filter(item=>item.hospitalName.includes(Object.values(filter))) //모든 병원 이름 중 입력받은 단어를 포함하는 것만 필터링
+        reservation=total.filter(item=>item.hospitalName.includes(Object.values(filter))&& !item.check) //모든 병원 이름 중 입력받은 단어를 포함하는 것만 필터링
     }catch(e){
         return ctx.throw(200,e)
     }
     ctx.body=reservation
 }
+
+// 병원에 예약된 내역만 가져오기(진료O)
+export const hspfilterReserve=async(ctx)=>{       
+    const filter=ctx.params             // 입력 받은 단어(params)
+    let total, reservation
+    try{
+        total=await Reservation.find().exec()  // 모든 데이터 조회 후
+        reservation=total.filter(item=>item.hospitalName.includes(Object.values(filter))&& item.check) //모든 병원 이름 중 입력받은 단어를 포함하는 것만 필터링
+    }catch(e){
+        return ctx.throw(200,e)
+    }
+    ctx.body=reservation
+}
+
+// 진료 완료 체크
+export const check = async (ctx) => {
+    const { _id } = ctx.params
+    let reservation
+    try {
+      console.log('_id: ', _id)
+      reservation = await Reservation.findOneAndUpdate(
+        { _id: _id },
+        { check:true }
+      ).exec()
+    } catch (e) {
+      ctx.throw(500, e)
+    }
+    ctx.body = reservation
+  }
 
 export const remove=async(ctx,next)=>{
     const id=ctx.params
