@@ -1,5 +1,17 @@
 import Router from "koa-router"
-import {write, read, readOne, filter,hspfilter,readName,hospital, remove, check,hspfilterReserve} from "./reservations.ctrl"
+import {
+  write,
+  read,
+  readOne,
+  filter,
+  hspfilter,
+  readName,
+  hospital,
+  remove,
+  check,
+  hspfilterReserve,
+  postReservation,
+} from './reservations.ctrl';
 
 const reservations=new Router()
 
@@ -12,6 +24,7 @@ reservations.get('/hspfilter/reserve/:filter',hspfilterReserve) // 진료O
 reservations.put('/:_id',check)
 // reservations.get('/read/host/:hostId',readName)
 // reservations.get('/read/name/:hospitalName',hospital)
-reservations.delete('/:_id',remove)
+reservations.delete('/:_id', remove)
+reservations.get('/readpost/:hostId', postReservation);
 
 export default reservations

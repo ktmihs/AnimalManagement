@@ -9,6 +9,7 @@ import Content from "../Components/Content";
 import "../Components/Content.css";
 import axios from "axios";
 import { useSelector, useDispatch } from 'react-redux';
+import SelectReservation from "../Components/reservation/SelectReservation";
 
 axios.defaults.withCredentials = true;
 const headers = { withCredentials: true };
@@ -162,6 +163,8 @@ const WritePostPage = ({ postTitle, postContent }) => {
               {/* <p>제목</p> */}
               <div class="col-sm-12  mb-s3 msb-sm-0">
                 {/* <Form.Control */}
+
+                {/* <SelectReservation/> */}
                 <input
                   type="text"
                   class="form-control mb- w-100   form-control-lg"
