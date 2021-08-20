@@ -157,3 +157,20 @@ export const remove=async(ctx,next)=>{
     await Reservation.deleteOne({_id:id})
     await next()
 }
+
+export const postReservation = async (ctx) => {
+    const { hostId } = ctx.params;
+    let reservation
+    try {
+        console.log(" 환자 아이디 : ", hostId)
+
+          reservation = await Reservation.find({
+            $and: [{ hostId: hostId }, { check: true }, { postCheck: false }],
+          });
+        
+        console.log(reservation)
+    } catch (e) {
+      ctx.throw(500, e)
+    }
+    ctx.body = reservation
+  }

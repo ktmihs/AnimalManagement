@@ -108,7 +108,11 @@ import LeftbarCategory from "./leftbar/LeftbarCategory";
                 {
                   title: '내 정보',
                   // address: userModify,
-                  address: '/modify/'+user._id,
+                  address: '/modify/' + user._id,
+                },
+                {
+                  title: '후기 작성하기',
+                  address: '/writepostpage',
                 },
                 {
                   title: '내가 쓴 글',
@@ -119,22 +123,21 @@ import LeftbarCategory from "./leftbar/LeftbarCategory";
                   address: '/reservation',
                 },
               ]}
-              h={141}
+              h={188}
             >
               My Page
             </LeftbarCategory>
           )}
           {hospital && (
-            
             <LeftbarCategory
               selections={[
                 {
                   title: '병원 정보',
-                  address: '/modify/'+hospital._id,
+                  address: '/modify/' + hospital._id,
                 },
                 {
                   title: '진료 내역',
-                  address: '/',
+                  address: '/hspreservation',
                 },
                 // {
                 //   title: '판매 중인 제품',
