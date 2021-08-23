@@ -14,9 +14,15 @@ const scope = {
 const floatRight = {
   float: "right",
 };
-const ProductViewImage = ({ company, price, children }) => {
+const ProductViewImage = ({ image,company, price, children }) => {
   return (
     <div style={scope}>
+      {
+        image && image!==''?
+        <img src={'../../'+image.split('\\')[2]}/>
+        :
+        <img src={'no_img.jpg'}/>
+      }
       {/* <div className="   product-title">제조원</div>
       <div className="product-detail">{company}</div>
 

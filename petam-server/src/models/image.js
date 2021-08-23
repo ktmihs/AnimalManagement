@@ -9,6 +9,9 @@ const ImageSchema=new Schema({
     },
     hospitalname:{
         type:String
+    },
+    productname:{
+        type:String
     }
 })
 

@@ -28,3 +28,15 @@ export const readOne=async(ctx)=>{
     }
     ctx.body=image[image.length-1]
 }
+
+export const readProductOne=async(ctx)=>{
+    const product=ctx.params
+    let total, image
+    try{
+        total=await Image.find().exec()
+        image=total.filter(item=>item.productname===String(Object.values(product)))
+    }catch(e){
+        return ctx.throw(200,e)
+    }
+    ctx.body=image[image.length-1]
+}

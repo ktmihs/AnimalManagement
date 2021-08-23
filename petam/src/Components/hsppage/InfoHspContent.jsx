@@ -54,6 +54,7 @@ function InfoHspContent(){
             console.log(ctx,ctx.data)
             })
     }, [hospitalId])
+
     const handleImage=(e)=>{
         console.log(e.target.files[0],e.target.files[0].name)
         setHospital({
@@ -67,6 +68,7 @@ function InfoHspContent(){
         setForm(formData)
         for(let data of formData){console.log(data[0],data[1])}
     }
+    
     const handleChange=(e)=>{
         const {name,value}=e.target
         
