@@ -33,9 +33,9 @@ const HospitalSchema = new Schema({
   company_number: {
     type: String,
   }, //사업자 등록번호
-    image:{
-        type: String
-    }, //병원 이미지
+  image:{
+      type: String
+  }, //병원 이미지
   timeList: {
     openHour: Number,
     openMinute: Number,

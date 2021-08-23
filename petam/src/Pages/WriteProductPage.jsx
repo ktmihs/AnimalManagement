@@ -3,7 +3,7 @@
 
 import "../style.css";
 import "../Components/product/product.css";
-import React, { Component } from "react";
+import React, { useState,Component } from "react";
 import { Button, Form, ImgInput } from "react-bootstrap";
 import Content from "../Components/Content";
 import "../Components/Content.css";
@@ -23,8 +23,19 @@ const he = {
   height: "520px",
   // justifyContent: "center",
 };
+const formData=new FormData()
 
 export default class WriteProductPage extends Component {
+
+  handleImage=(e)=>{
+    console.log(e,e.target.files[0],e.target.files[0].name)
+    formData.append('image', e.target.files[0])
+    formData.append('filename',e.target.files[0].name)
+    formData.append('productname',this.productName.value)
+    //setForm(formData)
+    for(let data of formData){console.log(data[0],data[1])}
+  }
+  
   productWrite = () => {
     console.log("productWrite");
     const name = this.productName.value;
@@ -32,7 +43,15 @@ export default class WriteProductPage extends Component {
     const price = this.productPrice.value;
     const company = this.productCompany.value;
     const discription = this.productDiscription.value;
-
+    
+    const image=this.productImage.value;
+    
+    //const [form,setForm]=useState(new FormData)
+    const config = {
+        headers: {
+        'content-type': 'multipart/form-data'
+        }    
+    }
     //빈파일이 아닌 경우 함수 진행
     // if (event.target.files !== null) {
     //   //FormData 생성
@@ -61,7 +80,16 @@ export default class WriteProductPage extends Component {
       price: this.productPrice.value,
       company: this.productCompany.value,
       discription: this.productDiscription.value,
+      image: this.productImage.value
     };
+    console.log('formData:',formData)
+    axios.post("/api/images/product/image",formData,config)
+    .then((response) => {
+        console.log(response,formData.entries()[0])
+    })
+    .catch((error) => {
+        console.log(error)
+    })
 
     console.log("send_param : ", send_param);
     axios
@@ -114,8 +142,11 @@ export default class WriteProductPage extends Component {
                   <input
                   className="product-input-image"
                   type="file"
-                  accept="image/jpg, image/jpeg, image/png"
-                  onChange={this.isSelectedImg}
+                  accept="image/*"
+                  value={this.image}
+                  name="image"
+                  ref={(ref) => (this.productImage = ref)}
+                  onChange={this.handleImage}
                   ></input>
                 </div>
                 <input

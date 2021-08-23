@@ -39,7 +39,7 @@ const ProductSchema = new Schema({
   // deleteTime: Date,
   hospitals: [String],
   image: {
-    type: ['images'],
+    type:String,
   },
   // hospitals: [
   //   {

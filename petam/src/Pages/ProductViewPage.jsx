@@ -29,6 +29,7 @@ function ProductViewPage(props) {
       discription: "",
       hospitals: [],
       enrollTime: "",
+      image:""
     },
   ]);
 
@@ -51,6 +52,7 @@ function ProductViewPage(props) {
         hospitals: res.data.hospitals,
         // dateformat을 이용하여 년-월-일 시:분:초 로 표현
         enrollTime: dateFormat(res.data.enrollTime, "yyyy-mm-dd hh:mm:ss"),
+        image:res.data.image
       });
       //   setProductData(productData.concat(_commentData));
       console.log("productData.hospitals:", res.data.hospitals);
@@ -81,7 +83,9 @@ function ProductViewPage(props) {
         /> */}
         <hr className="w-90" />
         <div className="col-12 m-auto bg-white" style={scope}>
-          <ProductViewImage></ProductViewImage>
+          <ProductViewImage
+            image={productData.image}
+          ></ProductViewImage>
           <ProductViewCompanyAndPrice
             company={productData.company}
             price={productData.price}

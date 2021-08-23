@@ -5,7 +5,7 @@ import Hospital from '../../models/hospital'
 import multer from '@koa/multer';
 import koaBody from 'koa-body'
 import fs from 'fs'
-import {write,readOne} from './images.ctrl'
+import {write,readOne,readProductOne} from './images.ctrl'
 const images = new Router()
 //파일을 저장할 디렉토리 설정
 // const upload = multer({ 
@@ -45,12 +45,26 @@ images.post('/image', upload.single('image'), async(ctx) => {
     const { filename,file,hospitalname } = ctx.request.body
     const image=new Image({ filename,file,hospitalname })
     try{
-        await image.save()
+      await image.save()
     } catch(e){
-        return ctx.throw(200,e)
+      return ctx.throw(200,e)
     }
     ctx.body = image
 })
+images.post('/product/image', upload.single('image'), async(ctx) => {
+
+  console.log(ctx.request,ctx.request.body)
+  const { filename,file,productname } = ctx.request.body
+  const image=new Image({ filename,file,productname })
+  try{
+    await image.save()
+  } catch(e){
+    return ctx.throw(200,e)
+  }
+  ctx.body = image
+})
 
 images.get('/image/:hospital',readOne)
+images.get('/image/product/:product',readProductOne)
+
 export default images
