@@ -2,23 +2,14 @@ import React,{useState,useEffect} from 'react'
 import { useSelector } from 'react-redux'
 import Content from '../Components/Content'
 import '../Components/Content.css'
-import SearchContent from '../Components/search/SearchContent'
 import axios from 'axios'
-import Pagination from '../Components/pagination/Pagination'
+import ReserveContent from '../Components/mypage/ReserveContent'
 
 // 내 예약 내역 페이지
 function MyReservationPage(){
     const [info,setInfo]=useState([])   //병원 정보
+    const [infoComplete,setInfoComplete]=useState([])   // 진료 완료된 정보
     const [loading,setLoading]=useState(false)    //로딩 중 표시
-    const [currentPage,setCurrentPage]=useState(1)  //현재 페이지
-    const [postsPerPage]=useState(4)                //한 페이지에서 보여줄 info 수
-
-    const linkName='reservation'         // 링크이름
-
-    const indexOfLastPost=currentPage*postsPerPage  //해당 페이지에서 마지막 info의 index
-    const indexOfFirstPost=indexOfLastPost-postsPerPage //  ...      첫번째 ...
-    const currentPosts=info.slice(indexOfFirstPost, indexOfLastPost)    //각 페이지에서 보여질 info 배열
-    const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
     const { user, hospital } = useSelector(({ user, hospital }) => ({
         user: user.user,
@@ -36,23 +27,36 @@ function MyReservationPage(){
                 setLoading(false)
             )
             .catch(err=>console.log(err))
+            axios.get('api/reservations/filter/complete/'+read)   // 현재 로그인 된 아이디로 예약된 내역 모두 불러오기
+            .then(
+                res=>{setInfoComplete(res.data),console.log(res.data)},
+                setLoading(false)
+            )
+            .catch(err=>console.log(err))
         }
         fetchPosts()
     }, [user])
-    
-    const totalCount={
-        textAlign:'right'
+
+    const [complete,setComplete]=useState(false)
+    const isComplete=(e)=>{
+        console.log(e.target.name,complete)
+        setComplete(e.target.name)
     }
+
     return(
         <Content>
             <h2 className='name'>내 예약 내역</h2>
             <div className='bodyContainer'>
-                <div style={totalCount}>총 {info.length}건</div>
-                <hr/>
-                <div >
-                    <SearchContent linkName={linkName} info={currentPosts} loading={loading}/>
-                    <Pagination postsPerPage={postsPerPage} totalPosts={info.length} paginate={paginate}/>
+                <div className='divide'>
+                    <button onClick={isComplete} name='false' className='divide-left'>예약 내역</button>
+                    <button onClick={isComplete} name='true' className='divide-right'>완료된 내역</button>
                 </div>
+                {
+                complete==='true'?
+                <ReserveContent info={infoComplete} loading={loading} linkName={'complete'}/>
+                :
+                <ReserveContent info={info} loading={loading} linkName={'reservation'}/>
+                }
                 <hr/>
             </div>
         </Content>

@@ -96,13 +96,25 @@ export const readName=async(ctx)=>{
     ctx.body=data
 }
 
-// 개인이 예약한 내역만 가져오기
+// 개인이 예약한 내역만 가져오기(진료X)
 export const filter=async(ctx)=>{       
     const filter=ctx.params             // 입력 받은 단어(params)
     let total, reservation
     try{
         total=await Reservation.find().exec()  // 모든 데이터 조회 후
         reservation=total.filter(item=>item.hostId.includes(Object.values(filter))&& !item.check) //모든 병원 이름 중 입력받은 단어를 포함하는 것만 필터링
+    }catch(e){
+        return ctx.throw(200,e)
+    }
+    ctx.body=reservation
+}
+// 개인이 예약한 내역만 가져오기(진료O)
+export const filterComplete=async(ctx)=>{       
+    const filter=ctx.params             // 입력 받은 단어(params)
+    let total, reservation
+    try{
+        total=await Reservation.find().exec()  // 모든 데이터 조회 후
+        reservation=total.filter(item=>item.hostId.includes(Object.values(filter))&& item.check) //모든 병원 이름 중 입력받은 단어를 포함하는 것만 필터링
     }catch(e){
         return ctx.throw(200,e)
     }
@@ -123,7 +135,7 @@ export const hspfilter=async(ctx)=>{
 }
 
 // 병원에 예약된 내역만 가져오기(진료O)
-export const hspfilterReserve=async(ctx)=>{       
+export const hspfilterComplete=async(ctx)=>{       
     const filter=ctx.params             // 입력 받은 단어(params)
     let total, reservation
     try{

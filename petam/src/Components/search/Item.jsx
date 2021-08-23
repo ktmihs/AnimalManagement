@@ -30,12 +30,20 @@ function Item({linkName,item}){
             </div>
         </a>
         :
-        <div className="reservation">
-            <h5 className='sign'>{hospitalName}</h5>
-            {item.dateDay}<br/>
-            {item.type}<br/>
-            <a href={`/${link}/${id}`}><h5 className='sign'>▶</h5></a>
-        </div>
+        link==='complete'?
+            <div className="reservation">
+                <h5 className='sign'>{hospitalName}</h5>
+                {item.dateDay}<br/>
+                {item.type}<br/>
+                <a href={`/${link}/${id}`}><h6 className='reserve-btn'>후기작성</h6></a>
+            </div>
+        :
+            <div className="reservation">
+                <h5 className='sign'>{hospitalName}</h5>
+                {item.dateDay}<br/>
+                {item.type}<br/>
+                <a href={`/${link}/${id}`}><h5 className='sign-btn'>▶</h5></a>
+            </div>
     )
 }
 export default Item
