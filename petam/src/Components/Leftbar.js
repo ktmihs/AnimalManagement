@@ -110,10 +110,10 @@ import LeftbarCategory from "./leftbar/LeftbarCategory";
                   // address: userModify,
                   address: '/modify/' + user._id,
                 },
-                {
-                  title: '후기 작성하기',
-                  address: '/writepostpage',
-                },
+                // {
+                //   title: '후기 작성하기',
+                //   address: '/writepostpage',
+                // },
                 {
                   title: '내가 쓴 글',
                   address: '/mypostlistpage',
@@ -123,7 +123,7 @@ import LeftbarCategory from "./leftbar/LeftbarCategory";
                   address: '/reservation',
                 },
               ]}
-              h={188}
+              h={145}
             >
               My Page
             </LeftbarCategory>

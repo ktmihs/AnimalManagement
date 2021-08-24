@@ -169,7 +169,22 @@ export const remove=async(ctx,next)=>{
     await Reservation.deleteOne({_id:id})
     await next()
 }
-
+// 후기 작성 완료 체크
+export const postCheck = async (ctx) => {
+  const { _id } = ctx.params;
+  let reservation;
+  try {
+    console.log('_id: ', _id);
+    reservation = await Reservation.findOneAndUpdate(
+      { _id: _id },
+      { postCheck: true },
+    );
+      console.log("reservation: ", reservation)
+  } catch (e) {
+    ctx.throw(500, e);
+  }
+  ctx.body = reservation;
+};
 export const postReservation = async (ctx) => {
     const { hostId } = ctx.params;
     let reservation

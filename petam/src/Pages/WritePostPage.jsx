@@ -1,40 +1,70 @@
 // joo-ju
 
-import "../style.css";
-import React, { Component, useState, useEffect } from "react";
-import "../Components/rating/rating.css";
-import { FaStar } from "react-icons/fa";
-import { Button, Form } from "react-bootstrap";
-import Content from "../Components/Content";
-import "../Components/Content.css";
-import axios from "axios";
+import '../style.css';
+import React, { Component, useState, useEffect } from 'react';
+import '../Components/rating/rating.css';
+import { FaStar } from 'react-icons/fa';
+import { Button, Form } from 'react-bootstrap';
+import Content from '../Components/Content';
+import '../Components/Content.css';
+import axios from 'axios';
+import { useHistory } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import SelectReservation from "../Components/reservation/SelectReservation";
+import SelectReservation from '../Components/reservation/SelectReservation';
 
 axios.defaults.withCredentials = true;
 const headers = { withCredentials: true };
-
-const WritePostPage = ({ postTitle, postContent }) => {
+// const WritePostPage = (match) => {
+  const WritePostPage = ({ postTitle, postContent, match }) => {
+  // const { postTitle, postContent, history } = match;
   // user 정보 조회
-        const { user, hospital } = useSelector(({ user, hospital }) => ({
-          user: user.user,
-          hospital: hospital.hospital,
-        }));
+const reserveId = match.params._id
+  const { user, hospital } = useSelector(({ user, hospital }) => ({
+    user: user.user,
+    hospital: hospital.hospital,
+  }));
+  const location = useHistory();
+  let reservationHospitalName;
+  let reservationDateDay;
   // 먼저 병원 정보 조회
   useEffect(async () => {
     try {
+      console.log('----', match.params._id);
 
-      console.log("user : ", user.username);
-      // console.log("hospital : ", hospital.username)
-      console.log("dsdfsdf")
-      
-
-          // const user = useSelector((state) => state.user.userData);
-      console.log("--",hospitalId);
-      const res = axios
-        .get("/api/hospitals/readone/" + hospitalId)
+      // console.log(location);
+      console.log(match);
+      console.log(match.params._id);
+      const resReservation = axios
+        .get('/api/reservations/read/' + match.params._id)
         .then((response) => {
-          console.log("response.data : ", response.data);
+          console.log('예약 정보.data : ', response.data);
+          // console.log("로그인 정보 : ", user);
+          setReservation({
+            _id: response.data._id,
+            hostId: response.data.hostId,
+            hospitalName: response.data.hospitalName,
+            pet: response.data.pet,
+            type: response.data.type,
+            dateDay: response.data.dateDay,
+          });
+
+          reservationDateDay = response.data.dateDay;
+          reservationHospitalName = response.data.hospitalName;
+
+          console.log('-', reservationHospitalName);
+          console.log('-', reservationDateDay);
+        });
+
+      console.log('user : ', user.username);
+      // console.log("hospital : ", hospital.username)
+      console.log('dsdfsdf');
+
+      // const user = useSelector((state) => state.user.userData);
+      console.log('--', hospitalId);
+      const res = axios
+        .get('/api/hospitals/readone/' + hospitalId)
+        .then((response) => {
+          console.log('response.data : ', response.data);
           // console.log("로그인 정보 : ", user);
           setHospitalData({
             _id: hospitalId,
@@ -42,7 +72,7 @@ const WritePostPage = ({ postTitle, postContent }) => {
             count: response.data.count,
           });
         });
-      console.log("hospitalData", hospitalData);
+      console.log('hospitalData', hospitalData);
     } catch (e) {
       console.error(e.message);
     }
@@ -75,28 +105,30 @@ const WritePostPage = ({ postTitle, postContent }) => {
     console.log(clickStates);
   };
 
-  const postWrite = async () => {
+  const postWrite = () => {
     const title = postTitle.value;
     const content = postContent.value;
-
-
-    if (title === "" || title === undefined) {
-      alert("제목을 입력해주세요.");
+   location.push('/');
+    if (title === '' || title === undefined) {
+      alert('제목을 입력해주세요.');
       // this.postTitle.focus();
       postTitle.focus();
       return;
-    } else if (content === "" || content === undefined) {
-      alert("내용을 입력해주세요.");
+    } else if (content === '' || content === undefined) {
+      alert('내용을 입력해주세요.');
       // this.postContent.focus();
       postContent.focus();
       return;
     } else if (clicked[5] == 0) {
-      alert("평점을 입력해주세요.");
+      alert('평점을 입력해주세요.');
       return;
     }
 
-    console.log(user.username)
-
+    console.log(user.username);
+    const resPostCHeck = axios.put(
+      '/api/reservations/postCheck/' + reservation._id,
+    );
+    // console.log('respostcheck', resPostCheck);
     const send_param = {
       content: postContent.value,
       title: postTitle.value,
@@ -104,44 +136,62 @@ const WritePostPage = ({ postTitle, postContent }) => {
       view: 0,
       writer: user.username,
       hospitalId: hospitalId,
+      reservation: reserveId,
     };
 
+    // 병원 별점 계산을 위해 병원 데이터 업데이트
+    // count 1 더해주고 score도 합해준다
+    const res2 = axios.put('/api/hospitals/' + hospitalId, {
+      ...hospitalData,
+      score: parseInt(hospitalData.score) + parseInt(clicked[5]),
+      count: parseInt(hospitalData.count) + 1,
+      // x,
+    });
     // 게시글 저장
     axios
-      .post("/api/posts/", send_param)
+      .post('/api/posts/', send_param)
       .then((response) => {
-        console.log("save post", response);
+        console.log('save post', response);
+        // 왜 안되는지 모르겠음 ㅜ
+        // location.push('/postlistpage');
+     
       })
       .catch((error) => {
         console.log(error);
       });
 
-    // 병원 별점 계산을 위해 병원 데이터 업데이트
-    // count 1 더해주고 score도 합해준다
-    const res2 = axios.put("/api/hospitals/" + hospitalId, {
-      ...hospitalData,
-      score: parseInt(hospitalData.score) + parseInt(clicked[5]),
-      count: parseInt(hospitalData.count) + 1,
-    });
-    console.log(send_param);
-    console.log("res : ", res);
+    // url.push({
+    //   //전부 작성되면 다음 페이지로 이동 & 정보 보내기
+    //   pathname: `/PostListPage`,
+    //   // user: hospital,
+    //   // isHospital: isHospital,
+    // });
   };
 
   const hospitalId = '6108d6ad3bc5d0b0e56ae1ac';
+  // const hospitalId = match.params._id
   const [hospitalData, setHospitalData] = useState([
     {
       _id: hospitalId,
-      score: "",
-      count: "",
+      score: '',
+      count: '',
     },
   ]);
-
+  const [reservation, setReservation] = useState({
+    _id: '',
+    hostId: '',
+    hospitalName: '',
+    pet: '',
+    type: '',
+    dateDay: '',
+    postCheck: false,
+  });
   const scope = {
-    minHeight: "70px",
-    paddingTop: "10px",
+    minHeight: '70px',
+    paddingTop: '10px',
   };
   const h25 = {
-    minHeight: "25vh",
+    minHeight: '25vh',
   };
 
   // render() {
@@ -160,7 +210,12 @@ const WritePostPage = ({ postTitle, postContent }) => {
             // onSubmit={postWrite}
           >
             <div class="form-group ">
-              {/* <p>제목</p> */}
+              <p>
+                예약 정보 : {reservation.hospitalName} - {reservation.dateDay}
+              </p>
+              <p>
+                {reservationHospitalName} {reservationDateDay}
+              </p>
               <div class="col-sm-12  mb-s3 msb-sm-0">
                 {/* <Form.Control */}
 
@@ -196,27 +251,27 @@ const WritePostPage = ({ postTitle, postContent }) => {
                   <FaStar
                     size="30"
                     onClick={(e) => handleStarClick(e, 0)}
-                    className={clicked[0] ? "clickedstar" : null}
+                    className={clicked[0] ? 'clickedstar' : null}
                   />
                   <FaStar
                     size="30"
                     onClick={(e) => handleStarClick(e, 1)}
-                    className={clicked[1] ? "clickedstar" : null}
+                    className={clicked[1] ? 'clickedstar' : null}
                   />
                   <FaStar
                     size="30"
                     onClick={(e) => handleStarClick(e, 2)}
-                    className={clicked[2] ? "clickedstar" : null}
+                    className={clicked[2] ? 'clickedstar' : null}
                   />
                   <FaStar
                     size="30"
                     onClick={(e) => handleStarClick(e, 3)}
-                    className={clicked[3] ? "clickedstar" : null}
+                    className={clicked[3] ? 'clickedstar' : null}
                   />
                   <FaStar
                     size="30"
                     onClick={(e) => handleStarClick(e, 4)}
-                    className={clicked[4] ? "clickedstar" : null}
+                    className={clicked[4] ? 'clickedstar' : null}
                   />
                 </div>
               </div>
@@ -226,6 +281,7 @@ const WritePostPage = ({ postTitle, postContent }) => {
                     class=" btn w-100  btn-success "
                     // onClick={this.postWrite}
                     onClick={postWrite}
+                    // onChange
                     variant="success"
                     type="submit"
                     block

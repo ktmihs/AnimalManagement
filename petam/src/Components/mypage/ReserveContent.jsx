@@ -5,7 +5,7 @@ import Pagination from '../pagination/Pagination'
 
 // 내 예약 내역 페이지
 function MyReservationPage({info, loading,linkName}){
-    //const [info,setInfo]=useState([])   //병원 정보
+    const [reservation,setReservation]=useState([])   //병원 정보
     const [currentPage,setCurrentPage]=useState(1)  //현재 페이지
     const [postsPerPage]=useState(4)                //한 페이지에서 보여줄 info 수
 
@@ -22,6 +22,7 @@ function MyReservationPage({info, loading,linkName}){
             <div style={totalCount}>총 {info.length}건</div>
             <hr/>
             <div>
+                {/* {currentPosts._id} */}
                 <SearchContent linkName={linkName} info={currentPosts} loading={loading}/>
                 <Pagination postsPerPage={postsPerPage} totalPosts={info.length} paginate={paginate}/>
             </div>

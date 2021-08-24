@@ -42,6 +42,9 @@ const PostSchema = new Schema({
     default: Date.now,
   },
   // deleteTime: Date,
+  reservation: {
+    type: String,
+  },
 });
 
 PostSchema.plugin(autoIncrement.plugin, {

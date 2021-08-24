@@ -13,7 +13,7 @@ const AuthFormBlock = styled.div`
   h3 {
     margin: 0;
     color: ${palette.gray[8]};
-    // color:red;
+   
     margin-bottom: 1rem;
   }
 `;
@@ -147,7 +147,7 @@ const Text = styled.div`
   float: left;
   margin: auto;
   text-align: center;
-  border: 1px solid green;
+  // border: 1px solid green;
   padding: 6px 5px 4px 5px;
 `;
 
