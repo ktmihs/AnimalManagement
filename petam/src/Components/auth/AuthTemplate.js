@@ -43,8 +43,8 @@ const WhiteBox = styled.div`
 
 const AuthTemplate = ({ children }) => {
   return (
-    <AuthTemplateBlock className="b">
-      <WhiteBox className="b">
+    <AuthTemplateBlock className="">
+      <WhiteBox className="">
         {/* <div className="logo-area b">
           <Link to="/">REACTERS</Link> 
                 <Link to="/main">

@@ -52,7 +52,7 @@ const App = () => {
           <Route exact path="/hospital" component={SearchPage} />
           <Route path="/PostListPage" component={PostListPage} />
           <Route path="/MyPostListPage" component={MyPostListPage} />
-          <Route path="/WritePostPage" component={WritePostPage} />
+          <Route path="/WritePostPage/:_id" component={WritePostPage} />
           <Route path="/writeproductpage" component={WriteProductPage} />
           <Route path="/ProductListPage" component={ProductListPage} />
           <Route path="/allproduct" component={AllProductPage}/>

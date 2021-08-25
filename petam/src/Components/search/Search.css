@@ -48,7 +48,7 @@
   box-shadow: 3px 3px 10px 0 rgba(0,0,0,0.3);
 }
 .b {
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 .sign-btn{
   color:#333333;

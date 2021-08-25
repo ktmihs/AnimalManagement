@@ -40,6 +40,9 @@ const mypage = {
 const Spacer = styled.div`
   height: 4rem;
 `;
+const marginRight = {
+  marginRight: '5px',
+}
 
 const UserInfo = styled.div`
   font-weight: 800;
@@ -87,8 +90,8 @@ const Header = ({ user, onLogout, onHLogout,onMy, hospital }) => {
                 </div>
               )}
               {!user && !hospital && (
-                <div className="right b">
-                  <Button to="/login">개인 로그인</Button>
+                <div className="right">
+                  <Button to="/login" style = {marginRight}>개인 로그인</Button>
                   <Button to="/hlogin">병원 로그인</Button>
                 </div>
               )}

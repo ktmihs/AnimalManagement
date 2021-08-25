@@ -36,7 +36,11 @@ const ReservationSchema = new Schema({
   postCheck: {
     type: Boolean,
     default: false,
-  }, // 후기 작성 확인
+  }, // 후기 작성 확인 
+  postId: {
+    type: String,
+    // default: false,
+  },
 });
 ReservationSchema.plugin(autoIncrement.plugin, {
     model: 'Reservation',
