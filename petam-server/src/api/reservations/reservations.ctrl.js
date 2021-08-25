@@ -102,7 +102,13 @@ export const filter=async(ctx)=>{
     let total, reservation
     try{
         total=await Reservation.find().exec()  // 모든 데이터 조회 후
-        reservation=total.filter(item=>item.hostId.includes(Object.values(filter))&& !item.check) //모든 병원 이름 중 입력받은 단어를 포함하는 것만 필터링
+        reservation=total.filter(item=>item.hostId.includes(Object.values(filter))&& !item.check) // 예약한 내역 중 아직 진료 받지 않은 데이터
+        reservation=reservation.sort((a,b)=>    // 시간 순서대로 정렬
+                    Number(a.dateDay.split('.')[0])-Number(b.dateDay.split('.')[0]) 
+                    || Number(a.dateDay.split('.')[1])-Number(b.dateDay.split('.')[1]) 
+                    || Number(a.dateDay.split('.')[2].split(':')[0])-Number(b.dateDay.split('.')[2].split(':')[0])
+                    || Number(a.dateDay.split('.')[2].split(':')[1])-Number(b.dateDay.split('.')[2].split(':')[1]) 
+                )
     }catch(e){
         return ctx.throw(200,e)
     }
@@ -114,7 +120,13 @@ export const filterComplete=async(ctx)=>{
     let total, reservation
     try{
         total=await Reservation.find().exec()  // 모든 데이터 조회 후
-        reservation=total.filter(item=>item.hostId.includes(Object.values(filter))&& item.check) //모든 병원 이름 중 입력받은 단어를 포함하는 것만 필터링
+        reservation=total.filter(item=>item.hostId.includes(Object.values(filter))&& item.check) // 예약한 내역 중 진료를 받은 데이터
+        reservation=reservation.sort((a,b)=>    // 시간 순서대로 정렬
+                    Number(a.dateDay.split('.')[0])-Number(b.dateDay.split('.')[0]) 
+                    || Number(a.dateDay.split('.')[1])-Number(b.dateDay.split('.')[1]) 
+                    || Number(a.dateDay.split('.')[2].split(':')[0])-Number(b.dateDay.split('.')[2].split(':')[0])
+                    || Number(a.dateDay.split('.')[2].split(':')[1])-Number(b.dateDay.split('.')[2].split(':')[1]) 
+                )
     }catch(e){
         return ctx.throw(200,e)
     }
@@ -127,7 +139,13 @@ export const hspfilter=async(ctx)=>{
     let total, reservation
     try{
         total=await Reservation.find().exec()  // 모든 데이터 조회 후
-        reservation=total.filter(item=>item.hospitalName.includes(Object.values(filter))&& !item.check) //모든 병원 이름 중 입력받은 단어를 포함하는 것만 필터링
+        reservation=total.filter(item=>item.hospitalName.includes(Object.values(filter))&& !item.check) // 진료 받지 않은 해당 병원의 모든 예약 데이터
+        reservation=reservation.sort((a,b)=>    // 시간 순서대로 정렬
+                    Number(a.dateDay.split('.')[0])-Number(b.dateDay.split('.')[0]) 
+                    || Number(a.dateDay.split('.')[1])-Number(b.dateDay.split('.')[1]) 
+                    || Number(a.dateDay.split('.')[2].split(':')[0])-Number(b.dateDay.split('.')[2].split(':')[0])
+                    || Number(a.dateDay.split('.')[2].split(':')[1])-Number(b.dateDay.split('.')[2].split(':')[1]) 
+                )
     }catch(e){
         return ctx.throw(200,e)
     }
@@ -140,7 +158,7 @@ export const hspfilterComplete=async(ctx)=>{
     let total, reservation
     try{
         total=await Reservation.find().exec()  // 모든 데이터 조회 후
-        reservation=total.filter(item=>item.hospitalName.includes(Object.values(filter))&& item.check) //모든 병원 이름 중 입력받은 단어를 포함하는 것만 필터링
+        reservation=total.filter(item=>item.hospitalName.includes(Object.values(filter))&& item.check) // 진료 받은 데이터
     }catch(e){
         return ctx.throw(200,e)
     }
