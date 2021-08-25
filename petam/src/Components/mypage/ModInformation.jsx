@@ -25,12 +25,11 @@ function ModInformation(){
     }
 
     const articleStyle={
-        maxWidth: '500px',
-        padding:'20px 0',
-        margin:'10px'
+        maxWidth: '700px',
+        padding:'15px 0 30px 0'
     }
     const margin={
-        marginTop:'55px'
+        marginTop:'60px'
     }
     const pet={
         display:'inline-block',
@@ -49,7 +48,7 @@ function ModInformation(){
     }
     const bottom={
         margin:'15px 0',
-        marginLeft:'130px'
+        marginLeft:'15vw'
     }
     return(
         <div style={margin}>

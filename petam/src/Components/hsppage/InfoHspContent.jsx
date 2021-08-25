@@ -28,6 +28,7 @@ function InfoHspContent(){
     const res=useHistory()
     
     const [image,setImage]=useState('')
+    const [imaged,setImaged]=useState('')
     const formData=new FormData()
     const [form,setForm]=useState(new FormData)
     const config = {
@@ -50,6 +51,7 @@ function InfoHspContent(){
                 name:ctx.data.name,
                 password:ctx.data.password
             })
+            if(ctx.data.image){ setImaged(ctx.data.image.split('\\')[2])}
             setId(ctx.data._id)
             console.log(ctx,ctx.data)
             })
@@ -117,38 +119,51 @@ function InfoHspContent(){
             console.log(error)
         })
     }
-
+    const fileSize={
+        width:'100%',
+        margin:'5px 30px'
+    }
+    const fileStyle={
+        margin:'40px 20px'
+    }
+    const boxSize={
+        maxWidth:'280px',
+        margin:'10px'
+    }
     return(
         <form onSubmit={handleCheck}>
-            <div className='divstyle'>
-            <input type="file" value={image} accept="image/*" name="image" onChange={handleImage} />
+            <div style={fileSize} className='divstyle'>
+                {
+                    imaged?<img className="img-style" src={'../'+imaged}/>:null
+                }
+                <input style={fileStyle} type="file" value={image} accept="image/*" name="image" onChange={handleImage} />
             </div>
             <div className='divstyle'>
-                <input className="inputDisabled mt-2" name="company_number" value={company_number} disabled/>  
+                <input style={boxSize} className="inputDisabled mt-2" name="company_number" value={company_number} disabled/>  
             </div>
             <div className='divstyle'>
-                <input className="inputDisabled mt-2" name="name" value={name} disabled/>
+                <input style={boxSize} className="inputDisabled mt-2" name="name" value={name} disabled/>
             </div>
             <div className='divstyle'>
-                <input className="input mt-2" name="tel" placeholder="tel" value={tel} onChange={handleChange}/>
+                <input style={boxSize} className="input mt-2" name="tel" placeholder="tel" value={tel} onChange={handleChange}/>
             </div>
             <div className='divstyle'>
-                <input className="input mt-2" name="old_addr" placeholder="old_addr" value={old_addr} onChange={handleChange}/>
+                <input style={boxSize} className="input mt-2" name="old_addr" placeholder="old_addr" value={old_addr} onChange={handleChange}/>
             </div>
             <div className='divstyle'>
-                <input className="input mt-2" name="new_addr" placeholder="new_addr" value={new_addr} onChange={handleChange}/>
+                <input style={boxSize} className="input mt-2" name="new_addr" placeholder="new_addr" value={new_addr} onChange={handleChange}/>
             </div>
             <div className='divstyle'>
-                <input className="input mt-2" name="zip_code" placeholder="zip_code" value={zip_code} onChange={handleChange}/>
+                <input style={boxSize} className="input mt-2" name="zip_code" placeholder="zip_code" value={zip_code} onChange={handleChange}/>
             </div>
             <div className='divstyle'>
-                <input className="input mt-2" type="password" name="password" placeholder="password" onChange={handleChange}/>
+                <input style={boxSize} className="input mt-2" type="password" name="password" placeholder="password" onChange={handleChange}/>
             </div>
             <div className='divstyle'>
-                <input className="input mt-2" type="password" name="passwordConfirm" placeholder="confirm password" onChange={handleChange}/>
+                <input style={boxSize} className="input mt-2" type="password" name="passwordConfirm" placeholder="confirm password" onChange={handleChange}/>
             </div>
             <div>
-                <button className="modifyBtn mt-4" type="submit">수정하기</button>
+                <button className="modifyBtn mt-4 mb-3" type="submit">수정하기</button>
             </div>
         </form>
     )

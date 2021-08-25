@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'
 
 import axios from 'axios'
-import swal from 'sweetalert';
+import swal from 'sweetalert'
 import { useHistory } from 'react-router'
 import "./mypage.css"
 
@@ -14,13 +14,16 @@ function InfoContent(){
     }))
     const main=useHistory()
     if(!user) return main.push('/')
+    
     const [information,setInformation]=useState({
             email:user.username,
             username:'',
+            name:'',
+            phone:'',
             password:''
         })
     const [passwordConfirm,setPasswordConfirm]=useState('')
-    const {email,username,password}=information
+    const {email,username,name,phone,password}=information
 
     const res=useHistory()
 
@@ -30,7 +33,9 @@ function InfoContent(){
             ctx=>{setInformation({
                 ...information,
                 email:ctx.data.email,
-                username:ctx.data.username
+                username:ctx.data.username,
+                name:ctx.data.name,
+                phone:ctx.data.phone
             })
             console.log(ctx)
             })
@@ -49,7 +54,7 @@ function InfoContent(){
     }
     const handleCheck=(e)=>{
         e.preventDefault();
-        (username==='' || password==='' || passwordConfirm==='')?    //미입력 사항 존재할 때
+        (name==='' || phone==='' || password==='' || passwordConfirm==='')?    //미입력 사항 존재할 때
             swal('','모두 작성해주세요!','warning')
         :
         (
@@ -74,23 +79,37 @@ function InfoContent(){
             console.log(error)
         })
     }
-
+    const formStyle={
+        marginTop:'5vw'
+    }
+    const boxSize={
+        maxWidth:'290px',
+        height:'60px',
+        borderRadius:'30px',
+        margin:'10px 8px'
+    }
     return(
-        <form onSubmit={handleCheck}>
-            <div className='divstyle'>
-                <input className="inputDisabled mt-3" name="email" placeholder="email" value={email} disabled/>
+        <form style={formStyle} onSubmit={handleCheck}>
+            <div className='divstyle' >
+                <input style={boxSize} className="inputDisabled mt-2" name="email" value={email} disabled/>
             </div>
             <div className='divstyle'>
-                <input className="input mt-3" name="username" value={username} onChange={handleChange}/>
+                <input style={boxSize} className="inputDisabled mt-2" name="username" value={username} disabled/>
             </div>
             <div className='divstyle'>
-                <input className="input mt-3" type="password" name="password" placeholder="password" value={password} onChange={handleChange}/>
+                <input style={boxSize} className="input mt-2" name="name" value={name} placeholder="name" onChange={handleChange}/>
             </div>
             <div className='divstyle'>
-                <input className="input mt-3" type="password" name="passwordConfirm" placeholder="confirm password" value={passwordConfirm} onChange={handleChange}/>
+                <input style={boxSize} className="input mt-2" name="phone" value={phone} placeholder="phone" onChange={handleChange}/>
+            </div>
+            <div className='divstyle'>
+                <input style={boxSize} className="input mt-2" type="password" name="password" placeholder="password" value={password} onChange={handleChange}/>
+            </div>
+            <div className='divstyle'>
+                <input style={boxSize} className="input mt-2" type="password" name="passwordConfirm" placeholder="confirm password" value={passwordConfirm} onChange={handleChange}/>
             </div>
             <div>
-                <button className="modifyBtn mt-4 mb-3" type="submit">수정하기</button>
+                <button className="modifyBtn mt-5 mb-2" type="submit">수정하기</button>
             </div>
         </form>
     )

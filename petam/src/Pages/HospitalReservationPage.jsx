@@ -30,15 +30,16 @@ function HospitalReservationPage(){
                 setHspId(res.data._id)
                 axios.get('/api/reservations/hspfilter/'+res.data.name)  // 예약 정보 중, 해당 병원 정보만 받아오기
                 .then(
-                    res=>setInfo(res.data)
+                    res=>{
+                        setInfo(res.data)
+                    }
                 )
                 .catch(err=>console.log(err))
-            })
-            
+            })    
         }
         fetchPosts()
-    }, [info])
-    
+    }, [hospital])
+
     const totalCount={
         textAlign:'right'
     }

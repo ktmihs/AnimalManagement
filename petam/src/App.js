@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route,Switch } from 'react-router-dom';
 // import PostListPage from './Pages/.PostListPage';
 import Leftbar from './Components/Leftbar.js';
 import SearchPage from './Pages/SearchPage';
@@ -22,7 +22,6 @@ import ProductListPage from './Pages/ProductListPage';
 import ProductViewPage from './Pages/ProductViewPage';
 import Modify from './Components/mypage/ModInformation';
 import AddPet from './Pages/AddPetPage';
-import Information from './Components/mypage/Information';
 import HeaderContainer from './Containers/common/HeaderContainer';
 import WritePage from './Pages/WritePage';
 import Test from './Pages/Test';
@@ -39,6 +38,7 @@ const App = () => {
       <div className="sidebar-body">
         <Route path="*" component={Leftbar} />
         <div className="body">
+          <Switch>
           {/* <Route component={PostListPage} path={['/@:username', '/']} exact /> */}
           <Route path="/login" component={LoginPage} />
           <Route path="/hlogin" component={HLoginPage} />
@@ -73,9 +73,10 @@ const App = () => {
           <Route exact path="/modify" component={Modify} />
           <Route exact path="/addPet" component={AddPet} />
           <Route path="/PostView/:_id" component={PostViewPage} />
-          <Route path="/info" component={Information} />
           <Route path="/hospital/:name" component={HospitalPage} />
           <Route path="/reservationPage" component={ReservationPage} />
+          <Route render={() => <ErrorPage />} />
+          </Switch>
         </div>
       </div>
     </>
