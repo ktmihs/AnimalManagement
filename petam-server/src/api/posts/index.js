@@ -12,6 +12,7 @@ posts.get('/list', postsCtrl.list);
 posts.put('/:_id', postsCtrl.update);
 posts.get('/readone/:_id', postsCtrl.readOne);
 posts.get('/read/:writer', postsCtrl.readWriter);
+posts.get('/read/hospital/:hospitalName', postsCtrl.readHospital);
 // posts.post('/detail/:_id', async (req, res) => {
 //   try {
 //     const _id = req.body._id;
