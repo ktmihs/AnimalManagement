@@ -15,15 +15,34 @@ import SelectReservation from '../Components/reservation/SelectReservation';
 axios.defaults.withCredentials = true;
 const headers = { withCredentials: true };
 // const WritePostPage = (match) => {
-  const WritePostPage = ({ postTitle, postContent, match }) => {
+const WritePostPage = ({ postTitle, postContent, match }) => {
   // const { postTitle, postContent, history } = match;
   // user 정보 조회
-const reserveId = match.params._id
+  const reserveId = match.params._id;
   const { user, hospital } = useSelector(({ user, hospital }) => ({
     user: user.user,
     hospital: hospital.hospital,
   }));
   const location = useHistory();
+
+  const [reservation, setReservation] = useState({
+    _id: '',
+    hostId: '',
+    hospitalName: '',
+    pet: '',
+    type: '',
+    dateDay: '',
+    postCheck: false,
+  });
+  let hospitalId;
+  
+  const [hospitalData, setHospitalData] = useState([
+    {
+      _id: hospitalId,
+      score: '',
+      count: '',
+    },
+  ]);
   let reservationHospitalName;
   let reservationDateDay;
   // 먼저 병원 정보 조회
@@ -34,6 +53,7 @@ const reserveId = match.params._id
       // console.log(location);
       console.log(match);
       console.log(match.params._id);
+
       const resReservation = axios
         .get('/api/reservations/read/' + match.params._id)
         .then((response) => {
@@ -58,21 +78,27 @@ const reserveId = match.params._id
       console.log('user : ', user.username);
       // console.log("hospital : ", hospital.username)
       console.log('dsdfsdf');
+const res_ = axios
+  .get('/api/hospitals/read/name/' + reservation.hospitalName)
+  .then((response) => {
+    console.log('response.data', response.data);
+    hospitalId = response.data._id;
+  });
 
       // const user = useSelector((state) => state.user.userData);
       console.log('--', hospitalId);
       const res = axios
-        .get('/api/hospitals/readone/' + hospitalId)
+        .get('/api/hospitals/read/name/' + reservation.hospitalName)
         .then((response) => {
           console.log('response.data : ', response.data);
           // console.log("로그인 정보 : ", user);
           setHospitalData({
-            _id: hospitalId,
+            _id: response.data._id,
             score: response.data.score,
             count: response.data.count,
           });
         });
-      console.log('hospitalData', hospitalData);
+      console.log('별점 계산을 위한 hospitalData', hospitalData);
     } catch (e) {
       console.error(e.message);
     }
@@ -108,7 +134,7 @@ const reserveId = match.params._id
   const postWrite = () => {
     const title = postTitle.value;
     const content = postContent.value;
-   location.push('/');
+    location.push('/');
     if (title === '' || title === undefined) {
       alert('제목을 입력해주세요.');
       // this.postTitle.focus();
@@ -128,20 +154,20 @@ const reserveId = match.params._id
     const resPostCHeck = axios.put(
       '/api/reservations/postCheck/' + reservation._id,
     );
-    // console.log('respostcheck', resPostCheck);
+
     const send_param = {
       content: postContent.value,
       title: postTitle.value,
       score: clicked[5],
       view: 0,
       writer: user.username,
-      hospitalId: hospitalId,
+      hospitalName: reservation.hospitalName,
       reservation: reserveId,
     };
 
     // 병원 별점 계산을 위해 병원 데이터 업데이트
     // count 1 더해주고 score도 합해준다
-    const res2 = axios.put('/api/hospitals/' + hospitalId, {
+    const res2 = axios.put('/api/hospitals/' + hospitalData._id, {
       ...hospitalData,
       score: parseInt(hospitalData.score) + parseInt(clicked[5]),
       count: parseInt(hospitalData.count) + 1,
@@ -154,7 +180,6 @@ const reserveId = match.params._id
         console.log('save post', response);
         // 왜 안되는지 모르겠음 ㅜ
         // location.push('/postlistpage');
-     
       })
       .catch((error) => {
         console.log(error);
@@ -168,24 +193,6 @@ const reserveId = match.params._id
     // });
   };
 
-  const hospitalId = '6108d6ad3bc5d0b0e56ae1ac';
-  // const hospitalId = match.params._id
-  const [hospitalData, setHospitalData] = useState([
-    {
-      _id: hospitalId,
-      score: '',
-      count: '',
-    },
-  ]);
-  const [reservation, setReservation] = useState({
-    _id: '',
-    hostId: '',
-    hospitalName: '',
-    pet: '',
-    type: '',
-    dateDay: '',
-    postCheck: false,
-  });
   const scope = {
     minHeight: '70px',
     paddingTop: '10px',

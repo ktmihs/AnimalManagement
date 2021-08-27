@@ -12,6 +12,9 @@ const { Schema } = mongoose;
 
 const PostSchema = new Schema({
   // _id: String,
+  reservation: {
+    type: String,
+  },
   no: {
     type: Number,
   }, // auto increment
@@ -34,7 +37,7 @@ const PostSchema = new Schema({
   writer: {
     type: String,
   },
-  hospitalId: {
+  hospitalName: {
     type: String,
   }, // 진료받은 병원의 _id 저장
   enrollTime: {
@@ -42,9 +45,6 @@ const PostSchema = new Schema({
     default: Date.now,
   },
   // deleteTime: Date,
-  reservation: {
-    type: String,
-  },
 });
 
 PostSchema.plugin(autoIncrement.plugin, {

@@ -30,6 +30,7 @@ import HRegisterPage from "./Pages/HRegisterPage";
 import HLoginPage from './Pages/HLoginPage';
 import AllProductPage from './Pages/AllProductPage.jsx';
 import ProductOnSale from './Pages/ProductOnSale.jsx';
+import HospitalPostListPage from './Pages/HospitalPostListPage.jsx';
 
 const App = () => {
   return (
@@ -48,7 +49,7 @@ const App = () => {
           <Route path="/test" component={Test} />
           <Route path="/" exact component={Main} />
           <Route path="/main" component={Main} />
-
+          <Route path="/HospitalPostListPage/:hospitalName" component={HospitalPostListPage}/>
           <Route exact path="/hospital" component={SearchPage} />
           <Route path="/PostListPage" component={PostListPage} />
           <Route path="/MyPostListPage" component={MyPostListPage} />

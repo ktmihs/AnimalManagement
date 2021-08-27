@@ -2,7 +2,7 @@ import Post from '../../models/post';
 import mongoose from 'mongoose';
 
 export const write = async (ctx) => {
-  const { title, content, tags, view, score, writer } = ctx.request.body;
+  const { title, content, tags, view, score, writer, reservation , hospitalName} = ctx.request.body;
 
   // 현재 로그인 기능이 구현되어 있지 않아 임의로 작성자 명시_210601
   // const writer = 'jooju';
@@ -13,6 +13,8 @@ export const write = async (ctx) => {
     view,
     score,
     writer,
+    reservation,
+    hospitalName,
   });
   try {
     await post.save();
@@ -51,6 +53,22 @@ export const readWriter = async (ctx) => {
 
   try {
     const posts = await Post.find({ writer: writer }).exec();
+    if (!posts) {
+      ctx.status = 404;
+      return;
+    }
+    ctx.body = posts;
+    console.log();
+    console.log(posts);
+  } catch (e) {
+    ctx.throw(500, e);
+  }
+};
+export const readHospital = async (ctx) => {
+  const { hospitalName } = ctx.params; 
+
+  try {
+    const posts = await Post.find({ hospitalName: hospitalName }).exec();
     if (!posts) {
       ctx.status = 404;
       return;

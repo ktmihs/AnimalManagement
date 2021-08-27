@@ -76,7 +76,15 @@ function HospitalPage(props) {
           id:hospitalInfo.id,
           name:hospital
       })
-    }
+  }
+    
+      const postClick = () => {
+        hspId.push({
+          pathname: '/hospitalpostlistpage/'+hospital,
+          id: hospitalInfo.id,
+          name: hospital,
+        });
+      };
     const topContent={
         padding:'0 10%',
         display:'flex',
@@ -130,7 +138,7 @@ function HospitalPage(props) {
                         }
                         <div style={buttons}>
                             <button style={topButton} className='button' onClick={handleClick}>예약하기</button>
-                            <button style={bottomButton} className='button'>후기</button>
+                            <button style={bottomButton} className='button' onClick = {postClick}>후기</button>
                         </div>
                     </div>
                 }

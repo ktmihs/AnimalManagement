@@ -8,7 +8,7 @@ const HeaderBlock = styled.div`
   position: fixed;
   width: 100%;
   
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+  // box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
 `;
 // background: white;
 /**
@@ -54,7 +54,8 @@ const Header = ({ user, onLogout, onHLogout,onMy, hospital }) => {
   // console.log("user : ", user)
   return (
     <>
-      <nav class=" shadow-sm navbar navbar-expand navbar-light bg-primary topbar  static-top shadow">
+      {/* <nav class=" shadow-sm navbar navbar-expand navbar-light bg-primary topbar b static-top shadow"> */}
+      <nav class="bg-primary">
         <div className=" col-12">
           <HeaderBlock>
             <Wrapper>
