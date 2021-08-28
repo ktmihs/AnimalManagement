@@ -2,8 +2,8 @@
   display:inline-block;
   border-radius: 10px;
   text-align:center;
-  height:180px;
-  width:158px;
+  height:200px;
+  width:164px;
   margin:20px 20px 0 20px;
   padding:5px 0;
   font-size:14px;
@@ -20,13 +20,16 @@
 .search {
   display:inline-block;
   border:1px solid #bbbcbc;
-  border-radius:5px;
+  border-radius:10px;
   width:40%;
-  height:35px;
+  padding-left: 15px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  /* height:35px; */
 }
 
 .search-button {
-  background-color:#dddddd;
+  background-color:#98B6E4;
   margin-left:10px;
   width:80px;
 }

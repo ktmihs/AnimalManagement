@@ -2,13 +2,21 @@ import React from 'react'
 import '../Content.css'
 import './Search.css'
 
+import { BiPhone, BiLocationPlus } from 'react-icons/bi';
+
 // 병원 하나씩 보여주기 & 예약 정보 하나씩 보여주기 (linkname으로 구분)
 function Item({linkName,item}){
     const link=linkName
     const name=item.name
     const id=item._id
     const hospitalName=item.hospitalName
-
+  const telIcon = {
+  marginRight: '5px',
+  }
+  const info = {
+    // border: '1px solid red',
+    marginTop: "7px"
+  }
     return( 
       link==='hospital'?
         <a href={`/${link}/${name}`}>
@@ -18,9 +26,13 @@ function Item({linkName,item}){
                     <img className="img-style" src={item.image.split('\\')[2]}/>
                     :
                     <img className="img-style" src={'no_img.jpg'}/>
-                }
-                {item.name}<br/>
-                tel: {item.tel}
+            }
+            <div style={info}>{item.name}</div>
+            {/* {item.name}<br /> */}
+            <div style={info}>
+            <BiPhone size="18" style={telIcon}/>
+              {item.tel}
+              </div>
             </div>
         </a>
       : link === 'complete' ? 
