@@ -5,12 +5,14 @@
 .sidebar-body {
   display: flex;
   flex-direction: row;
+/* height: 100vh; */
+  /* float: left; */
 }
 .body {
   /*display:flex; 없애니까 content크기 내용만큼으로 바뀜*/
   flex-direction: row !important;
   width: 100% !important;
-  max-height: 90.7vh;
+  max-height: calc(100vh - 70px);
   height: auto;
   overflow-y: scroll !important;
   /* background-color: red; */

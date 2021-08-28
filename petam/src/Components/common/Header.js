@@ -7,6 +7,7 @@ import Button from './Button';
 const HeaderBlock = styled.div`
   position: fixed;
   width: 100%;
+  height: 70px;
   
   // box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
 `;
@@ -48,6 +49,9 @@ const UserInfo = styled.div`
   font-weight: 800;
   margin-right: 1rem;
 `;
+const topbarHeight = {
+  height: '70px',
+}
 
 const Header = ({ user, onLogout, onHLogout,onMy, hospital }) => {
   // console.log(hospital)
@@ -55,9 +59,9 @@ const Header = ({ user, onLogout, onHLogout,onMy, hospital }) => {
   return (
     <>
       {/* <nav class=" shadow-sm navbar navbar-expand navbar-light bg-primary topbar b static-top shadow"> */}
-      <nav class="bg-primary">
+      <nav class="bg-primary " style = {topbarHeight}>
         <div className=" col-12">
-          <HeaderBlock>
+          <HeaderBlock className="">
             <Wrapper>
               <Link to="/main">
                 <h3

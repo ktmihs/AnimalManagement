@@ -43,7 +43,7 @@ import LeftbarCategory from "./leftbar/LeftbarCategory";
   // render = () => (
     // console.log(hospital.username)
     return (
-      <div>
+      <div className="">
         <ul
           // class="leftbar-scope"
           class="leftbar-scope navbar-nav sidebar-color sidebar sidebar-dark accordion"

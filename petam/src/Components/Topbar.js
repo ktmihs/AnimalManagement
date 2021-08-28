@@ -29,7 +29,7 @@ export default class TopBar extends Component {
             </h3>
           </Link>
 
-          <div className="   sign-component c.ol-3">
+          <div className="   sign-component col-3">
              <Link to='/jlogin'>
             <button
               class="signin"
