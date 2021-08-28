@@ -16,7 +16,7 @@ const images = new Router()
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     console.log('file:',`${__dirname}/images/`)
-    cb(null, '..\\petam\\public')
+    cb(null, '..//petam//public')
     //cb(null, `${__dirname}/images/`) // 파일 업로드 경로
   },
   filename: function (req, file, cb) {
