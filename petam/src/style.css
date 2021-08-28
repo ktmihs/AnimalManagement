@@ -52,7 +52,7 @@ color: #84a9c4ff;
 }
 
 .b {
-  /* border: 2px solid red; */
+  border: 2px solid red;
   /* padding: 0.5rem;
   height: 100vh; */
 }
@@ -10783,7 +10783,7 @@ a:focus {
 
 .sidebar {
   width: 6.5rem;
-  min-height: 90.7vh;
+  min-height: calc(100vh - 70px);
   position: sticky ;
 }
 
