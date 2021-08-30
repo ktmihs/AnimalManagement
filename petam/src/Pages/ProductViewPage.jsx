@@ -83,17 +83,17 @@ function ProductViewPage(props) {
         /> */}
         <hr className="w-90" />
         <div className="col-12 m-auto bg-white" style={scope}>
-          <ProductViewImage
-            image={productData.image}
-          ></ProductViewImage>
+          <ProductViewImage image={productData.image}></ProductViewImage>
           <ProductViewCompanyAndPrice
             company={productData.company}
             price={productData.price}
           ></ProductViewCompanyAndPrice>
 
           <ProductViewDetail>{productData.discription}</ProductViewDetail>
-
-          <Link style={{ textDecorationLine: "none" }} to="/productlistpage">
+          {/* <br></br>
+          <br></br>
+          <br></br> */}
+          <Link style={{ textDecorationLine: 'none' }} to="/productlistpage">
             <div class="tolist">목록으로</div>
           </Link>
         </div>
@@ -104,7 +104,7 @@ function ProductViewPage(props) {
       <Content>
         <h2 className="name">판매중인 병원</h2>
         <ProductHospitalTable
-          headersName={["병원명", "전화번호"]}
+          headersName={['병원명', '전화번호']}
           history={props.history}
           hospitalinfo={productData.hospitals}
         />

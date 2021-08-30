@@ -74,13 +74,6 @@ export default class WriteProductPage extends Component {
   
   productWrite = () => {
     console.log("productWrite");
-    // const name = this.productName.value;
-    // // const sellingPrice = this.productSellingPrice.value;
-    // const price = this.productPrice.value;
-    // const company = this.productCompany.value;
-    // const discription = this.productDiscription.value;
-    
-    // const image=this.productImage.value;
     
     const config = {
         headers: {
