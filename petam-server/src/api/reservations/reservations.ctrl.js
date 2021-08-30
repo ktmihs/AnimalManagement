@@ -1,4 +1,4 @@
-import Reservation from "../../models/reservation";
+import Reservation from "../../models/reservation"
 
 // 예약하기
 export const write=async(ctx, next)=>{
@@ -42,7 +42,6 @@ export const read=async(ctx)=>{
     }catch(e){
         return ctx.throw(200,e)
     }
-    
     ctx.body=reservation
 }
 
@@ -80,22 +79,6 @@ export const hospital=async(ctx)=>{
     ctx.body=data
 }
 
-export const readName=async(ctx)=>{
-    const hostId=ctx.params
-    let data
-    try{
-        data=await Reservation.findOne(hostId).exec()
-    }catch(e){
-        return ctx.throw(200,e)
-    }
-    if(!data){
-        ctx.status=404
-        ctx.body={message:'data not found'}
-        return
-    }
-    ctx.body=data
-}
-
 // 개인이 예약한 내역만 가져오기(진료X)
 export const filter=async(ctx)=>{       
     const filter=ctx.params             // 입력 받은 단어(params)
@@ -104,11 +87,11 @@ export const filter=async(ctx)=>{
         total=await Reservation.find().exec()  // 모든 데이터 조회 후
         reservation=total.filter(item=>item.hostId.includes(Object.values(filter))&& !item.check) // 예약한 내역 중 아직 진료 받지 않은 데이터
         reservation=reservation.sort((a,b)=>    // 시간 순서대로 정렬
-                    Number(a.dateDay.split('.')[0])-Number(b.dateDay.split('.')[0]) 
-                    || Number(a.dateDay.split('.')[1])-Number(b.dateDay.split('.')[1]) 
-                    || Number(a.dateDay.split('.')[2].split(':')[0])-Number(b.dateDay.split('.')[2].split(':')[0])
-                    || Number(a.dateDay.split('.')[2].split(':')[1])-Number(b.dateDay.split('.')[2].split(':')[1]) 
-                )
+            Number(a.dateDay.split('.')[0])-Number(b.dateDay.split('.')[0]) 
+            || Number(a.dateDay.split('.')[1])-Number(b.dateDay.split('.')[1]) 
+            || Number(a.dateDay.split('.')[2].split(':')[0])-Number(b.dateDay.split('.')[2].split(':')[0])
+            || Number(a.dateDay.split('.')[2].split(':')[1])-Number(b.dateDay.split('.')[2].split(':')[1]) 
+        )
     }catch(e){
         return ctx.throw(200,e)
     }
@@ -122,11 +105,11 @@ export const filterComplete=async(ctx)=>{
         total=await Reservation.find().exec()  // 모든 데이터 조회 후
         reservation=total.filter(item=>item.hostId.includes(Object.values(filter))&& item.check) // 예약한 내역 중 진료를 받은 데이터
         reservation=reservation.sort((a,b)=>    // 시간 순서대로 정렬
-                    Number(a.dateDay.split('.')[0])-Number(b.dateDay.split('.')[0]) 
-                    || Number(a.dateDay.split('.')[1])-Number(b.dateDay.split('.')[1]) 
-                    || Number(a.dateDay.split('.')[2].split(':')[0])-Number(b.dateDay.split('.')[2].split(':')[0])
-                    || Number(a.dateDay.split('.')[2].split(':')[1])-Number(b.dateDay.split('.')[2].split(':')[1]) 
-                )
+            Number(a.dateDay.split('.')[0])-Number(b.dateDay.split('.')[0]) 
+            || Number(a.dateDay.split('.')[1])-Number(b.dateDay.split('.')[1]) 
+            || Number(a.dateDay.split('.')[2].split(':')[0])-Number(b.dateDay.split('.')[2].split(':')[0])
+            || Number(a.dateDay.split('.')[2].split(':')[1])-Number(b.dateDay.split('.')[2].split(':')[1]) 
+        )
     }catch(e){
         return ctx.throw(200,e)
     }
@@ -141,11 +124,11 @@ export const hspfilter=async(ctx)=>{
         total=await Reservation.find().exec()  // 모든 데이터 조회 후
         reservation=total.filter(item=>item.hospitalName.includes(Object.values(filter))&& !item.check) // 진료 받지 않은 해당 병원의 모든 예약 데이터
         reservation=reservation.sort((a,b)=>    // 시간 순서대로 정렬
-                    Number(a.dateDay.split('.')[0])-Number(b.dateDay.split('.')[0]) 
-                    || Number(a.dateDay.split('.')[1])-Number(b.dateDay.split('.')[1]) 
-                    || Number(a.dateDay.split('.')[2].split(':')[0])-Number(b.dateDay.split('.')[2].split(':')[0])
-                    || Number(a.dateDay.split('.')[2].split(':')[1])-Number(b.dateDay.split('.')[2].split(':')[1]) 
-                )
+            Number(a.dateDay.split('.')[0])-Number(b.dateDay.split('.')[0]) 
+            || Number(a.dateDay.split('.')[1])-Number(b.dateDay.split('.')[1]) 
+            || Number(a.dateDay.split('.')[2].split(':')[0])-Number(b.dateDay.split('.')[2].split(':')[0])
+            || Number(a.dateDay.split('.')[2].split(':')[1])-Number(b.dateDay.split('.')[2].split(':')[1]) 
+        )
     }catch(e){
         return ctx.throw(200,e)
     }
@@ -170,7 +153,6 @@ export const check = async (ctx) => {
     const { _id } = ctx.params
     let reservation
     try {
-      console.log('_id: ', _id)
       reservation = await Reservation.findOneAndUpdate(
         { _id: _id },
         { check:true }
@@ -187,33 +169,30 @@ export const remove=async(ctx,next)=>{
     await Reservation.deleteOne({_id:id})
     await next()
 }
+
 // 후기 작성 완료 체크
 export const postCheck = async (ctx) => {
   const { _id } = ctx.params;
   let reservation;
   try {
-    console.log('_id: ', _id);
     reservation = await Reservation.findOneAndUpdate(
       { _id: _id },
       { postCheck: true },
-    );
-      console.log("reservation: ", reservation)
+    )
   } catch (e) {
-    ctx.throw(500, e);
+    ctx.throw(500, e)
   }
-  ctx.body = reservation;
-};
+  ctx.body = reservation
+}
+
+// 후기 작성 가능
 export const postReservation = async (ctx) => {
-    const { hostId } = ctx.params;
+    const { hostId } = ctx.params
     let reservation
     try {
-        console.log(" 환자 아이디 : ", hostId)
-
-          reservation = await Reservation.find({
-            $and: [{ hostId: hostId }, { check: true }, { postCheck: false }],
-          });
-        
-        console.log(reservation)
+        reservation = await Reservation.find({
+          $and: [{ hostId: hostId }, { check: true }, { postCheck: false }],
+        })
     } catch (e) {
       ctx.throw(500, e)
     }
