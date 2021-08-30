@@ -5,7 +5,6 @@ import Pagination from '../pagination/Pagination'
 
 // 내 예약 내역 페이지
 function MyReservationPage({info, loading,linkName}){
-    const [reservation,setReservation]=useState([])   //병원 정보
     const [currentPage,setCurrentPage]=useState(1)  //현재 페이지
     const [postsPerPage]=useState(4)                //한 페이지에서 보여줄 info 수
 

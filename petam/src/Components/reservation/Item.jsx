@@ -23,4 +23,5 @@ function Item({lastTime,reservationTime,time,selectTime}){
         }</>  
     )
 }
+
 export default Item

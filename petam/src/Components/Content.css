@@ -15,7 +15,6 @@
   max-height: calc(100vh - 70px);
   height: auto;
   overflow-y: scroll !important;
-  /* background-color: red; */
   background-color: rgb(209, 225, 245);
 }
 .body::-webkit-scrollbar {
@@ -41,7 +40,6 @@
   display: inline-block;
   text-align: center;
   min-height: 280px;
-  /* width: 400px; */
   overflow: hidden;
   margin-left: 50px;
   word-wrap: break-word;
@@ -49,13 +47,9 @@
 }
 .ContentBoxHospitalInfo {
   display: inline-block;
-  padding-top: 20px;
-  margin-left: 50px;
-  /*height:25vw;*/
   height: 280px;
   width: 500px;
-  /* width: calc(100% - 800px); */
-  /* border:1px dotted #bbbcbc; */
+  padding-top:20px;
   overflow: hidden;
   word-wrap: break-word;
   line-height: 30px;

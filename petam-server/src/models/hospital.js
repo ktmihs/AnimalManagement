@@ -1,9 +1,7 @@
+import mongoose, { Schema } from 'mongoose'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
-import mongoose, { Schema } from 'mongoose';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-
-// const { Schema } = mongoose;
 const HospitalSchema = new Schema({
   hashedPassword: String, //로그인 비밀번호
   username: String, //  병원 아이디
@@ -44,15 +42,7 @@ const HospitalSchema = new Schema({
     lunchOpenHour: Number,
     lunchOpenMinute: Number,
     lunchCloseHour: Number,
-    lunchCloseMinute: Number,
-    // openHour: { Number },
-    // openMinute: { Number },
-    // closeHour: { Number },
-    // closeMinute: { Number },
-    // lunchOpenHour: { Number },
-    // lunchOpenMinute: { Number },
-    // lunchCloseHour: { Number },
-    // lunchCloseMinute: { Number },
+    lunchCloseMinute: Number
   }, // 병원 운영시간, 점심시간
   reservationTime: [], //예약 정보
   products: [

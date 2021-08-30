@@ -4,15 +4,14 @@ import '../Components/Content.css'
 import ReserveContent from '../Components/hsppage/ReserveContent'
 import axios from 'axios'
 import Pagination from '../Components/pagination/Pagination'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux'
 
 // 로그인 된 병원의 예약 확인 페이지
 function HospitalReservationPage(){
-    const { user, hospital } = useSelector(({ user, hospital }) => ({
-        user: user.user,
-        hospital: hospital.hospital,
-      }));
-    //const [name,setName]=useState()       // 현재 로그인 된 병원 이름
+    const { hospital } = useSelector(({ hospital }) => ({
+        hospital: hospital.hospital
+    }))
+
     const [hspId,setHspId]=useState(hospital._id)   //병원 Id
     const [info,setInfo]=useState([])   //병원 정보
     const [currentPage,setCurrentPage]=useState(1)  //현재 페이지
@@ -43,13 +42,14 @@ function HospitalReservationPage(){
     const totalCount={
         textAlign:'right'
     }
+
     return(
         <Content>
             <h2 className='name'>예약된 내역</h2>
             <div className='bodyContainer'>
                 <div style={totalCount}>총 {info.length}건</div>
                 <hr/>
-                <div >
+                <div>
                     <ReserveContent hspId={hspId} info={currentPosts}/>
                     <Pagination postsPerPage={postsPerPage} totalPosts={info.length} paginate={paginate}/>
                 </div>

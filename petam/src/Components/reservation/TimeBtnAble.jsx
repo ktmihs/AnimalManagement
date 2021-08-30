@@ -8,4 +8,5 @@ function TimeBtnAble({time,selectTime}){
     }
     return <button onClick={handleClick} className='timeBtn' value={time}>{time}</button>
 }
+
 export default TimeBtnAble

@@ -35,6 +35,7 @@ export const read=async(ctx)=>{
     }
     ctx.body=pet
 }
+
 // 나의 반려동물 정보 읽기
 export const readMyPet=async(ctx)=>{
     const email=ctx.params
@@ -76,6 +77,7 @@ export const update=async(ctx)=>{
     }
     ctx.body=pet
 }
+
 // 특정 반려동물 정보 삭제
 export const remove=async(ctx)=>{
     const {email,name}=ctx.params

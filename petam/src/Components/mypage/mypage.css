@@ -6,6 +6,12 @@
     display:inline-block;
     text-align:center;
 }
+.boxsize{
+    max-width:290px;
+    height:60px;
+    border-radius:30px;
+    margin:10px 8px;
+}
 .radio{
     margin:0 5px;
     display: inline-block;

@@ -1,13 +1,12 @@
 import React from 'react'
-import { useHistory, useLocation } from 'react-router'
-import { useSelector, useDispatch } from 'react-redux';
-
-import '../../style.css'
-import "../sign/Register.css"
-import "../sign/sign.css"
+import { useHistory } from 'react-router'
+import { useSelector } from 'react-redux'
 import InfoContent from './InfoContent'
 import InfoHspContent from '../hsppage/InfoHspContent'
 import InfoTitle from './InfoTitle'
+import '../../style.css'
+import "../sign/Register.css"
+import "../sign/sign.css"
 
 // 정보 수정 페이지
 function ModInformation(){
@@ -29,7 +28,7 @@ function ModInformation(){
         padding:'15px 0 30px 0'
     }
     const margin={
-        marginTop:'60px'
+        margin:'60px 0'
     }
     const pet={
         display:'inline-block',

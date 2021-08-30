@@ -1,16 +1,14 @@
-import React from 'react'
+import React,{ useState,useEffect } from 'react'
 import { useLocation } from 'react-router'
 import { useSelector } from 'react-redux'
 import Content from '../Components/Content'
 import '../Components/Content.css'
-import swal from 'sweetalert';
+import swal from 'sweetalert'
 import axios from 'axios'
-import { useState,useEffect } from 'react';
 
 function CheckReservationPage({location,history}){
-    const { user, hospital } = useSelector(({ user, hospital }) => ({
-        user: user.user,
-        hospital: hospital.hospital,
+    const { user } = useSelector(({ user }) => ({
+        user: user.user
     }))
     const [reservation,setReservation]=useState({
         hospitalName:'',
@@ -50,7 +48,6 @@ function CheckReservationPage({location,history}){
         .catch((error) => {
             console.log(error)
         })
-
         axios.put("/api/hospitals/"+hsp.id+'/'+reserve.dateDay)        // 병원에 예약 시간 정보 저장
         .then((response) => {
             console.log('reservationTime:',response)
@@ -59,8 +56,8 @@ function CheckReservationPage({location,history}){
             console.log(error)
         })
     }
-    const handleClick=()=>{
-        
+
+    const handleClick=()=>{    
         swal({
             text:'예약이 확정되었습니다.',
             icon:'success',
@@ -86,6 +83,7 @@ function CheckReservationPage({location,history}){
             name:hsp.name
         })
     }
+
     const contentBox={
         border:'none',
         height:'auto'
@@ -101,6 +99,7 @@ function CheckReservationPage({location,history}){
         display:'inline-block',
         backgroundColor:'#5F8DDA'
     }
+    
     return(
         <Content>
             <h2 className='name'>예약 정보 확인</h2>

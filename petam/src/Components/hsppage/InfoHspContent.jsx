@@ -7,8 +7,7 @@ import { useSelector } from 'react-redux'
 
 // 병원 정보 수정 페이지의 내용
 function InfoHspContent(){
-    const { userId, hospitalId } = useSelector(({ user, hospital }) => ({
-        userId: user.user,
+    const { hospitalId } = useSelector(({ hospital }) => ({
         hospitalId: hospital.hospital,
     }))
     
@@ -58,7 +57,6 @@ function InfoHspContent(){
     }, [hospitalId])
 
     const handleImage=(e)=>{
-        console.log(e.target.files[0],e.target.files[0].name)
         setHospital({
             ...hospital,
             image:e.target.value
@@ -68,12 +66,10 @@ function InfoHspContent(){
         formData.append('filename',e.target.files[0].name)
         formData.append('hospitalname',name)
         setForm(formData)
-        for(let data of formData){console.log(data[0],data[1])}
     }
     
     const handleChange=(e)=>{
-        const {name,value}=e.target
-        
+        const {name,value}=e.target 
         name==='passwordConfirm'?       // 비밀번호 확인일 경우에만 따로 저장
         setPasswordConfirm(value)
         :
@@ -83,6 +79,7 @@ function InfoHspContent(){
         })
         console.log(name,value)
     }
+
     const handleCheck=(e)=>{
         e.preventDefault();
         (tel==='' || old_addr==='' || new_addr==='' || zip_code==='' || password==='' || passwordConfirm==='')?    //미입력 사항 존재할 때
@@ -106,7 +103,6 @@ function InfoHspContent(){
         axios.post("/api/images/image",form,config)
         .then((response) => {
             console.log(response,form.entries()[0])
-            //for(let i of formData.entries()){ console.log('form',i[0],i[1])}
         })
         .catch((error) => {
             console.log(error)
@@ -119,6 +115,7 @@ function InfoHspContent(){
             console.log(error)
         })
     }
+
     const fileSize={
         width:'100%',
         margin:'5px 30px'
@@ -126,10 +123,7 @@ function InfoHspContent(){
     const fileStyle={
         margin:'40px 20px'
     }
-    const boxSize={
-        maxWidth:'280px',
-        margin:'10px'
-    }
+
     return(
         <form onSubmit={handleCheck}>
             <div style={fileSize} className='divstyle'>
@@ -139,28 +133,28 @@ function InfoHspContent(){
                 <input style={fileStyle} type="file" value={image} accept="image/*" name="image" onChange={handleImage} />
             </div>
             <div className='divstyle'>
-                <input style={boxSize} className="inputDisabled mt-2" name="company_number" value={company_number} disabled/>  
+                <input className="inputDisabled mt-2 box-size" name="company_number" value={company_number} disabled/>  
             </div>
             <div className='divstyle'>
-                <input style={boxSize} className="inputDisabled mt-2" name="name" value={name} disabled/>
+                <input className="inputDisabled mt-2 box-size" name="name" value={name} disabled/>
             </div>
             <div className='divstyle'>
-                <input style={boxSize} className="input mt-2" name="tel" placeholder="tel" value={tel} onChange={handleChange}/>
+                <input className="input mt-2 box-size" name="tel" placeholder="tel" value={tel} onChange={handleChange}/>
             </div>
             <div className='divstyle'>
-                <input style={boxSize} className="input mt-2" name="old_addr" placeholder="old_addr" value={old_addr} onChange={handleChange}/>
+                <input className="input mt-2 box-size" name="old_addr" placeholder="old_addr" value={old_addr} onChange={handleChange}/>
             </div>
             <div className='divstyle'>
-                <input style={boxSize} className="input mt-2" name="new_addr" placeholder="new_addr" value={new_addr} onChange={handleChange}/>
+                <input className="input mt-2 box-size" name="new_addr" placeholder="new_addr" value={new_addr} onChange={handleChange}/>
             </div>
             <div className='divstyle'>
-                <input style={boxSize} className="input mt-2" name="zip_code" placeholder="zip_code" value={zip_code} onChange={handleChange}/>
+                <input className="input mt-2 box-size" name="zip_code" placeholder="zip_code" value={zip_code} onChange={handleChange}/>
             </div>
             <div className='divstyle'>
-                <input style={boxSize} className="input mt-2" type="password" name="password" placeholder="password" onChange={handleChange}/>
+                <input className="input mt-2 box-size" type="password" name="password" placeholder="password" onChange={handleChange}/>
             </div>
             <div className='divstyle'>
-                <input style={boxSize} className="input mt-2" type="password" name="passwordConfirm" placeholder="confirm password" onChange={handleChange}/>
+                <input className="input mt-2 box-size" type="password" name="passwordConfirm" placeholder="confirm password" onChange={handleChange}/>
             </div>
             <div>
                 <button className="modifyBtn mt-4 mb-3" type="submit">수정하기</button>

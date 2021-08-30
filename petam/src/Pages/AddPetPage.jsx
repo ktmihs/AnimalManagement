@@ -1,18 +1,14 @@
 import axios from 'axios'
 import React,{useState,useEffect} from 'react'
 import { useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
-
 import Content from '../Components/Content'
 import "../Components/mypage/mypage.css"
 import PetsInfo from '../Components/mypage/PetsInfo'
 
 function AddPetPage(){
-    const { user, hospital } = useSelector(({ user, hospital }) => ({
-        user: user.user,
-        hospital: hospital.hospital,
+    const { user } = useSelector(({ user }) => ({
+        user: user.user
     }))
-
     const username=user.username
     const [pets,setPets]=useState([])
     const [pet,setPet]=useState({
@@ -25,7 +21,7 @@ function AddPetPage(){
     const {parent,name,species,age,gender}=pet
 
     useEffect(() => {
-        axios.get('/api/pets/'+username) //나중에 로그인 이메일 넣기
+        axios.get('/api/pets/'+username)
         .then(
             res=>setPets(res.data)
         )
@@ -39,6 +35,7 @@ function AddPetPage(){
             [name]: value
         })
     }
+
     const handleCheck=(e)=>{
         e.preventDefault();
         (name==='' || age==='' || species==='' || gender==='')?    //미입력 사항 존재할 때
@@ -58,7 +55,7 @@ function AddPetPage(){
         .catch((error) => {
             console.log(error)
         })
-        axios.post('/api/pets/',pet)                    // 동물 테이블에 저장
+        axios.post('/api/pets/',pet)        // 동물 테이블에 저장
         .then((response) => {
             console.log(response)
         })
@@ -81,9 +78,7 @@ function AddPetPage(){
         <Content>
             <div className="title mt-4"><h3>등록된 반려 동물 리스트</h3></div>
             <div className="petsDiv">
-            
-            <PetsInfo info={pets}/>
-
+            <PetsInfo info={pets}/>     {/*등록된 동물 리스트*/}
             </div>
             <hr style={line}/>
             <div style={info}>
@@ -115,5 +110,6 @@ function AddPetPage(){
         </Content>
     )
 }
-//AddPetPage > PetsInfo > Item > PetInfo
+
+// AddPetPage > PetsInfo > Item > PetInfo
 export default AddPetPage

@@ -1,6 +1,4 @@
-import React from 'react'
-import { useState,useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import React,{ useState,useEffect } from 'react'
 import Content from '../Components/Content'
 import '../Components/Content.css'
 import axios from 'axios'
@@ -8,10 +6,6 @@ import swal from 'sweetalert'
 
 // 예약된 정보 확인 페이지
 function ConfirmReservationPage(props){
-    const { user, hospital } = useSelector(({ user, hospital }) => ({
-        user: user.user,
-        hospital: hospital.hospital,
-    }))
     const [id,setId]=useState(props.match.params._id)
     const [reservation,setReservation]=useState({
         no:0,
@@ -23,6 +17,7 @@ function ConfirmReservationPage(props){
     })
     const {no,name,pet,type,memo,dateDay}=reservation
     const [hsp,setHsp]=useState()
+    
     useEffect(() => {
         const findReserve=async()=>{
             axios.get('/api/reservations/read/'+id) 
@@ -95,6 +90,7 @@ function ConfirmReservationPage(props){
         display:'inline-block',
         backgroundColor:'#5F8DDA'
     }
+    
     return(
         <Content>
             <h2 className='name'>예약 정보 확인</h2>

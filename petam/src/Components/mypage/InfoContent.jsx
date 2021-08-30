@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-
+import { useSelector } from 'react-redux'
 import axios from 'axios'
 import swal from 'sweetalert'
 import { useHistory } from 'react-router'
@@ -8,9 +7,8 @@ import "./mypage.css"
 
 // 개인 회원의 개인정보 수정 페이지
 function InfoContent(){
-    const { user, hospital } = useSelector(({ user, hospital }) => ({
-        user: user.user,
-        hospital: hospital.hospital,
+    const { user } = useSelector(({ user }) => ({
+        user: user.user
     }))
     const main=useHistory()
     if(!user) return main.push('/')
@@ -50,8 +48,8 @@ function InfoContent(){
             ...information,
             [name]: value
         })
-        console.log(name,value)
     }
+
     const handleCheck=(e)=>{
         e.preventDefault();
         (name==='' || phone==='' || password==='' || passwordConfirm==='')?    //미입력 사항 존재할 때
@@ -70,6 +68,7 @@ function InfoContent(){
             )
         )
     }
+
     const handleSubmit=()=>{
         axios.put("/api/auth/"+email,information)        // 기존 등록 병원
         .then((response) => {
@@ -79,34 +78,30 @@ function InfoContent(){
             console.log(error)
         })
     }
+
     const formStyle={
-        marginTop:'5vw'
+        marginTop:'2vw'
     }
-    const boxSize={
-        maxWidth:'290px',
-        height:'60px',
-        borderRadius:'30px',
-        margin:'10px 8px'
-    }
+   
     return(
         <form style={formStyle} onSubmit={handleCheck}>
             <div className='divstyle' >
-                <input style={boxSize} className="inputDisabled mt-2" name="email" value={email} disabled/>
+                <input className="inputDisabled mt-2 boxsize boxsize" name="email" value={email} disabled/>
             </div>
             <div className='divstyle'>
-                <input style={boxSize} className="inputDisabled mt-2" name="username" value={username} disabled/>
+                <input className="inputDisabled mt-2 boxsize" name="username" value={username} disabled/>
             </div>
             <div className='divstyle'>
-                <input style={boxSize} className="input mt-2" name="name" value={name} placeholder="name" onChange={handleChange}/>
+                <input className="input mt-2 boxsize" name="name" value={name} placeholder="name" onChange={handleChange}/>
             </div>
             <div className='divstyle'>
-                <input style={boxSize} className="input mt-2" name="phone" value={phone} placeholder="phone" onChange={handleChange}/>
+                <input className="input mt-2 boxsize" name="phone" value={phone} placeholder="phone" onChange={handleChange}/>
             </div>
             <div className='divstyle'>
-                <input style={boxSize} className="input mt-2" type="password" name="password" placeholder="password" value={password} onChange={handleChange}/>
+                <input className="input mt-2 boxsize" type="password" name="password" placeholder="password" value={password} onChange={handleChange}/>
             </div>
             <div className='divstyle'>
-                <input style={boxSize} className="input mt-2" type="password" name="passwordConfirm" placeholder="confirm password" value={passwordConfirm} onChange={handleChange}/>
+                <input className="input mt-2 boxsize" type="password" name="passwordConfirm" placeholder="confirm password" value={passwordConfirm} onChange={handleChange}/>
             </div>
             <div>
                 <button className="modifyBtn mt-5 mb-2" type="submit">수정하기</button>

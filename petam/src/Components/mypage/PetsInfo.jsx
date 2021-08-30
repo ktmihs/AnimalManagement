@@ -16,4 +16,5 @@ function PetsInfo({info}){
         </>
     )
 }
+
 export default PetsInfo

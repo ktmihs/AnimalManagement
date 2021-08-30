@@ -15,7 +15,7 @@ function SearchContent({linkName, info, loading}){
                         <Item linkName={linkName} key={item.id} item={item}/>
                     )
                 })
-        }
+            }
         </>
     )
 }

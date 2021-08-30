@@ -1,22 +1,6 @@
 import Image from '../../models/image'
 
-// export const write=async(req,res,next)=>{
-//     return console.log(req, req.file)
-    
-// }
-export const write=async(req,res,next)=>{
-    console.log(req, req.file)
-    const getImage={
-        filename:req.body.filename,
-        hospitalname:req.body.hospitalname 
-    }
-    const image=new Image(getImage)
-    try{
-        await image.save()
-    } catch(e){
-        return req.throw(500,e)
-    }
-}
+// 병원 이미지 볼러오기
 export const readOne=async(ctx)=>{
     const hospital=ctx.params
     let total, image
@@ -29,6 +13,7 @@ export const readOne=async(ctx)=>{
     ctx.body=image[image.length-1]
 }
 
+// 제품 이미지 불러오기
 export const readProductOne=async(ctx)=>{
     const product=ctx.params
     let total, image

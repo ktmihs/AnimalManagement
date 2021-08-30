@@ -5,15 +5,14 @@ import './hsppage.css'
 import axios from 'axios'
 
 // 로그인 된 병원의 예약 정보를 테이블 칼럼에 하나씩 보여줌
-function Item({hspId,item}){
+function Item({item}){
 
     // 진료 완료 버튼을 누르면 진료가 완료되었음을 알려주고, 예약된 시간 정보들을 삭제함
     const handleSubmit=()=>{
         swal('','진료완료!','success')
         axios.put('/api/reservations/'+item._id)        // check를 true로 변경
-        //axios.delete('/api/reservations/'+item._id)     // 예약 테이블에서 삭제
-        //axios.delete('/api/hospitals/'+hspId+'/'+item.dateDay)  // 병원 정보에서 예약된 시간 칼럼 삭제
     }
+    
     // 진료 완료 버튼 클릭 시,
     const handleClick=()=>{
         swal({
