@@ -10,6 +10,7 @@ function MainHospitalContent(){
     fir:'',
     sec:''
   })
+  
   useEffect(() => {
     axios.get('/api/hospitals/last')
     .then(ctx=>{

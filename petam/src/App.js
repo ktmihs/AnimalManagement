@@ -31,7 +31,7 @@ import HLoginPage from './Pages/HLoginPage';
 import AllProductPage from './Pages/AllProductPage.jsx';
 import ProductOnSale from './Pages/ProductOnSale.jsx';
 import HospitalPostListPage from './Pages/HospitalPostListPage.jsx';
-
+import Footer from './Components/Footer.jsx'
 const App = () => {
   return (
     <>
@@ -78,6 +78,7 @@ const App = () => {
           <Route path="/reservationPage" component={ReservationPage} />
           <Route render={() => <ErrorPage />} />
           </Switch>
+          <Route path="*" component={Footer}/>
         </div>
       </div>
     </>

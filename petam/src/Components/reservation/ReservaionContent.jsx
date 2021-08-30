@@ -5,11 +5,10 @@ import './reservation.css'
 
 // 예약 시간 정한 후의 예약할 동물과 예약 목적을 선택할 페이지
 function ReservationContent({time,getReserve}){
-    const { user, hospital } = useSelector(({ user, hospital }) => ({
-        user: user.user,
-        hospital: hospital.hospital,
+    const { user } = useSelector(({ user }) => ({
+        user: user.user
     }))
-    const email=user.username     // 예약자 이메일
+
     const [pets,setPets]=useState([])   // 예약자의 반려동물 list
     const [reserve,setReserve]=useState({   // 예약 내역 정보
         pet:'x',
@@ -72,7 +71,7 @@ function ReservationContent({time,getReserve}){
                 <br/><br/>
                 <textarea name='text' onChange={handleChange} style={textBox} placeholder="병원에 보낼 메시지를 적어주세요."/>
                 <div style={warningText}>
-                    ※주의사항※<br/>
+                    ※주의사항※<br/><br/>
                     예약 1일 전까지 무료 취소 가능합니다.<br/>
                     무분별한 예약, 취소 시 차후 불이익이 발생할 수 있습니다.
                 </div>

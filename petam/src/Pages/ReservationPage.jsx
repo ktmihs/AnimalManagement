@@ -16,6 +16,7 @@ function ReservationPage({history}){
         hour:'',
         minute:''
     })
+    
     const [reserve,setReserve]=useState({   // 예약 정보 받아오기
         pet:'',
         option:'',
@@ -38,6 +39,7 @@ function ReservationPage({history}){
     })
 
     const res=useHistory()      // 다음 페이지에 정보 넘겨주기 위해 res 설정
+    
     const toCheck=()=>{{    
         reserve.pet==='' || reserve.option==='' || reserve.option==='기타' && reserve.text===''?    //미입력 사항 존재할 때
         (
@@ -57,6 +59,7 @@ function ReservationPage({history}){
             dateDay:`${time.month}.${time.dates}.${time.hour}:${time.minute}`
         })
     }}
+
     const getTime=(startDate,startTime)=>{  // TimeTable에서 시간 정보 가져오기
         setTime({
             year:startDate.getFullYear(),
@@ -82,31 +85,33 @@ function ReservationPage({history}){
         display:'inline-block',
         backgroundColor:'#5F8DDA'
     }
+
     return(
         <Content>
             <h2 className='name'>{hsp.Name}</h2>
             <div className='bodyContainer'>
                 <div style={inner}>
-                    {nextPage?
-                    <>
-                        <ReservationContent time={time} getReserve={getReserve}/>
-                        <div style={buttons}>                   
-                            <button style={leftButton} className='button' onClick={()=>setNextPage(false)}>이전으로</button>
-                            <button style={rightButton} className='button' onClick={toCheck}>예약하기</button>  
-                        </div>
-                    </>
-                    :
-                    <>
-                        <TimeTable getTime={getTime} hsp={hsp}/>
-                        {time.minute!==''?
-                            <div style={buttons}>
-                                <button style={leftButton} className='button' onClick={()=>history.push('/Hospital/'+hsp.Name)}>취소</button>
-                                <button style={rightButton} className='button' onClick={()=>setNextPage(true)}>다음으로</button>  
+                    {
+                    nextPage?
+                        <>
+                            <ReservationContent time={time} getReserve={getReserve} />
+                            <div style={buttons}>                   
+                                <button style={leftButton} className='button' onClick={()=>setNextPage(false)}>이전으로</button>
+                                <button style={rightButton} className='button' onClick={toCheck}>예약하기</button>  
                             </div>
-                        :
-                        <></>
-                        }
-                    </>
+                        </>
+                    :
+                        <>
+                            <TimeTable getTime={getTime} hsp={hsp} />
+                            {time.minute!==''?
+                                <div style={buttons}>
+                                    <button style={leftButton} className='button' onClick={()=>history.push('/Hospital/'+hsp.Name)}>취소</button>
+                                    <button style={rightButton} className='button' onClick={()=>setNextPage(true)}>다음으로</button>  
+                                </div>
+                            :
+                            null
+                            }
+                        </>
                     }
                 </div>
             </div>

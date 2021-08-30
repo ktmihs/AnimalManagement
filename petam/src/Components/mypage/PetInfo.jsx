@@ -3,8 +3,7 @@ import axios from 'axios'
 
 // 반려동물 정보를 보여주는 모달창
 const PetInfo = ( props ) => {
-    // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
-    const { open, close, header, item } = props
+    const { open, close, header, item } = props    // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
 
     const handleSubmit=()=>{
         axios.delete('/api/auth/pet/'+item.parent+'/'+`${item.name}(${item.species})`)    // 보호자의 반려동물 리스트에서 해당 반려동물 삭제

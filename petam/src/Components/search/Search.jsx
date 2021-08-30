@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import '../Content.css'
 import './Search.css'
 
-// 검색창
+// 검색 페이지 상단 검색창
 function Search({getSearchWord}){
     const [searchWord,setSearchWord]=useState('')
 

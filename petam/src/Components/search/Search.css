@@ -10,13 +10,11 @@
   color:#333333;
   box-shadow: 3px 3px 10px 0 rgba(0,0,0,0.3);
 }
-
 .img-style {
   width: 150px;
   height: 125px;
   vertical-align: top;
 }
-
 .search {
   display:inline-block;
   border:1px solid #bbbcbc;
@@ -25,9 +23,7 @@
   padding-left: 15px;
   padding-top: 8px;
   padding-bottom: 8px;
-  /* height:35px; */
 }
-
 .search-button {
   background-color:#98B6E4;
   margin-left:10px;

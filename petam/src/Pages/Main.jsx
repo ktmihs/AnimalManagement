@@ -1,28 +1,22 @@
 import React from 'react'
 import Content from '../Components/Content'
 import '../Components/Content.css'
-import MainAd from '../Components/main/MainAd'
 import MainHospitalContent from '../Components/main/MainHospitalContent'
-import MainProductContent from '../Components/main/MainProductContent';
-import { useSelector, useDispatch } from 'react-redux';
-
+import MainProductContent from '../Components/main/MainProductContent'
+import { useSelector } from 'react-redux'
 
 // 메인 페이지
 function Main() {
-  // const a = reducer.user
-  // console.log("user ==== ", user)
 
   const { user, hospital } = useSelector(({ user, hospital }) => ({
     user: user.user,
     hospital: hospital.hospital,
   }));
- 
 
   return (
     <Content>
       {hospital && (
         <div>
-          
           {/* {hospital.username}
           {hospital.company_number} */}
         </div>
@@ -31,10 +25,10 @@ function Main() {
       <h2 className="name">Main Page!!</h2>
       <div className="bodyContainer">
         <MainHospitalContent />
-        <MainProductContent /> {/*나중에 제품으로 변경*/}
+        <MainProductContent /> 
       </div>
     </Content>
-  );
+  )
 }
 
 {/*

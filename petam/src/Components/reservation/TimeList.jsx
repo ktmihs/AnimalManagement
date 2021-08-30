@@ -5,10 +5,11 @@ import Item from './Item'
 function TimeList({lastTime,timeList, reservationTime,selectTime}){
   return(
       <div>
-          {
-            timeList.map(time=><Item lastTime={lastTime} reservationTime={reservationTime} time={time} selectTime={selectTime}/>)
-          }
+        {
+          timeList.map(time=><Item lastTime={lastTime} reservationTime={reservationTime} time={time} selectTime={selectTime}/>)
+        }
       </div>
     )
 }
+
 export default TimeList
