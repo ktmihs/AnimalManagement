@@ -299,10 +299,8 @@ const AuthForm = ({ type, form, onChange, onSubmit, timeHandleChange, error }) =
             />
             <Label>사업자 번호</Label>
             <StyledInput
-              // autoComplete="openTime"
               name="company_number"
               placeholder="사업자 번호"
-              // type="password"
               onChange={onChange}
               value={form.company_number}
             />
