@@ -23,7 +23,18 @@ import CommentButtons from '../Components/comment/CommentButtons';
 import { useSelector } from 'react-redux';
 axios.defaults.withCredentials = true;
 const headers = { withCredentials: true };
-
+const hName = {
+  fontSize: 'small',
+  paddingTop: '6px',
+  paddingBottom: '5px',
+  paddingRight: '7px',
+  paddingLeft: '7px',
+  // border: '1px solid red',
+  marginRight: '10px',
+  borderRadius: '3px',
+  backgroundColor: '#98B6E4',
+  color: 'white',
+};
 function PostViewPage(props) {
   const { user, hospital } = useSelector(({ user, hospital }) => ({
     user: user.user,
@@ -63,6 +74,7 @@ function PostViewPage(props) {
         content: res.data.content,
         writer: res.data.writer,
         score: res.data.score,
+        hospitalName: res.data.hospitalName,
         // view: parseInt(res.data.view) + 1,
         // dateformat을 이용하여 년-월-일 시:분:초 로 표현
         enrollTime: dateFormat(res.data.enrollTime, 'yyyy-mm-dd hh:mm:ss'),
@@ -88,6 +100,7 @@ function PostViewPage(props) {
             content: cData.content,
             writer: cData.writer,
             post_id: _id,
+            hospitalName: cData.hospitalName,
             // dateformat을 이용하여 년-월-일 로 표현
             enrollTime: dateFormat(cData.enrollTime, 'yyyy-mm-dd hh:mm'),
             // enrollTime: rowData.enrollTime,
@@ -120,7 +133,8 @@ function PostViewPage(props) {
         <div className="col-12 m-auto bg-white">
           <div className="">
             <div class="stars ">
-              <FaStar
+             <span style={hName}> {postData.hospitalName}</span>
+              <FaStar 
                 size="18"
                 className={postData.score > 0 && 'clickedstar'}
               />

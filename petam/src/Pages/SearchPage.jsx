@@ -63,7 +63,7 @@ function SearchPage(){
             <Search getSearchWord={getSearchWord} />
             <a href='#bottom' style={button}>Down</a>
             <div className='bodyContainer'>
-                <SearchContent linkName={linkName} info={currentPosts} loading={loading}/>
+                <SearchContent  linkName={linkName} info={currentPosts} loading={loading}/>
                 <Pagination postsPerPage={postsPerPage} totalPosts={info.length} paginate={paginate}/>
             </div>
             <a href='#top' name='bottom' style={button}>&ensp;Up&ensp;</a>
