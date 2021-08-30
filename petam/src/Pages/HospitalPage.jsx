@@ -24,8 +24,8 @@ function HospitalPage(props) {
     img: '',
     addr: '',
     tel: '',
-    time: '09:00 - 18:00',
-    lunch: '',
+    time: '등록되지 않음',
+    lunch: '등록되지 않음',
     company_number: '',
     avg: '0', //평점
   });
@@ -39,26 +39,29 @@ function HospitalPage(props) {
         console.log(ctx);
           const _avg = (ctx.data.score / ctx.data.count).toFixed(2);
           let openMinute, closeMinute, lunchOpenMinute, lunchCloseMinute;
-          if (ctx.data.timeList.openMinute == 0) { openMinute = "00" }
-          else {openMinute = ctx.data.timeList.openMinute; }
-          if (ctx.data.timeList.closeMinute == 0) {
-            closeMinute = '00';
-          } else {
-            closeMinute = ctx.data.timeList.closeMinute;
-          }
-          if (ctx.data.timeList.lunchOpenMinute == 0) {
-            lunchOpenMinute = '00';
-          } else {
-            lunchOpenMinute = ctx.data.timeList.lunchOpenMinute;
-          }
-          if (ctx.data.timeList.lunchCloseMinute == 0) {
-            lunchCloseMinute = '00';
-          } else {
-            lunchCloseMinute = ctx.data.timeList.lunchCloseMinute;
-          }
+
+          if(ctx.data.timeList){
+            if (ctx.data.timeList.openMinute == 0) { openMinute = "00" }
+            else {openMinute = ctx.data.timeList.openMinute; }
+            if (ctx.data.timeList.closeMinute == 0) {
+              closeMinute = '00';
+            } else {
+              closeMinute = ctx.data.timeList.closeMinute;
+            }
+            if (ctx.data.timeList.lunchOpenMinute == 0) {
+              lunchOpenMinute = '00';
+            } else {
+              lunchOpenMinute = ctx.data.timeList.lunchOpenMinute;
+            }
+            if (ctx.data.timeList.lunchCloseMinute == 0) {
+              lunchCloseMinute = '00';
+            } else {
+              lunchCloseMinute = ctx.data.timeList.lunchCloseMinute;
+            }
+        }
         ctx.data.timeList
             ? 
-                setHospitalInfo({
+            setHospitalInfo({
               id: ctx.data._id,
               name: ctx.data.name,
               addr: ctx.data.new_addr,
@@ -123,9 +126,10 @@ function HospitalPage(props) {
     flexDirection: 'row',
   };
   const hospitalImg = {
-    width: '190px',
-    height: '190px',
-    verticalAlign: 'top',
+    width: '200px',
+    height: '200px',
+    margin:'auto 70px'
+    //verticalAlign: 'top',
   };
   const buttons = {
     display: 'flex',
@@ -138,24 +142,26 @@ function HospitalPage(props) {
   const topButton = {
     display: 'block',
     backgroundColor: '#5F8DDA',
-    marginBottom: '5%',
-    width: "40%",
+    marginLeft:'8vw',
+    width: '33%',
+    height:'45px',
     float: 'left',
   };
   const bottomButton = {
     display: 'block',
-
-    width: '40%',
+    marginRight:'8vw',
+    width: '33%',
+    height:'45px',
     backgroundColor: '#5F8DDA',
     float: 'right',
   };
   const bottomContent = {
     fontSize: '14px',
     textAlign: 'left',
-      margin: '3% 10% 0 10%',
+      // margin: '3% 10% 0 10%',
     overflow: 'auto',
       height: '220px',
-      width: "80vw"
+      // width: "80vw"
     // float: 'left',
   };
     const info = {
@@ -183,11 +189,20 @@ function HospitalPage(props) {
         {hospital}
       </h2>
       <div className="bodyContainer ">
-        <div className="">
-                  <div className="contentBox ">
-                      {/* <div className = "ContentBoxHospitalInfo"> */}
-            {loghospital || !user || hospitalInfo.company_number === '' ? ( // 병원으로 로그인 했거나, 로그인을 안 했거나, 해당 병원이 등록 안 된 병원일 경우
-              hospitalInfo.img && hospitalInfo.img !== '' ? (
+        <div className="contentBox ">
+          {loghospital || !user || hospitalInfo.company_number === '' ? ( // 병원으로 로그인 했거나, 로그인을 안 했거나, 해당 병원이 등록 안 된 병원일 경우
+            hospitalInfo.img && hospitalInfo.img !== '' ? (
+              <img
+                style={hospitalImg}
+                src={`../${hospitalInfo.img.split('\\')[2]}`}
+                alt="hospitalImg"
+              />
+            ) : (
+              <img style={hospitalImg} src={'../no_img.jpg'} />
+            )
+          ) : (
+            <div style={topContent}>
+              {hospitalInfo.img && hospitalInfo.img !== '' ? (
                 <img
                   style={hospitalImg}
                   src={`../${hospitalInfo.img.split('\\')[2]}`}
@@ -195,90 +210,77 @@ function HospitalPage(props) {
                 />
               ) : (
                 <img style={hospitalImg} src={'../no_img.jpg'} />
-              )
-            ) : (
-              <div style={topContent}>
-                {hospitalInfo.img && hospitalInfo.img !== '' ? (
-                  <img
-                    style={hospitalImg}
-                    src={`../${hospitalInfo.img.split('\\')[2]}`}
-                    alt="hospitalImg"
-                  />
-                ) : (
-                  <img style={hospitalImg} src={'../no_img.jpg'} />
-                )}
-              </div>
-            )}
-          </div>
-          {/* <div className="contentBox b"> */}
-                  
-                      <div className = "ContentBoxHospitalInfo">
-            <div style={bottomContent}>
-              <div style={info}>
-                <div style={w}>
-                  <BiLocationPlus size="25" style={margin} />
-                  {/* <span style={title}> 주소 </span>{' '} */}
-                  주소
-                </div>
-                <span style={detail}>{hospitalInfo.addr}</span>
-              </div>{' '}
-              <div style={info}>
-                <div style={w}>
-                  <BiPhone size="25" style={margin} />
-                  전화번호
-                </div>
-                <span style={detail}>{hospitalInfo.tel}</span>
-              </div>
-              <div style={info}>
-                <div style={w}>
-                  <RiTimeLine size="25" style={margin} />
-                  운영 시간
-                </div>
-                <span style={detail}>{hospitalInfo.time}</span>
-              </div>
-              <div style={info}>
-                <div style={w}>
-                  <RiTimeFill size="25" style={margin} />
-                  점심 시간
-                </div>
-                <span style={detail}>{hospitalInfo.lunch}</span>
-              </div>
-              <div style={info}>
-                <div style={w}>
-                  <FaStar size="25" style={margin} />
-                  평점
-                </div>
-                <span style={detail}>{hospitalInfo.avg}</span>
-              </div>
-     
+              )}
             </div>
-          </div>
+          )}
+        </div>
 
-          <div className="contentBox">
-            {loghospital || !user || hospitalInfo.company_number === '' ? ( // 병원으로 로그인 했거나, 로그인을 안 했거나, 해당 병원이 등록 안 된 병원일 경우
-              <></>
-            ) : (
-              //   <div style={topContent}>
-              <div>
-                {/* <div style={buttons}> */}
-                <button
-                  style={topButton}
-                  className="button"
-                  onClick={handleClick}
-                >
-                  예약하기
-                </button>
-                <button
-                  style={bottomButton}
-                  className="button"
-                  onClick={postClick}
-                >
-                  후기
-                </button>
-                {/* </div> */}
+        <div className = "ContentBoxHospitalInfo">
+          <div style={bottomContent}>
+            <div style={info}>
+              <div style={w}>
+                <BiLocationPlus size="25" style={margin} />
+                {/* <span style={title}> 주소 </span>{' '} */}
+                주소
               </div>
-            )}
+              <span style={detail}>{hospitalInfo.addr}</span>
+            </div>{' '}
+            <div style={info}>
+              <div style={w}>
+                <BiPhone size="25" style={margin} />
+                전화번호
+              </div>
+              <span style={detail}>{hospitalInfo.tel}</span>
+            </div>
+            <div style={info}>
+              <div style={w}>
+                <RiTimeLine size="25" style={margin} />
+                운영 시간
+              </div>
+              <span style={detail}>{hospitalInfo.time}</span>
+            </div>
+            <div style={info}>
+              <div style={w}>
+                <RiTimeFill size="25" style={margin} />
+                점심 시간
+              </div>
+              <span style={detail}>{hospitalInfo.lunch}</span>
+            </div>
+            <div style={info}>
+              <div style={w}>
+                <FaStar size="25" style={margin} />
+                평점
+              </div>
+              <span style={detail}>{hospitalInfo.avg}</span>
+            </div>
+    
           </div>
+        </div>
+
+        <div>
+          {loghospital || !user || hospitalInfo.company_number === '' ? ( // 병원으로 로그인 했거나, 로그인을 안 했거나, 해당 병원이 등록 안 된 병원일 경우
+            <></>
+          ) : (
+            //   <div style={topContent}>
+            <div style={{paddingBottom:'5vw'}}>
+              {/* <div style={buttons}> */}
+              <button
+                style={topButton}
+                className="button"
+                onClick={handleClick}
+              >
+                예약하기
+              </button>
+              <button
+                style={bottomButton}
+                className="button"
+                onClick={postClick}
+              >
+                후기
+              </button>
+              {/* </div> */}
+            </div>
+          )}
         </div>
       </div>
       <ProductXscroll>{hospitalInfo.products}</ProductXscroll>

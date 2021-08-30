@@ -23,6 +23,7 @@ const ProductXscroll = (props) => {
                   name: "",
                   company: "",
                   price: "",
+                  image:""
                 },
               ]);
               console.log(item.productId);
@@ -32,12 +33,13 @@ const ProductXscroll = (props) => {
                   const res = axios
                     .get("/api/products/readone/" + item.productId)
                     .then((response) => {
-                      console.log(response.data.name);
+                      console.log('res name:',response.data.name);
                       const p = response.data.price;
                       setProductData({
                         _id: response.data._id,
                         name: response.data.name,
                         company: response.data.company,
+                        image:response.data.image,
                         // price: response.data.price,
                         price: p
                           .toString()
@@ -53,7 +55,7 @@ const ProductXscroll = (props) => {
 
               return (
                 <li class="product-item ">
-                  <ProductImage></ProductImage>
+                  <ProductImage>{productData.image}</ProductImage>
                   <ProductName>
                     [{productData.company}] {productData.name}
                   </ProductName>

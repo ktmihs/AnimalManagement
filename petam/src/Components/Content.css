@@ -39,25 +39,22 @@
 }
 .contentBox {
   display: inline-block;
-  padding-top: 20px;
-  margin: 10px 3% 20px 3%;
-  /*height:25vw;*/
+  text-align: center;
   min-height: 280px;
-  /* max-height: 280px; */
-  width: 400px;
-  /* border:1px dotted #bbbcbc; */
+  /* width: 400px; */
   overflow: hidden;
+  margin-left: 50px;
   word-wrap: break-word;
   line-height: 30px;
 }
 .ContentBoxHospitalInfo {
   display: inline-block;
   padding-top: 20px;
-  margin: 10px 3% 20px 3%;
+  margin-left: 50px;
   /*height:25vw;*/
   height: 280px;
   width: 500px;
-  /* width: calc(100% - 400px); */
+  /* width: calc(100% - 800px); */
   /* border:1px dotted #bbbcbc; */
   overflow: hidden;
   word-wrap: break-word;
