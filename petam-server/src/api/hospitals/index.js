@@ -1,6 +1,6 @@
 
 import Router from "koa-router"
-import { check, logout, write, login, read, readOne, hregister, readLast, readCompany, update, updateTime, remove, removeTime, readName, filter, updateProduct, removeProduct,} from "./hospitals.ctrl"
+import { check, logout, write, login, read, readOne, hregister, readLast, readCompany, update, updateTime, remove, removeTime, readName, filter, updateProduct, removeProduct, readProductPrice} from "./hospitals.ctrl"
 
 const hospitals = new Router();
 
@@ -20,7 +20,8 @@ hospitals.get('/read/company/:company_number',readCompany)
 hospitals.put('/:_id',update)
 hospitals.put('/:_id/:reservationTime', updateTime)
 hospitals.delete('/:_id/:reservationTime',removeTime)
-hospitals.delete('/:id',remove)
+hospitals.delete('/:id', remove)
+hospitals.get('/product/price/:_id/:productId', readProductPrice);
 
 hospitals.put('/product/:_id/:productId/:price', updateProduct);
 hospitals.delete('/product/:_id/:productId', removeProduct);

@@ -395,3 +395,20 @@ export const removeProduct = async (ctx) => {
 
   console.log('ctx.body:', ctx.body);
 };
+export const readProductPrice = async (ctx) => {
+  const { _id, productId } = ctx.params;
+  try {
+    // const products = await Hospital.findById(_id).exec();
+
+    const hospital = await Hospital.find(
+      {_id: _id}
+      // $and: [{ products.productId : {productId : productId} }, { _id: _id }],
+    );
+
+      ctx.body = hospital;
+    console.log('판매 가격', ctx.body);
+  } catch (e) {
+    ctx.throw(500, e);
+  }
+
+};

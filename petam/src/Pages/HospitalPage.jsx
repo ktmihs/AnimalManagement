@@ -36,7 +36,8 @@ function HospitalPage(props) {
     axios
       .get('/api/hospitals/read/name/' + hospital)
       .then((ctx) => {
-        console.log(ctx);
+        console.log("ctx ", ctx);
+        console.log("ctx.data._id: ", ctx.data._id)
           const _avg = (ctx.data.score / ctx.data.count).toFixed(2);
           let openMinute, closeMinute, lunchOpenMinute, lunchCloseMinute;
           if (ctx.data.timeList.openMinute == 0) { openMinute = "00" }
@@ -96,7 +97,8 @@ function HospitalPage(props) {
               products: ctx.data.products,
               avg: _avg,
             });
-      }, console.log(hospitalInfo))
+      },
+        console.log("hospitalInfo", hospitalInfo))
       .catch((err) => console.log(err));
   }, []);
 

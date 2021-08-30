@@ -11,6 +11,7 @@ const ProductXscroll = (props) => {
     minWidth: "100%",
     maxWidth: "100%",
   };
+  let sellingPrice
   return (
     <div style={scope} className="bo">
       <div id="XProduct" className="product-x-scroll ">
@@ -25,15 +26,19 @@ const ProductXscroll = (props) => {
                   price: "",
                 },
               ]);
-              console.log(item.productId);
-
+              console.log("productId", item.productId);
+              console.log("sellingprice : ", item.price)
+              console.log("children : ", children)
               useEffect(async () => {
                 try {
+                  // const hospital = axios.get("api/hospitals/readone/" + )
                   const res = axios
                     .get("/api/products/readone/" + item.productId)
                     .then((response) => {
-                      console.log(response.data.name);
-                      const p = response.data.price;
+                      console.log(response.data);
+                      console.log("ctx : ", response.data)
+                      const p = item.price
+                      // const p = response.data.price;
                       setProductData({
                         _id: response.data._id,
                         name: response.data.name,
@@ -43,7 +48,7 @@ const ProductXscroll = (props) => {
                           .toString()
                           .replace(/\B(?=(\d{3})+(?!\d))/g, ","),
                       });
-                      console.log(productData);
+                      console.log("price", productData);
                       // console.log("res: ", res.data)
                     });
                 } catch (e) {
