@@ -27,26 +27,61 @@ const formData=new FormData()
 
 export default class WriteProductPage extends Component {
 
+  state={
+    send_param:{
+      name:'',
+      price:'',
+      company:'',
+      discription:'',
+      image:''
+    },
+    image:{
+      file:'',
+      previewURL:''
+    }
+  }
+  handleChange=(e)=>{
+    const {name,value}=e.target
+    this.setState({
+      send_param:{
+        ...this.state.send_param,
+        [name]:value
+      }
+    })
+    console.log(this.state)
+  }
   handleImage=(e)=>{
+    e.preventDefault(); 
+    this.handleChange(e)
+    let reader = new FileReader()
+    let file = e.target.files[0]
+    reader.onloadend = () => {
+      this.setState({
+        image:{
+          file : file,
+          previewURL : reader.result 
+        }
+      })
+    }
+    reader.readAsDataURL(file)
+    console.log(this.state.send_param)
     console.log(e,e.target.files[0],e.target.files[0].name)
     formData.append('image', e.target.files[0])
     formData.append('filename',e.target.files[0].name)
-    formData.append('productname',this.productName.value)
-    //setForm(formData)
+    formData.append('productname',this.state.send_param.name)
     for(let data of formData){console.log(data[0],data[1])}
   }
   
   productWrite = () => {
     console.log("productWrite");
-    const name = this.productName.value;
-    // const sellingPrice = this.productSellingPrice.value;
-    const price = this.productPrice.value;
-    const company = this.productCompany.value;
-    const discription = this.productDiscription.value;
+    // const name = this.productName.value;
+    // // const sellingPrice = this.productSellingPrice.value;
+    // const price = this.productPrice.value;
+    // const company = this.productCompany.value;
+    // const discription = this.productDiscription.value;
     
-    const image=this.productImage.value;
+    // const image=this.productImage.value;
     
-    //const [form,setForm]=useState(new FormData)
     const config = {
         headers: {
         'content-type': 'multipart/form-data'
@@ -74,14 +109,16 @@ export default class WriteProductPage extends Component {
     //   return;
     // }
 
-    const send_param = {
-      name: this.productName.value,
-      // sellingPrice: this.productSellingPrice.value,
-      price: this.productPrice.value,
-      company: this.productCompany.value,
-      discription: this.productDiscription.value,
-      image: this.productImage.value
-    };
+    
+
+    // const send_param = {
+    //   name: this.productName.value,
+    //   // sellingPrice: this.productSellingPrice.value,
+    //   price: this.productPrice.value,
+    //   company: this.productCompany.value,
+    //   discription: this.productDiscription.value,
+    //   image: this.productImage.value
+    // };
     console.log('formData:',formData)
     axios.post("/api/images/product/image",formData,config)
     .then((response) => {
@@ -91,9 +128,9 @@ export default class WriteProductPage extends Component {
         console.log(error)
     })
 
-    console.log("send_param : ", send_param);
+    console.log("send_param : ", this.state.send_param);
     axios
-      .post("/api/products", send_param)
+      .post("/api/products", this.state.send_param)
       .then((response) => {
         console.log(response);
       })
@@ -138,14 +175,22 @@ export default class WriteProductPage extends Component {
             <div class="form-group  " style={he}>
               <div class="col-sm-12 mb-3 mb-sm-0">
                 <div style={floatLeft}>
-                  <div className=" product-image-preview"></div>
+                  {
+                    this.state.image.file?
+                    <div>
+                      <img className=" product-image-preview" src={this.state.image.previewURL}/>
+                    </div>
+                    :
+                    <div className=" product-image-preview"></div>
+                  }
                   <input
                   className="product-input-image"
                   type="file"
                   accept="image/*"
-                  value={this.image}
+                  value={this.state.send_param.image}
                   name="image"
-                  ref={(ref) => (this.productImage = ref)}
+                  id="image"
+                  //ref={(ref) => (this.productImage = ref)}
                   onChange={this.handleImage}
                   ></input>
                 </div>
@@ -153,8 +198,10 @@ export default class WriteProductPage extends Component {
                   // lassName="form-control product-input w-100 form-control-lg"
                   className="product-input-60"
                   style={floatRight}
-                  ref={(ref) => (this.productName = ref)}
-                  value={this.productName}
+                  //ref={(ref) => (this.productName = ref)}
+                  name="name"
+                  value={this.state.send_param.name}
+                  onChange={this.handleChange}
                   placeholder="제품 이름"
                 />
 
@@ -162,24 +209,30 @@ export default class WriteProductPage extends Component {
                   // lassName="form-control product-input w-100 form-control-lg"
                   className="product-input-60"
                   style={floatRight}
-                  ref={(ref) => (this.productCompany = ref)}
-                  value={this.productCompany}
+                  //ref={(ref) => (this.productCompany = ref)}
+                  name="company"
+                  value={this.state.send_param.company}
+                  onChange={this.handleChange}
                   placeholder="제조원"
                 />
                 <input
                   // lassName="form-control product-input w-100 form-control-lg"
                   className="product-input-60"
                   style={floatRight}
-                  ref={(ref) => (this.productPrice = ref)}
-                  value={this.productPrice}
+                  //ref={(ref) => (this.productPrice = ref)}
+                  name="price"
+                  value={this.state.send_param.price}
+                  onChange={this.handleChange}
                   placeholder="정가"
                 />
 
                 <textarea
                   // lassName="form-control product-input w-100 form-control-lg"
                   className="product-input"
-                  ref={(ref) => (this.productDiscription = ref)}
-                  value={this.productDiscription}
+                  //ref={(ref) => (this.productDiscription = ref)}
+                  name="discription"
+                  value={this.state.send_param.discription}
+                  onChange={this.handleChange}
                   placeholder="제품 설명"
                 />
                 {/* <div class="form-group mt-3"> */}
