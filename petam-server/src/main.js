@@ -20,14 +20,6 @@ mongoose.connect('mongodb://localhost:27017/petam', {
   .catch((e) => {
     console.error(e);
   });
-// mongoose
-//   .connect(MONGO_URI, { useNewUrlParser: true })
-//   .then(() => {
-//     console.log('Connected to MongoDB');
-//   })
-//   .catch(e => {
-//     console.error(e);
-//   });
 
 const app = new Koa();
 const router = new Router();

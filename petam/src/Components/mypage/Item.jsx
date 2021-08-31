@@ -4,8 +4,7 @@ import './mypage.css'
 
 // 각 반려 동물마다 클릭 시, 모달창 오픈
 function Item({item}){
-
-    const [ modalOpen, setModalOpen ] = useState(false);
+    const [ modalOpen, setModalOpen ] = useState(false)
     let header=`${item.name}\'s info`
     const openModal = () => {
         setModalOpen(true)

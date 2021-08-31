@@ -53,11 +53,13 @@ function TimeTable(props){
   let minute=currentDate.getMinutes()
   let hour=currentDate.getHours()
   let date=currentDate.getDate()
+
   // 예약 시간 기준 30분 이전에는 예약할 수 없도록 조정
   if(minute>30){
     minute-=30
     hour+=1
   } else {minute+=30}
+
   const [lastTime,setLastTime]=useState({
     hour:hour,
     minute:minute,
@@ -141,15 +143,14 @@ function TimeTable(props){
               maxDate={addDays(new Date(), 30)}
             />
           </div>
-          
           <div style={timePicker}>
             <TimeList lastTime={lastTime} timeList={time} reservationTime={reservationTime} selectTime={setStartTime}/>
           </div>
-        
         </div>
         <div style={info}>※ 예약은 최소 30분 전까지 가능합니다<br/>회색 칸은 이미 예약된 시간이거나, 불가능한 시간입니다. ※</div>
         <button style={button} className='button' onClick={selectDate}>날짜 선택</button>
       </>
   )
 }
+
 export default TimeTable

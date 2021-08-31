@@ -7,18 +7,17 @@ import ReserveContent from '../Components/mypage/ReserveContent'
 
 // 내 예약 내역 페이지
 function MyReservationPage(){
+
     const [info,setInfo]=useState([])   //병원 정보
     const [infoComplete,setInfoComplete]=useState([])   // 진료 완료된 정보
     const [loading,setLoading]=useState(false)    //로딩 중 표시
 
-    const { user, hospital } = useSelector(({ user, hospital }) => ({
-        user: user.user,
-        hospital: hospital.hospital,
+    const { user } = useSelector(({ user }) => ({
+        user: user.user
     }))
 
     useEffect(() => {
         const read=user.username
-        console.log(read)
         const fetchPosts=async()=>{
             setLoading(true)
             axios.get('api/reservations/filter/'+read)   // 현재 로그인 된 아이디로 예약된 내역 모두 불러오기
@@ -38,8 +37,8 @@ function MyReservationPage(){
     }, [user])
 
     const [complete,setComplete]=useState(false)
+    
     const isComplete=(e)=>{
-        console.log(e.target.name,complete)
         setComplete(e.target.name)
     }
 
@@ -53,9 +52,9 @@ function MyReservationPage(){
                 </div>
                 {
                 complete==='true'?
-                <ReserveContent info={infoComplete} loading={loading} linkName={'complete'}/>
-                :
-                <ReserveContent info={info} loading={loading} linkName={'reservation'}/>
+                    <ReserveContent info={infoComplete} loading={loading} linkName={'complete'}/>
+                    :
+                    <ReserveContent info={info} loading={loading} linkName={'reservation'}/>
                 }
                 <hr/>
             </div>

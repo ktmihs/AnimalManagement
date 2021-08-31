@@ -4,4 +4,5 @@ import React from 'react'
 function TimeBtnDisabled({time}){
     return <button className='timeBtnDisabled' value={time} disabled>{time}</button>
 }
+
 export default TimeBtnDisabled

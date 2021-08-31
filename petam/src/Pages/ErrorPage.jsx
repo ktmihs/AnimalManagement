@@ -4,6 +4,7 @@ import Content from '../Components/Content'
 
 // 잘못된 링크, url 입력 시 error page
 function ErrorPage(){
+
     const error={
         textAlign:'center',
         color:'red',
@@ -16,6 +17,7 @@ function ErrorPage(){
         textDecorationLine:'none',
         color:'#395382'
     }
+
     return(
         <Content>
             <div style={error}>
@@ -28,4 +30,5 @@ function ErrorPage(){
         </Content>
     )
 }
+
 export default ErrorPage

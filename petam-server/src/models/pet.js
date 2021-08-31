@@ -17,6 +17,5 @@ const PetSchema=new Schema({
         type: String
     }   // 성별
 })
-
 const Pet=mongoose.model("Pet",PetSchema)
 export default Pet

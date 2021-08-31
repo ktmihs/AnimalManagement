@@ -8,6 +8,7 @@ import Pagination from '../Components/pagination/Pagination'
 
 // 검색 페이지
 function SearchPage(){
+    
     const [searchWord,setSearchWord]=useState('')
     const [info,setInfo]=useState([])   //병원 정보
     const [loading,setLoading]=useState(false)    //로딩 중 표시
@@ -43,6 +44,7 @@ function SearchPage(){
 
     //병원 검색 받으면 리렌딩 ()
     const getSearchWord=(word)=>{ setSearchWord(word) }
+    
     const button={
         position:'relative',
         textAlign:'right',
@@ -56,6 +58,7 @@ function SearchPage(){
         border:'3px solid #f98',
         borderRadius:'20px'
     }
+
     return (
         <Content>
             <a name='top'/>
