@@ -32,62 +32,76 @@ function HospitalPage(props) {
   const [hospital, setHospital] = useState(props.match.params.name)
 
   useEffect(() => {
-    axios.get('/api/hospitals/read/name/' + hospital)
-    .then((ctx) => {
-      const _avg = (ctx.data.score / ctx.data.count).toFixed(2)
-      let openMinute, closeMinute, lunchOpenMinute, lunchCloseMinute
 
-      if(ctx.data.timeList){
-        if (ctx.data.timeList.openMinute == 0) { 
-          openMinute = "00" 
-        } else {
-          openMinute = ctx.data.timeList.openMinute 
-        }
-        if (ctx.data.timeList.closeMinute == 0) {
-          closeMinute = '00'
-        } else {
-          closeMinute = ctx.data.timeList.closeMinute
-        }
-        if (ctx.data.timeList.lunchOpenMinute == 0) {
-          lunchOpenMinute = '00'
-        } else {
-          lunchOpenMinute = ctx.data.timeList.lunchOpenMinute
-        }
-        if (ctx.data.timeList.lunchCloseMinute == 0) {
-          lunchCloseMinute = '00'
-        } else {
-          lunchCloseMinute = ctx.data.timeList.lunchCloseMinute
-        }
-      }
-      ctx.data.timeList? 
-        setHospitalInfo({
-          id: ctx.data._id,
-          name: ctx.data.name,
-          addr: ctx.data.new_addr,
-          tel: ctx.data.tel,
-          img: ctx.data.image,
-          _id: ctx.data._id,
-          company_number: ctx.data.company_number,
-          products: ctx.data.products,
-          avg: _avg,
-          time: ctx.data.timeList.openHour+':'+openMinute+'  -  '+ctx.data.timeList.closeHour +':'+closeMinute,
-          lunch: ctx.data.timeList.lunchOpenHour+':'+lunchOpenMinute+'  -  '+ctx.data.timeList.lunchCloseHour+':' +lunchCloseMinute
-        })
-      : setHospitalInfo({
-          ...hospitalInfo,
-          id: ctx.data._id,
-          name: ctx.data.name,
-          addr: ctx.data.new_addr,
-          tel: ctx.data.tel,
-          img: ctx.data.image,
-          _id: ctx.data._id,
-          products: ctx.data.products,
-          avg: _avg,
-        })
-    }).catch(
-      (err) => console.log(err)
-    )
-  }, [])
+    axios
+      .get('/api/hospitals/read/name/' + hospital)
+      .then((ctx) => {
+        console.log("ctx ", ctx);
+        console.log("ctx.data._id: ", ctx.data._id)
+          const _avg = (ctx.data.score / ctx.data.count).toFixed(2);
+          let openMinute, closeMinute, lunchOpenMinute, lunchCloseMinute;
+          if (ctx.data.timeList.openMinute == 0) { openMinute = "00" }
+          else {openMinute = ctx.data.timeList.openMinute; }
+          if (ctx.data.timeList.closeMinute == 0) {
+            closeMinute = '00';
+          } else {
+            closeMinute = ctx.data.timeList.closeMinute;
+          }
+          if (ctx.data.timeList.lunchOpenMinute == 0) {
+            lunchOpenMinute = '00';
+          } else {
+            lunchOpenMinute = ctx.data.timeList.lunchOpenMinute;
+          }
+          if (ctx.data.timeList.lunchCloseMinute == 0) {
+            lunchCloseMinute = '00';
+          } else {
+            lunchCloseMinute = ctx.data.timeList.lunchCloseMinute;
+          }
+        ctx.data.timeList
+            ? 
+                setHospitalInfo({
+              id: ctx.data._id,
+              name: ctx.data.name,
+              addr: ctx.data.new_addr,
+              tel: ctx.data.tel,
+              img: ctx.data.image,
+              _id: ctx.data._id,
+              company_number: ctx.data.company_number,
+              products: ctx.data.products,
+              avg: _avg,
+              time:
+                ctx.data.timeList.openHour +
+                ':' +
+                openMinute +
+                '  -  ' +
+                ctx.data.timeList.closeHour +
+                ':' +
+               closeMinute,
+              lunch:
+                ctx.data.timeList.lunchOpenHour +
+                ':' +
+                lunchOpenMinute +
+                '  -  ' +
+                ctx.data.timeList.lunchCloseHour +
+                ':' +
+     lunchCloseMinute,
+            })
+          : setHospitalInfo({
+              ...hospitalInfo,
+              id: ctx.data._id,
+              name: ctx.data.name,
+              addr: ctx.data.new_addr,
+              tel: ctx.data.tel,
+              img: ctx.data.image,
+              _id: ctx.data._id,
+              products: ctx.data.products,
+              avg: _avg,
+            });
+      },
+        console.log("hospitalInfo", hospitalInfo))
+      .catch((err) => console.log(err));
+  }, []);
+
 
   const hspId = useHistory() // history.push로 연결된 링크에 보내주기
 

@@ -11,6 +11,7 @@ const ProductXscroll = (props) => {
     minWidth: "100%",
     maxWidth: "100%",
   };
+  let sellingPrice
   return (
     <div style={scope} className="bo">
       <div id="XProduct" className="product-x-scroll ">
@@ -23,29 +24,31 @@ const ProductXscroll = (props) => {
                   name: "",
                   company: "",
                   price: "",
-                  image:""
                 },
               ]);
-              console.log(item.productId);
-
+              console.log("productId", item.productId);
+              console.log("sellingprice : ", item.price)
+              console.log("children : ", children)
               useEffect(async () => {
                 try {
+                  // const hospital = axios.get("api/hospitals/readone/" + )
                   const res = axios
                     .get("/api/products/readone/" + item.productId)
                     .then((response) => {
-                      console.log('res name:',response.data.name);
-                      const p = response.data.price;
+                      console.log(response.data);
+                      console.log("ctx : ", response.data)
+                      const p = item.price
+                      // const p = response.data.price;
                       setProductData({
                         _id: response.data._id,
                         name: response.data.name,
                         company: response.data.company,
-                        image:response.data.image,
                         // price: response.data.price,
                         price: p
                           .toString()
                           .replace(/\B(?=(\d{3})+(?!\d))/g, ","),
                       });
-                      console.log(productData);
+                      console.log("price", productData);
                       // console.log("res: ", res.data)
                     });
                 } catch (e) {
@@ -55,10 +58,13 @@ const ProductXscroll = (props) => {
 
               return (
                 <li class="product-item ">
-                  <ProductImage>{productData.image}</ProductImage>
+                  <ProductImage></ProductImage>
                   <ProductName>
-                    [{productData.company}] {productData.name}
+                   {productData.name}
                   </ProductName>
+                  {/* <ProductName>
+                    [{productData.company}] {productData.name}
+                  </ProductName> */}
                   <ProductPrice>{productData.price}</ProductPrice>
                 </li>
               );
