@@ -60,8 +60,11 @@ const ProductXscroll = (props) => {
                 <li class="product-item ">
                   <ProductImage></ProductImage>
                   <ProductName>
-                    [{productData.company}] {productData.name}
+                   {productData.name}
                   </ProductName>
+                  {/* <ProductName>
+                    [{productData.company}] {productData.name}
+                  </ProductName> */}
                   <ProductPrice>{productData.price}</ProductPrice>
                 </li>
               );

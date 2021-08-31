@@ -9,12 +9,13 @@ const ProductHospitalTableColumnName = ({ his, _id, children }) => {
       console.log(_id);
       console.log(his);
       let name;
-      const res = axios.get("/api/hospitals/read/" + _id).then((response) => {
+      const res = axios.get("/api/hospitals/readone/" + _id).then((response) => {
         console.log("response: ", response);
-        name = response.data.name;
+        name = response.data;
         console.log("name", name);
 
         his.push("/hospital/" + response.data.name);
+        
       });
       console.log(res);
       // if (type == "post") {
