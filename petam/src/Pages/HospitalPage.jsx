@@ -17,7 +17,6 @@ function HospitalPage(props) {
   }))
 
   const [hospitalInfo, setHospitalInfo] = useState({
-    //나중에 ''로 초기화 후, db에서 받아 set에 넣어주기
     id: '',
     name: '',
     img: '',
@@ -32,59 +31,46 @@ function HospitalPage(props) {
   const [hospital, setHospital] = useState(props.match.params.name)
 
   useEffect(() => {
-
     axios
       .get('/api/hospitals/read/name/' + hospital)
       .then((ctx) => {
-        console.log("ctx ", ctx);
-        console.log("ctx.data._id: ", ctx.data._id)
-          const _avg = (ctx.data.score / ctx.data.count).toFixed(2);
-          let openMinute, closeMinute, lunchOpenMinute, lunchCloseMinute;
-          if (ctx.data.timeList.openMinute == 0) { openMinute = "00" }
-          else {openMinute = ctx.data.timeList.openMinute; }
-          if (ctx.data.timeList.closeMinute == 0) {
-            closeMinute = '00';
-          } else {
-            closeMinute = ctx.data.timeList.closeMinute;
-          }
-          if (ctx.data.timeList.lunchOpenMinute == 0) {
-            lunchOpenMinute = '00';
-          } else {
-            lunchOpenMinute = ctx.data.timeList.lunchOpenMinute;
-          }
-          if (ctx.data.timeList.lunchCloseMinute == 0) {
-            lunchCloseMinute = '00';
-          } else {
-            lunchCloseMinute = ctx.data.timeList.lunchCloseMinute;
-          }
-        ctx.data.timeList
-            ? 
-                setHospitalInfo({
-              id: ctx.data._id,
-              name: ctx.data.name,
-              addr: ctx.data.new_addr,
-              tel: ctx.data.tel,
-              img: ctx.data.image,
-              _id: ctx.data._id,
-              company_number: ctx.data.company_number,
-              products: ctx.data.products,
-              avg: _avg,
-              time:
-                ctx.data.timeList.openHour +
-                ':' +
-                openMinute +
-                '  -  ' +
-                ctx.data.timeList.closeHour +
-                ':' +
-               closeMinute,
-              lunch:
-                ctx.data.timeList.lunchOpenHour +
-                ':' +
-                lunchOpenMinute +
-                '  -  ' +
-                ctx.data.timeList.lunchCloseHour +
-                ':' +
-     lunchCloseMinute,
+        const _avg = (ctx.data.score / ctx.data.count).toFixed(2)
+        let openMinute, closeMinute, lunchOpenMinute, lunchCloseMinute
+        if (ctx.data.timeList.openMinute == 0) { 
+          openMinute = "00" 
+        } else {
+          openMinute = ctx.data.timeList.openMinute
+        }
+        if (ctx.data.timeList.closeMinute == 0) {
+          closeMinute = '00'
+        } else {
+          closeMinute = ctx.data.timeList.closeMinute
+        }
+        if (ctx.data.timeList.lunchOpenMinute == 0) {
+          lunchOpenMinute = '00'
+        } else {
+          lunchOpenMinute = ctx.data.timeList.lunchOpenMinute
+        }
+        if (ctx.data.timeList.lunchCloseMinute == 0) {
+          lunchCloseMinute = '00'
+        } else {
+          lunchCloseMinute = ctx.data.timeList.lunchCloseMinute
+        }
+        ctx.data.timeList? 
+          setHospitalInfo({
+            id: ctx.data._id,
+            name: ctx.data.name,
+            addr: ctx.data.new_addr,
+            tel: ctx.data.tel,
+            img: ctx.data.image,
+            _id: ctx.data._id,
+            company_number: ctx.data.company_number,
+            products: ctx.data.products,
+            avg: _avg,
+            time:
+              ctx.data.timeList.openHour + ':' + openMinute + '  -  ' + ctx.data.timeList.closeHour + ':' + closeMinute,
+            lunch:
+              ctx.data.timeList.lunchOpenHour + ':' + lunchOpenMinute + '  -  ' + ctx.data.timeList.lunchCloseHour + ':' + lunchCloseMinute,
             })
           : setHospitalInfo({
               ...hospitalInfo,
@@ -96,11 +82,10 @@ function HospitalPage(props) {
               _id: ctx.data._id,
               products: ctx.data.products,
               avg: _avg,
-            });
-      },
-        console.log("hospitalInfo", hospitalInfo))
-      .catch((err) => console.log(err));
-  }, []);
+            })
+      })
+      .catch((err) => console.log(err))
+  }, [])
 
 
   const hspId = useHistory() // history.push로 연결된 링크에 보내주기
@@ -217,14 +202,14 @@ function HospitalPage(props) {
           </div>
         </div>
         <div>
-          {loghospital || !user || hospitalInfo.company_number === '' ? ( // 병원으로 로그인 했거나, 로그인을 안 했거나, 해당 병원이 등록 안 된 병원일 경우
+          {loghospital || !user || hospitalInfo.company_number === '' ?  // 병원으로 로그인 했거나, 로그인을 안 했거나, 해당 병원이 등록 안 된 병원일 경우
             null
-          ) : (
+          : 
             <div style={{paddingBottom:'5vw'}}>
               <button style={topButton} className="button" onClick={handleClick}>예약하기</button>
               <button style={bottomButton} className="button" onClick={postClick}>후기</button>
             </div>
-          )}
+          }
         </div>
       </div>
       <ProductXscroll>{hospitalInfo.products}</ProductXscroll>

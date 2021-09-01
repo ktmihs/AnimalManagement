@@ -14,7 +14,7 @@ hospitals.get('/readone/:_id',readOne)
 hospitals.get('/last',readLast)
 hospitals.get('/read/name/:name',readName)
 hospitals.get('/read/company/:company_number',readCompany)
-hospitals.put('/score/:_id',update)
+hospitals.put('/:_id',update)
 hospitals.put('/:_id/:reservationTime', updateTime)
 
 hospitals.get('/product/price/:_id/:productId', readProductPrice);
