@@ -45,6 +45,9 @@ const WritePostPage = ({ postTitle, postContent, match }) => {
   ]);
   let reservationHospitalName;
   let reservationDateDay;
+
+  let countstar = 0;
+  let totalscore = 0;
   // 먼저 병원 정보 조회
   useEffect(async () => {
     try {
@@ -78,12 +81,7 @@ const WritePostPage = ({ postTitle, postContent, match }) => {
       console.log('user : ', user.username);
       // console.log("hospital : ", hospital.username)
       console.log('dsdfsdf');
-const res_ = axios
-  .get('/api/hospitals/read/name/' + reservation.hospitalName)
-  .then((response) => {
-    console.log('response.data', response.data);
-    hospitalId = response.data._id;
-  });
+
 
       // const user = useSelector((state) => state.user.userData);
       console.log('--', hospitalId);
@@ -99,6 +97,7 @@ const res_ = axios
           });
         });
       console.log('별점 계산을 위한 hospitalData', hospitalData);
+    totalscore = hospitalData.score
     } catch (e) {
       console.error(e.message);
     }
@@ -115,7 +114,7 @@ const res_ = axios
     false,
     0,
   ]);
-  const countstar = 0;
+  // const countstar = 0;
   const handleStarClick = (e, index) => {
     e.preventDefault();
     let clickStates = [...clicked];
@@ -129,6 +128,26 @@ const res_ = axios
 
     setClicked(clickStates);
     console.log(clickStates);
+    totalscore = totalscore + clickStates[5]
+    // countstar = hospitalData.count + 1
+  
+    console.log(totalscore, countstar);
+
+    const res_ = axios
+      .get('/api/hospitals/read/name/' + reservation.hospitalName)
+      .then((response) => {
+        console.log('----response.data', response.data);
+        totalscore = totalscore + response.data.score
+        countstar = response.data.count + 1
+    console.log(totalscore, countstar);
+        hospitalId = response.data._id;
+             setHospitalData({
+               _id: hospitalId,
+               score: totalscore, 
+               count: countstar
+             });
+      });
+  
   };
 
   const postWrite = () => {
@@ -167,12 +186,20 @@ const res_ = axios
 
     // 병원 별점 계산을 위해 병원 데이터 업데이트
     // count 1 더해주고 score도 합해준다
-    const res2 = axios.put('/api/hospitals/' + hospitalData._id, {
-      ...hospitalData,
-      score: parseInt(hospitalData.score) + parseInt(clicked[5]),
-      count: parseInt(hospitalData.count) + 1,
-      // x,
-    });
+
+    // setHospitalData
+    const res2 = axios.put('/api/hospitals/score/' + hospitalData._id, hospitalData
+    //   {
+    //   ...hospitalData,
+    //   // score: parseInt(hospitalData.score) + parseInt(clicked[5]),
+    //   // count: parseInt(hospitalData.count) + 1,
+    //   score: totalscore,
+    //   count: countstar
+    //   // x,
+    // }
+      
+    
+    );
     // 게시글 저장
     axios
       .post('/api/posts/', send_param)
