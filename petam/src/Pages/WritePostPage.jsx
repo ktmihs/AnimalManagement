@@ -188,7 +188,7 @@ const WritePostPage = ({ postTitle, postContent, match }) => {
     // count 1 더해주고 score도 합해준다
 
     // setHospitalData
-    const res2 = axios.put('/api/hospitals/score/' + hospitalData._id, hospitalData
+    const res2 = axios.put('/api/hospitals/' + hospitalData._id, hospitalData
     //   {
     //   ...hospitalData,
     //   // score: parseInt(hospitalData.score) + parseInt(clicked[5]),

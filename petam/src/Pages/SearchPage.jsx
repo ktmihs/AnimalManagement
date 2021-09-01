@@ -33,7 +33,7 @@ function SearchPage(){
                     res.data.length>1000?   // 병원 데이터가 1000을 넘을 경우
                     setPostsPerPage(150)    // 한 페이지 당 150으로 변경
                     :
-                    console.log(res.data.length)
+                    null
                 },
                 setLoading(false),
             )
