@@ -1,5 +1,4 @@
 import React, { Component, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import ProductImage from './ProductImage';
 import ProductName from './ProductName';
 import axios from 'axios';
@@ -40,13 +39,11 @@ const ProductXscroll = (props) => {
                         name: response.data.name,
                         company: response.data.company,
                         image: response.data.image,
-                        // price: response.data.price,
                         price: p
                           .toString()
                           .replace(/\B(?=(\d{3})+(?!\d))/g, ','),
                       });
                       console.log(productData);
-                      // console.log("res: ", res.data)
                     });
                 } catch (e) {
                   console.error(e.message);

@@ -48,7 +48,6 @@ function HospitalPostListPage({ location, history, match }) {
             writer: rowData.writer,
             // dateformat을 이용하여 년-월-일 로 표현
             enrollTime: dateFormat(rowData.enrollTime, "yyyy-mm-dd"),
-            // enrollTime: rowData.enrollTime,
           }
         )
       );

@@ -8,7 +8,6 @@
   border: none;
   border-radius: 4px;
   background-color: #ffc107;
-  /* } */
 }
 .leftbar-category-hr {
   border: solid 1px;
@@ -23,10 +22,6 @@
   color: rgb(112, 112, 112);
 }
 .leftbar-category:hover {
-}
-
-.b {
-  /* border: 1px solid red; */
 }
 
 .leftbar-scope {

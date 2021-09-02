@@ -10,13 +10,12 @@ import '../Components/Content.css';
 import axios from 'axios';
 import { useHistory } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import SelectReservation from '../Components/reservation/SelectReservation';
 
 axios.defaults.withCredentials = true;
 const headers = { withCredentials: true };
-// const WritePostPage = (match) => {
+
+
 const WritePostPage = ({ postTitle, postContent, match }) => {
-  // const { postTitle, postContent, history } = match;
   // user 정보 조회
   const reserveId = match.params._id;
   const { user, hospital } = useSelector(({ user, hospital }) => ({
@@ -51,17 +50,10 @@ const WritePostPage = ({ postTitle, postContent, match }) => {
   // 먼저 병원 정보 조회
   useEffect(async () => {
     try {
-      console.log('----', match.params._id);
-
-      // console.log(location);
-      console.log(match);
-      console.log(match.params._id);
 
       const resReservation = axios
         .get('/api/reservations/read/' + match.params._id)
-        .then((response) => {
-          console.log('예약 정보.data : ', response.data);
-          // console.log("로그인 정보 : ", user);
+        .then((response) => {     
           setReservation({
             _id: response.data._id,
             hostId: response.data.hostId,
@@ -73,37 +65,25 @@ const WritePostPage = ({ postTitle, postContent, match }) => {
 
           reservationDateDay = response.data.dateDay;
           reservationHospitalName = response.data.hospitalName;
-
-          console.log('-', reservationHospitalName);
-          console.log('-', reservationDateDay);
         });
 
-      console.log('user : ', user.username);
-      // console.log("hospital : ", hospital.username)
-      console.log('dsdfsdf');
-
-
-      // const user = useSelector((state) => state.user.userData);
-      console.log('--', hospitalId);
       const res = axios
         .get('/api/hospitals/read/name/' + reservation.hospitalName)
         .then((response) => {
-          console.log('response.data : ', response.data);
-          // console.log("로그인 정보 : ", user);
           setHospitalData({
             _id: response.data._id,
             score: response.data.score,
             count: response.data.count,
           });
         });
-      console.log('별점 계산을 위한 hospitalData', hospitalData);
+      
     totalscore = hospitalData.score
     } catch (e) {
       console.error(e.message);
     }
   }, []);
 
-  //별점을 계산
+  // 별점을 계산
   // 가장 마지막 clicked[5]는 true가 총 몇개인지 나타내는 변수
   // clicked[5]가 최종적으로 저장되는 값.
   const [clicked, setClicked] = useState([
@@ -114,7 +94,7 @@ const WritePostPage = ({ postTitle, postContent, match }) => {
     false,
     0,
   ]);
-  // const countstar = 0;
+
   const handleStarClick = (e, index) => {
     e.preventDefault();
     let clickStates = [...clicked];
@@ -127,19 +107,14 @@ const WritePostPage = ({ postTitle, postContent, match }) => {
     }
 
     setClicked(clickStates);
-    console.log(clickStates);
+
     totalscore = totalscore + clickStates[5]
-    // countstar = hospitalData.count + 1
-  
-    console.log(totalscore, countstar);
 
     const res_ = axios
       .get('/api/hospitals/read/name/' + reservation.hospitalName)
       .then((response) => {
-        console.log('----response.data', response.data);
         totalscore = totalscore + response.data.score
         countstar = response.data.count + 1
-    console.log(totalscore, countstar);
         hospitalId = response.data._id;
              setHospitalData({
                _id: hospitalId,
@@ -153,15 +128,15 @@ const WritePostPage = ({ postTitle, postContent, match }) => {
   const postWrite = () => {
     const title = postTitle.value;
     const content = postContent.value;
+
     location.push('/');
+
     if (title === '' || title === undefined) {
       alert('제목을 입력해주세요.');
-      // this.postTitle.focus();
       postTitle.focus();
       return;
     } else if (content === '' || content === undefined) {
       alert('내용을 입력해주세요.');
-      // this.postContent.focus();
       postContent.focus();
       return;
     } else if (clicked[5] == 0) {
@@ -169,7 +144,6 @@ const WritePostPage = ({ postTitle, postContent, match }) => {
       return;
     }
 
-    console.log(user.username);
     const resPostCHeck = axios.put(
       '/api/reservations/postCheck/' + reservation._id,
     );
@@ -184,40 +158,17 @@ const WritePostPage = ({ postTitle, postContent, match }) => {
       reservation: reserveId,
     };
 
-    // 병원 별점 계산을 위해 병원 데이터 업데이트
-    // count 1 더해주고 score도 합해준다
+    const res2 = axios.put('/api/hospitals/' + hospitalData._id, hospitalData);
 
-    // setHospitalData
-    const res2 = axios.put('/api/hospitals/' + hospitalData._id, hospitalData
-    //   {
-    //   ...hospitalData,
-    //   // score: parseInt(hospitalData.score) + parseInt(clicked[5]),
-    //   // count: parseInt(hospitalData.count) + 1,
-    //   score: totalscore,
-    //   count: countstar
-    //   // x,
-    // }
-      
-    
-    );
     // 게시글 저장
     axios
       .post('/api/posts/', send_param)
       .then((response) => {
         console.log('save post', response);
-        // 왜 안되는지 모르겠음 ㅜ
-        // location.push('/postlistpage');
       })
       .catch((error) => {
         console.log(error);
       });
-
-    // url.push({
-    //   //전부 작성되면 다음 페이지로 이동 & 정보 보내기
-    //   pathname: `/PostListPage`,
-    //   // user: hospital,
-    //   // isHospital: isHospital,
-    // });
   };
 
   const scope = {
@@ -228,10 +179,7 @@ const WritePostPage = ({ postTitle, postContent, match }) => {
     minHeight: '25vh',
   };
 
-  // render() {
-  // render = () => (
   return (
-    // const { title, content } = this.state
     <Content class=" " style={scope}>
       <h2 className="name">글 쓰기</h2>
 
@@ -240,8 +188,6 @@ const WritePostPage = ({ postTitle, postContent, match }) => {
           <Form
             class="user"
             id="WritePostPage"
-            // onSubmit={this.postWrite}
-            // onSubmit={postWrite}
           >
             <div class="form-group ">
               <p>
@@ -250,19 +196,13 @@ const WritePostPage = ({ postTitle, postContent, match }) => {
               <p>
                 {reservationHospitalName} {reservationDateDay}
               </p>
-              <div class="col-sm-12  mb-s3 msb-sm-0">
-                {/* <Form.Control */}
-
-                {/* <SelectReservation/> */}
+              <div class="col-sm-12  mb-s3 msb-sm-0">       
                 <input
                   type="text"
                   class="form-control mb- w-100   form-control-lg"
-                  // id="postTitle"
-                  // ref={(ref) => (this.postTitle = ref)}
                   ref={(ref) => (postTitle = ref)}
                   maxLength="50"
                   value={postTitle}
-                  // value={this.postTitle}
                   placeholder="제목"
                 />
               </div>
@@ -313,7 +253,6 @@ const WritePostPage = ({ postTitle, postContent, match }) => {
                 <div class="col-sm-3 float-left">
                   <Button
                     class=" btn w-100  btn-success "
-                    // onClick={this.postWrite}
                     onClick={postWrite}
                     // onChange
                     variant="success"
@@ -321,36 +260,20 @@ const WritePostPage = ({ postTitle, postContent, match }) => {
                     block
                   >
                     저장
-                    {/* <p class=" text-white">
-                      저장{" "}
-                    </p> */}
                   </Button>
-
-                  {/* <!-- <button type="text" class=" btn form-control bg-gray-400 form-control-user"  style="border:1px solid red; text-align:center;" > <p style="border:1px solid red; text-align:center; vertical-align: middle;" >중복확인</p></button> --> */}
                 </div>
 
                 <div class="col-sm-3 float-right">
                   <Button
                     class=" btn w-100  btn-success "
                     variant="danger"
-                    // onClick={this.postWrite}
-                    // type='submit'
                     block
                   >
                     취소
-                    {/* <p class=" text-white">
-                      저장{" "}
-                    </p> */}
                   </Button>
-
-                  {/* <!-- <button type="text" class=" btn form-control bg-gray-400 form-control-user"  style="border:1px solid red; text-align:center;" > <p style="border:1px solid red; text-align:center; vertical-align: middle;" >중복확인</p></button> --> */}
                 </div>
               </div>
             </div>
-
-            {/* <!-- <a href="#" class="btn   btn-user btn-block" style="background-color:red; 88a; color: white"><i class="fas fa-check" style=""></i>   수정  </a> -->
-
-                      <!-- <div><a href="login.html" class="btn btn-primary btn-user btn-block">회원가입</a></div> --> */}
           </Form>
         </div>
       </div>

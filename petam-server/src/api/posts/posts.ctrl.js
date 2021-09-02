@@ -4,8 +4,6 @@ import mongoose from 'mongoose';
 export const write = async (ctx) => {
   const { title, content, tags, view, score, writer, reservation , hospitalName} = ctx.request.body;
 
-  // 현재 로그인 기능이 구현되어 있지 않아 임의로 작성자 명시_210601
-  // const writer = 'jooju';
   const post = new Post({
     title,
     content,

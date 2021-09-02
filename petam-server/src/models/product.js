@@ -6,17 +6,11 @@ mongoose.set('useCreateIndex', true);
 autoIncrement.initialize(mongoose.connection);
 
 const { Schema } = mongoose;
-// const {
-//   Types: { ObjectId },
-// } = Schema;
 
 const ProductSchema = new Schema({
   name: {
     type: String,
   }, // 제품 이름
-  // sellingPrice: {
-  //   type: Number,
-  // }, // 판매가
   price: {
     type: Number,
   }, // 정가
@@ -36,19 +30,10 @@ const ProductSchema = new Schema({
   discription: {
     type: String,
   },
-  // deleteTime: Date,
   hospitals: [String],
   image: {
     type:String,
   },
-  // hospitals: [
-  //   {
-  //     hospitalId: {
-  //       // type: mongoose.Schema.Types.ObjectId,
-  //       type: String,
-  //     },
-  //   },
-  // ], // 제품별 판매하는 병원을 찾기 위해 배열형태로 저장
 });
 ProductSchema.plugin(autoIncrement.plugin, {
   model: 'Product',

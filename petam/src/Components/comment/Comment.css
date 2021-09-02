@@ -1,31 +1,21 @@
 .comment-input {
-  /* border: 2px solid green; */
-  /* width: (100% - 40px); */
   padding: 10px 15px;
   border-radius: 10px;
   border-color: lightgray;
-  /* width: 80%; */
   width: calc(100% - 85px);
-
-  /* max-width: 89%; */
-  /* max-width: 80%; */
   min-height: 100px;
   max-height: 100px;
   overflow-y: scroll;
-
   float: left;
   font-size: 20;
-  /* border: 1px solid red; */
 }
 
 .comment {
   min-height: 150px;
-  /* max-height: 150px; */
 }
 
 .comment-profile {
   width: 40px;
-  /* border: 1px solid red; */
   height: 40px;
   text-align: center;
   vertical-align: middle;
@@ -47,10 +37,6 @@
   text-align: center;
   text-align-last: center;
   padding: 37px 0;
-  /* vertical-align: middle; */
-  /* margin-left: 10px; */
-  /* border: 1px solid red; */
-  /* background-color: gray; */
 }
 å .comment-cancel-button {
   float: right;
@@ -58,30 +44,21 @@
 .comment-scope {
   width: 100%;
   min-height: 103px;
-  /* min-height: 60px; */
-  /* border: 1px solid green; */
 }
 
 .comment-top {
   margin: 20px 30px 0px 30px;
   min-height: 30px;
-  /* border: 1px solid green; */
   height: auto;
   display: block;
-  /* style */
-
-  /* font-weight: bold; */
 }
 .comment-top-writer {
-  /* float: left; */
-  /* border: 1px solid blue; */
   margin: auto;
   visibility: inherit;
   font-size: large;
 }
 .comment-detail {
   margin: 0px 30px 0px 30px;
-  /* font-size: ; */
 }
 .comment-top-time {
   margin-top: 8px;
@@ -91,7 +68,6 @@
 .comment-buttons {
   margin: 0px 30px 0px 20px;
   min-height: 30px;
-  /* padding:1 */
 }
 .comment-button {
   float: right;

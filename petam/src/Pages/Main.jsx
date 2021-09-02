@@ -15,13 +15,6 @@ function Main() {
 
   return (
     <Content>
-      {hospital && (
-        <div>
-          {/* {hospital.username}
-          {hospital.company_number} */}
-        </div>
-    )}
-      
       <h2 className="name">Main Page!!</h2>
       <div className="bodyContainer">
         <MainHospitalContent />
@@ -31,20 +24,5 @@ function Main() {
   )
 }
 
-{/*
-function Main({location, history}) {
- 
-  return (
-    <Components>
-        <button onClick={()=> history.push('/SearchPage')}>검색 페이지</button>
-        <button onClick={()=> history.push('/HospitalPage')}>병원 페이지</button>
-        <button onClick={()=> history.push('/ReservationPage')}>예약하기</button>
-        <button onClick={()=> history.push('/CheckReservationPage')}>예약 확인</button>
-        <button onClick={()=> history.push('/MyReservationPage')}>내 예약 내역</button>
-    </Components>
-  )
-}
-
-*/}
 
 export default Main

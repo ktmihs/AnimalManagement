@@ -6,7 +6,6 @@ import { FaStar } from 'react-icons/fa';
 import React, { Component, useEffect, useState } from 'react';
 import Content from '../Components/Content';
 import '../Components/button/Button.css';
-import { Button, Form } from 'react-bootstrap';
 import '../Components/Content.css';
 import '../Components/comment/Comment.css';
 import { Link } from 'react-router-dom';
@@ -29,7 +28,6 @@ const hName = {
   paddingBottom: '5px',
   paddingRight: '7px',
   paddingLeft: '7px',
-  // border: '1px solid red',
   marginRight: '10px',
   borderRadius: '3px',
   backgroundColor: '#98B6E4',
@@ -75,7 +73,6 @@ function PostViewPage(props) {
         writer: res.data.writer,
         score: res.data.score,
         hospitalName: res.data.hospitalName,
-        // view: parseInt(res.data.view) + 1,
         // dateformat을 이용하여 년-월-일 시:분:초 로 표현
         enrollTime: dateFormat(res.data.enrollTime, 'yyyy-mm-dd hh:mm:ss'),
       });
@@ -85,13 +82,9 @@ function PostViewPage(props) {
         ...res.data,
         view: parseInt(res.data.view) + 1,
       });
-      console.log('update post view : ', req);
-
-      console.log('-----comment-----');
 
       //comments
       const commentRes = await axios.get('/api/comments/read/post/' + _id);
-      console.log('commentRes : ', commentRes);
       const _commentData = await commentRes.data.map(
         (cData) => (
           setLastIdx(lastIdx + 1),
@@ -103,7 +96,6 @@ function PostViewPage(props) {
             hospitalName: cData.hospitalName,
             // dateformat을 이용하여 년-월-일 로 표현
             enrollTime: dateFormat(cData.enrollTime, 'yyyy-mm-dd hh:mm'),
-            // enrollTime: rowData.enrollTime,
           }
         ),
       );
@@ -112,13 +104,9 @@ function PostViewPage(props) {
       console.error(e.message);
     }
   }, []);
+
   const [lastIdx, setLastIdx] = useState(0);
 
-  // 댓글 작성 함수들
-  const handleSubmit = (e) => {
-    alert('An essay was submitted: ' + this.state.value);
-    e.preventDefault();
-  };
 
   return (
     <div>
@@ -169,7 +157,6 @@ function PostViewPage(props) {
       </Content>
       <Content>
         {user && <CommentWrite pid={postData._id}>{postData._id}</CommentWrite>}
-        {/* Comment */}
 
         {lastIdx !== 0 ? (
           // 포스트를 역순으로 출력하고 싶다면 .reverse()를 추가하면 된다

@@ -54,11 +54,8 @@ const topbarHeight = {
 }
 
 const Header = ({ user, onLogout, onHLogout,onMy, hospital }) => {
-  // console.log(hospital)
-  // console.log("user : ", user)
   return (
     <>
-      {/* <nav class=" shadow-sm navbar navbar-expand navbar-light bg-primary topbar b static-top shadow"> */}
       <nav class="bg-primary " style = {topbarHeight}>
         <div className=" col-12">
           <HeaderBlock className="">
@@ -66,7 +63,6 @@ const Header = ({ user, onLogout, onHLogout,onMy, hospital }) => {
               <Link to="/main">
                 <h3
                   class="main-button"
-                  // className="b bg-primary m-auto text-2140C text-center p-3 "
                 >
                   <span className="text-pet h4">
                     <b>pet</b>
@@ -84,14 +80,12 @@ const Header = ({ user, onLogout, onHLogout,onMy, hospital }) => {
                 <div className="right">
                   <UserInfo>{user.username}</UserInfo>
                   <Button onClick={onLogout}>로그아웃</Button>
-                  {/* <Button style={mypage}to="/mypage">My</Button> */}
                 </div>
               )}
               {hospital && (
                 <div className="right">
                   <UserInfo>{hospital.username}</UserInfo>
                   <Button onClick={onLogout}>로그아웃</Button>
-                  {/* <Button style={mypage}to="/mypage">My</Button> */}
                 </div>
               )}
               {!user && !hospital && (
