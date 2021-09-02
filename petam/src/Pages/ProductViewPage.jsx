@@ -35,12 +35,7 @@ function ProductViewPage(props) {
 
   useEffect(async () => {
     try {
-      console.log("product detail");
-      console.log("_id : ", _id);
-      console.log("history: ", props.history);
       const res = await axios.get("/api/products/readone/" + _id);
-
-      console.log("res : ", res.data);
 
       setProductData({
         _id: res.data._id,
@@ -54,9 +49,6 @@ function ProductViewPage(props) {
         enrollTime: dateFormat(res.data.enrollTime, "yyyy-mm-dd hh:mm:ss"),
         image:res.data.image
       });
-      //   setProductData(productData.concat(_commentData));
-      console.log("productData.hospitals:", res.data.hospitals);
-      //   console.log("map:", res.data.hospitals.map());
     } catch (e) {
       console.error(e.message);
     }
@@ -76,11 +68,6 @@ function ProductViewPage(props) {
     <div>
       <Content className="">
         <ProductViewName class="">{productData.name}</ProductViewName>
-
-        {/* <PostViewWriterDate
-          writer={productData.writer}
-          date={productData.enrollTime}
-        /> */}
         <hr className="w-90" />
         <div className="col-12 m-auto bg-white" style={scope}>
           <ProductViewImage image={productData.image}></ProductViewImage>
@@ -88,19 +75,12 @@ function ProductViewPage(props) {
             company={productData.company}
             price={productData.price}
           ></ProductViewCompanyAndPrice>
-
           <ProductViewDetail>{productData.discription}</ProductViewDetail>
-          {/* <br></br>
-          <br></br>
-          <br></br> */}
           <Link style={{ textDecorationLine: 'none' }} to="/productlistpage">
             <div class="tolist">목록으로</div>
           </Link>
         </div>
       </Content>
-
-      {/* 판매하는 병원 목록 */}
-
       <Content>
         <h2 className="name">판매중인 병원</h2>
         <ProductHospitalTable

@@ -22,11 +22,7 @@ const CommentButtons = ({ children }) => {
   return (
     <div>
       <div className="comment-buttons  ">
-        {/* <div className="comment-button b"style={remove} onClick={commentRemove}>삭제</div>
-        <div style={floatRight}> | </div>
-        <div className="comment-button b" style={update} onClick={commentUpdate}>
-          수정
-        </div> */}
+      
       </div>
     </div>
   );

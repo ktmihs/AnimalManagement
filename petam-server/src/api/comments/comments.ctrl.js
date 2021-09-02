@@ -1,11 +1,8 @@
 import Comment from '../../models/comment';
-// import mongoose from 'mongoose';
 
 export const write = async (ctx) => {
   const { writer, content, post_id, secret } = ctx.request.body;
 
-  // 현재 로그인 기능이 구현되어 있지 않아 임의로 작성자 명시_210601
-  //   const writer = 'jooju';
   const comment = new Comment({
     writer,
     content,

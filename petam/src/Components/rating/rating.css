@@ -1,11 +1,9 @@
 .clickedstar {
-  /* color: rgb(212, 180, 0); */
   color:#f7d36f;
 }
 svg.rating {
   color: #c7c7c7;
   cursor: pointer;
-  /* border: 1px solid blue; */
 }
 
 div.rating {
@@ -14,25 +12,17 @@ div.rating {
   padding: 10px 20px;
 }
 
-/* div.rating:hover svg {
-  color: rgb(212, 180, 0);
-} */
-
 svg.rating:hover ~ svg {
   color: #c7c7c7;
 }
 .star {
   margin-right: 1px;
-  /* margin-top: 5px; */
 }
 .stars {
   margin-top: 5px;
   margin-bottom: 5px;
   margin-left: 12px;
   margin-right:4px;
-  /* float:left; */
-  /* vertical-align: middle; */
-  /* font-size: small; */
 }
 .score{
   width: 100px;

@@ -32,22 +32,17 @@ const ProductHospitalTable = (props) => {
                 tel: "",
               },
             ]);
-            console.log("item",item);
 
             useEffect(async () => {
               try {
                 const res = axios
                   .get("/api/hospitals/readone/" + item)
                   .then((response) => {
-                    console.log("item--", item)
-                    console.log("===", response.data);
                     setHospitalData({
                       _id: response.data._id,
                       name: response.data.name,
                       tel: response.data.tel,
                     });
-                    console.log("---",hospitalData);
-                    // console.log("res: ", res.data)
                   });
               } catch (e) {
                 console.error(e.message);

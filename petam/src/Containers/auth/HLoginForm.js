@@ -40,23 +40,15 @@ const HLoginForm = ({ history }) => {
 
   useEffect(() => {
       if (authError) {
-        console.log(authError)
-      console.log('병원 로그인 오류 발생');
-      console.log(authError);
       setError('병원 로그인 실패');
       return;
     }
     if (auth) {
-      console.log('병원 로그인 성공');
-      console.log("auth : ", auth);
-      // console.log("----", user)
-        
       dispatch(hcheck());
     }
   }, [auth, authError, dispatch]);
 
     useEffect(() => {
-        // console.log("----", user)
         if (hospital) {
             history.push('/');
             try {

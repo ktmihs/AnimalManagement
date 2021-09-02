@@ -13,7 +13,6 @@ export default class TopBar extends Component {
           <Link to="/main">
             <h3
               class="main-button"
-              // className="b bg-primary m-auto text-2140C text-center p-3 "
             >
               <span className="text-pet h4">
                 <b>pet</b>
@@ -25,7 +24,6 @@ export default class TopBar extends Component {
                 <b>m</b>
               </span>
 
-              {/* <img src={imgUser} className="w-25 h-25"></img> */}
             </h3>
           </Link>
 
@@ -33,7 +31,6 @@ export default class TopBar extends Component {
              <Link to='/jlogin'>
             <button
               class="signin"
-              // className=" btn-light btn col-5 m-auto text-2140C text-center p-2 m-1"
             >
              Login
           </button>
@@ -41,20 +38,12 @@ export default class TopBar extends Component {
             <Link to='/jregister'>
             <button
               class="signup"
-              // className=" btn-secondary btn col-5 m-auto text-white text-center float-right p-2 m-1"
             >
               Sign Up
               </button>
               </Link>
           </div>
-
         </div>
-        {/* <div className="  col-3">
-          <SignButton/>
-
-        </div> */}
-
-        {/* <!-- Topbar Navbar --> */}
       </nav>
     </div>
   );

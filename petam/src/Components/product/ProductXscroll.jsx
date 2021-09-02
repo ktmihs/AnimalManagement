@@ -26,27 +26,22 @@ const ProductXscroll = (props) => {
                   image: '',
                 },
               ]);
-              console.log(item.productId);
 
               useEffect(async () => {
                 try {
                   const res = axios
                     .get('/api/products/readone/' + item.productId)
                     .then((response) => {
-                      console.log('res name:', response.data.name);
-                      const p = response.data.price;
+                      const p = item.price
                       setProductData({
                         _id: response.data._id,
                         name: response.data.name,
                         company: response.data.company,
                         image: response.data.image,
-                        // price: response.data.price,
                         price: p
                           .toString()
                           .replace(/\B(?=(\d{3})+(?!\d))/g, ','),
                       });
-                      console.log(productData);
-                      // console.log("res: ", res.data)
                     });
                 } catch (e) {
                   console.error(e.message);
@@ -56,9 +51,7 @@ const ProductXscroll = (props) => {
               return (
                 <li class="product-item ">
                   <ProductImage>{productData.image}</ProductImage>
-                  <ProductName>
-                  {productData.name}
-                  </ProductName>
+                  <ProductName>{productData.name}</ProductName>
                   <ProductPrice>{productData.price}</ProductPrice>
                 </li>
               );

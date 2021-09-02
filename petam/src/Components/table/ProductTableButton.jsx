@@ -11,7 +11,6 @@ const ProductTableButton = ({ his, hospitalId, _id, children }) => {
         .get("/api/products/read/hospital/" + _id + "/" + hospitalId)
         .then((response) => {
           setLastIdx(response.data);
-          console.log("res =---== ", response.data);
         });
     } catch (e) {
       console.error(e.message);
@@ -20,7 +19,6 @@ const ProductTableButton = ({ his, hospitalId, _id, children }) => {
 
   function toSell() {
     let sellingPrice = Number(prompt("판매가를 입력하세요."));
-    console.log(sellingPrice);
     if (isNaN(sellingPrice) == true) {
       alert("잘못입력하셨습니다. 다시 입력해주세요 :D");
       return toSell();
@@ -31,7 +29,6 @@ const ProductTableButton = ({ his, hospitalId, _id, children }) => {
         "/api/hospitals/product/" + hospitalId + "/" + _id + "/" + sellingPrice
       )
       .then((response) => {
-        console.log("insert productId and price : ", response);
         setLastIdx(1);
       });
 
@@ -41,12 +38,10 @@ const ProductTableButton = ({ his, hospitalId, _id, children }) => {
     axios
       .delete("api/products/hospital/" + _id + "/" + hospitalId)
       .then((response) => {
-        console.log("product 스키마에 hospitals: hospitalId 삭제");
       });
     axios
       .delete("api/hospitals/product/" + hospitalId + "/" + _id)
       .then((response) => {
-        console.log("hospitals 스키마에 products: productId 삭제");
         setLastIdx(0);
       });
   }
