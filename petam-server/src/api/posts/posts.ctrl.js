@@ -56,8 +56,6 @@ export const readWriter = async (ctx) => {
       return;
     }
     ctx.body = posts;
-    console.log();
-    console.log(posts);
   } catch (e) {
     ctx.throw(500, e);
   }
@@ -72,8 +70,6 @@ export const readHospital = async (ctx) => {
       return;
     }
     ctx.body = posts;
-    console.log();
-    console.log(posts);
   } catch (e) {
     ctx.throw(500, e);
   }

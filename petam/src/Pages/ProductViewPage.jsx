@@ -35,12 +35,7 @@ function ProductViewPage(props) {
 
   useEffect(async () => {
     try {
-      console.log("product detail");
-      console.log("_id : ", _id);
-      console.log("history: ", props.history);
       const res = await axios.get("/api/products/readone/" + _id);
-
-      console.log("res : ", res.data);
 
       setProductData({
         _id: res.data._id,
@@ -54,7 +49,6 @@ function ProductViewPage(props) {
         enrollTime: dateFormat(res.data.enrollTime, "yyyy-mm-dd hh:mm:ss"),
         image:res.data.image
       });
-      console.log("productData.hospitals:", res.data.hospitals);
     } catch (e) {
       console.error(e.message);
     }

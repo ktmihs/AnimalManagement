@@ -67,8 +67,6 @@ export const updateHospital = async (ctx) => {
   const { _id, hospitalId } = ctx.params; // id로 하면 안됨.. _id로 해야 됨..
   let product;
   try {
-    console.log('_id: ', _id);
-    console.log('hospitlaId : ', hospitalId);
     product = await Product.findOneAndUpdate(
       { _id: _id },
       {
@@ -81,7 +79,6 @@ export const updateHospital = async (ctx) => {
     ctx.throw(500, e);
   }
   ctx.body = product;
-  console.log('ctx.body:', ctx.body);
 };
 
 export const removeHospital = async (ctx) => {
@@ -101,5 +98,4 @@ export const removeHospital = async (ctx) => {
   }
   ctx.body = product;
 
-  console.log('ctx.body:', ctx.body);
 };

@@ -48,7 +48,6 @@ export default class WriteProductPage extends Component {
         [name]:value
       }
     })
-    console.log(this.state)
   }
   handleImage=(e)=>{
     e.preventDefault(); 
@@ -64,8 +63,6 @@ export default class WriteProductPage extends Component {
       })
     }
     reader.readAsDataURL(file)
-    console.log(this.state.send_param)
-    console.log(e,e.target.files[0],e.target.files[0].name)
     formData.append('image', e.target.files[0])
     formData.append('filename',e.target.files[0].name)
     formData.append('productname',this.state.send_param.name)

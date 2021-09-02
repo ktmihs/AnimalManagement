@@ -31,11 +31,9 @@ export const hregister = async (ctx) => {
     lunchCloseMinute: Joi.number(),
   });
   const result = schema.validate(ctx.request.body);
-  console.log(result);
   if (result.error) {
     ctx.status = 400;
     ctx.body = result.error;
-    console.log(ctx.body)
     return;
   }
 
@@ -88,9 +86,6 @@ export const hregister = async (ctx) => {
         lunchCloseMinute: lunchCloseMinute,
       },
     });
-    console.log("운영 시간 : ", openHour)
-    console.log("아이디 : ", username)
-    console.log("hospital.timeList : ", hospital.timeList)
     await hospital.setPassword(password); // 비밀번호 설정
     await hospital.save(); // 데이터베이스에 저장
 
@@ -118,11 +113,9 @@ export const login = async (ctx) => {
 
   try {
     const hospital = await Hospital.findByCompany_number(company_number);
-    console.log(hospital)
     // 계정이 존재하지 않으면 에러 처리
     if (!hospital) {
       ctx.status = 401;
-      console.log("---")
       return;
     }
     const valid = await hospital.checkPassword(password);
@@ -262,9 +255,6 @@ export const readName=async(ctx)=>{
     }
     if(!data){
         data='x'
-        // ctx.status=404
-        // ctx.body={message:'data not found'}
-        // return 
     }
     ctx.body=data
 }
@@ -280,9 +270,6 @@ export const readCompany=async(ctx)=>{
     }
     if(!data){
         data='x'
-        // ctx.status=404
-        // ctx.body={message:'data not found'}
-        // return 
     }
     ctx.body=data
 }
@@ -315,8 +302,6 @@ export const updateTime = async (ctx) => {
     const { _id, reservationTime } = ctx.params
     let hospital
     try {
-      console.log('_id: ', _id)
-      console.log('reservationTime : ', reservationTime)
       hospital = await Hospital.findOneAndUpdate(
         { _id: _id },
         {
@@ -355,10 +340,7 @@ export const updateProduct = async (ctx) => {
   const { _id, productId, price } = ctx.params; // id로 하면 안됨.. _id로 해야 됨..
   let hospital;
   try {
-    console.log('_id: ', _id);
-    console.log('productId : ', productId);
     hospital = await Hospital.findOneAndUpdate(
-      // _id,
       { _id: _id },
       {
         $addToSet: {
@@ -373,7 +355,6 @@ export const updateProduct = async (ctx) => {
     ctx.throw(500, e);
   }
   ctx.body = hospital;
-  console.log('ctx.body:', ctx.body);
 };
 
 export const removeProduct = async (ctx) => {
@@ -393,16 +374,13 @@ export const removeProduct = async (ctx) => {
   }
   ctx.body = hospital;
 
-  console.log('ctx.body:', ctx.body);
 };
 export const readProductPrice = async (ctx) => {
   const { _id, productId } = ctx.params;
   try {
-    // const products = await Hospital.findById(_id).exec();
 
     const hospital = await Hospital.find(
       {_id: _id}
-      // $and: [{ products.productId : {productId : productId} }, { _id: _id }],
     );
 
       ctx.body = hospital;

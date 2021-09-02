@@ -17,14 +17,11 @@ console.log("user ==== ", user.userData);
     console.log("유저 정보 없음!")
       } else {
           
-console.log("user ==== ", user);
 }
   }, []);
   return (
-    // render(
     <Content>
       <h2 className="name">Main Page!!</h2>
-      {/* <p> 로그인 정보 : {user}</p> */}
     </Content>
   );
 }

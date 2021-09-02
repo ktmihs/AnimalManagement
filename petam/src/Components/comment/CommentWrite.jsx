@@ -16,20 +16,14 @@ const CommentWrite = ({ children, pid, comContent }) => {
 
   const comWrite = () => {
     const content = comContent.value;
-    console.log("user",user)
     const send_param = {
       post_id: children,
       writer: user.username,
       content: comContent.value,
     };
-    console.log("send_param", send_param);
-    console.log("children", children);
     axios
       .post("/api/comments", send_param)
       .then((response) => {
-        console.log(response);
-
-        console.log("success");
       })
       .catch((error) => {
         console.log(error);
