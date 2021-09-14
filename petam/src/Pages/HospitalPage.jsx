@@ -34,27 +34,30 @@ function HospitalPage(props) {
     axios
       .get('/api/hospitals/read/name/' + hospital)
       .then((ctx) => {
-        const _avg = (ctx.data.score / ctx.data.count).toFixed(2)
+        let _avg = (ctx.data.score / ctx.data.count).toFixed(2)
+        if(!ctx.data.score && !ctx.data.count){_avg=0.0}
         let openMinute, closeMinute, lunchOpenMinute, lunchCloseMinute
-        if (ctx.data.timeList.openMinute == 0) { 
-          openMinute = "00" 
-        } else {
-          openMinute = ctx.data.timeList.openMinute
-        }
-        if (ctx.data.timeList.closeMinute == 0) {
-          closeMinute = '00'
-        } else {
-          closeMinute = ctx.data.timeList.closeMinute
-        }
-        if (ctx.data.timeList.lunchOpenMinute == 0) {
-          lunchOpenMinute = '00'
-        } else {
-          lunchOpenMinute = ctx.data.timeList.lunchOpenMinute
-        }
-        if (ctx.data.timeList.lunchCloseMinute == 0) {
-          lunchCloseMinute = '00'
-        } else {
-          lunchCloseMinute = ctx.data.timeList.lunchCloseMinute
+        if (ctx.data.timeList){
+          if (ctx.data.timeList.openMinute == 0) { 
+            openMinute = "00" 
+          } else {
+            openMinute = ctx.data.timeList.openMinute
+          }
+          if (ctx.data.timeList.closeMinute == 0) {
+            closeMinute = '00'
+          } else {
+            closeMinute = ctx.data.timeList.closeMinute
+          }
+          if (ctx.data.timeList.lunchOpenMinute == 0) {
+            lunchOpenMinute = '00'
+          } else {
+            lunchOpenMinute = ctx.data.timeList.lunchOpenMinute
+          }
+          if (ctx.data.timeList.lunchCloseMinute == 0) {
+            lunchCloseMinute = '00'
+          } else {
+            lunchCloseMinute = ctx.data.timeList.lunchCloseMinute
+          }
         }
         ctx.data.timeList? 
           setHospitalInfo({

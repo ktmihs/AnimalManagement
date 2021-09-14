@@ -55,7 +55,7 @@ function MainHospitalContent() {
           </a>
         ) : null}
         {productData.sec ? (
-          <a className="link" href={`/hospital/${productData.sec._id}`}>
+          <a className="link" href={`/product/detail/${productData.sec._id}`}>
             <div className="ad">
               [{productData.sec.company}]{productData.sec.name}
               <br />

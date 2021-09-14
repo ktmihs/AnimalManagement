@@ -10,7 +10,7 @@ import jwtMiddleware from './lib/jwtMiddleware';
 // 비구조화 할당을 통하여 process.env 내부 값에 대한 레퍼런스 만들기
 const { PORT, MONGO_URI } = process.env;
 
-mongoose.connect('mongodb://52.78.215.99:27017/petam', {
+mongoose.connect('mongodb://localhost:27017/petam', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
