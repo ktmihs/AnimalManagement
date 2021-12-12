@@ -5,11 +5,11 @@
 
 ## MOVE LOCATION
 
-<a href="#server_start">💻 PETAM-SERVER START</a>
+<a href="#server_start">💻 PETAM-SERVER START</a><br/>
 <a href="#history">📂 FOLDER HISTORY </a><br/>
 <a href="#preview">📸 PAGE PREVIEW </a><br/>
 <a href="#erd">📄 ERD CHART </a><br/>
-<a href="#flow">📄 WORK FLOW CHART </a><br/>
+<a href="#flow">📄 WORK FLOW CHART </a>
 
 <hr/>
 <br/>
