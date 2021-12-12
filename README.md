@@ -5,14 +5,29 @@
 
 ## MOVE LOCATION
 
+<a href="#server_start">💻 PETAM-SERVER START</a>
 <a href="#history">📂 FOLDER HISTORY </a><br/>
 <a href="#preview">📸 PAGE PREVIEW </a><br/>
 <a href="#erd">📄 ERD CHART </a><br/>
 <a href="#flow">📄 WORK FLOW CHART </a><br/>
-<a href="#server_start">💻 PETAM-SERVER START</a>
 
 <hr/>
 <br/>
+
+
+## 💻 PETAM-SERVER START <a name="server_start"></a>
+#### package.json 설치
+```shell
+npm update
+```
+#### nodemon 실행
+```shell
+yarn start
+```
+
+<hr/>
+<br/>
+
 
 ## 📂 FOLDER HISTORY <a name="history"></a>
 ### 👉 [Front] petam
@@ -83,18 +98,5 @@
 ## 📄 WORK FLOW CHART <a name="flow"></a>
 ![업무흐름도_v2_210813_최종](https://user-images.githubusercontent.com/63227474/131955483-a9f80da3-3a47-4212-a929-032a6d727c5b.PNG)
 
-<hr/>
-<br/>
-
-
-## 💻 PETAM-SERVER START <a name="server_start"></a>
-#### package.json 설치
-```shell
-npm update
-```
-#### nodemon 실행
-```shell
-yarn start
-```
-
 <a href="#top">TOP</a>
+
